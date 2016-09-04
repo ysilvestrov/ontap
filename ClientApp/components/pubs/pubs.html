@@ -1,0 +1,41 @@
+﻿<h1>Pubs list</h1>
+
+<p>Пабы с крафтовым пивом</p>
+
+<p *ngIf="!pubs"><em>Loading...</em>
+</p>
+
+
+<div class="dropdown"  *ngIf="cities">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Город<span *ngIf="city">: {{city.name}}</span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a (click)="setCity('')">*</a></li>
+        <li *ngFor="let city of cities"><a (click)="setCity(city.name)">{{ city.name }}</a></li>
+    </ul>
+</div>
+
+<table class='table' *ngIf="pubs">
+    <thead>
+        <tr>
+            <th>Город</th>
+            <th>Паб</th>
+            <th>На кранах</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pub of pubs">
+            <td>{{ pub.city.name }}</td>
+            <td>{{ pub.name }}</td>
+            <td>
+                <div class="btn-group" role="group" aria-label="...">
+                    <a *ngFor="let serve of pub.serves" href="#" class="btn btn-primary btn-s" role="button"  data-toggle="tooltip" data-placement="left" title="{{beer.description}}">
+                         {{ serve.beer.name }} : {{ serve.price }}
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,105 @@
+﻿<h1>Список пив</h1>
+
+<p>Пиво</p>
+
+<p *ngIf="!beers">
+    <em>Loading...</em>
+</p>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+</div>
+
+<table class='table' *ngIf="pubs">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Город</th>
+        <th>На кранах</th>
+        <th>*</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pub of pubs">
+        <td>{{ pub.id }}</td>
+        <td>
+            <span *ngIf="!editing || (editing.id != pub.id)">
+                    {{ pub.name }}
+                </span>
+            <span *ngIf="editing && (editing.id == pub.id)">
+                    <input type="text" class="form-control" id="name"
+                           required
+                           [(ngModel)]="editing.name" name="name">
+                </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != pub.id)">
+                    {{ pub.address }}
+                </span>
+            <span *ngIf="editing && (editing.id == pub.id)">
+                    <input type="text" class="form-control" id="editing.address"
+                           required
+                           [(ngModel)]="editing.address" name="address">
+                </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != pub.id)">
+                    {{ pub.city.name }}
+                </span>
+            <span *ngIf="editing && (editing.id == pub.id)">
+                <select class="form-control" [(ngModel)]="editing.city.id" (change)="onEditChangeCity($event.target.value)">
+                    <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                </select>
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != pub.id)">
+                <span *ngFor="let beer of pub.serves">
+                    {{ beer.name }}
+                </span>
+            </span>
+            <span *ngIf="editing && (editing.id == pub.id)">
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != pub.id)">
+                    <button (click)="editPub(pub.id)">Edit</button>
+                </span>
+            <span *ngIf="editing && (editing.id == pub.id)">
+                    <button (click)="savePub()">Save</button>
+                    <button (click)="cancelEdit()">Cancel</button>
+                </span>
+        </td>
+    </tr>
+    <tr *ngIf="adding">
+        <td>
+            <input type="text" class="form-control" id="adding.id"
+                   required
+                   [(ngModel)]="adding.id" name="id">
+        </td>
+        <td>
+            <input type="text" class="form-control" id="adding.address"
+                    required
+                    [(ngModel)]="editing.address" name="address">
+        </td>
+        <td>
+            <input type="text" class="form-control" id="adding.name"
+                   required
+                   [(ngModel)]="adding.name" name="name">
+        </td>
+        <td>
+            <select class="form-control" [(ngModel)]="adding.city.id" (change)="onEditChangeCity($event.target.value)">
+                <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+            </select>
+        </td>
+        <td>
+            *
+        </td>
+        <td>
+            <button (click)="addPub()">Save</button>
+            <button (click)="cancelEdit()">Cancel</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="startAdd()">+</button>

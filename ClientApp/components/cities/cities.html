@@ -1,0 +1,63 @@
+﻿<h1>Список городов</h1>
+
+<p>Города</p>
+
+<p *ngIf="!cities">
+    <em>Loading...</em>
+</p>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+</div>
+
+<table class='table' *ngIf="cities">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>*</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let city of cities">
+        <td>{{ city.id }}</td>
+        <td>
+            <span *ngIf="!editing || (editing.id != city.id)">
+                    {{ city.name }}
+                </span>
+            <span *ngIf="editing && (editing.id == city.id)">
+                    <input type="text" class="form-control" id="name"
+                           required
+                           [(ngModel)]="editing.name" name="name">
+                </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != city.id)">
+                    <button (click)="editCity(city.id)">Edit</button>
+                </span>
+            <span *ngIf="editing && (editing.id == city.id)">
+                    <button (click)="saveCity()">Save</button>
+                    <button (click)="cancelEdit()">Cancel</button>
+                </span>
+        </td>
+    </tr>
+
+    <tr *ngIf="adding">
+        <td>
+            <input type="text" class="form-control" id="adding.id"
+                   required
+                   [(ngModel)]="adding.id" name="id">
+        </td>
+        <td>
+        <td>
+            <input type="text" class="form-control" id="adding.name"
+                   required
+                   [(ngModel)]="adding.name" name="name">
+        </td>
+        <td>
+            <button (click)="addCity()">Save</button>
+            <button (click)="cancelEdit()">Cancel</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="startAddCity()">+</button>
