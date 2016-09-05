@@ -1,4 +1,7 @@
-﻿export interface IBeer {
+﻿export interface IElement {
+    id: string;
+}
+export interface IBeer {
     id: string;
     name: string;
     description: string;

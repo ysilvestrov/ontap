@@ -2,7 +2,7 @@
 
 <p>Пабы с крафтовым пивом</p>
 
-<p *ngIf="!pubs"><em>Loading...</em>
+<p *ngIf="!elements"><em>Loading...</em>
 </p>
 
 
@@ -17,7 +17,7 @@
     </ul>
 </div>
 
-<table class='table' *ngIf="pubs">
+<table class='table' *ngIf="elements">
     <thead>
         <tr>
             <th>Город</th>
@@ -26,12 +26,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let pub of pubs">
+        <tr *ngFor="let pub of elements">
             <td>{{ pub.city.name }}</td>
             <td>{{ pub.name }}</td>
             <td>
                 <div class="btn-group" role="group" aria-label="...">
-                    <a *ngFor="let serve of pub.serves" href="#" class="btn btn-primary btn-s" role="button"  data-toggle="tooltip" data-placement="left" title="{{beer.description}}">
+                    <a *ngFor="let serve of pub.serves" href="#" class="btn btn-primary btn-s" role="button"  data-toggle="tooltip" data-placement="left" title="{{serve.beer.description}}">
                          {{ serve.beer.name }} : {{ serve.price }}
                     </a>
                 </div>

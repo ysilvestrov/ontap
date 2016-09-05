@@ -29,9 +29,6 @@ module.exports = {
             '@angular/platform-browser-dynamic',
             '@angular/router',
             '@angular/platform-server',
-            'linqts',
-            'ng2-bootstrap',
-            'ng2-table'
         ]
     },
     output: {

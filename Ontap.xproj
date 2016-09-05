@@ -7,7 +7,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>bc6755ab-36f9-4587-9556-75cf4d220130</ProjectGuid>
+    <ProjectGuid>e79987df-556b-4757-b4fa-f4c00e3a3115</ProjectGuid>
     <RootNamespace>Ontap</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
