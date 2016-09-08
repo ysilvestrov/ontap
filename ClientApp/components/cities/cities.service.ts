@@ -1,64 +1,27 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {ICity} from "../../models/ontap.models.ts";
-import { Observable }     from 'rxjs/Observable';
-// Add the RxJS Observable operators we need in this app.
-import '../../modules/rxjs.operators.ts';
+import {ICity, City} from "../../models/ontap.models.ts";
+import {AppService} from "../../modules/appComponent.ts";
 
 @Injectable()
-export class CityService {
-    constructor(private http: Http) {}
-
-    private serverUrl = 'api/cities'; // URL to web API
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || [];
+export class CityService extends AppService<ICity> {
+    constructor(http: Http) {
+        super(http);
+        this.serverUrl = "api/cities";
     }
 
-    private handleError(error: any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        let errMsg = (error.message)
-            ? error.message
-            : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
+    default(): ICity {
+        return new City({
+            id: 'id',
+            name: 'name'
+        });;
     }
 
-
-    addCity(city: ICity): Observable<ICity> {
-        let body = JSON.stringify(city);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.serverUrl, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
-        //return new Observable<City>(o => {
-        //    o.next(city);
-        //    o.complete();
-        //});
+    new(source: ICity): ICity {
+        return new City(source);
     }
 
-    changeCity(city: ICity): Observable<ICity> {
-        let body = JSON.stringify(city);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.serverUrl + "/" + city.id, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
-        //return new Observable<City>(o => {
-        //    o.next(city);
-        //    o.complete();
-        //});
-    }
-
-    getCities(): Observable<ICity[]> {
-        return this.http.get(this.serverUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
-        //return new Observable<City[]>(o => {
-        //    o.complete();
-        //});
+    copy(source: ICity, dest: ICity) {
+        dest.name = source.name;
     }
 }

@@ -1,6 +1,6 @@
-﻿<h1>Список пив</h1>
+﻿<h1>Редактировать список пабов</h1>
 
-<p>Пиво</p>
+<p>На этой странице можно редактировать список пабов, а также добавлять новые.</p>
 
 <p *ngIf="!elements">
     <em>Loading...</em>
@@ -12,11 +12,11 @@
 <table class='table' *ngIf="elements">
     <thead>
     <tr>
-        <th>Id</th>
+        <th>Служебный Id</th>
         <th>Название</th>
         <th>Город</th>
-        <th>На кранах</th>
-        <th>*</th>
+        <th>Адрес</th>
+        <th>Действия</th>
     </tr>
     </thead>
     <tbody>
@@ -34,16 +34,6 @@
         </td>
         <td>
             <span *ngIf="!editing || (editing.id != pub.id)">
-                    {{ pub.address }}
-                </span>
-            <span *ngIf="editing && (editing.id == pub.id)">
-                    <input type="text" class="form-control" id="editing.address"
-                           required
-                           [(ngModel)]="editing.address" name="address">
-                </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != pub.id)">
                     {{ pub.city.name }}
                 </span>
             <span *ngIf="editing && (editing.id == pub.id)">
@@ -54,20 +44,27 @@
         </td>
         <td>
             <span *ngIf="!editing || (editing.id != pub.id)">
-                <span *ngFor="let beer of pub.serves">
-                    {{ beer.name }}
-                </span>
+                {{ pub.address }}
             </span>
             <span *ngIf="editing && (editing.id == pub.id)">
+                <input type="text" class="form-control" id="editing.address"
+                       required
+                       [(ngModel)]="editing.address" name="address">
             </span>
         </td>
         <td>
             <span *ngIf="!editing || (editing.id != pub.id)">
-                    <button (click)="edit(pub.id)">Edit</button>
+                <button (click)="edit(pub.id)" type="button" class="btn btn-default" aria-label="Edit">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
                 </span>
             <span *ngIf="editing && (editing.id == pub.id)">
-                    <button (click)="save()">Save</button>
-                    <button (click)="cancelEdit()">Cancel</button>
+                    <button  (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    </button>
+                    <button  (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
                 </span>
         </td>
     </tr>
@@ -76,11 +73,6 @@
             <input type="text" class="form-control" id="adding.id"
                    required
                    [(ngModel)]="adding.id" name="id">
-        </td>
-        <td>
-            <input type="text" class="form-control" id="adding.address"
-                    required
-                    [(ngModel)]="editing.address" name="address">
         </td>
         <td>
             <input type="text" class="form-control" id="adding.name"
@@ -93,13 +85,21 @@
             </select>
         </td>
         <td>
-            *
+            <input type="text" class="form-control" id="adding.address"
+                   required
+                   [(ngModel)]="adding.address" name="address">
         </td>
         <td>
-            <button (click)="add()">Save</button>
-            <button (click)="cancelEdit()">Cancel</button>
+            <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+            </button>
+            <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
         </td>
     </tr>
     </tbody>
 </table>
-<button (click)="startAdd()">+</button>
+<button (click)="startAdd()" type="button" class="btn btn-default" aria-label="Add">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+</button>

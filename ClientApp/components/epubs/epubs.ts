@@ -20,8 +20,13 @@ export class EPubs extends  AppComponent<IPub, EPubService> {
         this.getCities();
     }
 
+    startAdd() {
+        super.startAdd();
+        this.adding.city = new List(this.cities).First();
+    }
+
     getCities() {
-        this.cityService.getCities()
+        this.cityService.get()
             .subscribe(
             cities => this.cities = cities,
             error => this.errorMessage = <any>error);

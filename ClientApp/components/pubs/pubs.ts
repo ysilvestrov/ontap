@@ -9,7 +9,7 @@ import {AppComponent, AppService} from "../../modules/appComponent.ts";
 
 @ng.Component({
     selector: 'pubs',
-    providers: [EPubService, CityService],
+    providers: [EPubService],
   template: require('./pubs.html')
 })
 export class Pubs extends AppComponent<IPub, EPubService> implements ng.OnInit {
@@ -17,7 +17,7 @@ export class Pubs extends AppComponent<IPub, EPubService> implements ng.OnInit {
     public cities: ICity[];
     public city: ICity;
 
-    constructor(elmService: EPubService, private cityService: CityService) {
+    constructor(elmService: EPubService) {
         super(elmService);
         if (this.elements) {
             this.onLoad1(this.elements);
