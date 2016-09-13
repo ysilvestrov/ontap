@@ -49,6 +49,24 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         this.adding = null;
     }
 
+    delete() {
+        if (!this.editing) { return; }
+        this.elmService.delete(this.editing)
+            .subscribe(
+            element => {
+                for (let c of this.elements) {
+                    if (c.id === element.id) {
+                        var index = this.elements.indexOf(c, 0);
+                        if (index > -1) {
+                            this.elements.splice(index, 1);
+                        }
+                    }
+                }
+            },
+            error => this.errorMessage = <any>error);
+        this.editing = null;
+    }
+
     save() {
         if (!this.editing) { return; }
         this.elmService.change(this.editing)
@@ -56,7 +74,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
             element => {
                 for (let c of this.elements) {
                     if (c.id === element.id) {
-                        this.elmService.copy(c, element);
+                        this.elmService.copy(element, c);
                     }
                 }
             },
@@ -117,6 +135,12 @@ export abstract class AppService<TInteface extends IElement> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.put(this.serverUrl + "/" + element.id, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    delete(element: TInteface): Observable<TInteface> {
+        return this.http.delete(this.serverUrl + "/" + element.id)
             .map(this.extractData)
             .catch(this.handleError);
     }

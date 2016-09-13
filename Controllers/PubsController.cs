@@ -60,6 +60,8 @@ namespace Ontap.Controllers
                 throw new KeyNotFoundException(string.Format("No pub with id {id}", id));
             var current = Pubs.First(c => c.Id == id);
             current.Name = pub.Name;
+            current.City = _context.Cities.First(p => p.Id == pub.City.Id);
+            current.Address = pub.Address;
             await _context.SaveChangesAsync();
             return current;
         }

@@ -20,7 +20,7 @@ export class BeerService extends AppService<IBeer> {
             alcohol: 2.5,
             ibu: 30,
             gravity: 15,
-        });;
+        });
     }
 
     new(source: IBeer): IBeer {

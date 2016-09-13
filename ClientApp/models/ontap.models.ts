@@ -1,5 +1,5 @@
 ﻿export interface IElement {
-    id: string;
+    id: any;
 }
 export interface IBeer {
     id: string;
@@ -23,7 +23,9 @@ export interface ICity {
     name: string;
 }
 export interface IServe {
-    beer: IBeer;
+    id: number;
+    served: IBeer;
+    servedIn: IPub;
     price: number;
 }
 export class Pub implements IPub {
@@ -71,6 +73,19 @@ export class Beer implements IBeer {
         this.alcohol = beer.alcohol;
         this.gravity = beer.gravity;
         this.ibu = beer.ibu;
+    }
+}
+export class Serve implements IServe {
+    id: number;
+    served: IBeer;
+    servedIn: IPub;
+    price: number;
+
+    constructor(serve: IServe) {
+        this.id = serve.id;
+        this.served = serve.served;
+        this.servedIn = serve.servedIn;
+        this.price = serve.price;
     }
 
 }

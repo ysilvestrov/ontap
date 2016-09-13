@@ -32,7 +32,7 @@
             <td>
                 <div class="btn-group" role="group" aria-label="...">
                     <a *ngFor="let serve of pub.serves" href="#" class="btn btn-primary btn-s" role="button"  data-toggle="tooltip" data-placement="left" title="{{serve.beer.description}}">
-                         {{ serve.beer.name }} : {{ serve.price }}
+                         {{ serve.beer.name }} {{ serve.price | number:'2.2-2' }} ₴
                     </a>
                 </div>
             </td>
