@@ -1,6 +1,6 @@
 ﻿<h1>Редактировать список пива</h1>
 
-<p>На этой странице можно редактировать сорта пива, а также добавлять новые сорта.</p>
+<p>На этой странице можно редактировать пивоварни, а также добавлять новые.</p>
 
 <p *ngIf="!elements">
     <em>Loading...</em>
@@ -14,51 +14,51 @@
     <tr>
         <th>Служебный Id</th>
         <th>Название</th>
-        <th>Производитель</th>
-        <th>Описание</th>
+        <th>Страна</th>
+        <th>Адрес</th>
         <th>Действия</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let beer of elements">
-        <td>{{ beer.id }}</td>
+    <tr *ngFor="let brewery of elements">
+        <td>{{ brewery.id }}</td>
         <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                    {{ beer.name }}
+            <span *ngIf="!editing || (editing.id != brewery.id)">
+                    {{ brewery.name }}
                 </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
+            <span *ngIf="editing && (editing.id == brewery.id)">
                     <input type="text" class="form-control" id="name"
                            required
                            [(ngModel)]="editing.name" name="name">
                 </span>
         </td>
         <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                    {{ beer.brewery.name }}
+            <span *ngIf="!editing || (editing.id != brewery.id)">
+                    {{ brewery.country.name }}
                 </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <select class="form-control" [(ngModel)]="editing.brewery.id" (change)="onEditChangeBrewery($event.target.value)">
-                    <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
+            <span *ngIf="editing && (editing.id == brewery.id)">
+                <select class="form-control" [(ngModel)]="editing.country.id" (change)="onEditChangeCountry($event.target.value)">
+                    <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
                 </select>
             </span>
         </td>
         <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                    {{ beer.description }}
+            <span *ngIf="!editing || (editing.id != brewery.id)">
+                    {{ brewery.address }}
                 </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <textarea class="form-control" id="editing.description"
+            <span *ngIf="editing && (editing.id == brewery.id)">
+                <textarea class="form-control" id="editing.address"
                           required
-                          [(ngModel)]="editing.description" name="description"></textarea>
+                          [(ngModel)]="editing.address" name="address"></textarea>
             </span>
         </td>
         <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                <button (click)="edit(beer.id)" type="button" class="btn btn-default" aria-label="Edit">
+            <span *ngIf="!editing || (editing.id != brewery.id)">
+                <button (click)="edit(brewery.id)" type="button" class="btn btn-default" aria-label="Edit">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
             </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
+            <span *ngIf="editing && (editing.id == brewery.id)">
                 <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                 </button>
@@ -80,14 +80,14 @@
                    [(ngModel)]="adding.name" name="name">
         </td>
         <td>
-            <select class="form-control" [(ngModel)]="adding.brewery.id" (change)="onAddChangeBrewery($event.target.value)">
-                <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
+            <select class="form-control" [(ngModel)]="adding.country.id" (change)="onAddChangeCountry($event.target.value)">
+                <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
             </select>
         </td>
         <td>
-                <textarea class="form-control" id="adding.description"
+                <textarea class="form-control" id="adding.address"
                           required
-                          [(ngModel)]="adding.description" name="description"></textarea>
+                          [(ngModel)]="adding.address" name="address"></textarea>
         </td>
         <td>
             <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">

@@ -6,10 +6,16 @@ export interface IBeer {
     name: string;
     description: string;
     type: string;
-    brewery: string;
+    brewery: IBrewery;
     alcohol: number;
     gravity: number;
     ibu: number;
+}
+export interface IBrewery {
+    id: string;
+    name: string;
+    address: string;
+    country: ICountry;
 }
 export interface IPub {
     id: string;
@@ -19,6 +25,10 @@ export interface IPub {
     serves: IServe[];
 }
 export interface ICity {
+    id: string;
+    name: string;
+}
+export interface ICountry {
     id: string;
     name: string;
 }
@@ -59,7 +69,7 @@ export class Beer implements IBeer {
     name: string;
     description: string;
     type: string;
-    brewery: string;
+    brewery: IBrewery;
     alcohol: number;
     gravity: number;
     ibu: number;
@@ -87,5 +97,20 @@ export class Serve implements IServe {
         this.servedIn = serve.servedIn;
         this.price = serve.price;
     }
+
+}
+export class Brewery implements IBrewery {
+    constructor(brewery: IBrewery) {
+        this.id = brewery.id;
+        this.name = brewery.name;
+        this.address = brewery.address;
+        this.country = brewery.country;
+    }
+
+    id: string;
+    name: string;
+    address: string;
+    country: ICountry;
+
 
 }

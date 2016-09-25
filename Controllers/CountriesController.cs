@@ -11,22 +11,22 @@ using Ontap.Models;
 namespace Ontap.Controllers
 {
     [Route("api/[controller]")]
-    public class BeersController : Controller
+    public class CountriesController : Controller
     {
         private readonly DataContext _context;
 
-        public BeersController(DataContext context)
+        public CountriesController(DataContext context)
         {
             _context = context;
   
         }
 
-        public IEnumerable<Beer> Beers => _context.Beers.Include(b => b.Brewery);
+        public IEnumerable<Country> Countries => _context.Countries;
 
 
         // GET: api/pubs
         [HttpGet]
-        public IEnumerable<Beer> Get() => Beers.ToArray();
+        public IEnumerable<Country> Get() => Countries.ToArray();
 
         //// GET api/values/5
         //[HttpGet("{id}")]
@@ -37,27 +37,25 @@ namespace Ontap.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<Beer> Post([FromBody] Beer beer)
+        public async Task<Country> Post([FromBody] Country country)
         {
-            if (Beers.Any(c => c.Id == beer.Id))
-                throw new ArgumentException(string.Format("Beer with id {id} already exists", beer.Id));
-            _context.Beers.Add(beer);
+            if (Countries.Any(c => c.Id == country.Id))
+                throw new ArgumentException(string.Format("Country with id {id} already exists", country.Id));
+            _context.Countries.Add(country);
             await _context.SaveChangesAsync();
-            return beer;
+            return country;
         }
 
         // PUT api/cities/Kharkiv
         [HttpPut("{id}")]
-        public async Task<Beer> Put(string id, [FromBody]Beer beer)
+        public async Task<Country> Put(string id, [FromBody]Country country)
         {
-            if (Beers.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No beer with id {id}", id));
-            var current = Beers.First(c => c.Id == id);
-            current.Name = beer.Name;
-            current.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
-            current.Description = beer.Description;
+            if (Countries.All(c => c.Id != id))
+                throw new KeyNotFoundException(string.Format("No country with id {id}", id));
+            var currentCity = Countries.First(c => c.Id == id);
+            currentCity.Name = country.Name;
             await _context.SaveChangesAsync();
-            return current;
+            return currentCity;
         }
 
         //// DELETE api/values/5

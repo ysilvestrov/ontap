@@ -11,22 +11,22 @@ using Ontap.Models;
 namespace Ontap.Controllers
 {
     [Route("api/[controller]")]
-    public class BeersController : Controller
+    public class BreweriesController : Controller
     {
         private readonly DataContext _context;
 
-        public BeersController(DataContext context)
+        public BreweriesController(DataContext context)
         {
             _context = context;
   
         }
 
-        public IEnumerable<Beer> Beers => _context.Beers.Include(b => b.Brewery);
+        public IEnumerable<Brewery> Breweries => _context.Breweries.Include(b => b.Country);
 
 
         // GET: api/pubs
         [HttpGet]
-        public IEnumerable<Beer> Get() => Beers.ToArray();
+        public IEnumerable<Brewery> Get() => Breweries.ToArray();
 
         //// GET api/values/5
         //[HttpGet("{id}")]
@@ -37,25 +37,25 @@ namespace Ontap.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<Beer> Post([FromBody] Beer beer)
+        public async Task<Brewery> Post([FromBody] Brewery brewery)
         {
-            if (Beers.Any(c => c.Id == beer.Id))
-                throw new ArgumentException(string.Format("Beer with id {id} already exists", beer.Id));
-            _context.Beers.Add(beer);
+            if (Breweries.Any(c => c.Id == brewery.Id))
+                throw new ArgumentException(string.Format("Brewery with id {id} already exists", brewery.Id));
+            _context.Breweries.Add(brewery);
             await _context.SaveChangesAsync();
-            return beer;
+            return brewery;
         }
 
         // PUT api/cities/Kharkiv
         [HttpPut("{id}")]
-        public async Task<Beer> Put(string id, [FromBody]Beer beer)
+        public async Task<Brewery> Put(string id, [FromBody]Brewery brewery)
         {
-            if (Beers.All(c => c.Id != id))
+            if (Breweries.All(c => c.Id != id))
                 throw new KeyNotFoundException(string.Format("No beer with id {id}", id));
-            var current = Beers.First(c => c.Id == id);
-            current.Name = beer.Name;
-            current.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
-            current.Description = beer.Description;
+            var current = Breweries.First(c => c.Id == id);
+            current.Name = brewery.Name;
+            current.Address = brewery.Address;
+            current.Country = _context.Countries.First(c => c.Id == brewery.Country.Id);
             await _context.SaveChangesAsync();
             return current;
         }

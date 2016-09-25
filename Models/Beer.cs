@@ -21,7 +21,6 @@ namespace Ontap.Models
         [Required]
         public string Name { get; set; }
         public string Type { get; set; }
-        public string Brewery { get; set; }
         public decimal Alcohol { get; set; }
         public decimal Gravity { get; set; }
         public decimal Ibu { get; set; }
@@ -49,5 +48,7 @@ namespace Ontap.Models
         [IgnoreDataMember]
         [JsonIgnore]
         public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }
+
+         public virtual Brewery Brewery { get; set; }
     }
 }

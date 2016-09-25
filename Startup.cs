@@ -29,7 +29,8 @@ namespace Ontap
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options 
-                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                => options.UseSqlServer(Configuration.GetValue<string>("SQLSERVER_CONNECTION_STRING") 
+                ?? Configuration.GetConnectionString("DefaultConnection")));
             // Add framework services.
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -54,7 +55,6 @@ namespace Ontap
                 {
                     serviceScope.ServiceProvider.GetService<DataContext>().Database.Migrate();
                     serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData();
-
                 }
 
             }
