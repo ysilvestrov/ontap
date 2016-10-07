@@ -31,5 +31,7 @@ namespace Ontap.Models
         [IgnoreDataMember]
         [JsonIgnore]
         public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }
+
+        public IEnumerable<PubAdmin> Admins { get; set; }
     }
 }

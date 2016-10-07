@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ontap.Models
 {
@@ -21,12 +24,50 @@ namespace Ontap.Models
                 .HasOne(p => p.ServedIn)
                 .WithMany(b => b.BeerServedInPubs)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BreweryAdmin>()
+                .HasOne(ba => ba.User)
+                .WithMany(u => u.BreweryAdmins)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BreweryAdmin>()
+                .HasOne(ba => ba.Brewery)
+                .WithMany(b => b.Admins)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<PubAdmin>()
+                .HasOne(ba => ba.User)
+                .WithMany(u => u.PubAdmins)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<PubAdmin>()
+                .HasOne(ba => ba.Pub)
+                .WithMany(b => b.Admins)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
 
-        public void EnsureSeedData()
+        public void EnsureSeedData(IConfigurationRoot configuration)
+        {
+            EnsurePubData();
+            EnsureUserData(configuration);
+        }
+
+        private void EnsureUserData(IConfigurationRoot configuration)
+        {
+            if (Users.Any()) return;
+
+            var admin = new User
+            {
+                Name = "admin",
+                Id = "admin",
+                IsAdmin = true,
+                Password = configuration.GetValue<string>("DefaultAdminPassword")
+            };
+
+            Users.Add(admin);
+            SaveChanges();
+        }
+
+        private void EnsurePubData()
         {
             if (Breweries.Any()) return;
-
             var ukraine = new Country {Id = "UA", Name = "Ukraine"};
             var syndicateBrewery = new Brewery {Id = "Syndicate", Name = "Syndicate", Country = ukraine};
             var whiteRabbitBrewery = new Brewery {Id = "White Rabbit", Name = "White Rabbit", Country = ukraine};
@@ -37,7 +78,8 @@ namespace Ontap.Models
                 Kind = Beer.Classification.Ale,
                 Alcohol = 5.8M,
                 Brewery = syndicateBrewery,
-                Description = "заряд янтарного милосердия от киевского-ресторана пивоварни Синдикат. Прекрасный, чуть сладкий, янтарный эль, располагающий к меланхолии переулков каменных городков старушки-Бельгии",
+                Description =
+                    "заряд янтарного милосердия от киевского-ресторана пивоварни Синдикат. Прекрасный, чуть сладкий, янтарный эль, располагающий к меланхолии переулков каменных городков старушки-Бельгии",
                 Ibu = 16,
                 Type = "Abbey Dubbel"
             };
@@ -48,7 +90,8 @@ namespace Ontap.Models
                 Kind = Beer.Classification.Ale,
                 Alcohol = 3.5M,
                 Brewery = syndicateBrewery,
-                Description = "лучшая характеристика этого пива - “Шахтерский эль”. Легкое, темное, чуть карамельное пиво, которым приятно ударить по усталости в конце рабочей недели и по мозолям от пробелов и тачпадов.",
+                Description =
+                    "лучшая характеристика этого пива - “Шахтерский эль”. Легкое, темное, чуть карамельное пиво, которым приятно ударить по усталости в конце рабочей недели и по мозолям от пробелов и тачпадов.",
                 Ibu = 18,
                 Type = "English Mild Ale"
             };
@@ -60,13 +103,14 @@ namespace Ontap.Models
                 Alcohol = 5.5M,
                 Gravity = 12.5M,
                 Brewery = whiteRabbitBrewery,
-                Description = "эль названный в честь штамма дрожжей, названного в честь города в котором был доведен до совершенства такой сорт как двойной IPA. Сам SD конечно ничего общего с этими ипа не имеет, но его приятная охмеленность отлично отдает дань американским элям.",
+                Description =
+                    "эль названный в честь штамма дрожжей, названного в честь города в котором был доведен до совершенства такой сорт как двойной IPA. Сам SD конечно ничего общего с этими ипа не имеет, но его приятная охмеленность отлично отдает дань американским элям.",
                 Ibu = 34,
                 Type = "American Pale Ale"
             };
 
-            var kharkiv = new City { Id = "Kharkiv", Name = "Харьков" };
-            var kyiv = new City { Id = "Kyiv", Name = "Киев" };
+            var kharkiv = new City {Id = "Kharkiv", Name = "Харьков"};
+            var kyiv = new City {Id = "Kyiv", Name = "Киев"};
 
             var redDoorPub = new Pub
             {
@@ -87,10 +131,10 @@ namespace Ontap.Models
             };
 
             BeerServedInPubs.RemoveRange(
-                BeerServedInPubs.Where(s => 
-                s.ServedIn.Id == mohnatyyHmilPub.Id || s.ServedIn.Id == redDoorPub.Id ||
-                s.Served.Id == abbeyDubbelBeer.Id || s.Served.Id == sanDiegoApaBeer.Id || 
-                s.Served.Id == mildAleBeer.Id
+                BeerServedInPubs.Where(s =>
+                        s.ServedIn.Id == mohnatyyHmilPub.Id || s.ServedIn.Id == redDoorPub.Id ||
+                        s.Served.Id == abbeyDubbelBeer.Id || s.Served.Id == sanDiegoApaBeer.Id ||
+                        s.Served.Id == mildAleBeer.Id
                 ));
             Pubs.RemoveRange(Pubs.Where(p => p.Id == mohnatyyHmilPub.Id || p.Id == redDoorPub.Id));
             Beers.RemoveRange(
@@ -107,14 +151,13 @@ namespace Ontap.Models
 
             BeerServedInPubs.AddRange(
                 new BeerServedInPubs {Served = abbeyDubbelBeer, ServedIn = mohnatyyHmilPub, Price = 40},
-                new BeerServedInPubs {Served = mildAleBeer, ServedIn = mohnatyyHmilPub, Price = 40 },
-                new BeerServedInPubs {Served = abbeyDubbelBeer, ServedIn = redDoorPub, Price = 50 },
-                new BeerServedInPubs {Served = mildAleBeer, ServedIn = redDoorPub, Price = 45 },
-                new BeerServedInPubs {Served = sanDiegoApaBeer, ServedIn = redDoorPub, Price = 50 }
-                );
+                new BeerServedInPubs {Served = mildAleBeer, ServedIn = mohnatyyHmilPub, Price = 40},
+                new BeerServedInPubs {Served = abbeyDubbelBeer, ServedIn = redDoorPub, Price = 50},
+                new BeerServedInPubs {Served = mildAleBeer, ServedIn = redDoorPub, Price = 45},
+                new BeerServedInPubs {Served = sanDiegoApaBeer, ServedIn = redDoorPub, Price = 50}
+            );
 
             SaveChanges();
-
         }
 
         public DbSet<Pub> Pubs { get; set; }
@@ -123,5 +166,8 @@ namespace Ontap.Models
         public DbSet<BeerServedInPubs> BeerServedInPubs { get; set; }
         public DbSet<Brewery> Breweries { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<PubAdmin> PubAdmins { get; set; }
+        public DbSet<BreweryAdmin> BreweryAdmins { get; set; }
     }
 }

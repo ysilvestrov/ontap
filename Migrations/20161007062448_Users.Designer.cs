@@ -8,9 +8,10 @@ using Ontap.Models;
 namespace ontap.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20161007062448_Users")]
+    partial class Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -164,9 +165,9 @@ namespace ontap.Migrations
                 {
                     b.Property<string>("Id");
 
-                    b.Property<bool>("CanAdminBrewery");
-
                     b.Property<bool>("CanAdminPub");
+
+                    b.Property<bool>("CanAdminPubBrewery");
 
                     b.Property<bool>("IsAdmin");
 
@@ -213,7 +214,7 @@ namespace ontap.Migrations
                         .HasForeignKey("BreweryId");
 
                     b.HasOne("Ontap.Models.User", "User")
-                        .WithMany("BreweryAdmins")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 
@@ -231,7 +232,7 @@ namespace ontap.Migrations
                         .HasForeignKey("PubId");
 
                     b.HasOne("Ontap.Models.User", "User")
-                        .WithMany("PubAdmins")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
         }

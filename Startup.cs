@@ -35,6 +35,7 @@ namespace Ontap
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +55,7 @@ namespace Ontap
                     var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     serviceScope.ServiceProvider.GetService<DataContext>().Database.Migrate();
-                    serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData();
+                    serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData(Configuration);
                 }
 
             }
@@ -68,7 +69,7 @@ namespace Ontap
                             app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                     {
                         serviceScope.ServiceProvider.GetService<DataContext>().Database.Migrate();
-                        serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData();
+                        serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData(Configuration);
                     }
                 }
                 catch (Exception ex)
