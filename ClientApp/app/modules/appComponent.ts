@@ -7,6 +7,7 @@ import { Observable }     from 'rxjs/Observable';
 import './rxjs.operators.ts';
 import {IStronglyTypedEvents, EventDispatcher, IEvent} from './StronglyTypedEvents.ts';
 import { FormsModule }   from '@angular/forms';
+import { LoginService } from "../components/login/login.service";
 
 @Injectable()
 export class AppComponent<TInterface extends IElement, TService extends AppService<TInterface>> {
@@ -102,7 +103,9 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
 
 @Injectable()
 export abstract class AppService<TInteface extends IElement> {
-    constructor(private http: Http) { }
+    constructor(private http: Http, private loginService: LoginService) {
+        console.log("Login service instantiated: "+loginService);
+    }
 
     protected serverUrl; // URL to web API
 
@@ -121,36 +124,47 @@ export abstract class AppService<TInteface extends IElement> {
         return Observable.throw(errMsg);
     }
 
+    private get options(): RequestOptions {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        if (this.loginService.accessToken) {
+            headers.append('Authorization', `Bearer ${this.loginService.accessToken.accessToken}`);
+        }
+        return new RequestOptions({ headers: headers });
+    }
 
     add(pub: TInteface): Observable<TInteface> {
         let body = JSON.stringify(pub);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.serverUrl, body, options)
+        return this.http.post(this.serverUrl, body, this.options)
             .map(this.extractData, this)
             .catch(this.handleError);
     }
 
     change(element: TInteface): Observable<TInteface> {
         let body = JSON.stringify(element);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.serverUrl + "/" + element.id, body, options)
+        return this.http.put(this.serverUrl + "/" + element.id, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     delete(element: TInteface): Observable<TInteface> {
-        return this.http.delete(this.serverUrl + "/" + element.id)
+        return this.http.delete(this.serverUrl + "/" + element.id, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     get(): Observable<TInteface[]> {
-        return this.http.get(this.serverUrl)
+        return this.http.get(this.serverUrl, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
+
+    getOne(id:any): Observable<TInteface> {
+        return this.http.get(this.serverUrl + "/" + id, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+
 
     abstract new(element: TInteface): TInteface;
     abstract copy(source: TInteface, destination: TInteface): void;

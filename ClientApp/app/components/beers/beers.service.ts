@@ -2,11 +2,12 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {IBeer, Beer, Brewery} from "../../models/ontap.models.ts";
 import {AppService} from "../../modules/appComponent.ts";
+import { LoginService } from "../login/login.service";
 
 @Injectable()
 export class BeerService extends AppService<IBeer> {
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, loginService: LoginService) {
+        super(http, loginService);
         this.serverUrl = "api/beers";
     }
 

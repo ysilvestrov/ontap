@@ -11,6 +11,7 @@ import { EPubsComponent } from "./components/epubs/epubs.component";
 import { ServesComponent } from "./components/serves/serves.component";
 import { BreweriesComponent } from "./components/breweries/breweries.component";
 import { UsersComponent } from "./components/users/users.component";
+import { LoginComponent } from "./components/login/login.component";
 import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { HomeComponent } from './components/home/home.component';
         EPubsComponent,
         PubsComponent,
         ServesComponent,
+        LoginComponent,
         UsersComponent
     ],
     imports: [

@@ -2,11 +2,12 @@
 import { Http } from '@angular/http';
 import { IPub, Pub, City } from "../../models/ontap.models.ts";
 import {AppService} from "../../modules/appComponent.ts";
+import Loginservice = require("../login/login.service");
 
 @Injectable()
 export class EPubService extends AppService<IPub> {
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, loginService: Loginservice.LoginService) {
+        super(http, loginService);
         this.serverUrl = "api/pubs";
     }
 

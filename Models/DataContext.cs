@@ -58,7 +58,7 @@ namespace Ontap.Models
                 Name = "admin",
                 Id = "admin",
                 IsAdmin = true,
-                Password = configuration.GetValue<string>("DefaultAdminPassword")
+                Password = UserBase.GetHash(configuration.GetValue<string>("DefaultAdminPassword"))
             };
 
             Users.Add(admin);

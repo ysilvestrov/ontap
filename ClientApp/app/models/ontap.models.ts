@@ -143,3 +143,8 @@ export class User implements IUser {
     pubs: IPub[];
     breweries: IBrewery[];
 }
+export class AccessToken {
+    accessToken: string;
+    expiresIn: number;
+    expiresAt: Date;
+}

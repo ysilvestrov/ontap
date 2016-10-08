@@ -38,6 +38,13 @@ namespace Ontap.Controllers
             return Users;
         }
 
+        // GET: api/pubs
+        [HttpGet("{id}")]
+        public User Get(string id)
+        {
+            return Users.FirstOrDefault(u => u.Id == id);
+        }
+
         // POST api/values
         /// <exception cref="ArgumentException">If user with the same Id already exists.</exception>
         [HttpPost]
@@ -45,6 +52,7 @@ namespace Ontap.Controllers
         {
             if (Users.Any(c => c.Id == user.Id))
                 throw new ArgumentException(string.Format("User with id {id} already exists", user.Id));
+            user.Password = UserBase.GetHash(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
@@ -61,12 +69,12 @@ namespace Ontap.Controllers
             current.Name = user.Name;
             current.Password = string.IsNullOrWhiteSpace(user.Password)
                 ? current.Password
-                : Encoding.UTF8.GetChars(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(user.Password))).ToString();
+                : UserBase.GetHash(user.Password);
             current.IsAdmin = user.IsAdmin;
             current.CanAdminPub = user.CanAdminPub;
             current.CanAdminBrewery = user.CanAdminBrewery;          
             await _context.SaveChangesAsync();
-            return current;
+            return current; 
         }
     }
 }

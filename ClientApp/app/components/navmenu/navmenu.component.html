@@ -1,5 +1,5 @@
 ﻿<div class='main-nav'>
-        <div class='navbar navbar-inverse'>
+    <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
                 <span class='sr-only'>Toggle navigation</span>
@@ -17,37 +17,39 @@
                         <span class='glyphicon glyphicon-question-sign'></span> Что на кранах
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && loginService.currentUser.isAdmin">
                     <a [routerLink]="['/cities']">
                         <span class='glyphicon glyphicon-flag'></span> Города
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)">
                     <a [routerLink]="['/beers']">
                         <span class='glyphicon glyphicon-glass'></span> Пиво
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)">
                     <a [routerLink]="['/epubs']">
                         <span class='glyphicon glyphicon-home'></span> Пабы
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)">
                     <a [routerLink]="['/serves']">
                         <span class='glyphicon glyphicon-euro'></span> Цены
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)">
                     <a [routerLink]="['/breweries']">
                         <span class='glyphicon glyphicon-star'></span> Пивоварни
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && loginService.currentUser.isAdmin">
                     <a [routerLink]="['/users']">
                         <span class='glyphicon glyphicon-user'></span> Пользователи
                     </a>
                 </li>
             </ul>
         </div>
+        <log-in></log-in>
+
     </div>
 </div>

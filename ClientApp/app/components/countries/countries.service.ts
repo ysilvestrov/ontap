@@ -2,11 +2,12 @@
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {ICountry} from "../../models/ontap.models.ts";
 import {AppService} from "../../modules/appComponent.ts";
+import Loginservice = require("../login/login.service");
 
 @Injectable()
 export class CountryService extends AppService<ICountry> {
-    constructor(http: Http) {
-        super(http);
+    constructor(http: Http, loginService: Loginservice.LoginService) {
+        super(http, loginService);
         this.serverUrl = "api/countries";
     }
 
