@@ -32,5 +32,8 @@ export class BeerService extends AppService<IBeer> {
         dest.name = source.name;
         dest.description = source.description;
         dest.brewery = source.brewery;
+        dest.alcohol = source.alcohol;
+        dest.ibu = source.ibu;
+        dest.gravity = source.gravity;
     }
 }

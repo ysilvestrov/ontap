@@ -47,6 +47,16 @@
                         <span class='glyphicon glyphicon-user'></span> Пользователи
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && loginService.currentUser.isAdmin">
+                    <a [routerLink]="['/pub-admins']">
+                        <span class='glyphicon glyphicon-user'></span> Админы пабов
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && loginService.currentUser.isAdmin">
+                    <a [routerLink]="['/brewery-admins']">
+                        <span class='glyphicon glyphicon-user'></span> Админы пивоварен
+                    </a>
+                </li>
             </ul>
         </div>
         <log-in></log-in>

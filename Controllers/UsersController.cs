@@ -28,7 +28,11 @@ namespace Ontap.Controllers
             .ThenInclude(pa => pa.User)
             .Include(u => u.BreweryAdmins)
             .ThenInclude(ba => ba.Brewery)
-            .ToArray();
+            .ToArray().Select(u =>
+            {
+                u.Password = "";
+                return u;
+            });
 
 
         // GET: api/pubs
@@ -65,7 +69,7 @@ namespace Ontap.Controllers
         { 
             if (Users.All(c => c.Id != id))
                 throw new KeyNotFoundException(string.Format("No user with id {id}", id));
-            var current = Users.First(c => c.Id == id);
+            var current = _context.Users.First(c => c.Id == id);
             current.Name = user.Name;
             current.Password = string.IsNullOrWhiteSpace(user.Password)
                 ? current.Password

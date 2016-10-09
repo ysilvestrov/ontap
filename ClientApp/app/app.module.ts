@@ -12,6 +12,8 @@ import { ServesComponent } from "./components/serves/serves.component";
 import { BreweriesComponent } from "./components/breweries/breweries.component";
 import { UsersComponent } from "./components/users/users.component";
 import { LoginComponent } from "./components/login/login.component";
+import { PubAdminsComponent } from './components/pubadmins/pubadmins.component';
+import { BreweryAdminsComponent } from './components/breweryadmins/breweryadmins.component';
 import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
@@ -27,6 +29,8 @@ import { HomeComponent } from './components/home/home.component';
         PubsComponent,
         ServesComponent,
         LoginComponent,
+        PubAdminsComponent,
+        BreweryAdminsComponent,
         UsersComponent
     ],
     imports: [
@@ -42,6 +46,8 @@ import { HomeComponent } from './components/home/home.component';
             { path: 'pubs', component: PubsComponent },
             { path: 'serves', component: ServesComponent },
             { path: 'users', component: UsersComponent },
+            { path: 'pub-admins', component: PubAdminsComponent },
+            { path: 'brewery-admins', component: BreweryAdminsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

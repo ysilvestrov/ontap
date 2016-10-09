@@ -148,3 +148,33 @@ export class AccessToken {
     expiresIn: number;
     expiresAt: Date;
 }
+export interface IPubAdmin {
+    id: number;
+    pub: IPub;
+    user: IUser;
+}
+export class PubAdmin implements IPubAdmin {
+    constructor(pa:IPubAdmin) {
+        this.id = pa.id;
+        this.pub = pa.pub;
+        this.user = pa.user;
+    }
+    id: number;
+    pub: IPub;
+    user: IUser;
+}
+export interface IBreweryAdmin {
+    id: number;
+    brewery: IBrewery;
+    user: IUser;
+}
+export class BreweryAdmin implements IBreweryAdmin {
+    constructor(pa: IBreweryAdmin) {
+        this.id = pa.id;
+        this.brewery = pa.brewery;
+        this.user = pa.user;
+    }
+    id: number;
+    brewery: IBrewery;
+    user: IUser;
+}

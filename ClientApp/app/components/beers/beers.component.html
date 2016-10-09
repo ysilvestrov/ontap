@@ -9,13 +9,16 @@
     {{errorMessage}}
 </div>
 
-<table class='table' *ngIf="elements">
+<table class='table table-striped table-condensed' *ngIf="elements">
     <thead>
     <tr>
         <th>Служебный Id</th>
         <th>Название</th>
         <th>Производитель</th>
         <th>Описание</th>
+        <th>Алкоголь, &deg;</th>
+        <th>Плотность, %</th>
+        <th>Горькость, IBU</th>
         <th>Действия</th>
     </tr>
     </thead>
@@ -54,6 +57,33 @@
         </td>
         <td>
             <span *ngIf="!editing || (editing.id != beer.id)">
+                {{ beer.alcohol }}
+            </span>
+            <span *ngIf="editing && (editing.id == beer.id)">
+                <input type="number" class="form-control col-xs-1" id="alcohol"
+                       required
+                       [(ngModel)]="editing.alcohol" name="alcohol">
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != beer.id)">
+                {{ beer.gravity }}
+            </span>
+            <span *ngIf="editing && (editing.id == beer.id)">
+                <input type="number" class="form-control col-xs-1" id="gravity"                      
+                       [(ngModel)]="editing.gravity" name="gravity">
+            </span>
+        </td>        <td>
+            <span *ngIf="!editing || (editing.id != beer.id)">
+                {{ beer.ibu }}
+            </span>
+            <span *ngIf="editing && (editing.id == beer.id)">
+                <input type="number" class="form-control col-xs-1" id="ibu"                       
+                       [(ngModel)]="editing.ibu" name="ibu">
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != beer.id)">
                 <button (click)="edit(beer.id)" type="button" class="btn btn-default" aria-label="Edit">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
@@ -85,9 +115,22 @@
             </select>
         </td>
         <td>
-                <textarea class="form-control" id="adding.description"
-                          required
-                          [(ngModel)]="adding.description" name="description"></textarea>
+            <textarea class="form-control" id="adding.description"
+                      required
+                      [(ngModel)]="adding.description" name="description"></textarea>
+        </td>
+        <td>
+                <input type="number" class="form-control col-xs-1" id="adding.alcohol"                       
+                       [(ngModel)]="adding.alcohol" name="adding.alcohol">
+        </td>
+        <td>
+                <input type="number" class="form-control col-xs-1" id="adding.gravity"                      
+                       [(ngModel)]="adding.gravity" name="adding.gravity">
+        </td>
+        <td>
+                <input type="number" class="form-control col-xs-1" id="adding.ibu"
+                       required
+                       [(ngModel)]="adding.ibu" name="adding.ibu">
         </td>
         <td>
             <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">

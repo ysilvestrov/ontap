@@ -12,6 +12,6 @@ namespace Ontap.Models
         public string Address { get; set; }
         public Country Country { get; set; }
         public virtual IList<Beer> Beers { get; set; }
-        public IEnumerable<BreweryAdmin> Admins { get; set; }
+        public ICollection<BreweryAdmin> Admins { get; set; }
     }
 }
