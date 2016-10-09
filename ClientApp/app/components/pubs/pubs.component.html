@@ -30,10 +30,19 @@
             <td>{{ pub.city.name }}</td>
             <td>{{ pub.name }}</td>
             <td>
+                <template #toolTipTemplate let-model="model">
+                    <p>{{model.beer.description}}</p>
+                    <p>Характеристики: 
+                        <strong>{{model.beer.alcohol}}</strong>&deg;
+                        <span *ngIf="model.beer.gravity > 0">
+                            <strong>{{model.beer.gravity}}</strong>%
+                        </span>
+                        <strong>{{model.beer.ibu}}</strong>&nbsp;IBU</p>
+                </template>
                 <div class="btn-group" role="group" aria-label="...">
-                    <button *ngFor="let serve of pub.serves" class="btn btn-primary btn-s" role="button" data-toggle="tooltip" data-placement="left" title="{{serve.beer.description}}
-Характеристики: {{serve.beer.alcohol}}&deg; {{serve.beer.gravity}}% {{serve.beer.ibu}} IBU">
-                         {{ serve.beer.name }} {{ serve.price | number:'2.2-2' }} ₴
+                    <button *ngFor="let serve of pub.serves" class="btn btn-primary btn-s" role="button" 
+                            [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve" >
+                        {{ serve.beer.name }} {{ serve.price | number:'2.2-2' }} ₴
                     </button>
                 </div>
             </td>

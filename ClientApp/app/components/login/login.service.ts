@@ -15,7 +15,7 @@ export class LoginService {
                 var token = sessionStorage.getItem("token");
                 if (token) {
                     token = JSON.parse(token);
-                    if (this.isValid(token)) {
+                    if (!(token instanceof String) && this.isValid(token)) {
                         this.accessToken = token;
                     }
                 }

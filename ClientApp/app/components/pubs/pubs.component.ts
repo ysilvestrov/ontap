@@ -5,6 +5,7 @@ import {IPub, ICity, Pub} from "../../models/ontap.models.ts";
 import {EPubService} from "../epubs/epubs.service.ts";
 import {CityService} from "../cities/cities.service.ts";
 import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 @ng.Component({
     selector: 'pubs',

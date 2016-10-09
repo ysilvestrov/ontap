@@ -15,6 +15,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { PubAdminsComponent } from './components/pubadmins/pubadmins.component';
 import { BreweryAdminsComponent } from './components/breweryadmins/breweryadmins.component';
 import { HomeComponent } from './components/home/home.component';
+import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -36,6 +37,7 @@ import { HomeComponent } from './components/home/home.component';
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
+        TooltipModule, 
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

@@ -144,6 +144,12 @@ export class User implements IUser {
     breweries: IBrewery[];
 }
 export class AccessToken {
+    constructor(at: AccessToken) {
+        this.accessToken = at.accessToken;
+        this.expiresIn = at.expiresIn;
+        this.expiresAt = at.expiresAt;
+    }
+
     accessToken: string;
     expiresIn: number;
     expiresAt: Date;
