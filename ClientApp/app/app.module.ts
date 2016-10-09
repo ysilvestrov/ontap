@@ -50,7 +50,7 @@ import { HomeComponent } from './components/home/home.component';
             { path: 'brewery-admins', component: BreweryAdminsComponent },
             { path: '**', redirectTo: 'home' }
         ])
-    ]
+    ],
 })
 export class AppModule {
 }

@@ -17,8 +17,19 @@ export class LoginComponent {
     public userLogin: string;
     public userPassword: string; 
 
-    constructor(private loginService:LoginService, private userService:UserService) {
+    constructor(private loginService: LoginService, private userService: UserService) {
+        if (loginService.isAuthorised()) {
+            this.isAuthorized = true;
+            this.userLogin = this.parseJwt(loginService.accessToken.accessToken).sub;
+            this.getUser(this.userLogin);            
+        }
     }
+
+    parseJwt(token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base64));
+    };
 
     login() {
         this.loginService.login(this.userLogin, this.userPassword)
@@ -26,21 +37,28 @@ export class LoginComponent {
             token => {
                 this.isAuthorized = true;
                 this.loginService.accessToken = token;
-                this.userService.getOne(this.userLogin)
-                    .subscribe(
-                        user => {
-                            this.user = user;
-                            this.loginService.currentUser = user;
-                        },
-                        error => {
-                            this.errorMessage = <any>error;
-                        }
-                    );
+                if (sessionStorage) {
+                    sessionStorage.setItem("token", JSON.stringify(token));
+                }
+                this.getUser(this.userLogin);
             },
             error => {
                 this.errorMessage = <any>error;
                 this.isAuthorized = false;
                 this.user = null;
             });
+    }
+
+    getUser(userLogin: string) {
+        this.userService.getOne(userLogin)
+            .subscribe(
+            user => {
+                this.user = user;
+                this.loginService.currentUser = user;
+            },
+            error => {
+                this.errorMessage = <any>error;
+            }
+            );
     }
 }

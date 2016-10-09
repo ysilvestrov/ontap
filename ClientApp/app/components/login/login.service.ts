@@ -9,7 +9,21 @@ import * as moment from 'moment';
 
 @Injectable()
 export class LoginService {
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
+        try {            
+            if (sessionStorage) {
+                var token = sessionStorage.getItem("token");
+                if (token) {
+                    token = JSON.parse(token);
+                    if (this.isValid(token)) {
+                        this.accessToken = token;
+                    }
+                }
+            }
+        } catch (e) {
+            //do nothing
+        } 
+    }
 
     protected serverUrl = "/api/jwt"; // URL to web API
 
@@ -41,7 +55,11 @@ export class LoginService {
     }
 
     isAuthorised(): boolean {
-        return this.accessToken != null && moment(this.accessToken.expiresAt).diff(moment()) > 0;
+        return this.accessToken != null && this.isValid(this.accessToken);
+    }
+
+    isValid(token: AccessToken): boolean {
+        return moment(token.expiresAt).diff(moment()) > 0;
     }
 
 
