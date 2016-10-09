@@ -102,6 +102,22 @@ export class List<T> {
     }
 
     /**
+     * Returns distinct elements from a sequence by using the default equality comparer to compare values.
+     */
+    public DistinctBy(field: (value: T) => any): List<T> {
+        var seen = [];
+        return this.Where((value, index, iter) => {
+            var k = field(value);
+            if (seen.indexOf(k) <= 0) {
+                seen.push(k);
+                return true;
+            } else {
+                return false;
+            }
+        });
+    }
+
+    /**
      * Returns the element at a specified index in a sequence.
      */
     public ElementAt(index: number): T {

@@ -13,8 +13,10 @@ import {AppComponent,AppService} from "../../modules/appComponent.ts";
   template: require('./serves.component.html')
 })
 export class ServesComponent extends  AppComponent<IServe, ServeService> {
+    public serves: IServe[];
     public pubs: IPub[];
     public beers: IBeer[];
+    public pub:IPub;
 
     constructor(elmService: ServeService, private pubService: EPubService, private beerService: BeerService) {
         super(elmService);
@@ -64,5 +66,18 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
 
     onChangeBeer(obj: IServe, id:string) {
         obj.served = new List(this.beers).Where(c => c.id === id).First();
+    }
+
+    public setPub(name) {
+        if (!this.serves) {
+            this.serves = this.elements;
+        }
+        this.pub = new List(this.pubs)
+            .Where((pub) => pub.name === name)
+            .First();
+        this.elements = (name === "") ? this.serves :
+            new List(this.serves)
+                .Where((serve) => serve.servedIn.name === this.pub.name)
+                .ToArray();
     }
 }

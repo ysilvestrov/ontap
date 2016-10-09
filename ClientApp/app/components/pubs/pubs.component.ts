@@ -10,6 +10,7 @@ import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2Bootstra
 @ng.Component({
     selector: 'pubs',
     providers: [EPubService],
+    styles: [require('./pubs.component.css')],
   template: require('./pubs.component.html')
 })
 export class PubsComponent extends AppComponent<IPub, EPubService> implements ng.OnInit {
@@ -31,9 +32,10 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements ng
     onLoad1(elements:IPub[]) {
             this.allPubs = elements;
             this.city = null;
-            this.cities = new List(this.allPubs)
-                .Select((pub: IPub) => pub.city)
-                .Distinct()
+            var pubCities = new List(this.allPubs)
+                .Select((pub: IPub) => pub.city).ToArray();
+            this.cities = new List(pubCities)
+                .DistinctBy((city: ICity) => city.name)
                 .OrderBy((city: ICity) => city.name)
                 .ToArray();
     }

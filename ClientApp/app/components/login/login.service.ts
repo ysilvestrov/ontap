@@ -15,7 +15,7 @@ export class LoginService {
                 var token = sessionStorage.getItem("token");
                 if (token) {
                     token = JSON.parse(token);
-                    if (!(token instanceof String) && this.isValid(token)) {
+                    if (token && token.hasOwnProperty("accessToken") && token.accessToken && this.isValid(token)) {
                         this.accessToken = token;
                     }
                 }
@@ -28,7 +28,7 @@ export class LoginService {
     protected serverUrl = "/api/jwt"; // URL to web API
 
     public currentUser: IUser;
-    public accessToken: AccessToken;  
+    public accessToken: any;  
 
     private extractData(res: Response) {
         let body = res.json();

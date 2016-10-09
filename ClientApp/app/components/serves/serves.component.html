@@ -9,10 +9,20 @@
     {{errorMessage}}
 </div>
 
+<div class="dropdown" *ngIf="pubs">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Паб<span *ngIf="pub">: {{pub.name}}</span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a (click)="setPub('')">*</a></li>
+        <li *ngFor="let pub of pubs"><a (click)="setPub(pub.name)">{{ pub.name }}</a></li>
+    </ul>
+</div>
+
 <table class='table' *ngIf="elements">
     <thead>
         <tr>
-            <th>Служебный Id</th>
             <th>Паб</th>
             <th>Пиво</th>
             <th>Цена</th>
@@ -21,7 +31,6 @@
     </thead>
     <tbody>
         <tr *ngFor="let serve of elements">
-            <td>{{ serve.id }}</td>
             <td>
                 <span *ngIf="!editing || (editing.id != serve.id)">
                     {{ serve.servedIn.name }}
@@ -73,17 +82,12 @@
         </tr>
         <tr *ngIf="adding">
             <td>
-                <input type="text" class="form-control" id="adding.id"
-                       required
-                       [(ngModel)]="adding.id" name="id">
-            </td>
-            <td>
-                <select class="form-control" [(ngModel)]="adding.servedIn.id" (change)="onEditChangePub($event.target.value)">
+                <select class="form-control" [(ngModel)]="adding.servedIn.id" (change)="onAddChangePub($event.target.value)">
                     <option *ngFor="let pub of pubs" [value]="pub.id">{{pub.name}}</option>
                 </select>
             </td>
             <td>
-                <select class="form-control" [(ngModel)]="adding.served.id" (change)="onEditChangeBeer($event.target.value)">
+                <select class="form-control" [(ngModel)]="adding.served.id" (change)="onAddChangeBeer($event.target.value)">
                     <option *ngFor="let beer of beers" [value]="beer.id">{{beer.name}}</option>
                 </select>
             </td>

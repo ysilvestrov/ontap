@@ -32,11 +32,10 @@ namespace Ontap.Controllers
         public IEnumerable<BeerServedInPubs> Get() => Serves as BeerServedInPubs[] ?? Serves.ToArray();
 
         // POST api/serves
+        /// <exception cref="ArgumentException">Record for the same beer and pub already exists</exception>
         [HttpPost]
         public async Task<BeerServedInPubs> Post([FromBody] BeerServedInPubs serve)
         {
-            if (Serves.Any(s => s.Id == serve.Id))
-                throw new ArgumentException(string.Format("Record with id {id} already exists", serve.Id));
             if (Serves.Any(s => s.Served.Id == serve.Served.Id && s.ServedIn.Id == serve.ServedIn.Id))
                 throw new ArgumentException("Record for the same beer and pub already exists");
             var current = serve;
