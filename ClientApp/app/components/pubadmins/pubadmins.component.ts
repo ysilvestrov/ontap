@@ -10,7 +10,7 @@ import {AppComponent,AppService} from "../../modules/appComponent.ts";
 @ng.Component({
     selector: 'pubAdmins',
     providers: [PubAdminService, EPubService, UserService],
-  template: require('./pubAdmins.component.html')
+  template: require('./pubadmins.component.html')
 })
 export class PubAdminsComponent extends  AppComponent<IPubAdmin, PubAdminService> {
     public pubs: IPub[];
