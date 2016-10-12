@@ -15,8 +15,10 @@ export class LoginService {
                 var token = sessionStorage.getItem("token");
                 if (token) {
                     token = JSON.parse(token);
-                    if (token && token.hasOwnProperty("accessToken") && token.accessToken && this.isValid(token)) {
-                        this.accessToken = token;
+                    if (token && token.hasOwnProperty("accessToken")) {
+                        if (token.accessToken && this.isValid(token)) {
+                            this.accessToken = token;
+                        }
                     }
                 }
             }
