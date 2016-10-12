@@ -43,7 +43,7 @@ namespace Ontap.Controllers
         }
 
         // GET: api/pubs
-        [HttpGet("{id:string}")]
+        [HttpGet("{id}")]
         public User Get(string id)
         {
             return Users.FirstOrDefault(u => u.Id == id);
