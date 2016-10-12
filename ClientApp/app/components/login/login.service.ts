@@ -12,12 +12,12 @@ export class LoginService {
     constructor(private http: Http) {
         try {            
             if (sessionStorage) {
-                var token = sessionStorage.getItem("token");
+                let token = sessionStorage.getItem("token");
                 if (token) {
-                    token = JSON.parse(token);
-                    if (token && token.hasOwnProperty("accessToken")) {
-                        if (token.accessToken && this.isValid(token)) {
-                            this.accessToken = token;
+                    let atoken:AccessToken = JSON.parse(token);
+                    if (atoken && atoken.hasOwnProperty("accessToken")) {
+                        if (atoken.accessToken && this.isValid(atoken)) {
+                            this.accessToken = atoken;
                         }
                     }
                 }
