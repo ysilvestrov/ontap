@@ -67,7 +67,7 @@ namespace Ontap.Controllers
         [HttpPut("{id}")]
         public async Task<User> Put(string id, [FromBody]User user)
         { 
-            if (Users.All(c => c.Id != id))
+            if (_context.Users.All(c => c.Id != id))
                 throw new KeyNotFoundException(string.Format("No user with id {id}", id));
             var current = _context.Users.First(c => c.Id == id);
             current.Name = user.Name;
