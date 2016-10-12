@@ -43,7 +43,7 @@ namespace Ontap.Controllers
         }
 
         // GET: api/pubs
-        [HttpGet("{id}")]
+        [HttpGet("{id:string}")]
         public User Get(string id)
         {
             return Users.FirstOrDefault(u => u.Id == id);
@@ -54,7 +54,7 @@ namespace Ontap.Controllers
         [HttpPost]
         public async Task<User> Post([FromBody] User user)
         {
-            if (Users.Any(c => c.Id == user.Id))
+            if (_context.Users.Any(c => c.Id == user.Id))
                 throw new ArgumentException(string.Format("User with id {id} already exists", user.Id));
             user.Password = UserBase.GetHash(user.Password);
             _context.Users.Add(user);
