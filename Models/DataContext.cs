@@ -7,7 +7,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Ontap.Models
 {
-    public class DataContext : DbContext
+    public interface IDataContext
+    {
+        void EnsureSeedData(IConfigurationRoot configuration);
+        DbSet<Pub> Pubs { get; set; }
+        DbSet<Beer> Beers { get; set; }
+        DbSet<City> Cities { get; set; }
+        DbSet<BeerServedInPubs> BeerServedInPubs { get; set; }
+        DbSet<Brewery> Breweries { get; set; }
+        DbSet<Country> Countries { get; set; }
+        DbSet<User> Users { get; set; }
+        DbSet<PubAdmin> PubAdmins { get; set; }
+        DbSet<BreweryAdmin> BreweryAdmins { get; set; }
+    }
+
+    public class DataContext : DbContext, IDataContext
     {
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)

@@ -41,6 +41,7 @@ namespace Ontap.Controllers
         {
             if (Beers.Any(c => c.Id == beer.Id))
                 throw new ArgumentException(string.Format("Beer with id {id} already exists", beer.Id));
+            beer.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
             _context.Beers.Add(beer);
             await _context.SaveChangesAsync();
             return beer;

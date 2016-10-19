@@ -83,59 +83,16 @@ namespace Ontap
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
                     HotModuleReplacement = true
                 });
-
-                using (
-                    var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    serviceScope.ServiceProvider.GetService<DataContext>().Database.Migrate();
-                    serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData(Configuration);
-                }
-
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                try
-                {
-                    using (
-                        var serviceScope =
-                            app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    {
-                        serviceScope.ServiceProvider.GetService<DataContext>().Database.Migrate();
-                        serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData(Configuration);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    var logger = loggerFactory.CreateLogger("Catchall Endpoint");
-                    logger.LogInformation("No endpoint found for request {ex}", ex);
-                }
+
             }
 
-            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+            ConfigureDb(app);
 
-                ValidateAudience = true,
-                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
-
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = SigningKey,
-
-                RequireExpirationTime = true,
-                ValidateLifetime = true,
-
-                ClockSkew = TimeSpan.Zero
-            };
-
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
-            {
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                TokenValidationParameters = tokenValidationParameters
-            });
+            ConfigureJwt(app);
 
             app.UseStaticFiles();
 
@@ -148,6 +105,41 @@ namespace Ontap
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
+            });
+        }
+
+        private void ConfigureDb(IApplicationBuilder app)
+        {
+            using (
+                var serviceScope =
+                    app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<DataContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<DataContext>().EnsureSeedData(Configuration);
+            }
+        }
+
+        private void ConfigureJwt(IApplicationBuilder app)
+        {
+            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+                ValidateAudience = true,
+                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = SigningKey,
+                RequireExpirationTime = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
             });
         }
     }
