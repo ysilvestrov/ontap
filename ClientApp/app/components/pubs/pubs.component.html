@@ -8,7 +8,7 @@
 
 <div class="dropdown"  *ngIf="cities">
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Город<span *ngIf="city">: {{city.name}}</span>
+        Город: <span *ngIf="city">{{city.name}}</span><span *ngIf="!city">все</span>
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -17,35 +17,30 @@
     </ul>
 </div>
 
-<table class='table' *ngIf="elements">
-    <thead>
-        <tr>
-            <th>Город</th>
-            <th>Паб</th>
-            <th>На кранах</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let pub of elements">
-            <td>{{ pub.city.name }}</td>
-            <td>{{ pub.name }}</td>
-            <td>
-                <template #toolTipTemplate let-model="model">
-                    <p>{{model.beer.description}}</p>
-                    <p>Характеристики: 
-                        <strong>{{model.beer.alcohol}}</strong>&deg;
-                        <span *ngIf="model.beer.gravity > 0">
-                            <strong>{{model.beer.gravity}}</strong>%
-                        </span>
-                        <strong>{{model.beer.ibu}}</strong>&nbsp;IBU</p>
-                </template>
-                <div class="btn-group" role="group" aria-label="...">
-                    <button *ngFor="let serve of pub.serves" class="btn btn-primary btn-s red-tooltip" role="button" 
-                            [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve" >
-                        {{ serve.beer.name }} {{ serve.price | number:'2.2-2' }} ₴
-                    </button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<template #toolTipTemplate let-model="model">
+    <p>{{model.beer.description}}</p>
+    <p>
+        Характеристики:
+        <strong>{{model.beer.alcohol}}</strong>&deg;
+        <span *ngIf="model.beer.gravity > 0">
+            <strong>{{model.beer.gravity}}</strong>%
+        </span>
+        <strong>{{model.beer.ibu}}</strong>&nbsp;IBU
+    </p>
+</template>
+
+<div *ngIf="elements" style="margin-top: 20px;">
+    <div *ngFor="let pub of elements">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ pub.name }} <span class="label label-success">{{ pub.city.name }}</span></h3>
+            </div>
+            <div class="panel-body">
+                <button *ngFor="let serve of pub.serves" class="btn btn-primary btn-s red-tooltip" role="button"
+                        [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve">
+                    {{ serve.beer.name }} <span class="label label-info">{{ serve.beer.brewery.name }}</span> <span class="badge">{{ serve.price | number:'2.2-2' }} ₴</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

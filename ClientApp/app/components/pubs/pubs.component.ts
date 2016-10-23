@@ -38,15 +38,20 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements ng
                 .DistinctBy((city: ICity) => city.name)
                 .OrderBy((city: ICity) => city.name)
                 .ToArray();
+            this.setCity("");
     }
 
     public setCity(name) {
         this.city = new List(this.cities)
             .Where((city) => city.name === name)
             .First();
-        this.elements = (name === "") ? this.allPubs :
+        this.elements = (name === "") ? 
+            new List(this.allPubs)
+                .OrderByDescending((pub: IPub) => pub.serves.length)
+                .ToArray() :
             new List(this.allPubs)
                 .Where((pub) => pub.city.name === this.city.name)
+                .OrderByDescending((pub:IPub) => pub.serves.length)
                 .ToArray();
     }
 }
