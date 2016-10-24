@@ -5,8 +5,20 @@
 <p *ngIf="!elements">
     <em>Loading...</em>
 </p>
+
 <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
     {{errorMessage}}
+</div>
+
+<div class="dropdown" *ngIf="breweries">
+    <button class="btn btn-default dropdown-toggle" type="button" id="breweryChooser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Пивоварня: <span *ngIf="brewery">{{brewery.name}}</span><span *ngIf="!brewery">все</span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="breweryChooser">
+        <li><a (click)="setBrewery('')">*</a></li>
+        <li *ngFor="let brewery of breweries"><a (click)="setBrewery(brewery.name)">{{ brewery.name }}</a></li>
+    </ul>
 </div>
 
 <table class='table table-striped table-condensed' *ngIf="elements">

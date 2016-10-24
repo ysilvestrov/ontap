@@ -15,10 +15,36 @@ import {AppComponent, AppService} from "../../modules/appComponent.ts";
 export class BeersComponent extends AppComponent<IBeer, BeerService> {
 
     public breweries: IBrewery[];
+    public allBeers: IBeer[];
+    public brewery: IBrewery;
 
     constructor(elmService: BeerService, private breweryService: BreweryService) {
         super(elmService);
         this.getBreweries();
+        if (this.elements) {
+            this.onElementsLoad(this.elements);
+        }
+        this.onLoad.subscribe((s: BeersComponent, elements: IBeer[]) => { this.onElementsLoad(elements) });
+    }
+
+    onElementsLoad(elements: IBeer[]) {
+        this.allBeers = elements;
+        this.brewery = null;
+        this.setBrewery("");
+    }
+
+    public setBrewery(name) {
+        this.brewery = new List(this.breweries)
+            .Where((brewery) => brewery.name === name)
+            .First();
+        this.elements = (name === "") ?
+            new List(this.allBeers)
+                .OrderBy((beer: IBeer) => beer.brewery.name)
+                .ToArray() :
+            new List(this.allBeers)
+                .Where((beer) => beer.brewery.name === this.brewery.name)
+                .OrderBy((beer: IBeer) => beer.brewery.name)
+                .ToArray();
     }
 
     startAdd() {

@@ -33,7 +33,7 @@
     <div *ngFor="let pub of elements">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{{ pub.name }} <span class="label label-success">{{ pub.city.name }}</span></h3>
+                <h3 class="panel-title">{{ pub.name }} <span class="label label-success">{{ pub.city.name }}</span> <small>{{ pub.address }}</small></h3>
             </div>
             <div class="panel-body">
                 <button *ngFor="let serve of pub.serves" class="btn btn-primary btn-s red-tooltip" role="button"

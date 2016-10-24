@@ -21,15 +21,15 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements ng
     constructor(elmService: EPubService) {
         super(elmService);
         if (this.elements) {
-            this.onLoad1(this.elements);
+            this.onElementsLoad(this.elements);
         }
-        this.onLoad.subscribe((s: PubsComponent, elements:IPub[]) => {this.onLoad1(elements)});
+        this.onLoad.subscribe((s: PubsComponent, elements:IPub[]) => {this.onElementsLoad(elements)});
     }
 
     ngOnInit() {
     }
 
-    onLoad1(elements:IPub[]) {
+    onElementsLoad(elements:IPub[]) {
             this.allPubs = elements;
             this.city = null;
             var pubCities = new List(this.allPubs)
