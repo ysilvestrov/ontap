@@ -18,14 +18,14 @@
 </div>
 
 <template #toolTipTemplate let-model="model">
-    <p>{{model.beer.description}}</p>
+    <p>{{model.served.description}}</p>
     <p>
         Характеристики:
-        <strong>{{model.beer.alcohol}}</strong>&deg;
-        <span *ngIf="model.beer.gravity > 0">
-            <strong>{{model.beer.gravity}}</strong>%
+        <strong>{{model.served.alcohol}}</strong>&deg;
+        <span *ngIf="model.served.gravity > 0">
+            <strong>{{model.served.gravity}}</strong>%
         </span>
-        <strong>{{model.beer.ibu}}</strong>&nbsp;IBU
+        <strong>{{model.served.ibu}}</strong>&nbsp;IBU
     </p>
 </template>
 
@@ -36,9 +36,13 @@
                 <h3 class="panel-title">{{ pub.name }} <span class="label label-success">{{ pub.city.name }}</span> <small>{{ pub.address }}</small></h3>
             </div>
             <div class="panel-body">
-                <button *ngFor="let serve of pub.serves" class="btn btn-primary btn-s red-tooltip" role="button"
+                <button *ngFor="let serve of pub.serves | sortByTap" class="btn btn-s red-tooltip" 
+                        [ngClass]="serve.served.brewery.country.id=='UA'?'btn-info':'btn-primary'" role="button"
                         [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve">
-                    {{ serve.beer.name }} <span class="label label-info">{{ serve.beer.brewery.name }}</span> <span class="badge">{{ serve.price | number:'2.2-2' }} ₴</span>
+                    <span class="badge">{{ serve.tap }}</span>
+                    {{ serve.served.name }}
+                    <span class="label label-info">{{ serve.served.brewery.name }}</span>
+                    <span class="badge">{{ serve.price | number:'2.2-2' }} ₴</span>
                 </button>
             </div>
         </div>

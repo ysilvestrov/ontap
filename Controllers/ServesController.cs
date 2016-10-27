@@ -56,6 +56,7 @@ namespace Ontap.Controllers
             current.Served = _context.Beers.First(beer => beer.Id == serve.Served.Id);
             current.ServedIn = _context.Pubs.First(pub => pub.Id == serve.ServedIn.Id);
             current.Price = serve.Price;
+            current.Tap = serve.Tap;
             await _context.SaveChangesAsync();
             return current;
         }

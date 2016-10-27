@@ -36,15 +36,6 @@ namespace Ontap.Models
 
         public string _labels { get; set; }
 
-        [NotMapped]
-        public IEnumerable<Pub> ServedIn
-        {
-            get
-            {
-                return BeerServedInPubs != null ? BeerServedInPubs.Select(x => x.ServedIn) : new Pub[0];
-            }
-        }
-
         [IgnoreDataMember]
         [JsonIgnore]
         public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }

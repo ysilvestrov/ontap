@@ -23,10 +23,11 @@
 <table class='table' *ngIf="elements">
     <thead>
         <tr>
-            <th>Паб</th>
-            <th>Пиво</th>
-            <th>Цена</th>
-            <th>Действия</th>
+            <th class="col-xs-3">Паб</th>
+            <th class="col-xs-1">Кран</th>
+            <th class="col-xs-5">Пиво</th>
+            <th class="col-xs-1">Цена</th>
+            <th class="col-xs-3">Действия</th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +40,16 @@
                     <select class="form-control" [(ngModel)]="editing.servedIn.id" (change)="onEditChangePub($event.target.value)">
                         <option *ngFor="let pub of pubs" [value]="pub.id">{{pub.name}}</option>
                     </select>
+                </span>
+            </td>
+            <td>
+                <span *ngIf="!editing || (editing.id != serve.id)">
+                    {{ serve.tap }}
+                </span>
+                <span *ngIf="editing && (editing.id == serve.id)">
+                    <input type="number" class="form-control" id="editing.tap"
+                           required
+                           [(ngModel)]="editing.tap" name="tap">
                 </span>
             </td>
             <td>
@@ -56,7 +67,7 @@
                     {{ serve.price }}
                 </span>
                 <span *ngIf="editing && (editing.id == serve.id)">
-                    <input type="text" class="form-control" id="editing.price"
+                    <input type="number" class="form-control" id="editing.price"
                            required
                            [(ngModel)]="editing.price" name="price">
                 </span>
@@ -87,12 +98,17 @@
                 </select>
             </td>
             <td>
+                <input type="number" class="form-control" id="adding.tap"
+                       required
+                       [(ngModel)]="adding.tap" name="tap">
+            </td>
+            <td>
                 <select class="form-control" [(ngModel)]="adding.served.id" (change)="onAddChangeBeer($event.target.value)">
                     <option *ngFor="let beer of beers" [value]="beer.id">{{beer.name}}</option>
                 </select>
             </td>
             <td>
-                <input type="text" class="form-control" id="adding.price"
+                <input type="number" class="form-control" id="adding.price"
                        required
                        [(ngModel)]="adding.price" name="price">
             </td>

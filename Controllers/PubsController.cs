@@ -26,6 +26,7 @@ namespace Ontap.Controllers
             .Include(p => p.BeerServedInPubs)
             .ThenInclude(s => s.Served)
             .ThenInclude(b => b.Brewery)
+            .ThenInclude(b=>b.Country)
             .ToArray();
 
 

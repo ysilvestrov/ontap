@@ -3,6 +3,7 @@ import { FormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
 import { AppComponent } from './components/app/app.component'
+import { SortByTap } from './components/app/sortbytap.pipe'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { PubsComponent } from './components/pubs/pubs.component';
 import { CitiesComponent } from './components/cities/cities.component';
@@ -32,7 +33,8 @@ import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2Bootstra
         LoginComponent,
         PubAdminsComponent,
         BreweryAdminsComponent,
-        UsersComponent
+        UsersComponent,
+        SortByTap
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

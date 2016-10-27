@@ -16,22 +16,8 @@ namespace Ontap.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public virtual City City { get; set; }
-
-        [NotMapped]
-        public IEnumerable<Serve> Serves 
-        {
-            get
-            {
-                return BeerServedInPubs != null
-                    ? BeerServedInPubs.Select(x => new Serve {Beer = x.Served, Price = x.Price})
-                    : new Serve[0];
-            }
-        }
-
-        [IgnoreDataMember]
-        [JsonIgnore]
+        [JsonProperty("serves")]
         public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }
-
         public ICollection<PubAdmin> Admins { get; set; }
     }
 }

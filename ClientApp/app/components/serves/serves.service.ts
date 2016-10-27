@@ -32,6 +32,7 @@ export class ServeService extends AppService<IServe> {
                 serves: [],
             }),
             price: 0,
+            tap:1,
         });
     }
 
@@ -43,5 +44,6 @@ export class ServeService extends AppService<IServe> {
         dest.served = source.served;
         dest.servedIn = source.servedIn;
         dest.price = source.price;
+        dest.tap = source.tap;
     }
 }

@@ -37,6 +37,7 @@ export interface IServe {
     served: IBeer;
     servedIn: IPub;
     price: number;
+    tap: number;
 }
 export interface IUser {
     id: string;
@@ -100,12 +101,14 @@ export class Serve implements IServe {
     served: IBeer;
     servedIn: IPub;
     price: number;
+    tap: number;
 
     constructor(serve: IServe) {
         this.id = serve.id;
         this.served = serve.served;
         this.servedIn = serve.servedIn;
         this.price = serve.price;
+        this.tap = serve.tap;
     }
 
 }
