@@ -49,6 +49,12 @@ export class LoginComponent {
             });
     }
 
+    logout() {
+        this.loginService.logout();
+        this.isAuthorized = false;
+        this.user = null;
+    }
+
     getUser(userLogin: string) {
         this.userService.getOne(userLogin)
             .subscribe(

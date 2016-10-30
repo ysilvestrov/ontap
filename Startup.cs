@@ -1,8 +1,10 @@
 using System;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ontap.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Ontap.Auth;
@@ -49,6 +52,7 @@ namespace Ontap
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             services.AddSingleton(Configuration);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Get options from app settings
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
 
@@ -57,12 +61,16 @@ namespace Ontap
             {
                 options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
+                options.ValidFor = TimeSpan.Parse(jwtAppSettingOptions[nameof(JwtIssuerOptions.ValidFor)]);
                 options.SigningCredentials = new SigningCredentials(SigningKey, SecurityAlgorithms.HmacSha256);
             });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminUser",
-                                  policy => policy.RequireClaim("UserType", "Admin"));
+                options.AddPolicy("AdminUser", policy => policy.RequireClaim("UserType", "Admin"));
+                options.AddPolicy("PubAdminUser", policy => policy.RequireUserType("Admin", "PubAdmin"));
+                options.AddPolicy("BreweryAdminUser", policy => policy.RequireUserType("Admin", "BrewerAdmin"));
+                options.AddPolicy("BreweryOrPubAdminUser",
+                    policy => policy.RequireUserType("Admin", "PubAdmin", "BrewerAdmin"));
             });
         }
 

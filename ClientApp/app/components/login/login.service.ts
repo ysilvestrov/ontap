@@ -56,6 +56,11 @@ export class LoginService {
             .catch(this.handleError);
     }
 
+    logout():void {
+        sessionStorage.removeItem("token");
+        this.accessToken = null;
+    }
+
     isAuthorised(): boolean {
         return this.accessToken != null && this.isValid(this.accessToken);
     }
