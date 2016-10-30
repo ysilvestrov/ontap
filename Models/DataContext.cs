@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Ontap.Models
 {
@@ -41,6 +39,9 @@ namespace Ontap.Models
             modelBuilder.Entity<BeerServedInPubs>()
                 .Property(s => s.Tap)
                 .HasDefaultValue(1);
+            modelBuilder.Entity<BeerServedInPubs>()
+                .Property(s => s.Volume)
+                .HasDefaultValue(0.5m);
             modelBuilder.Entity<BreweryAdmin>()
                 .HasOne(ba => ba.User)
                 .WithMany(u => u.BreweryAdmins)

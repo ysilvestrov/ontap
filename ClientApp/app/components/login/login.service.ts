@@ -59,6 +59,7 @@ export class LoginService {
     logout():void {
         sessionStorage.removeItem("token");
         this.accessToken = null;
+        this.currentUser = null;
     }
 
     isAuthorised(): boolean {

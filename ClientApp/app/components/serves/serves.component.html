@@ -25,8 +25,9 @@
         <tr>
             <th class="col-xs-3">Паб</th>
             <th class="col-xs-1">Кран</th>
-            <th class="col-xs-5">Пиво</th>
+            <th class="col-xs-4">Пиво</th>
             <th class="col-xs-1">Цена</th>
+            <th class="col-xs-1">Объём</th>
             <th class="col-xs-3">Действия</th>
         </tr>
     </thead>
@@ -54,11 +55,11 @@
             </td>
             <td>
                 <span *ngIf="!editing || (editing.id != serve.id)">
-                    {{ serve.served.name }}
+                    {{ serve.served.name }} ({{serve.served.brewery.name}})
                 </span>
                 <span *ngIf="editing && (editing.id == serve.id)">
                     <select class="form-control" [(ngModel)]="editing.served.id" (change)="onEditChangeBeer($event.target.value)">
-                        <option *ngFor="let beer of beers" [value]="beer.id">{{beer.name}}</option>
+                        <option *ngFor="let beer of beers" [value]="beer.id">{{beer.name}} ({{beer.brewery.name}})</option>
                     </select>
                 </span>
             </td>
@@ -70,6 +71,16 @@
                     <input type="number" class="form-control" id="editing.price"
                            required
                            [(ngModel)]="editing.price" name="price">
+                </span>
+            </td>
+            <td>
+                <span *ngIf="!editing || (editing.id != serve.id)">
+                    {{ serve.volume }}
+                </span>
+                <span *ngIf="editing && (editing.id == serve.id)">
+                    <input type="number" class="form-control" id="editing.volume"
+                           required
+                           [(ngModel)]="editing.volume" name="volume">
                 </span>
             </td>
             <td>
@@ -104,13 +115,18 @@
             </td>
             <td>
                 <select class="form-control" [(ngModel)]="adding.served.id" (change)="onAddChangeBeer($event.target.value)">
-                    <option *ngFor="let beer of beers" [value]="beer.id">{{beer.name}}</option>
+                    <option *ngFor="let beer of beers" [value]="beer.id">{{beer.name}} ({{beer.brewery.name}})</option>
                 </select>
             </td>
             <td>
                 <input type="number" class="form-control" id="adding.price"
                        required
                        [(ngModel)]="adding.price" name="price">
+            </td>
+            <td>
+                <input type="number" class="form-control" id="adding.volume"
+                       required
+                       [(ngModel)]="adding.volume" name="volume">
             </td>
             <td>
                 <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">

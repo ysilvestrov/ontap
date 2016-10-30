@@ -90,6 +90,7 @@ namespace Ontap.Controllers
             current.ServedIn = _context.Pubs.First(pub => pub.Id == serve.ServedIn.Id);
             current.Price = serve.Price;
             current.Tap = serve.Tap;
+            current.Volume = serve.Volume;
             await _context.SaveChangesAsync();
             return current;
         }
