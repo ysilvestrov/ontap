@@ -104,6 +104,8 @@ namespace Ontap
 
             app.UseStaticFiles();
 
+            app.UseMiddleware(typeof(JsonErrorHandlingMiddleware));
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

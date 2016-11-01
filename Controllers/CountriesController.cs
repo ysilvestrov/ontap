@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Ontap.Auth;
 using Ontap.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -37,10 +39,11 @@ namespace Ontap.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize(Policy = "AdminUser")]
         public async Task<Country> Post([FromBody] Country country)
         {
             if (Countries.Any(c => c.Id == country.Id))
-                throw new ArgumentException(string.Format("Country with id {id} already exists", country.Id));
+                throw new AlreadyExistsException(string.Format("Country with id {id} already exists", country.Id));
             _context.Countries.Add(country);
             await _context.SaveChangesAsync();
             return country;
@@ -48,6 +51,7 @@ namespace Ontap.Controllers
 
         // PUT api/cities/Kharkiv
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminUser")]
         public async Task<Country> Put(string id, [FromBody]Country country)
         {
             if (Countries.All(c => c.Id != id))

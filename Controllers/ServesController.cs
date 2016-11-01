@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Ontap.Auth;
 using Ontap.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -57,12 +58,12 @@ namespace Ontap.Controllers
         public IEnumerable<BeerServedInPubs> Get() => Serves as BeerServedInPubs[] ?? Serves.ToArray();
 
         // POST api/serves
-        /// <exception cref="ArgumentException">Record for the same beer and pub already exists</exception>
+        /// <exception cref="AlreadyExistsException">Record for the same beer and pub already exists</exception>
         [HttpPost]
         public async Task<BeerServedInPubs> Post([FromBody] BeerServedInPubs serve)
         {
             if (Serves.Any(s => s.Served.Id == serve.Served.Id && s.ServedIn.Id == serve.ServedIn.Id))
-                throw new ArgumentException("Record for the same beer and pub already exists");
+                throw new AlreadyExistsException("Record for the same beer and pub already exists");
             var current = serve;
             current.Served = _context.Beers.First(beer => beer.Id == serve.Served.Id);
             current.ServedIn = _context.Pubs.First(pub => pub.Id == serve.ServedIn.Id);

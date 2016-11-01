@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Ontap.Auth;
 using Ontap.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,6 +13,7 @@ using Ontap.Models;
 namespace Ontap.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Policy = "AdminUser")]
     public class BreweryAdminsController : Controller
     {
         private readonly DataContext _context;
@@ -37,9 +40,9 @@ namespace Ontap.Controllers
         public async Task<BreweryAdmin> Post([FromBody] BreweryAdmin admin)
         {
             if (Admins.Any(s => s.Id == admin.Id))
-                throw new ArgumentException(string.Format("Record with id {id} already exists", admin.Id));
+                throw new AlreadyExistsException(string.Format("Record with id {id} already exists", admin.Id));
             if (Admins.Any(s => s.User.Id == admin.User.Id && s.Brewery.Id == admin.Brewery.Id))
-                throw new ArgumentException("Record for the same beer and pub already exists");
+                throw new AlreadyExistsException("Record for the same beer and pub already exists");
             var current = admin;
             current.User = _context.Users.First(user => user.Id == admin.User.Id);
             current.Brewery = _context.Breweries.First(brewery => brewery.Id == admin.Brewery.Id);

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Ontap.Auth;
 using Ontap.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,7 +20,6 @@ namespace Ontap.Controllers
         public BreweriesController(DataContext context)
         {
             _context = context;
-  
         }
 
         public IEnumerable<Brewery> Breweries => _context.Breweries.Include(b => b.Country);
@@ -37,10 +38,12 @@ namespace Ontap.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize(Policy = "BreweryAdminUser")]
         public async Task<Brewery> Post([FromBody] Brewery brewery)
         {
             if (Breweries.Any(c => c.Id == brewery.Id))
-                throw new ArgumentException(string.Format("Brewery with id {id} already exists", brewery.Id));
+                throw new AlreadyExistsException(string.Format("Brewery with id {id} already exists", brewery.Id));
+            brewery.Country = _context.Countries.First(c => c.Id == brewery.Country.Id);
             _context.Breweries.Add(brewery);
             await _context.SaveChangesAsync();
             return brewery;
@@ -48,6 +51,7 @@ namespace Ontap.Controllers
 
         // PUT api/cities/Kharkiv
         [HttpPut("{id}")]
+        [Authorize(Policy = "BreweryAdminUser")]
         public async Task<Brewery> Put(string id, [FromBody]Brewery brewery)
         {
             if (Breweries.All(c => c.Id != id))
@@ -60,10 +64,17 @@ namespace Ontap.Controllers
             return current;
         }
 
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        [Authorize(Policy = "BreweryAdminUser")]
+        public async Task Delete(string id)
+        {
+            if (Breweries.All(c => c.Id != id))
+                throw new KeyNotFoundException(string.Format("No brewery with id {id}", id));
+            if(_context.Beers.Any(b => b.Brewery.Id == id))
+                throw new AlreadyExistsException("Cannot delete brewery with beers");
+            _context.Breweries.Remove(_context.Breweries.First(c => c.Id == id));
+            await _context.SaveChangesAsync();
+        }
     }
 }

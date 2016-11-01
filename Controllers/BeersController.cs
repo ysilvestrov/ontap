@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Ontap.Auth;
 using Ontap.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,6 +13,7 @@ using Ontap.Models;
 namespace Ontap.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Policy = "BreweryOrPubAdminUser")]
     public class BeersController : Controller
     {
         private readonly DataContext _context;
@@ -40,7 +43,7 @@ namespace Ontap.Controllers
         public async Task<Beer> Post([FromBody] Beer beer)
         {
             if (Beers.Any(c => c.Id == beer.Id))
-                throw new ArgumentException(string.Format("Beer with id {id} already exists", beer.Id));
+                throw new AlreadyExistsException(string.Format("Beer with id {id} already exists", beer.Id));
             beer.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
             _context.Beers.Add(beer);
             await _context.SaveChangesAsync();
