@@ -12,7 +12,6 @@
 <table class='table' *ngIf="elements">
     <thead>
         <tr>
-            <th>Служебный Id</th>
             <th>Пивоварня</th>
             <th>Пользователь</th>
             <th>Действия</th>
@@ -20,13 +19,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let breweryAdmin of elements">
-            <td>{{ breweryAdmin.id }}</td>
             <td>
                 <span *ngIf="!editing || (editing.id != breweryAdmin.id)">
                     {{ breweryAdmin.brewery.name }}
                 </span>
                 <span *ngIf="editing && (editing.id == breweryAdmin.id)">
-                    <select class="form-control" [(ngModel)]="editing.brewery.id" (change)="onEditChangePub($event.target.value)">
+                    <select class="form-control" [(ngModel)]="editing.brewery.id" (change)="onEditChangeBrewery($event.target.value)">
                         <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
                     </select>
                 </span>
@@ -62,21 +60,15 @@
         </tr>
         <tr *ngIf="adding">
             <td>
-                <input type="text" class="form-control" id="adding.id"
-                       required
-                       [(ngModel)]="adding.id" name="id">
-            </td>
-            <td>
-                <select class="form-control" [(ngModel)]="adding.brewery.id" (change)="onEditChangePub($event.target.value)">
+                <select class="form-control" [(ngModel)]="adding.brewery.id" (change)="onAddChangeBrewery($event.target.value)">
                     <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
                 </select>
             </td>
             <td>
-                <select class="form-control" [(ngModel)]="adding.user.id" (change)="onEditChangeUser($event.target.value)">
+                <select class="form-control" [(ngModel)]="adding.user.id" (change)="onAddChangeUser($event.target.value)">
                     <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
                 </select>
             </td>
-\
             <td>
                 <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>

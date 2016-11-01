@@ -39,16 +39,16 @@ namespace Ontap.Controllers
         [HttpPost]
         public async Task<BreweryAdmin> Post([FromBody] BreweryAdmin admin)
         {
-            if (Admins.Any(s => s.Id == admin.Id))
-                throw new AlreadyExistsException(string.Format("Record with id {id} already exists", admin.Id));
             if (Admins.Any(s => s.User.Id == admin.User.Id && s.Brewery.Id == admin.Brewery.Id))
-                throw new AlreadyExistsException("Record for the same beer and pub already exists");
-            var current = admin;
-            current.User = _context.Users.First(user => user.Id == admin.User.Id);
-            current.Brewery = _context.Breweries.First(brewery => brewery.Id == admin.Brewery.Id);
+                throw new AlreadyExistsException("Record for the same admin and brewery already exists");
+            var current = new BreweryAdmin
+            {
+                User = _context.Users.First(user => user.Id == admin.User.Id),
+                Brewery = _context.Breweries.First(brewery => brewery.Id == admin.Brewery.Id)
+            };
             _context.BreweryAdmins.Add(current);
             await _context.SaveChangesAsync();
-            return admin;
+            return Admins.First(s => s.User.Id == admin.User.Id && s.Brewery.Id == admin.Brewery.Id);
         }
 
         // PUT api/serves/123
@@ -57,7 +57,7 @@ namespace Ontap.Controllers
         public async Task<BreweryAdmin> Put(int id, [FromBody]BreweryAdmin admin)
         { 
             if (Admins.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No record with id {id}", id));
+                throw new KeyNotFoundException($"No record with id {id}");
             var current = Admins.First(c => c.Id == id);
             current.User = _context.Users.First(user => user.Id == admin.User.Id);
             current.Brewery = _context.Breweries.First(brewery => brewery.Id == admin.Brewery.Id);
@@ -71,7 +71,7 @@ namespace Ontap.Controllers
         public async Task<BreweryAdmin> Delete(int id)
         { 
             if (Admins.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No record with id {id}", id));
+                throw new KeyNotFoundException($"No record with id {id}");
             var current = Admins.First(c => c.Id == id);
             _context.BreweryAdmins.Remove(current);
             await _context.SaveChangesAsync();

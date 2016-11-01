@@ -39,16 +39,16 @@ namespace Ontap.Controllers
         [HttpPost]
         public async Task<PubAdmin> Post([FromBody] PubAdmin admin)
         {
-            if (Admins.Any(s => s.Id == admin.Id))
-                throw new AlreadyExistsException(string.Format("Record with id {id} already exists", admin.Id));
             if (Admins.Any(s => s.User.Id == admin.User.Id && s.Pub.Id == admin.Pub.Id))
                 throw new AlreadyExistsException("Record for the same user and pub already exists");
-            var current = admin;
-            current.User = _context.Users.First(user => user.Id == admin.User.Id);
-            current.Pub = _context.Pubs.First(pub => pub.Id == admin.Pub.Id);
+            var current = new PubAdmin
+            {
+                User = _context.Users.First(user => user.Id == admin.User.Id),
+                Pub = _context.Pubs.First(pub => pub.Id == admin.Pub.Id)
+            };
             _context.PubAdmins.Add(current);
             await _context.SaveChangesAsync();
-            return admin;
+            return Admins.First(s => s.User.Id == admin.User.Id && s.Pub.Id == admin.Pub.Id);
         }
 
         // PUT api/serves/123
@@ -57,7 +57,7 @@ namespace Ontap.Controllers
         public async Task<PubAdmin> Put(int id, [FromBody]PubAdmin admin)
         { 
             if (Admins.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No record with id {id}", id));
+                throw new KeyNotFoundException($"No record with id {id}");
             var current = Admins.First(c => c.Id == id);
             current.User = _context.Users.First(user => user.Id == admin.User.Id);
             current.Pub = _context.Pubs.First(pub => pub.Id == admin.Pub.Id);
@@ -71,7 +71,7 @@ namespace Ontap.Controllers
         public async Task<PubAdmin> Delete(int id)
         { 
             if (Admins.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No record with id {id}", id));
+                throw new KeyNotFoundException($"No record with id {id}");
             var current = Admins.First(c => c.Id == id);
             _context.PubAdmins.Remove(current);
             await _context.SaveChangesAsync();

@@ -12,7 +12,6 @@
 <table class='table' *ngIf="elements">
     <thead>
         <tr>
-            <th>Служебный Id</th>
             <th>Паб</th>
             <th>Пользователь</th>
             <th>Действия</th>
@@ -20,7 +19,6 @@
     </thead>
     <tbody>
         <tr *ngFor="let pubAdmin of elements">
-            <td>{{ pubAdmin.id }}</td>
             <td>
                 <span *ngIf="!editing || (editing.id != pubAdmin.id)">
                     {{ pubAdmin.pub.name }}
@@ -62,21 +60,15 @@
         </tr>
         <tr *ngIf="adding">
             <td>
-                <input type="text" class="form-control" id="adding.id"
-                       required
-                       [(ngModel)]="adding.id" name="id">
-            </td>
-            <td>
-                <select class="form-control" [(ngModel)]="adding.pub.id" (change)="onEditChangePub($event.target.value)">
+                <select class="form-control" [(ngModel)]="adding.pub.id" (change)="onAddChangePub($event.target.value)">
                     <option *ngFor="let pub of pubs" [value]="pub.id">{{pub.name}}</option>
                 </select>
             </td>
             <td>
-                <select class="form-control" [(ngModel)]="adding.user.id" (change)="onEditChangeUser($event.target.value)">
+                <select class="form-control" [(ngModel)]="adding.user.id" (change)="onAddChangeUser($event.target.value)">
                     <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
                 </select>
             </td>
-\
             <td>
                 <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
