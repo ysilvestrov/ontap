@@ -108,7 +108,7 @@ export class List<T> {
         var seen = [];
         return this.Where((value, index, iter) => {
             var k = field(value);
-            if (seen.indexOf(k) <= 0) {
+            if (seen.indexOf(k) < 0) {
                 seen.push(k);
                 return true;
             } else {

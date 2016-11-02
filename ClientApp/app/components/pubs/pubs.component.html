@@ -20,7 +20,6 @@
 <template #toolTipTemplate let-model="model">
     <p>{{model.served.description}}</p>
     <p>
-        Характеристики:
         <strong>{{model.served.alcohol}}</strong>&deg;
         <span *ngIf="model.served.gravity > 0">
             <strong>{{model.served.gravity}}</strong>%

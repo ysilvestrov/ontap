@@ -65,8 +65,11 @@ namespace Ontap.Controllers
             if (Serves.Any(s => s.Served.Id == serve.Served.Id && s.ServedIn.Id == serve.ServedIn.Id))
                 throw new AlreadyExistsException("Record for the same beer and pub already exists");
             var current = serve;
-            current.Served = _context.Beers.First(beer => beer.Id == serve.Served.Id);
-            current.ServedIn = _context.Pubs.First(pub => pub.Id == serve.ServedIn.Id);
+            current.Served =
+                _context.Beers.Include(b => b.Brewery)
+                    .ThenInclude(b => b.Admins)
+                    .First(beer => beer.Id == serve.Served.Id);
+            current.ServedIn = _context.Pubs.Include(p => p.Admins).First(pub => pub.Id == serve.ServedIn.Id);
             if (!HasUserRights(await GetUser(), current))
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
