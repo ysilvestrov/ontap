@@ -15,5 +15,6 @@ namespace Ontap.Models
         public int Tap { get; set; } = 1;
         [DefaultValue(typeof(decimal), "0.5")]
         public decimal Volume { get; set; } = 0.5m;
+        public DateTime Updated { get; set; }
     }
 }

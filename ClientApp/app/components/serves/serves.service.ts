@@ -33,7 +33,8 @@ export class ServeService extends AppService<IServe> {
             }),
             price: 0,
             tap: 1,
-            volume:0.5,
+            volume: 0.5,
+            updated: new Date(),
         });
     }
 
@@ -47,5 +48,6 @@ export class ServeService extends AppService<IServe> {
         dest.price = source.price;
         dest.tap = source.tap;
         dest.volume = source.volume;
+        dest.updated = source.updated;
     }
 }

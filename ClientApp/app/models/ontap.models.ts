@@ -39,6 +39,7 @@ export interface IServe {
     price: number;
     tap: number;
     volume: number;
+    updated: Date;
 }
 export interface IUser {
     id: string;
@@ -104,6 +105,7 @@ export class Serve implements IServe {
     price: number;
     tap: number;
     volume: number;
+    updated: Date;
 
     constructor(serve: IServe) {
         this.id = serve.id;
@@ -112,6 +114,7 @@ export class Serve implements IServe {
         this.price = serve.price;
         this.tap = serve.tap;
         this.volume = serve.volume;
+        this.updated = serve.updated;
     }
 
 }

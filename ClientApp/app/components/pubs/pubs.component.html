@@ -33,7 +33,9 @@
     <div *ngFor="let pub of elements">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{{ pub.name }} <span class="label label-success">{{ pub.city.name }}</span> <small>{{ pub.address }}</small></h3>
+                <h3 class="panel-title">{{ pub.name }} <span class="label label-success">{{ pub.city.name }}</span> <small>{{ pub.address }}</small>
+                    <span class="pull-right" *ngIf="pubUpdates[pub.id]"><small><i class="glyphicon glyphicon-calendar"></i> {{pubUpdates[pub.id]}}</small></span>
+                </h3>
             </div>
             <div class="panel-body">
                 <button *ngFor="let serve of pub.serves | sortByTap" class="btn btn-s red-tooltip" 
