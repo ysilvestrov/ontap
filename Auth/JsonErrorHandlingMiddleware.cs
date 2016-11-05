@@ -26,14 +26,18 @@ namespace Ontap.Auth
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex);
+                var processed = await HandleExceptionAsync(context, ex);
+                if (!processed)
+                {
+                    throw;
+                }
             }
         }
 
-        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static async Task<bool> HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            if (exception == null) return;
-            if (!context.Request.ContentType.Contains("json")) return;
+            if (exception == null || context?.Request?.ContentType?.Contains("json") != true)
+                return false;
 
             var code = HttpStatusCode.InternalServerError;
 
@@ -42,6 +46,8 @@ namespace Ontap.Auth
             else if (exception is InvalidCredentialException) code = HttpStatusCode.Forbidden;
 
             await WriteExceptionAsync(context, exception, code).ConfigureAwait(false);
+
+            return true;
         }
 
         private static async Task WriteExceptionAsync(HttpContext context, Exception exception, HttpStatusCode code)
