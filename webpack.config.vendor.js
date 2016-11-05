@@ -32,6 +32,7 @@ module.exports = {
             'es6-promise',
             'jquery',
             'zone.js',
+            'flag-icon-css/css/flag-icon.css',
         ]
     },
     output: {

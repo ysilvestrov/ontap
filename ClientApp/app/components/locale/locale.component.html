@@ -1,0 +1,17 @@
+﻿<div class="locale btn-group btn-group-xs pull-right" role="group" aria-label="...">
+    <button type="button" class="btn"
+            [ngClass]="{'btn-primary': currentLocale =='uk', 'btn-link': currentLocale !='uk'}"
+            (click)="selectLocale('uk','UA')">
+        <span class="flag-icon flag-icon-ua flag-icon-squared"></span>
+    </button>
+    <button type="button" class="btn"
+            [ngClass]="{'btn-primary': currentLocale =='en', 'btn-link': currentLocale !='en'}"
+            (click)="selectLocale('en','US')">
+        <span class="flag-icon flag-icon-gb flag-icon-squared"></span>
+    </button>
+    <button type="button" class="btn"
+            [ngClass]="{'btn-primary': currentLocale =='ru', 'btn-link': currentLocale !='ru'}"
+            (click)="selectLocale('ru','RU')">
+        <span class="flag-icon flag-icon-ru flag-icon-squared"></span>
+    </button>
+</div>

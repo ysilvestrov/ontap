@@ -5,7 +5,8 @@ import {IBrewery, IUser, IBreweryAdmin, BreweryAdmin} from "../../models/ontap.m
 import {BreweryService} from "../breweries/breweries.service.ts";
 import {UserService} from "../users/users.service.ts";
 import {BreweryAdminService} from "./breweryadmins.service.ts";
-import {AppComponent,AppService} from "../../modules/appComponent.ts";
+import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { Locale, LocaleService, LocalizationService } from "angular2localization";
 
 @ng.Component({
     selector: 'breweryAdmins',
@@ -16,8 +17,8 @@ export class BreweryAdminsComponent extends  AppComponent<IBreweryAdmin, Brewery
     public breweries: IBrewery[];
     public users: IUser[];
 
-    constructor(elmService: BreweryAdminService, private breweryService: BreweryService, private userService: UserService) {
-        super(elmService);
+    constructor(elmService: BreweryAdminService, private breweryService: BreweryService, private userService: UserService, public locale: LocaleService, public localization: LocalizationService) {
+        super(elmService, locale, localization);
         this.getBreweries();
         this.getUsers();
     }

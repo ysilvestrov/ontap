@@ -1,0 +1,20 @@
+﻿{
+  "G": {
+    "CITY": "City",
+    "ALL": "all"
+  },
+  "PUBS": {
+    "TITLE": "Ukrainian pubs and Restaurants",
+    "DESCRIPTION": "Here is the list of all the Ukrainian craft pubs and Restaurants"
+  },
+  "MENU": {
+    "HOME": "HOME",
+    "ONTAP": "What's on tap"
+  },
+  "HOME": {
+    "DESCRIPTION": "Here you can find out what beer is on tap on every craft pub all over Ukraine.",
+    "ASSERTION": "To continue please confirm you are at least 18 years old",
+    "YES": "Yes",
+    "NO": "No"
+  }
+}

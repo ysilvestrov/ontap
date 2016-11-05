@@ -1,13 +1,18 @@
-﻿<h1>Что на кранах?</h1>
-<p>На нашем сайте вы можете узнать, какое пиво сейчас продаётся в пабах по всей территории Украины.</p>
+﻿<h1>
+    <span *ngIf="!isBrowser || !isLoaded">Що на кранах</span>{{'MENU.ONTAP' | translate:lang}}?
+</h1>
+<p>
+    <span *ngIf="!isBrowser || !isLoaded">На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.</span>
+    {{'HOME.DESCRIPTION' | translate:lang}}
+</p>
 <div class="panel panel-warning">
     <div class="panel-heading">
-        <h3 class="panel-title">Для продолжения пожалуйста подтвердите, что вам исполнилось 18 лет:</h3>
+        <h3 class="panel-title">
+            <span *ngIf="!isBrowser || !isLoaded">Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років</span>{{'HOME.ASSERTION' | translate:lang}}:
+        </h3>
     </div>
     <div class="panel-body">
-        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-            <a class="btn btn-default" [routerLink]="['/pubs']" role="button">Да, мне исполнилось 18 лет.</a>
-            <a class="btn btn-danger" href="http://prom.ua/Podemnyj-kran-igrushki.html" role="button">Нет, я моложе 18 лет.</a>
-        </div>
+            <a class="btn btn-success btn-lg" [routerLink]="['/pubs']" role="button"><span class="glyphicon glyphicon-ok-circle"></span> <span *ngIf="!isBrowser || !isLoaded">Так</span>{{'HOME.YES' | translate:lang}}</a>
+            <a class="btn btn-danger btn-lg" href="http://prom.ua/Podemnyj-kran-igrushki.html" role="button"><span class="glyphicon glyphicon-remove-circle"></span> <span *ngIf="!isBrowser || !isLoaded">Ні</span>{{'HOME.NO' | translate:lang}}</a>
     </div>
 </div>

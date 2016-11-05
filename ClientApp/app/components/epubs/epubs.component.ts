@@ -4,7 +4,8 @@ import { List } from "../../modules/linq.ts";
 import {IPub, ICity, Pub} from "../../models/ontap.models.ts";
 import {EPubService} from "./epubs.service.ts";
 import {CityService} from "../cities/cities.service.ts";
-import {AppComponent,AppService} from "../../modules/appComponent.ts";
+import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { Locale, LocaleService, LocalizationService } from "angular2localization";
 
 @ng.Component({
     selector: 'epubs',
@@ -14,8 +15,8 @@ import {AppComponent,AppService} from "../../modules/appComponent.ts";
 export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     public cities: ICity[];
 
-    constructor(elmService: EPubService, private cityService: CityService) {
-        super(elmService);
+    constructor(elmService: EPubService, private cityService: CityService, public locale: LocaleService, public localization: LocalizationService) {
+        super(elmService, locale, localization);
         this.getCities();
     }
 

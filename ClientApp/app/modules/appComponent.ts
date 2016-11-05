@@ -8,15 +8,19 @@ import './rxjs.operators.ts';
 import {IStronglyTypedEvents, EventDispatcher, IEvent} from './StronglyTypedEvents.ts';
 import { FormsModule }   from '@angular/forms';
 import { LoginService } from "../components/login/login.service";
+import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 @Injectable()
-export class AppComponent<TInterface extends IElement, TService extends AppService<TInterface>> {
+export class AppComponent<TInterface extends IElement, TService extends AppService<TInterface>> extends Locale {
     public elements: TInterface[];
     public editing: TInterface;
     public adding: TInterface;
     public errorMessage: any;
+    public isBrowser: boolean;
 
-    constructor(private elmService: TService) {
+    constructor(private elmService: TService, public locale: LocaleService, public localization: LocalizationService) {
+        super(locale, localization);
+        this.isBrowser = typeof (document) != "undefined";
         this.get();
     }
 

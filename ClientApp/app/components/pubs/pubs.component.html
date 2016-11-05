@@ -1,6 +1,12 @@
-﻿<h1>Пабы и рестораны Украины</h1>
+﻿<h1>
+    <span *ngIf="!isBrowser">Паби та ресторани України</span>
+    {{'PUBS.TITLE' | translate:lang}}
+</h1>
 
-<p>Пабы с крафтовым пивом</p>
+<p>
+    <span *ngIf="!isBrowser">На цей сторінці ви можете знайти список усіх крафтових пабів в Україні</span>
+    {{'PUBS.DESCRIPTION' | translate:lang}}
+</p>
 
 <div *ngIf="!elements">
     <div class="progress">
@@ -13,7 +19,7 @@
 
 <div class="dropdown"  *ngIf="cities">
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Город: <span *ngIf="city">{{city.name}}</span><span *ngIf="!city">все</span>
+        <span *ngIf="!isBrowser">Місто</span>{{'G.CITY' | translate:lang}}: <span *ngIf="city">{{city.name}}</span><span *ngIf="!city"><span *ngIf="!isBrowser">усі</span>{{'G.ALL' | translate:lang}}</span>
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

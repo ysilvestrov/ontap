@@ -5,7 +5,8 @@ import {IPub, IBeer, IServe, Serve} from "../../models/ontap.models.ts";
 import {EPubService} from "../epubs/epubs.service.ts";
 import {BeerService} from "../beers/beers.service.ts";
 import {ServeService} from "./serves.service.ts";
-import {AppComponent,AppService} from "../../modules/appComponent.ts";
+import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 @ng.Component({
     selector: 'serves',
@@ -18,8 +19,8 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
     public beers: IBeer[];
     public pub:IPub;
 
-    constructor(elmService: ServeService, private pubService: EPubService, private beerService: BeerService) {
-        super(elmService);
+    constructor(elmService: ServeService, private pubService: EPubService, private beerService: BeerService, public locale: LocaleService, public localization: LocalizationService) {
+        super(elmService, locale, localization);
         this.getPubs();
         this.getBeers();
     }

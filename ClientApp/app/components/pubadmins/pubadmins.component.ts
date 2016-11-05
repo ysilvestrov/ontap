@@ -5,7 +5,8 @@ import {IPub, IUser, IPubAdmin, PubAdmin} from "../../models/ontap.models.ts";
 import {EPubService} from "../epubs/epubs.service.ts";
 import {UserService} from "../users/users.service.ts";
 import {PubAdminService} from "./pubadmins.service.ts";
-import {AppComponent,AppService} from "../../modules/appComponent.ts";
+import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { Locale, LocaleService, LocalizationService } from "angular2localization";
 
 @ng.Component({
     selector: 'pubAdmins',
@@ -16,8 +17,8 @@ export class PubAdminsComponent extends  AppComponent<IPubAdmin, PubAdminService
     public pubs: IPub[];
     public users: IUser[];
 
-    constructor(elmService: PubAdminService, private pubService: EPubService, private userService: UserService) {
-        super(elmService);
+    constructor(elmService: PubAdminService, private pubService: EPubService, private userService: UserService, public locale: LocaleService, public localization: LocalizationService) {
+        super(elmService, locale, localization);
         this.getPubs();
         this.getUsers();
     }

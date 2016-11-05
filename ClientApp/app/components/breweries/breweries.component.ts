@@ -5,6 +5,7 @@ import {IBrewery, Brewery , ICountry} from "../../models/ontap.models.ts";
 import {BreweryService} from "./breweries.service.ts";
 import {CountryService} from "../countries/countries.service.ts";
 import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { Locale, LocaleService, LocalizationService } from "angular2localization";
 
 @ng.Component({
     selector: 'breweries',
@@ -15,8 +16,8 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
 
     public countries: ICountry[];
 
-    constructor(elmService: BreweryService, private countryService: CountryService) {
-        super(elmService);
+    constructor(elmService: BreweryService, private countryService: CountryService, public locale: LocaleService, public localization: LocalizationService) {
+        super(elmService, locale, localization);
         this.getCountries();
     }
 
