@@ -19,6 +19,7 @@ import { BreweryAdminsComponent } from "./components/breweryadmins/breweryadmins
 import { HomeComponent } from "./components/home/home.component";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from "ng2-bootstrap/ng2-bootstrap";
 import { LocaleModule, LocalizationModule } from "angular2localization";
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -37,7 +38,8 @@ import { LocaleModule, LocalizationModule } from "angular2localization";
         BreweryAdminsComponent,
         UsersComponent,
         LocaleComponent,
-        SortByTap
+        SortByTap,
+        FileSelectDirective,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

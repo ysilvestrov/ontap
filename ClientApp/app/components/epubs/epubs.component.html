@@ -9,6 +9,61 @@
     {{errorMessage}}
 </div>
 
+<div class="container-fluid" *ngIf="elements">
+    <div class="row">
+        <div class="col-md-3"><h4><strong>Название</strong></h4></div>
+        <div class="col-md-2"><h4><strong>Город</strong></h4></div>
+        <div class="col-md-5"><h4><strong>Адрес</strong></h4></div>
+        <div class="col-md-2"><h4><strong>Действия</strong></h4></div>
+    </div>
+    <div class="row-wrapper" *ngFor="let pub of elements">
+        <div class="row" *ngIf="!editing || (editing.id != pub.id)">
+            <div class="col-md-3">{{ pub.name }}</div>
+            <div class="col-md-2">{{ pub.city.name }}</div>
+            <div class="col-md-5">{{ pub.address }}</div>
+            <div class="col-md-2">
+                <button (click)="edit(pub.id)" type="button" class="btn btn-default" aria-label="Edit">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div class="row" *ngIf="editing && (editing.id == pub.id)">
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="editing.name"
+                       required
+                       [(ngModel)]="editing.name" name="name">
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" [(ngModel)]="editing.city.id" (change)="onEditChangeCity($event.target.value)">
+                    <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="editing.address"
+                       required
+                       [(ngModel)]="editing.address" name="address">
+            </div>
+            <div class="col-md-2">
+                <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                </button>
+                <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div class="row edit2" *ngIf="editing && (editing.id == pub.id)">
+            <div class="col-md-1">
+                <img *ngIf="editing.image" [src]="'http://res.cloudinary.com/ontap-in-ua/image/upload/'+editing.image+'.png'"/>
+            </div>
+            <div class="col-md-4">
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+            </div>
+            <div class="col-md-7"></div>
+        </div>
+    </div>
+</div>
+
 <table class='table' *ngIf="elements">
     <thead>
     <tr>
@@ -20,54 +75,6 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let pub of elements">
-        <td>{{ pub.id }}</td>
-        <td>
-            <span *ngIf="!editing || (editing.id != pub.id)">
-                    {{ pub.name }}
-                </span>
-            <span *ngIf="editing && (editing.id == pub.id)">
-                    <input type="text" class="form-control" id="name"
-                           required
-                           [(ngModel)]="editing.name" name="name">
-                </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != pub.id)">
-                    {{ pub.city.name }}
-                </span>
-            <span *ngIf="editing && (editing.id == pub.id)">
-                <select class="form-control" [(ngModel)]="editing.city.id" (change)="onEditChangeCity($event.target.value)">
-                    <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
-                </select>
-            </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != pub.id)">
-                {{ pub.address }}
-            </span>
-            <span *ngIf="editing && (editing.id == pub.id)">
-                <input type="text" class="form-control" id="editing.address"
-                       required
-                       [(ngModel)]="editing.address" name="address">
-            </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != pub.id)">
-                <button (click)="edit(pub.id)" type="button" class="btn btn-default" aria-label="Edit">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                </button>
-                </span>
-            <span *ngIf="editing && (editing.id == pub.id)">
-                    <button  (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                    </button>
-                    <button  (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </button>
-                </span>
-        </td>
-    </tr>
     <tr *ngIf="adding">
         <td>
             <input type="text" class="form-control" id="adding.id"

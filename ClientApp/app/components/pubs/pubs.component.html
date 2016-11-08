@@ -1,5 +1,5 @@
 ﻿<h1>
-    <span *ngIf="!isBrowser">Паби та ресторани України</span>
+    <span *ngIf="!isBrowser">Крафтові паби України</span>
     {{'PUBS.TITLE' | translate:lang}}
 </h1>
 
@@ -49,14 +49,21 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <button *ngFor="let serve of pub.serves | sortByTap" class="btn btn-s red-tooltip" 
-                        [ngClass]="serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'" role="button"
-                        [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve">
-                    <span class="badge">{{ serve.tap }}</span>
-                    {{ serve.served.name }}
-                    <span class="label" [ngClass]="serve.served.brewery.country.id=='UA'?'label-info':'label-success'" >{{ serve.served.brewery.name }}</span>
-                    <span class="badge">{{ serve.price | number:'2.2-2' }} ₴</span>
-                </button>
+                <div>
+                    <div class="pull-left" *ngIf="pub.image">
+                        <img [src]="'http://res.cloudinary.com/ontap-in-ua/image/upload/'+pub.image+'.png'" />
+                    </div>
+                    <div>
+                        <button *ngFor="let serve of pub.serves | sortByTap" class="btn btn-s red-tooltip"
+                                [ngClass]="serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'" role="button"
+                                [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve">
+                            <span class="badge">{{ serve.tap }}</span>
+                            {{ serve.served.name }}
+                            <span class="label" [ngClass]="serve.served.brewery.country.id=='UA'?'label-info':'label-success'" >{{ serve.served.brewery.name }}</span>
+                            <span class="badge">{{ serve.price | number:'2.2-2' }} ₴</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

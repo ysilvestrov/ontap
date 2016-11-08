@@ -1,3 +1,8 @@
-﻿.tooltip {
+﻿:host-context(.tooltip) {
     background-color: gray;
+}
+
+.pub-image img {
+    max-height: 100px;
+    max-width: 100px;
 }

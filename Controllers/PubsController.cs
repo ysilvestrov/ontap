@@ -68,6 +68,7 @@ namespace Ontap.Controllers
             current.Name = pub.Name;
             current.City = _context.Cities.First(p => p.Id == pub.City.Id);
             current.Address = pub.Address;
+            current.Image = pub.Image;
             await _context.SaveChangesAsync();
             return current;
         }

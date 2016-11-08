@@ -23,6 +23,7 @@ export interface IPub {
     address: string;
     city: ICity;
     serves: IServe[];
+    image: string;
 }
 export interface ICity {
     id: string;
@@ -55,6 +56,7 @@ export class Pub implements IPub {
     id: string;
     name: string;
     address: string;
+    image: string;
     city: ICity;
     serves: IServe[];
 
@@ -64,6 +66,7 @@ export class Pub implements IPub {
         this.address = pub.address;
         this.city = pub.city;
         this.serves = pub.serves;
+        this.image = pub.image;
     }
 
 }

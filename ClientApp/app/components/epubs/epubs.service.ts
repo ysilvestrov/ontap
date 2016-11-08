@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http } from '@angular/http';
-import { IPub, Pub, City } from "../../models/ontap.models.ts";
-import {AppService} from "../../modules/appComponent.ts";
+import { IPub, Pub, City } from "../../models/ontap.models";
+import {AppService} from "../../modules/appComponent";
 import Loginservice = require("../login/login.service");
 
 @Injectable()
@@ -16,6 +16,7 @@ export class EPubService extends AppService<IPub> {
             id: 'id',
             name: 'name',
             address: 'address',
+            image: '',
             city: new City({ id: 'kyiv', name: 'Kyiv' }),
             serves: [],
         });
@@ -30,5 +31,6 @@ export class EPubService extends AppService<IPub> {
         dest.city = source.city;
         dest.address = source.address;
         dest.serves = source.serves;
+        dest.image = source.image;
     }
 }

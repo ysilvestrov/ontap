@@ -28,6 +28,7 @@ export class ServeService extends AppService<IServe> {
                 id: 'id',
                 name: 'name',
                 address: 'address',
+                image: '',
                 city: new City({ id: 'kyiv', name: 'Kyiv' }),
                 serves: [],
             }),
