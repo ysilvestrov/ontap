@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Locale, LocaleService, LocalizationService } from "angular2localization";
+import { Locale, LocaleService, LocalizationService, ServiceState } from "angular2localization";
 
 @Component({
     selector: 'home',
@@ -13,7 +13,7 @@ export class HomeComponent extends Locale {
     constructor(public locale: LocaleService, public localization: LocalizationService) {
         super(locale, localization);
         this.isBrowser = typeof (document) != "undefined";
-        this.isLoaded = false;
+        this.isLoaded = this.localization.serviceState === ServiceState.isReady;
         this.localization.translationChanged.subscribe(
 
             // Refreshes the variable 'title' with the new translation when the selected language changes.

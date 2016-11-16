@@ -18,7 +18,7 @@ export class ServeService extends AppService<IServe> {
                 id: 'id',
                 name: 'name',
                 description: 'description',
-                brewery: new Brewery({id:'', name:'', address: '', country: {id: 'UA', name: 'Ukraine'}}),
+                brewery: new Brewery({id:'', name:'', address: '', image:'', country: {id: 'UA', name: 'Ukraine'}}),
                 type: 'Lager',
                 alcohol: 2.5,
                 ibu: 30,

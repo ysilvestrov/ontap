@@ -17,5 +17,6 @@ namespace Ontap.Models
         [JsonIgnore]
         public virtual IList<Beer> Beers { get; set; }
         public ICollection<BreweryAdmin> Admins { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Mysqlx.Datatypes;
+using NickBuhro.Translit;
 using Ontap.Auth;
 using Ontap.Models;
+using Ontap.Util;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,16 +48,25 @@ namespace Ontap.Controllers
             return enumerable;
         }
 
-        // POST api/values
+        // POST api/pubs
+        /// <summary>
+        /// Creates new pub
+        /// </summary>
+        /// <param name="pub">Pub to create</param>
+        /// <returns>Processed pub entity</returns>
         [HttpPost]
         [Authorize(Policy = "AdminUser")]
         public async Task<Pub> Post([FromBody] Pub pub)
         {
-            if (Pubs.Any(c => c.Id == pub.Id))
-                throw new AlreadyExistsException(string.Format("Pub with id {id} already exists", pub.Id));
+            var pid = pub.Name.MakeId();
+            var id = pid;
+
+            for (var i = 0; Pubs.Any(c => c.Id == id); id = $"{pid}_{i}", i++);
+
+            pub.Id = id;
             _context.Pubs.Add(pub);
             await _context.SaveChangesAsync();
-            return pub;
+            return await _context.Pubs.FirstAsync(p => p.Id == id);
         }
 
         // PUT api/cities/Kharkiv

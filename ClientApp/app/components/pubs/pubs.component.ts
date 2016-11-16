@@ -1,14 +1,15 @@
 import * as ng from '@angular/core';
 import { Http } from '@angular/http';
-import { List } from "../../modules/linq.ts";
-import {IPub, ICity, Pub, IServe} from "../../models/ontap.models.ts";
-import {EPubService} from "../epubs/epubs.service.ts";
-import {CityService} from "../cities/cities.service.ts";
-import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { List } from "../../modules/linq";
+import {IPub, ICity, Pub, IServe} from "../../models/ontap.models";
+import {EPubService} from "../epubs/epubs.service";
+import {CityService} from "../cities/cities.service";
+import {AppComponent, AppService} from "../../modules/appComponent";
 import {SortByTap} from "../app/sortbytap.pipe";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 import * as moment from 'moment';
 import { LocaleService, LocalizationService } from 'angular2localization';
+import { CloudinaryOptions} from 'ng2-cloudinary';
 
 @ng.Component({
     selector: 'pubs',
@@ -24,6 +25,12 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements ng
 
     public isBrowser: boolean;
     public isLoaded: boolean;
+
+    cloudinaryOptions: CloudinaryOptions = new CloudinaryOptions({
+        cloud_name: 'ontap-in-ua',
+        upload_preset: 'ontapInUa_pubs',
+        autoUpload: true
+    });
 
     constructor(elmService: EPubService, public locale: LocaleService, public localization: LocalizationService) {
         super(elmService, locale, localization);

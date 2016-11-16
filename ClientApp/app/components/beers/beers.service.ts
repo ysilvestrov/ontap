@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {IBeer, Beer, Brewery} from "../../models/ontap.models.ts";
-import {AppService} from "../../modules/appComponent.ts";
+import {IBeer, Beer, Brewery} from "../../models/ontap.models";
+import {AppService} from "../../modules/appComponent";
 import { LoginService } from "../login/login.service";
 
 @Injectable()
@@ -16,7 +16,7 @@ export class BeerService extends AppService<IBeer> {
             id: 'id',
             name: 'name',
             description: 'description',
-            brewery: new Brewery({ id: '', name: '', address: '', country: { id: 'UA', name: 'Ukraine' } }),
+            brewery: new Brewery({ id: '', name: '', address: '', image:'', country: { id: 'UA', name: 'Ukraine' } }),
             type: 'Lager',
             alcohol: 2.5,
             ibu: 30,

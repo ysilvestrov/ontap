@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {IBrewery, Brewery} from "../../models/ontap.models.ts";
-import {AppService} from "../../modules/appComponent.ts";
+import {IBrewery, Brewery} from "../../models/ontap.models";
+import {AppService} from "../../modules/appComponent";
 import { LoginService } from "../login/login.service";
 
 @Injectable()
@@ -16,6 +16,7 @@ export class BreweryService extends AppService<IBrewery> {
             id: 'id',
             name: 'name',
             address: 'address',
+            image: '',
             country: {id: 'UA', name: 'Ukraine'},
         });
     }
@@ -28,5 +29,6 @@ export class BreweryService extends AppService<IBrewery> {
         dest.name = source.name;
         dest.address = source.address;
         dest.country = source.country;
+        dest.image = source.image;
     }
 }

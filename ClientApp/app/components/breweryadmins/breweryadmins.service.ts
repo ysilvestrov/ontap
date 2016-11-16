@@ -28,6 +28,7 @@ export class BreweryAdminService extends AppService<IBreweryAdmin> {
                 id: 'id',
                 name: 'name',
                 address: 'address',
+                image: '',
                 country: {id: 'UA', name: 'Ukraine'}
             })
         });

@@ -1,6 +1,14 @@
-﻿:host-context(.tooltip) {
-    background-color: gray;
-}
+﻿  .tooltip-inner {
+    background-color: grey;
+    border: 2px solid white;
+      color: black;
+  }
+
+  .tooltip-arrow {
+    background-color: grey;
+      border-left-color: grey;
+      margin-right: 2px;
+  }
 
 .pub-image img {
     max-height: 100px;

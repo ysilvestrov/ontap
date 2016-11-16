@@ -41,7 +41,10 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
             //response is the cloudinary response
             //see http://cloudinary.com/documentation/upload_images#upload_response
             this.cloudinaryImage = JSON.parse(response);
-            this.editing.image = this.cloudinaryImage.public_id;
+            if (this.editing)
+                this.editing.image = this.cloudinaryImage.public_id;
+            if (this.adding)
+                this.adding.image = this.cloudinaryImage.public_id;
 
             return { item, response, status, headers };
         };

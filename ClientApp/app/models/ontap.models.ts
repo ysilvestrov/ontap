@@ -16,6 +16,7 @@ export interface IBrewery {
     name: string;
     address: string;
     country: ICountry;
+    image: string;
 }
 export interface IPub {
     id: string;
@@ -127,12 +128,14 @@ export class Brewery implements IBrewery {
         this.name = brewery.name;
         this.address = brewery.address;
         this.country = brewery.country;
+        this.image = brewery.image;
     }
 
     id: string;
     name: string;
     address: string;
     country: ICountry;
+    image: string;
 }
 export class User implements IUser {
     constructor(user :IUser) {

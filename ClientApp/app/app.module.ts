@@ -20,6 +20,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from "ng2-bootstrap/ng2-bootstrap";
 import { LocaleModule, LocalizationModule } from "angular2localization";
 import { FileSelectDirective } from 'ng2-file-upload';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -45,6 +46,7 @@ import { FileSelectDirective } from 'ng2-file-upload';
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
         TooltipModule, 
+        Ng2CloudinaryModule,
         LocaleModule.forRoot(), // New instance of LocaleService.
         LocalizationModule.forRoot(), // New instance of LocalizationService
         RouterModule.forRoot([

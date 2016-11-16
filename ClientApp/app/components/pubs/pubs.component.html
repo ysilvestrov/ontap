@@ -29,15 +29,21 @@
 </div>
 
 <template #toolTipTemplate let-model="model">
-    <p>{{model.served.description}}</p>
-    <p>
-        <strong>{{model.served.alcohol}}</strong>&deg;
-        <span *ngIf="model.served.gravity > 0">
+    <div class="pull-left pub-image" *ngIf="model.served.brewery.image">
+        <cl-image public-id="{{model.served.brewery.image}}" [options]="cloudinaryOptions" height="100" dpr="auto"
+                  format="png" quality="100" alt="{{model.served.brewery.name}} logo" title="{{model.served.brewery.name}}"></cl-image>
+    </div>    
+    <div>
+        <p>{{model.served.description}}</p>
+        <p>
+            <strong>{{model.served.alcohol}}</strong>&deg;
+            <span *ngIf="model.served.gravity > 0">
             <strong>{{model.served.gravity}}</strong>%
         </span>
-        <strong>{{model.served.ibu}}</strong>&nbsp;IBU
-        <strong>{{model.volume}}</strong>&nbsp;л
-    </p>
+            <strong>{{model.served.ibu}}</strong>&nbsp;IBU
+            <strong>{{model.volume}}</strong>&nbsp;л
+        </p>
+    </div>
 </template>
 
 <div *ngIf="elements" style="margin-top: 20px;">
@@ -50,8 +56,9 @@
             </div>
             <div class="panel-body">
                 <div>
-                    <div class="pull-left" *ngIf="pub.image">
-                        <img [src]="'http://res.cloudinary.com/ontap-in-ua/image/upload/'+pub.image+'.png'" />
+                    <div class="pull-left pub-image" *ngIf="pub.image">
+                        <cl-image public-id="{{pub.image}}" [options]="cloudinaryOptions" height="100" dpr="auto" 
+                                  format="png" quality="100" alt="{{pub.name}} logo" title="{{pub.name}}"></cl-image>
                     </div>
                     <div>
                         <button *ngFor="let serve of pub.serves | sortByTap" class="btn btn-s red-tooltip"
