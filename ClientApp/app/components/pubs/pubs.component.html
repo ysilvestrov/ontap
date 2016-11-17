@@ -30,7 +30,7 @@
 
 <template #toolTipTemplate let-model="model">
     <div class="pull-left pub-image" *ngIf="model.served.brewery.image">
-        <cl-image public-id="{{model.served.brewery.image}}" [options]="cloudinaryOptions" height="100" dpr="auto"
+        <cl-image public-id="{{model.served.brewery.image}}" [options]="cloudinaryOptions" crop="scale" height="100" dpr="auto"
                   format="png" quality="100" alt="{{model.served.brewery.name}} logo" title="{{model.served.brewery.name}}"></cl-image>
     </div>    
     <div>
@@ -50,14 +50,20 @@
     <div *ngFor="let pub of elements">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{{ pub.name }} <span class="label label-success">{{ pub.city.name }}</span> <small>{{ pub.address }}</small>
+                <h3 class="panel-title">{{ pub.name }} 
+                    <span class="label label-success">{{ pub.city.name }}</span>
+                    <small>{{ pub.address }}</small>
+                    <a *ngIf="pub.facebookUrl" [href]="pub.facebookUrl" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                    <a *ngIf="pub.vkontakteUrl" [href]="pub.vkontakteUrl" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                    <a *ngIf="pub.websiteUrl" [href]="pub.websiteUrl" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                    <a *ngIf="pub.bookingUrl" [href]="pub.bookingUrl" target="_blank"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                     <span class="pull-right" *ngIf="pubUpdates[pub.id]"><small><i class="glyphicon glyphicon-calendar"></i> {{pubUpdates[pub.id]}}</small></span>
                 </h3>
             </div>
             <div class="panel-body">
                 <div>
                     <div class="pull-left pub-image" *ngIf="pub.image">
-                        <cl-image public-id="{{pub.image}}" [options]="cloudinaryOptions" height="100" dpr="auto" 
+                        <cl-image public-id="{{pub.image}}" [options]="cloudinaryOptions" height="100" dpr="auto" crop="scale" 
                                   format="png" quality="100" alt="{{pub.name}} logo" title="{{pub.name}}"></cl-image>
                     </div>
                     <div>

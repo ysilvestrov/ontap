@@ -33,6 +33,7 @@ module.exports = {
             'jquery',
             'zone.js',
             'flag-icon-css/css/flag-icon.css',
+            'font-awesome/css/font-awesome.css',
         ]
     },
     output: {

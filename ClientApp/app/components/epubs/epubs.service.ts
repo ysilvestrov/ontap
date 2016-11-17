@@ -19,6 +19,10 @@ export class EPubService extends AppService<IPub> {
             image: '',
             city: new City({ id: 'kyiv', name: 'Kyiv' }),
             serves: [],
+            facebookUrl: '',
+            vkontakteUrl: '',
+            websiteUrl: '',
+            bookingUrl: '',
         });
     }
 
@@ -32,5 +36,9 @@ export class EPubService extends AppService<IPub> {
         dest.address = source.address;
         dest.serves = source.serves;
         dest.image = source.image;
+        dest.facebookUrl = source.facebookUrl;
+        dest.bookingUrl = source.facebookUrl;
+        dest.vkontakteUrl = source.vkontakteUrl;
+        dest.websiteUrl = source.websiteUrl;
     }
 }

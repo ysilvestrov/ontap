@@ -18,6 +18,7 @@ export interface IBrewery {
     country: ICountry;
     image: string;
 }
+
 export interface IPub {
     id: string;
     name: string;
@@ -25,7 +26,12 @@ export interface IPub {
     city: ICity;
     serves: IServe[];
     image: string;
+    facebookUrl: string;
+    vkontakteUrl: string;
+    websiteUrl: string;
+    bookingUrl: string;
 }
+
 export interface ICity {
     id: string;
     name: string;
@@ -60,6 +66,10 @@ export class Pub implements IPub {
     image: string;
     city: ICity;
     serves: IServe[];
+    facebookUrl: string;
+    vkontakteUrl: string;
+    websiteUrl: string;
+    bookingUrl: string;
 
     constructor(pub: IPub) {
         this.id = pub.id;
@@ -68,8 +78,11 @@ export class Pub implements IPub {
         this.city = pub.city;
         this.serves = pub.serves;
         this.image = pub.image;
+        this.facebookUrl = pub.facebookUrl;
+        this.vkontakteUrl = pub.vkontakteUrl;
+        this.websiteUrl = pub.websiteUrl;
+        this.bookingUrl = pub.bookingUrl;
     }
-
 }
 export class City implements ICity {
     id: string;

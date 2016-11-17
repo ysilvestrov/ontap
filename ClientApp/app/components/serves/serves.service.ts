@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http } from '@angular/http';
-import { IPub, IBeer, IServe, Serve, Beer, Pub, City, Brewery } from "../../models/ontap.models.ts";
-import {AppService} from "../../modules/appComponent.ts";
+import { IPub, IBeer, IServe, Serve, Beer, Pub, City, Brewery } from "../../models/ontap.models";
+import {AppService} from "../../modules/appComponent";
 import { LoginService } from "../login/login.service";
 
 @Injectable()
@@ -31,6 +31,10 @@ export class ServeService extends AppService<IServe> {
                 image: '',
                 city: new City({ id: 'kyiv', name: 'Kyiv' }),
                 serves: [],
+                facebookUrl: '',
+                vkontakteUrl: '',
+                websiteUrl: '',
+                bookingUrl: '',
             }),
             price: 0,
             tap: 1,

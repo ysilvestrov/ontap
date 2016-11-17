@@ -81,6 +81,10 @@ namespace Ontap.Controllers
             current.City = _context.Cities.First(p => p.Id == pub.City.Id);
             current.Address = pub.Address;
             current.Image = pub.Image;
+            current.BookingUrl = pub.BookingUrl;
+            current.FacebookUrl = pub.FacebookUrl;
+            current.VkontakteUrl = pub.VkontakteUrl;
+            current.WebsiteUrl = pub.WebsiteUrl;
             await _context.SaveChangesAsync();
             return current;
         }
