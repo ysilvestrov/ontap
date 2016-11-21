@@ -1,4 +1,6 @@
-import * as ng from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from "rxjs";
+import { TimerObservable } from "rxjs/observable/TimerObservable";
 import { Http } from '@angular/http';
 import { List } from "../../modules/linq";
 import {IPub, ICity, Pub, IServe} from "../../models/ontap.models";
@@ -11,13 +13,13 @@ import * as moment from 'moment';
 import { LocaleService, LocalizationService } from 'angular2localization';
 import { CloudinaryOptions} from 'ng2-cloudinary';
 
-@ng.Component({
+@Component({
     selector: 'pubs',
     providers: [EPubService],
     styles: [require('./pubs.component.css')],
   template: require('./pubs.component.html')
 })
-export class PubsComponent extends AppComponent<IPub, EPubService> implements ng.OnInit {
+export class PubsComponent extends AppComponent<IPub, EPubService> implements OnInit, OnDestroy {
     public allPubs: IPub[];
     public cities: ICity[];
     public city: ICity;
@@ -25,6 +27,7 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements ng
 
     public isBrowser: boolean;
     public isLoaded: boolean;
+    public subscription: Subscription;
 
     cloudinaryOptions: CloudinaryOptions = new CloudinaryOptions({
         cloud_name: 'ontap-in-ua',
@@ -55,6 +58,18 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements ng
     }
 
     ngOnInit() {
+        if (this.isBrowser) {
+            let timer = TimerObservable.create(10 * 1000, 15 * 60 * 1000);
+            this.subscription = timer.subscribe(t => {
+                this.get();
+            });
+        }
+    }
+
+    ngOnDestroy() {
+        if (typeof (this.subscription) != "undefined") {
+            this.subscription.unsubscribe();
+        }
     }
 
     onElementsLoad(elements:IPub[]) {
