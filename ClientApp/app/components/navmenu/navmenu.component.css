@@ -19,6 +19,11 @@ li.link-active a:focus {
     z-index: 1;
 }
 
+.copyright {
+    margin-top: 20px;
+    color: lightgray;
+}
+
 @media (min-width: 768px) {
     /* On small screens, convert the nav menu to a vertical sidebar */
     .main-nav {
