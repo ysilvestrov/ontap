@@ -8,7 +8,9 @@ import { LoginService } from "../login/login.service";
 import {AppComponent, AppService} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
-import { FileSelectDirective, FileDropDirective, FileUploader}  from 'ng2-file-upload';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
+import { Ng2BootstrapModule, AlertModule } from "ng2-bootstrap/ng2-bootstrap";
+
 
 @ng.Component({
     selector: 'epubs',
@@ -28,6 +30,8 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
 
     uploader: CloudinaryUploader = new CloudinaryUploader(this.cloudinaryOptions);
     successMessage: string;
+    outputs: string[];
+    importInProgress: boolean;
 
 
     constructor(elmService: EPubService,
@@ -77,12 +81,18 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     }
 
     import(id: string) {
+        this.importInProgress = true;
         this.elmService.import(id)
             .subscribe(
             message => {
                 this.successMessage = message;
+                this.outputs = message.split(/\n/);
+                this.importInProgress = false;
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.importInProgress = false;
+            });
         this.editing = null;
     }
 

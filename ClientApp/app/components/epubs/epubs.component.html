@@ -12,11 +12,16 @@
 <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
     {{errorMessage}}
 </div>
-<div class="alert alert-success" role="alert" *ngIf="successMessage">
-    <pre>
-        {{successMessage}}
-    </pre>
-</div>
+
+<alert type="danger" dismissible="true" *ngIf="errorMessage">
+        {{errorMessage}}
+</alert>
+
+<alert type="success" dismissible="true" *ngIf="successMessage">
+    <p *ngFor="let output of outputs">
+        {{output}}
+    </p>
+</alert>
 
 <div class="container-fluid" *ngIf="elements">
     <div class="row">
@@ -35,7 +40,8 @@
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
                 <button (click)="import(pub.id)" type="button" class="btn btn-default" aria-label="Import" *ngIf="pub.parserOptions &&  loginService.currentUser && loginService.currentUser.isAdmin">
-                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    <span class="fa fa-cloud-upload" aria-hidden="true" *ngIf="!this.importInProgress"></span>
+                    <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="this.importInProgress"></span>
                 </button>
             </div>
         </div>

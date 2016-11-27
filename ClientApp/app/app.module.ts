@@ -17,7 +17,7 @@ import { LocaleComponent } from "./components/locale/locale.component";
 import { PubAdminsComponent } from "./components/pubadmins/pubadmins.component";
 import { BreweryAdminsComponent } from "./components/breweryadmins/breweryadmins.component";
 import { HomeComponent } from "./components/home/home.component";
-import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from "ng2-bootstrap/ng2-bootstrap";
+import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule, AlertModule  } from "ng2-bootstrap/ng2-bootstrap";
 import { LocaleModule, LocalizationModule } from "angular2localization";
 import { FileSelectDirective } from 'ng2-file-upload';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
@@ -45,7 +45,8 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
-        TooltipModule, 
+        TooltipModule,
+        AlertModule, 
         Ng2CloudinaryModule,
         LocaleModule.forRoot(), // New instance of LocaleService.
         LocalizationModule.forRoot(), // New instance of LocalizationService
