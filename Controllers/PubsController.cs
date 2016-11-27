@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mysqlx.Datatypes;
+using Newtonsoft.Json;
 using NickBuhro.Translit;
 using Ontap.Auth;
 using Ontap.Models;
@@ -58,15 +59,37 @@ namespace Ontap.Controllers
         [Authorize(Policy = "AdminUser")]
         public async Task<Pub> Post([FromBody] Pub pub)
         {
-            var pid = pub.Name.MakeId();
-            var id = pid;
-
-            for (var i = 0; Pubs.Any(c => c.Id == id); id = $"{pid}_{i}", i++);
-
-            pub.Id = id;
+            pub.Id = Utilities.CreateId(pub.Name, i => Pubs.Any(c => c.Id == i));
             _context.Pubs.Add(pub);
             await _context.SaveChangesAsync();
-            return await _context.Pubs.FirstAsync(p => p.Id == id);
+            return await _context.Pubs.FirstAsync(p => p.Id == pub.Id);
+        }
+
+        // POST api/pubs
+        /// <summary>
+        /// Creates new pub
+        /// </summary>
+        /// <param name="pub">Pub to create</param>
+        /// <returns>Processed pub entity</returns>
+        [HttpPost("{id}")]
+        public async Task<String> Run(string id)
+        {
+            var pub = Pubs.First(c => c.Id == id);
+            var options = JsonConvert.DeserializeObject<Dictionary<string, object>>(pub.ParserOptions);
+            var parser = new GoogleSheetParser();
+            var serves = parser
+                .Parse(pub, _context.Beers, _context.Breweries, options,
+                    _context.Countries.First(c => c.Id == "UA"))
+                .Where(s => s.Served?.Brewery != null).ToArray();
+            _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == id));
+            _context.BeerServedInPubs.AddRange(serves);
+            _context.Beers.AddRange(serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id)));
+            _context.Breweries.AddRange(
+                serves.Select(s => s.Served.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
+            await _context.SaveChangesAsync();
+            var result = string.Join("\r\n",
+                serves.Select(s => $"{s.Tap}: {s.Served.Brewery.Name} - {s.Served.Name}, {s.Volume}l for {s.Price} UAH"));
+            return result;
         }
 
         // PUT api/cities/Kharkiv
@@ -85,6 +108,7 @@ namespace Ontap.Controllers
             current.FacebookUrl = pub.FacebookUrl;
             current.VkontakteUrl = pub.VkontakteUrl;
             current.WebsiteUrl = pub.WebsiteUrl;
+            current.ParserOptions = pub.ParserOptions;
             await _context.SaveChangesAsync();
             return current;
         }

@@ -24,5 +24,6 @@ namespace Ontap.Models
         public string VkontakteUrl { get; set; }
         public string WebsiteUrl { get; set; }
         public string BookingUrl { get; set; }
+        public string ParserOptions { get; set; }
     }
 }

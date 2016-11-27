@@ -35,6 +35,7 @@ export class PubAdminService extends AppService<IPubAdmin> {
                 vkontakteUrl: '',
                 websiteUrl: '',
                 bookingUrl: '',
+                parserOptions: '',
             })
         });
     }

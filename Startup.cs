@@ -66,7 +66,7 @@ namespace Ontap
             });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminUser", policy => policy.RequireClaim("UserType", "Admin"));
+                options.AddPolicy("AdminUser", policy => policy.RequireUserType("Admin"));
                 options.AddPolicy("PubAdminUser", policy => policy.RequireUserType("Admin", "PubAdmin"));
                 options.AddPolicy("BreweryAdminUser", policy => policy.RequireUserType("Admin", "BrewerAdmin"));
                 options.AddPolicy("BreweryOrPubAdminUser",

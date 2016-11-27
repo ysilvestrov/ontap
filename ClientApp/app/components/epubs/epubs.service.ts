@@ -1,7 +1,8 @@
 ﻿import { Injectable }     from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { IPub, Pub, City } from "../../models/ontap.models";
-import {AppService} from "../../modules/appComponent";
+import { AppService } from "../../modules/appComponent";
+import { Observable } from 'rxjs/Observable';
 import Loginservice = require("../login/login.service");
 
 @Injectable()
@@ -23,6 +24,7 @@ export class EPubService extends AppService<IPub> {
             vkontakteUrl: '',
             websiteUrl: '',
             bookingUrl: '',
+            parserOptions: '',
         });
     }
 
@@ -40,5 +42,20 @@ export class EPubService extends AppService<IPub> {
         dest.bookingUrl = source.facebookUrl;
         dest.vkontakteUrl = source.vkontakteUrl;
         dest.websiteUrl = source.websiteUrl;
+        dest.parserOptions = source.parserOptions;
+    }
+
+    private extractString(res: Response) {
+        let body = res.text();
+        return body || "";
+    }
+
+    import(id: string): Observable<string> {
+        let body = "";
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.serverUrl + "/" + id, body, options)
+            .map(this.extractString, this)
+            .catch(this.handleError);
     }
 }

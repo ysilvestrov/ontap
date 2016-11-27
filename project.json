@@ -29,8 +29,7 @@
     "NickBuhro.Translit": "1.0.0",
     "Google.Apis.Sheets.v4": "1.19.0.687",
     "Google.Apis.Auth": "1.19.0",
-    "Microsoft.NETCore.ILDAsm": "1.1.0"
-  },
+    "Microsoft.NETCore.ILDAsm": "1.1.0"  },
 
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",

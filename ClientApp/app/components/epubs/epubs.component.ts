@@ -3,7 +3,8 @@ import { Http } from '@angular/http';
 import { List } from "../../modules/linq";
 import {IPub, ICity, Pub} from "../../models/ontap.models";
 import {EPubService} from "./epubs.service";
-import {CityService} from "../cities/cities.service";
+import { CityService } from "../cities/cities.service";
+import { LoginService } from "../login/login.service";
 import {AppComponent, AppService} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
@@ -17,7 +18,6 @@ import { FileSelectDirective, FileDropDirective, FileUploader}  from 'ng2-file-u
 })
 export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     public cities: ICity[];
-
     cloudinaryImage: any;
 
     cloudinaryOptions: CloudinaryOptions = new CloudinaryOptions({
@@ -27,9 +27,11 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     });
 
     uploader: CloudinaryUploader = new CloudinaryUploader(this.cloudinaryOptions);
+    successMessage: string;
 
 
     constructor(elmService: EPubService,
+        private loginService: LoginService, 
         private cityService: CityService,
         public locale: LocaleService,
         public localization: LocalizationService) {
@@ -73,4 +75,15 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     onChangeCity(obj: IPub, id:string) {
         obj.city = new List(this.cities).Where(c => c.id === id).First();
     }
+
+    import(id: string) {
+        this.elmService.import(id)
+            .subscribe(
+            message => {
+                this.successMessage = message;
+            },
+            error => this.errorMessage = <any>error);
+        this.editing = null;
+    }
+
 }

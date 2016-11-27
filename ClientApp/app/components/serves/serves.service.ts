@@ -35,6 +35,7 @@ export class ServeService extends AppService<IServe> {
                 vkontakteUrl: '',
                 websiteUrl: '',
                 bookingUrl: '',
+                parserOptions: '',
             }),
             price: 0,
             tap: 1,

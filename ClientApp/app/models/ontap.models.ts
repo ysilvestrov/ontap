@@ -30,6 +30,7 @@ export interface IPub {
     vkontakteUrl: string;
     websiteUrl: string;
     bookingUrl: string;
+    parserOptions: string;
 }
 
 export interface ICity {
@@ -70,6 +71,7 @@ export class Pub implements IPub {
     vkontakteUrl: string;
     websiteUrl: string;
     bookingUrl: string;
+    parserOptions: string;
 
     constructor(pub: IPub) {
         this.id = pub.id;
@@ -82,7 +84,8 @@ export class Pub implements IPub {
         this.vkontakteUrl = pub.vkontakteUrl;
         this.websiteUrl = pub.websiteUrl;
         this.bookingUrl = pub.bookingUrl;
-    }
+        this.parserOptions = pub.parserOptions;
+    }    
 }
 export class City implements ICity {
     id: string;

@@ -1,11 +1,11 @@
 ﻿import { Injectable }     from '@angular/core';
-import Linq = require("./linq.ts");
+import Linq = require("./linq");
 import Ontapmodels = require("../models/ontap.models");
 import IElement = Ontapmodels.IElement;
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import './rxjs.operators.ts';
-import {IStronglyTypedEvents, EventDispatcher, IEvent} from './StronglyTypedEvents.ts';
+import {IStronglyTypedEvents, EventDispatcher, IEvent} from './StronglyTypedEvents';
 import { FormsModule }   from '@angular/forms';
 import { LoginService } from "../components/login/login.service";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
@@ -18,7 +18,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
     public errorMessage: any;
     public isBrowser: boolean;
 
-    constructor(private elmService: TService, public locale: LocaleService, public localization: LocalizationService) {
+    constructor(protected  elmService: TService, public locale: LocaleService, public localization: LocalizationService) {
         super(locale, localization);
         this.isBrowser = typeof (document) != "undefined";
         this.get();
@@ -107,7 +107,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
 
 @Injectable()
 export abstract class AppService<TInteface extends IElement> {
-    constructor(private http: Http, private loginService: LoginService) {
+    constructor(protected http: Http, private loginService: LoginService) {
         console.log("Login service instantiated: "+loginService);
     }
 
@@ -118,7 +118,7 @@ export abstract class AppService<TInteface extends IElement> {
         return body || [];
     }
 
-    private handleError(error: any) {
+    protected handleError(error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
         let errMsg = (error.message)
