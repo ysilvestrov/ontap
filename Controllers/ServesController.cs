@@ -28,14 +28,6 @@ namespace Ontap.Controllers
             return _context.Users.FirstAsync(u => u.Id == userId);
         }
 
-        private bool HasUserRights(User user, BeerServedInPubs serve)
-        {
-            return user.IsAdmin || 
-                (user.CanAdminBrewery && serve.Served.Brewery.Admins.Any(u=>u.User.Id == user.Id)) ||
-                (user.CanAdminPub && serve.ServedIn.Admins.Any(u => u.User.Id == user.Id))
-            ;
-        }
-
         public ServesController(DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
@@ -70,7 +62,7 @@ namespace Ontap.Controllers
                     .ThenInclude(b => b.Admins)
                     .First(beer => beer.Id == serve.Served.Id);
             current.ServedIn = _context.Pubs.Include(p => p.Admins).First(pub => pub.Id == serve.ServedIn.Id);
-            if (!HasUserRights(await GetUser(), current))
+            if (!(await GetUser()).HasRights(current))
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
             }
@@ -87,7 +79,7 @@ namespace Ontap.Controllers
             if (Serves.All(c => c.Id != id))
                 throw new KeyNotFoundException(string.Format("No record with id {id}", id));
             var current = Serves.First(c => c.Id == id);
-            if (!HasUserRights(await GetUser(), current))
+            if (!(await GetUser()).HasRights(current))
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
             }
@@ -108,7 +100,7 @@ namespace Ontap.Controllers
             if (Serves.All(c => c.Id != id))
                 throw new KeyNotFoundException(string.Format("No record with id {id}", id));
             var current = Serves.First(c => c.Id == id);
-            if (!HasUserRights(await GetUser(), current))
+            if (!(await GetUser()).HasRights(current))
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
             }

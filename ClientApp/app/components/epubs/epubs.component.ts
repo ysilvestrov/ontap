@@ -96,4 +96,15 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
         this.editing = null;
     }
 
+    canParsePub(pub) {
+        return pub.parserOptions && this.canEditPub(pub)           ;
+    }
+
+    canEditPub(pub) {
+        return this.loginService.currentUser &&
+            (this.loginService.currentUser.isAdmin ||
+            (this.loginService.currentUser.canAdminPub &&
+                new List(this.loginService.currentUser.pubs).Any(p => p.id === pub.id)));
+    }
+
 }

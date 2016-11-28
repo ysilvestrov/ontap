@@ -25,7 +25,7 @@ namespace Ontap.Controllers
 
         private IEnumerable<User> Users => _context.Users
             .Include(u => u.PubAdmins)
-            .ThenInclude(pa => pa.User)
+            .ThenInclude(pa => pa.Pub)
             .Include(u => u.BreweryAdmins)
             .ThenInclude(ba => ba.Brewery)
             .ToArray().Select(u =>

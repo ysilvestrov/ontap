@@ -52,9 +52,7 @@ export class EPubService extends AppService<IPub> {
 
     import(id: string): Observable<string> {
         let body = "";
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.serverUrl + "/" + id, body, options)
+        return this.http.patch(this.serverUrl + "/" + id, body, this.options)
             .map(this.extractString, this)
             .catch(this.handleError);
     }

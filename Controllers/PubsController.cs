@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Mysqlx.Datatypes;
 using Newtonsoft.Json;
-using NickBuhro.Translit;
 using Ontap.Auth;
 using Ontap.Models;
 using Ontap.Util;
@@ -20,11 +20,18 @@ namespace Ontap.Controllers
     public class PubsController : Controller
     {
         private readonly DataContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PubsController(DataContext context)
+        private Task<User> GetUser()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _context.Users.Include(u=>u.PubAdmins).FirstAsync(u => u.Id == userId);
+        }
+
+        public PubsController(DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
-  
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IEnumerable<Pub> Pubs => _context.Pubs
@@ -67,14 +74,19 @@ namespace Ontap.Controllers
 
         // POST api/pubs
         /// <summary>
-        /// Creates new pub
+        /// Import pub's beers
         /// </summary>
-        /// <param name="pub">Pub to create</param>
-        /// <returns>Processed pub entity</returns>
-        [HttpPost("{id}")]
-        public async Task<String> Run(string id)
+        /// <param name="id">Pub to run import</param>
+        /// <returns>Import log</returns>
+        [HttpPatch("{id}")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<string> Run(string id)
         {
             var pub = Pubs.First(c => c.Id == id);
+            if (!(await GetUser()).HasRights(pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
             var options = JsonConvert.DeserializeObject<Dictionary<string, object>>(pub.ParserOptions);
             var parser = new GoogleSheetParser();
             var serves = parser
@@ -100,6 +112,10 @@ namespace Ontap.Controllers
             if (Pubs.All(c => c.Id != id))
                 throw new KeyNotFoundException(string.Format("No pub with id {id}", id));
             var current = Pubs.First(c => c.Id == id);
+            if (!(await GetUser()).HasRights(pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
             current.Name = pub.Name;
             current.City = _context.Cities.First(p => p.Id == pub.City.Id);
             current.Address = pub.Address;

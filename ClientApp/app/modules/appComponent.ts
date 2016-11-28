@@ -128,7 +128,7 @@ export abstract class AppService<TInteface extends IElement> {
         return Observable.throw(errMsg);
     }
 
-    private get options(): RequestOptions {
+    protected get options(): RequestOptions {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         if (this.loginService.accessToken) {
             headers.append('Authorization', `Bearer ${this.loginService.accessToken.accessToken}`);
