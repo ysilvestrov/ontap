@@ -51,7 +51,10 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "embed": {
+      "include": "key.p12"
+    }
   },
 
   "runtimeOptions": {
@@ -79,10 +82,6 @@
     ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   },
-
-  "resource": [
-    "key.p12"
-  ],
 
   "tooling": {
     "defaultNamespace": "Ontap"
