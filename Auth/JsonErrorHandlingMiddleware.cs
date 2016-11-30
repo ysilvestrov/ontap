@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Elmah.Io.AspNetCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Ontap.Auth
 {
@@ -14,11 +16,13 @@ namespace Ontap.Auth
     {
         private readonly RequestDelegate _next;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly IConfigurationRoot _configuration;
 
-        public JsonErrorHandlingMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
+        public JsonErrorHandlingMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IConfigurationRoot configuration)
         {
             _next = next;
             _loggerFactory = loggerFactory;
+            _configuration = configuration;
         }
 
         public async Task Invoke(HttpContext context)
@@ -50,7 +54,10 @@ namespace Ontap.Auth
 
             await WriteExceptionAsync(context, exception, code).ConfigureAwait(false);
 
-            _loggerFactory.CreateLogger("Json").LogError(new EventId(), exception, "Business error");
+            //_loggerFactory.CreateLogger("Json").LogError(new EventId(), exception, "Business error");
+
+            exception.Ship(_configuration.GetValue<string>("ELMAH_API"),
+                new Guid(_configuration.GetValue<string>("ELMAH_LOG")), context);
 
             return true;
         }
@@ -65,7 +72,9 @@ namespace Ontap.Auth
                 error = new
                 {
                     message = exception.Message,
-                    exception = exception.GetType().Name
+                    exception = exception.GetType().Name,
+                    stack = exception.StackTrace,
+                    data = exception.Data
                 }
             })).ConfigureAwait(false);
         }

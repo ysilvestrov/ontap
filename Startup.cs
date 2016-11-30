@@ -1,22 +1,19 @@
 using System;
-using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ontap.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Ontap.Auth;
-using Loggr.Extensions.Logging;
+using Elmah.Io.AspNetCore;
 
 namespace Ontap
 {
@@ -85,8 +82,11 @@ namespace Ontap
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            loggerFactory.CreateLogger("MyLog");
-            loggerFactory.AddLoggr(LogLevel.Error, "ysilvestrov", "7b35847110724b9fba13359525810c9a");
+            //loggerFactory.CreateLogger("MyLog");
+            //loggerFactory.AddLoggr(LogLevel.Error, "ysilvestrov", "7b35847110724b9fba13359525810c9a");
+
+            app.UseElmahIo(Configuration.GetValue<string>("ELMAH_API"),
+                new Guid(Configuration.GetValue<string>("ELMAH_LOG")));
 
             if (env.IsDevelopment())
             {
