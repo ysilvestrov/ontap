@@ -70,7 +70,8 @@
       "node_modules",
       "Views",
       "web.config",
-      "wwwroot"
+      "wwwroot",
+      "key.p12"
     ]
   },
 

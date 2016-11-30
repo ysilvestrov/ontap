@@ -47,12 +47,9 @@ namespace Ontap.Util
             var serviceAccountEmail = "ontap-in-ua@api-project-188344924401.iam.gserviceaccount.com";
 
             var certificate =
-                new X509Certificate2(
-                    ReadFully(typeof(GoogleSheetParser).GetTypeInfo()
-                        .Assembly.GetManifestResourceStream("ontap.key.p12")), "notasecret",
-                    X509KeyStorageFlags.Exportable);
+                new X509Certificate2(File.ReadAllBytes("key.p12"), "notasecret", X509KeyStorageFlags.Exportable);
 
-            ServiceAccountCredential credential = new ServiceAccountCredential(
+            var credential = new ServiceAccountCredential(
                 new ServiceAccountCredential.Initializer(serviceAccountEmail)
                 {
                     Scopes = Scopes
