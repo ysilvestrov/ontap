@@ -1,18 +1,17 @@
 ﻿<h1>
-    <span *ngIf="!isBrowser || !isLoaded">Що на кранах</span>{{'MENU.ONTAP' | translate:lang}}?
+    {{'MENU.ONTAP' | translate:lang}}<!--Що на кранах-->?
 </h1>
-<p>
-    <span *ngIf="!isBrowser || !isLoaded">На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.</span>
-    {{'HOME.DESCRIPTION' | translate:lang}}
+<p>    
+    {{'HOME.DESCRIPTION' | translate:lang}}<!--На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.-->
 </p>
 <div class="panel panel-warning">
     <div class="panel-heading">
         <h3 class="panel-title">
-            <span *ngIf="!isBrowser || !isLoaded">Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років</span>{{'HOME.ASSERTION' | translate:lang}}:
+            {{'HOME.ASSERTION' | translate:lang}}<!--Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років-->:
         </h3>
     </div>
     <div class="panel-body">
-            <a class="btn btn-success btn-lg" [routerLink]="['/pubs']" role="button"><span class="glyphicon glyphicon-ok-circle"></span> <span *ngIf="!isBrowser || !isLoaded">Так</span>{{'HOME.YES' | translate:lang}}</a>
-            <a class="btn btn-danger btn-lg" href="http://prom.ua/Podemnyj-kran-igrushki.html" role="button"><span class="glyphicon glyphicon-remove-circle"></span> <span *ngIf="!isBrowser || !isLoaded">Ні</span>{{'HOME.NO' | translate:lang}}</a>
+            <a class="btn btn-success btn-lg" [routerLink]="['/pubs']" role="button"><span class="glyphicon glyphicon-ok-circle"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>
+            <a class="btn btn-danger btn-lg" href="http://prom.ua/Podemnyj-kran-igrushki.html" role="button"><span class="glyphicon glyphicon-remove-circle"></span> {{'HOME.NO' | translate:lang}}<!--Ні--></a>
     </div>
 </div>

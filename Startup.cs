@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Ontap.Auth;
+using Loggr.Extensions.Logging;
 
 namespace Ontap
 {
@@ -84,6 +85,8 @@ namespace Ontap
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.CreateLogger("MyLog");
+            loggerFactory.AddLoggr(LogLevel.Error, "ysilvestrov", "7b35847110724b9fba13359525810c9a");
 
             if (env.IsDevelopment())
             {
@@ -95,7 +98,6 @@ namespace Ontap
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-
             }
 
             ConfigureDb(app);

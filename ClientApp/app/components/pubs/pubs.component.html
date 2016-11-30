@@ -1,11 +1,9 @@
 ﻿<h1>
-    <span *ngIf="!isBrowser">Крафтові паби України</span>
-    {{'PUBS.TITLE' | translate:lang}}
+    {{'PUBS.TITLE' | translate:lang}}<!--Крафтові паби України-->
 </h1>
 
 <p>
-    <span *ngIf="!isBrowser">На цей сторінці ви можете знайти список усіх крафтових пабів в Україні</span>
-    {{'PUBS.DESCRIPTION' | translate:lang}}
+    {{'PUBS.DESCRIPTION' | translate:lang}}<!--На цей сторінці ви можете знайти список усіх крафтових пабів в Україні-->
 </p>
 
 <div *ngIf="!elements">
@@ -19,7 +17,7 @@
 
 <div class="dropdown"  *ngIf="cities">
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        <span *ngIf="!isBrowser">Місто</span>{{'G.CITY' | translate:lang}}: <span *ngIf="city">{{city.name}}</span><span *ngIf="!city"><span *ngIf="!isBrowser">усі</span>{{'G.ALL' | translate:lang}}</span>
+        {{'G.CITY' | translate:lang}}<!--Місто-->: <span *ngIf="city">{{city.name}}</span><span *ngIf="!city">{{'G.ALL' | translate:lang}}<!--усі--></span>
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

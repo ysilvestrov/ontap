@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Ontap.Auth
@@ -12,10 +13,12 @@ namespace Ontap.Auth
     public class JsonErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILoggerFactory _loggerFactory;
 
-        public JsonErrorHandlingMiddleware(RequestDelegate next)
+        public JsonErrorHandlingMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
         {
-            this._next = next;
+            _next = next;
+            _loggerFactory = loggerFactory;
         }
 
         public async Task Invoke(HttpContext context)
@@ -34,7 +37,7 @@ namespace Ontap.Auth
             }
         }
 
-        private static async Task<bool> HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task<bool> HandleExceptionAsync(HttpContext context, Exception exception)
         {
             if (exception == null || context?.Request?.ContentType?.Contains("json") != true)
                 return false;
@@ -46,6 +49,8 @@ namespace Ontap.Auth
             else if (exception is InvalidCredentialException) code = HttpStatusCode.Forbidden;
 
             await WriteExceptionAsync(context, exception, code).ConfigureAwait(false);
+
+            _loggerFactory.CreateLogger("Json").LogError(new EventId(), exception, "Business error");
 
             return true;
         }
