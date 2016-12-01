@@ -33,11 +33,12 @@
             <div class="col-md-5">{{ pub.address }}</div>
             <div class="col-md-2">
                 <button (click)="edit(pub.id)" type="button" class="btn btn-default" aria-label="Edit" *ngIf="canEditPub(pub)">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true" *ngIf="!isSaving(pub.id)"></span>
+                    <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isSaving(pub.id)"></span>                    
                 </button>
                 <button (click)="import(pub.id)" type="button" class="btn btn-default" aria-label="Import" *ngIf="canParsePub(pub)">
-                    <span class="fa fa-cloud-upload" aria-hidden="true" *ngIf="!this.importInProgress"></span>
-                    <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="this.importInProgress"></span>
+                    <span class="fa fa-cloud-upload fa-lg" aria-hidden="true" *ngIf="!isImporting(pub.id)"></span>
+                    <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isImporting(pub.id)"></span>
                 </button>
             </div>
         </div>

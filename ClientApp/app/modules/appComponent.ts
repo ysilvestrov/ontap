@@ -10,6 +10,15 @@ import { FormsModule }   from '@angular/forms';
 import { LoginService } from "../components/login/login.service";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
+export enum ProcessingStatus {
+    None,
+    Loading,
+    Saving,
+    Adding,
+    Deleting,
+    Importing
+}
+
 @Injectable()
 export class AppComponent<TInterface extends IElement, TService extends AppService<TInterface>> extends Locale {
     public elements: TInterface[];
@@ -17,6 +26,8 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
     public adding: TInterface;
     public errorMessage: any;
     public isBrowser: boolean;
+    public processingId: any;
+    public status: ProcessingStatus = ProcessingStatus.None;
 
     constructor(protected  elmService: TService, public locale: LocaleService, public localization: LocalizationService) {
         super(locale, localization);
@@ -25,24 +36,37 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
     }
 
     get() {
+        this.status = ProcessingStatus.Loading;
         this.elmService.get()
             .subscribe(
             elements => {
                 this.elements = elements;
                 this.signal(elements);
+                this.status = ProcessingStatus.None;
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.status = ProcessingStatus.None;
+            });
     }
 
     add() {
         if (!this.adding) { return; }
+        this.status = ProcessingStatus.Adding;
+        this.processingId = this.adding.id;
         this.elmService.add(this.adding)
             .subscribe(
             element => {
                 this.elements.push(element);
                 this.adding = null;
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
+            });
     }
 
     edit(id) {
@@ -57,6 +81,8 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
 
     delete() {
         if (!this.editing) { return; }
+        this.status = ProcessingStatus.Deleting;
+        this.processingId = this.editing.id;
         this.elmService.delete(this.editing)
             .subscribe(
             element => {
@@ -68,13 +94,21 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
                         }
                     }
                 }
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
+            });
         this.editing = null;
     }
 
     save() {
         if (!this.editing) { return; }
+        this.status = ProcessingStatus.Saving;
+        this.processingId = this.editing.id;
         this.elmService.change(this.editing)
             .subscribe(
             element => {
@@ -83,8 +117,14 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
                         this.elmService.copy(element, c);
                     }
                 }
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
+            });
         this.editing = null;
     }
 
@@ -102,6 +142,18 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         if (elements) {
             this._load.dispatch(this, elements);
         }
+    }
+
+    public isImporting(id) {
+        return this.status === ProcessingStatus.Importing && this.processingId === id;
+    }
+
+    public isSaving(id) {
+        return this.status === ProcessingStatus.Saving && this.processingId === id;
+    }
+
+    public isAdding(id) {
+        return this.status === ProcessingStatus.Saving && this.processingId === id;
     }
 }
 

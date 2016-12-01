@@ -5,7 +5,7 @@ import {IPub, ICity, Pub} from "../../models/ontap.models";
 import {EPubService} from "./epubs.service";
 import { CityService } from "../cities/cities.service";
 import { LoginService } from "../login/login.service";
-import {AppComponent, AppService} from "../../modules/appComponent";
+import {AppComponent, AppService, ProcessingStatus} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
@@ -32,7 +32,6 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     successMessage: string;
     outputs: string[];
     importInProgress: boolean;
-
 
     constructor(elmService: EPubService,
         private loginService: LoginService, 
@@ -81,17 +80,20 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     }
 
     import(id: string) {
-        this.importInProgress = true;
+        this.status = ProcessingStatus.Importing;
+        this.processingId = id;
         this.elmService.import(id)
             .subscribe(
             message => {
                 this.successMessage = message;
                 this.outputs = message.split(/\n/);
-                this.importInProgress = false;
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
             },
             error => {
                 this.errorMessage = <any>error;
-                this.importInProgress = false;
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
             });
         this.editing = null;
     }
