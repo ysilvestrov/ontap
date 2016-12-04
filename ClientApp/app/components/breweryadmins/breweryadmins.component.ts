@@ -1,11 +1,11 @@
 import * as ng from '@angular/core';
 import { Http } from '@angular/http';
-import { List } from "../../modules/linq.ts";
-import {IBrewery, IUser, IBreweryAdmin, BreweryAdmin} from "../../models/ontap.models.ts";
-import {BreweryService} from "../breweries/breweries.service.ts";
-import {UserService} from "../users/users.service.ts";
-import {BreweryAdminService} from "./breweryadmins.service.ts";
-import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { List } from "../../modules/linq";
+import {IBrewery, IUser, IBreweryAdmin, BreweryAdmin} from "../../models/ontap.models";
+import {BreweryService} from "../breweries/breweries.service";
+import {UserService} from "../users/users.service";
+import {BreweryAdminService} from "./breweryadmins.service";
+import {AppComponent, AppService} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 
 @ng.Component({

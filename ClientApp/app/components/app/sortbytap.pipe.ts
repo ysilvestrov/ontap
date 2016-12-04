@@ -1,4 +1,4 @@
-﻿import {IPub, ICity, Pub, IServe} from "../../models/ontap.models.ts";
+﻿import {IPub, ICity, Pub, IServe} from "../../models/ontap.models";
 
 import { Pipe, PipeTransform } from "@angular/core";
 

@@ -1,9 +1,9 @@
 import * as ng from '@angular/core';
 import { Http } from '@angular/http';
-import { List } from "../../modules/linq.ts";
-import {IUser, User} from "../../models/ontap.models.ts";
-import {UserService} from "./users.service.ts";
-import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { List } from "../../modules/linq";
+import { IUser, User } from "../../models/ontap.models";
+import { UserService } from "./users.service";
+import { AppComponent, AppService } from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 @ng.Component({

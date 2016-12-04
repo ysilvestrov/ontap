@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http } from '@angular/http';
-import { IBrewery, IBeer, IBreweryAdmin, BreweryAdmin, User, Pub, City, Brewery, ICountry } from "../../models/ontap.models.ts";
-import {AppService} from "../../modules/appComponent.ts";
+import { IBrewery, IBeer, IBreweryAdmin, BreweryAdmin, User, Pub, City, Brewery, ICountry } from "../../models/ontap.models";
+import {AppService} from "../../modules/appComponent";
 import { LoginService } from "../login/login.service";
 
 @Injectable()

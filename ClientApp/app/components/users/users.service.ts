@@ -1,7 +1,7 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {IUser, User} from "../../models/ontap.models.ts";
-import {AppService} from "../../modules/appComponent.ts";
+import {IUser, User} from "../../models/ontap.models";
+import {AppService} from "../../modules/appComponent";
 import { LoginService } from "../login/login.service";
 
 @Injectable()
