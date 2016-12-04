@@ -93,11 +93,16 @@ namespace Ontap.Controllers
                 .Parse(pub, _context.Beers, _context.Breweries, options,
                     _context.Countries.First(c => c.Id == "UA"))
                 .Where(s => s.Served?.Brewery != null).ToArray();
-            _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == id));
-            _context.BeerServedInPubs.AddRange(serves);
-            _context.Beers.AddRange(serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id)));
+            var beers = serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id));
+            _context.Beers.AddRange(beers);
             _context.Breweries.AddRange(
                 serves.Select(s => s.Served.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
+            _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == id));
+            foreach (var serve in serves)
+            {
+                serve.Served = _context.Beers.FirstOrDefault(_ => _.Id == serve.Served.Id) ?? serve.Served;
+            }
+            _context.BeerServedInPubs.AddRange(serves);
             await _context.SaveChangesAsync();
             var result = string.Join("\r\n",
                 serves.Select(s => $"{s.Tap}: {s.Served.Brewery.Name} - {s.Served.Name}, {s.Volume}l for {s.Price} UAH"));
