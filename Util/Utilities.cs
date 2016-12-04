@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NickBuhro.Translit;
 using Phonix;
@@ -10,6 +11,8 @@ namespace Ontap.Util
 {
     public static class Utilities
     {
+        private static readonly Regex CTester = new Regex("(?:[^A-Za-z0-9,.-])[CcIiPp]+(?:[^A-Za-z0-9,.-])");
+
         public static string MakeId(this string name)
         {
             return string.Concat(
@@ -20,7 +23,11 @@ namespace Ontap.Util
 
         public static string MakeSoundexKey(this string name)
         {
-            return new DoubleMetaphone().BuildKey(Transliteration.CyrillicToLatin(name));
+            name = CTester.Replace(name, match => match.Value.ToLowerInvariant().Replace('c','с').Replace('i', 'і').Replace('p', 'р'));
+            var words = new Regex(@"\W+").Split(Transliteration.CyrillicToLatin(name));
+            var builder = new DoubleMetaphone(6);
+            var result = string.Join("_", words.Select(w => builder.BuildKey(w)).ToArray());
+            return result;
         }
 
         public static bool TryParse(this object source, out decimal value, decimal defaultValue = 0)
