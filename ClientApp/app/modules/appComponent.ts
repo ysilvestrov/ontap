@@ -152,8 +152,12 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         return this.status === ProcessingStatus.Saving && this.processingId === id;
     }
 
+    public isDeleting(id) {
+        return this.status === ProcessingStatus.Deleting && this.processingId === id;
+    }
+
     public isAdding(id) {
-        return this.status === ProcessingStatus.Saving && this.processingId === id;
+        return this.status === ProcessingStatus.Saving;
     }
 }
 
@@ -223,6 +227,12 @@ export abstract class AppService<TInteface extends IElement> {
 
 
     abstract new(element: TInteface): TInteface;
-    abstract copy(source: TInteface, destination: TInteface): void;
+    copy(source: TInteface, destination: TInteface): void {
+        for (let key in source) {
+            if (source.hasOwnProperty(key)) {
+                destination[key] = source[key];
+            }
+        }
+    }
     abstract default(): TInteface;
 }

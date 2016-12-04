@@ -28,7 +28,9 @@
 
 <template #toolTipTemplate let-model="model">
     <div class="pull-left pub-image" *ngIf="model.served.brewery.image">
-        <cl-image public-id="{{model.served.brewery.image}}" [options]="cloudinaryOptions" crop="scale" height="100" dpr="auto"
+        <cl-image public-id="{{model.served.image}}" *ngIf="model.served.image" [options]="cloudinaryOptions" crop="scale" height="100" dpr="auto"
+                  format="png" quality="100" alt="{{model.served.brewery.name}} logo" title="{{model.served.brewery.name}}"></cl-image>
+        <cl-image public-id="{{model.served.brewery.image}}" *ngIf="!model.served.image" [options]="cloudinaryOptions" crop="scale" height="100" dpr="auto"
                   format="png" quality="100" alt="{{model.served.brewery.name}} logo" title="{{model.served.brewery.name}}"></cl-image>
     </div>    
     <div>

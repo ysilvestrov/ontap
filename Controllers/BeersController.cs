@@ -60,14 +60,21 @@ namespace Ontap.Controllers
             current.Name = beer.Name;
             current.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
             current.Description = beer.Description;
+            current.Image = beer.Image;
             await _context.SaveChangesAsync();
             return current;
         }
 
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminUser")]
+        public async Task<Beer> Delete(string id)
+        {
+            if (Beers.All(c => c.Id != id))
+                throw new KeyNotFoundException($"No record with id {id}");
+            var current = Beers.First(c => c.Id == id);
+            _context.Beers.Remove(current);
+            await _context.SaveChangesAsync();
+            return current;
+        }
     }
 }

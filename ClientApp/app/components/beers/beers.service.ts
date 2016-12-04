@@ -21,6 +21,7 @@ export class BeerService extends AppService<IBeer> {
             alcohol: 2.5,
             ibu: 30,
             gravity: 15,
+            image: '',
         });
     }
 
@@ -28,12 +29,4 @@ export class BeerService extends AppService<IBeer> {
         return new Beer(source);
     }
 
-    copy(source: IBeer, dest: IBeer) {
-        dest.name = source.name;
-        dest.description = source.description;
-        dest.brewery = source.brewery;
-        dest.alcohol = source.alcohol;
-        dest.ibu = source.ibu;
-        dest.gravity = source.gravity;
-    }
 }

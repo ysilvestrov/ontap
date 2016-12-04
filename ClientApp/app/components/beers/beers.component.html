@@ -2,13 +2,16 @@
 
 <p>На этой странице можно редактировать сорта пива, а также добавлять новые сорта.</p>
 
-<p *ngIf="!elements">
-    <em>Loading...</em>
-</p>
-
-<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
-    {{errorMessage}}
+<div *ngIf="!elements">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar"
+             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        </div>
+    </div>
 </div>
+<alert type="danger" dismissible="true" *ngIf="errorMessage">
+    {{errorMessage}}
+</alert>
 
 <div class="dropdown" *ngIf="breweries">
     <button class="btn btn-default dropdown-toggle" type="button" id="breweryChooser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -21,140 +24,143 @@
     </ul>
 </div>
 
-<table class='table table-striped table-condensed' *ngIf="elements">
-    <thead>
-    <tr>
-        <th class="col-xs-1">Служебный Id</th>
-        <th class="col-xs-2">Название</th>
-        <th class="col-xs-2">Производитель</th>
-        <th class="col-xs-3">Описание</th>
-        <th class="col-xs-1">Алкоголь, &deg;</th>
-        <th class="col-xs-1">Плотность, %</th>
-        <th class="col-xs-1">Горькость, IBU</th>
-        <th class="col-xs-1">Действия</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let beer of elements">
-        <td>{{ beer.id }}</td>
-        <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                    {{ beer.name }}
-                </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                    <input type="text" class="form-control col-md-2" id="name"
+<div class="container-fluid" *ngIf="elements">
+    <div class="row">
+        <div class="col-md-2"><h4><strong>Название</strong></h4></div>
+        <div class="col-md-2"><h4><strong>Производитель</strong></h4></div>
+        <div class="col-md-3"><h4><strong>Описание</strong></h4></div>
+        <div class="col-md-1"><h4><strong>Алкоголь, &deg;</strong></h4></div>
+        <div class="col-md-1"><h4><strong>Плотность, %</strong></h4></div>
+        <div class="col-md-1"><h4><strong>Горькость, IBU</strong></h4></div>
+        <div class="col-md-2"><h4><strong>Действия</strong></h4></div>
+    </div>
+    <div class="row-wrapper" *ngFor="let beer of elements">
+        <div class="row" *ngIf="!editing || (editing.id != beer.id)">
+            <div class="col-md-2" title="{{beer.id}}">{{ beer.name }}</div>
+            <div class="col-md-2">{{ beer.brewery.name }}</div>
+            <div class="col-md-3">{{ beer.description }}</div>
+            <div class="col-md-1">{{ beer.alcohol }}</div>
+            <div class="col-md-1">{{ beer.gravity }}</div>
+            <div class="col-md-1">{{ beer.ibu }}</div>
+            <div class="col-md-2">
+                <button (click)="edit(beer.id)" type="button" class="btn btn-default" aria-label="Edit">
+                    <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true" *ngIf="!isSaving(beer.id)"></span>
+                    <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isSaving(beer.id)"></span>
+                </button>
+            </div>
+        </div>
+        <div *ngIf="editing && (editing.id == beer.id)">
+            <div class="row">
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="editing.name"
                            required
                            [(ngModel)]="editing.name" name="name">
-                </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                    {{ beer.brewery.name }}
-                </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <select class="form-control" [(ngModel)]="editing.brewery.id" (change)="onEditChangeBrewery($event.target.value)">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" [(ngModel)]="editing.brewery.id" (change)="onEditChangeBrewery($event.target.value)">
+                        <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <textarea class="form-control" id="editing.description"
+                                  required
+                                  [(ngModel)]="editing.description" name="description"></textarea>
+
+                </div>
+                <div class="col-md-1">
+                    <input type="number" class="form-control col-xs-1" id="editing.alcohol"
+                           required
+                           [(ngModel)]="editing.alcohol" name="alcohol">
+                </div>
+                <div class="col-md-1">
+                    <input type="number" class="form-control col-xs-1" id="editing.gravity"
+                           [(ngModel)]="editing.gravity" name="gravity">
+
+                </div>
+                <div class="col-md-1">
+                    <input type="number" class="form-control col-xs-1" id="editing.ibu"
+                           [(ngModel)]="editing.ibu" name="ibu">
+                </div>
+                <div class="col-md-2">
+                    <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
+                        <span class="fa fa-floppy-o fa-lg" aria-hidden="true" *ngIf="!isSaving(editing.id)"></span>
+                        <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isSaving(editing.id)"></span>    
+                    </button>
+                    <button (click)="delete()" type="button" class="btn btn-default" aria-label="Delete">
+                        <span class="fa fa-trash-o fa-lg" aria-hidden="true" *ngIf="!isDeleting(editing.id)"></span>
+                        <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isDeleting(editing.id)"></span>  
+                    </button>
+                    <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
+                        <span class="fa fa-times fa-lg" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row edit2">
+                <div class="col-md-10">&nbsp;</div>
+                <div class="col-md-4">
+                    <div class="pull-left" style="margin-right: 20px;">
+                        <cl-image public-id="{{editing.image}}" [options]="cloudinaryOptions" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
+                    </div>
+                    <input type="file" ng2FileSelect [uploader]="uploader" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-wrapper" *ngIf="adding">
+        <div class="row">
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="adding.name"
+                       required
+                       [(ngModel)]="adding.name" name="name">
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" [(ngModel)]="adding.brewery.id" (change)="onAddChangeBrewery($event.target.value)">
                     <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
                 </select>
-            </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                    {{ beer.description }}
-                </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <textarea class="form-control" id="editing.description"
+            </div>
+            <div class="col-md-3">
+                <textarea class="form-control" id="adding.description"
                           required
-                          [(ngModel)]="editing.description" name="description"></textarea>
-            </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                {{ beer.alcohol }}
-            </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <input type="number" class="form-control col-xs-1" id="alcohol"
+                          [(ngModel)]="adding.description" name="description"></textarea>
+
+            </div>
+            <div class="col-md-1">
+                <input type="number" class="form-control col-xs-1" id="adding.alcohol"
                        required
-                       [(ngModel)]="editing.alcohol" name="alcohol">
-            </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                {{ beer.gravity }}
-            </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <input type="number" class="form-control col-xs-1" id="gravity"                      
-                       [(ngModel)]="editing.gravity" name="gravity">
-            </span>
-        </td>        <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                {{ beer.ibu }}
-            </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <input type="number" class="form-control col-xs-1" id="ibu"                       
-                       [(ngModel)]="editing.ibu" name="ibu">
-            </span>
-        </td>
-        <td>
-            <span *ngIf="!editing || (editing.id != beer.id)">
-                <button (click)="edit(beer.id)" type="button" class="btn btn-default" aria-label="Edit">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                </button>
-            </span>
-            <span *ngIf="editing && (editing.id == beer.id)">
-                <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
-                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                       [(ngModel)]="adding.alcohol" name="alcohol">
+            </div>
+            <div class="col-md-1">
+                <input type="number" class="form-control col-xs-1" id="adding.gravity"
+                       [(ngModel)]="adding.gravity" name="gravity">
+
+            </div>
+            <div class="col-md-1">
+                <input type="number" class="form-control col-xs-1" id="adding.ibu"
+                       [(ngModel)]="adding.ibu" name="ibu">
+            </div>
+            <div class="col-md-1">
+                <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
+                        <span class="fa fa-floppy-o fa-lg" aria-hidden="true" *ngIf="!isAdding(adding.id)"></span>
+                        <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isAdding(addning.id)"></span>
                 </button>
                 <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <span class="fa fa-times fa-lg" aria-hidden="true"></span>
                 </button>
-            </span>
-        </td>
-    </tr>
-    <tr *ngIf="adding">
-        <td>
-            <input type="text" class="form-control" id="adding.id"
-                   required
-                   [(ngModel)]="adding.id" name="id">
-        </td>
-        <td>
-            <input type="text" class="form-control" id="adding.name"
-                   required
-                   [(ngModel)]="adding.name" name="name">
-        </td>
-        <td>
-            <select class="form-control" [(ngModel)]="adding.brewery.id" (change)="onAddChangeBrewery($event.target.value)">
-                <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
-            </select>
-        </td>
-        <td>
-            <textarea class="form-control" id="adding.description"
-                      required
-                      [(ngModel)]="adding.description" name="description"></textarea>
-        </td>
-        <td>
-                <input type="number" class="form-control col-xs-1" id="adding.alcohol"                       
-                       [(ngModel)]="adding.alcohol" name="adding.alcohol">
-        </td>
-        <td>
-                <input type="number" class="form-control col-xs-1" id="adding.gravity"                      
-                       [(ngModel)]="adding.gravity" name="adding.gravity">
-        </td>
-        <td>
-                <input type="number" class="form-control col-xs-1" id="adding.ibu"
-                       required
-                       [(ngModel)]="adding.ibu" name="adding.ibu">
-        </td>
-        <td>
-            <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
-                <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-            </button>
-            <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            </div>
+        </div>
+        <div class="row edit2">
+            <div class="col-md-8">&nbsp;
+            </div>
+            <div class="col-md-4">
+                <div class="pull-left" style="margin-right: 20px;">
+                    <cl-image public-id="{{adding.image}}" [options]="cloudinaryOptions" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
+                </div>
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+            </div>
+        </div>
+    </div>
+</div>
+
 <button (click)="startAdd()" type="button" class="btn btn-default" aria-label="Add">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 </button>

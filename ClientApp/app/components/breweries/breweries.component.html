@@ -22,7 +22,7 @@
     </div>
     <div class="row-wrapper" *ngFor="let brewery of elements">
         <div class="row" *ngIf="!editing || (editing.id != brewery.id)">
-            <div class="col-md-3">{{ brewery.name }}</div>
+            <div class="col-md-3" title="{{brewery.id}}">{{ brewery.name }}</div>
             <div class="col-md-2">{{ brewery.country.name }}</div>
             <div class="col-md-5">{{ brewery.address }}</div>
             <div class="col-md-2">
@@ -50,10 +50,15 @@
                 </div>
                 <div class="col-md-2">
                     <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <span class="fa fa-floppy-o fa-lg" aria-hidden="true" *ngIf="!isSaving(editing.id)"></span>
+                        <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isSaving(editing.id)"></span>
+                    </button>
+                    <button (click)="delete()" type="button" class="btn btn-default" aria-label="Delete">
+                        <span class="fa fa-trash-o fa-lg" aria-hidden="true" *ngIf="!isDeleting(editing.id)"></span>
+                        <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isDeleting(editing.id)"></span>
                     </button>
                     <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        <span class="fa fa-times fa-lg" aria-hidden="true"></span>
                     </button>
                 </div>
             </div>

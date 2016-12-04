@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -72,7 +71,7 @@ namespace Ontap.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        [Authorize(Policy = "BreweryAdminUser")]
+        [Authorize(Policy = "AdminUser")]
         public async Task Delete(string id)
         {
             if (Breweries.All(c => c.Id != id))

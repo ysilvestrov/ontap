@@ -18,8 +18,10 @@ namespace Ontap.Models
         }
 
         public string Id { get; set; }
+
         [Required]
         public string Name { get; set; }
+
         public string Type { get; set; }
         public decimal Alcohol { get; set; }
         public decimal Gravity { get; set; }
@@ -30,8 +32,8 @@ namespace Ontap.Models
         [NotMapped]
         public string[] Labels
         {
-            get { return (_labels??"").Split('|'); } 
-            set { _labels = string.Join("|", value);}
+            get { return (_labels ?? "").Split('|'); }
+            set { _labels = string.Join("|", value); }
         }
 
         public string _labels { get; set; }
@@ -40,6 +42,7 @@ namespace Ontap.Models
         [JsonIgnore]
         public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }
 
-         public virtual Brewery Brewery { get; set; }
+        public virtual Brewery Brewery { get; set; }
+        public string Image { get; set; }
     }
 }

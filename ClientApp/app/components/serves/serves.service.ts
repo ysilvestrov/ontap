@@ -23,6 +23,7 @@ export class ServeService extends AppService<IServe> {
                 alcohol: 2.5,
                 ibu: 30,
                 gravity: 15,
+                image: '',
             }),
             servedIn: new Pub({
                 id: 'id',

@@ -10,6 +10,7 @@ export interface IBeer {
     alcohol: number;
     gravity: number;
     ibu: number;
+    image: string;
 }
 export interface IBrewery {
     id: string;
@@ -106,16 +107,14 @@ export class Beer implements IBeer {
     alcohol: number;
     gravity: number;
     ibu: number;
+    image: string;
 
     constructor(beer: IBeer) {
-        this.id = beer.id;
-        this.name = beer.name;
-        this.description = beer.description;
-        this.type = beer.type;
-        this.brewery = beer.brewery;
-        this.alcohol = beer.alcohol;
-        this.gravity = beer.gravity;
-        this.ibu = beer.ibu;
+        for (let key in beer) {
+            if (beer.hasOwnProperty(key)) {
+                this[key] = beer[key];
+            }
+        }
     }
 }
 export class Serve implements IServe {
