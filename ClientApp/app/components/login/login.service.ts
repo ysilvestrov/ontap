@@ -2,8 +2,8 @@
 import { IUser, User, AccessToken } from "../../models/ontap.models";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import '../../modules/rxjs.operators.ts';
-import {IStronglyTypedEvents, EventDispatcher, IEvent} from '../../modules/StronglyTypedEvents.ts';
+import '../../modules/rxjs.operators';
+import {IStronglyTypedEvents, EventDispatcher, IEvent} from '../../modules/StronglyTypedEvents';
 import { FormsModule }   from '@angular/forms';
 import * as moment from 'moment';
 
