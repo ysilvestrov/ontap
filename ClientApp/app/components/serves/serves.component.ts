@@ -1,11 +1,11 @@
 import * as ng from '@angular/core';
 import { Http } from '@angular/http';
-import { List } from "../../modules/linq.ts";
-import {IPub, IBeer, IServe, Serve} from "../../models/ontap.models.ts";
-import {EPubService} from "../epubs/epubs.service.ts";
-import {BeerService} from "../beers/beers.service.ts";
-import {ServeService} from "./serves.service.ts";
-import {AppComponent, AppService} from "../../modules/appComponent.ts";
+import { List } from "../../modules/linq";
+import {IPub, IBeer, IServe, Serve} from "../../models/ontap.models";
+import {EPubService} from "../epubs/epubs.service";
+import {BeerService} from "../beers/beers.service";
+import {ServeService} from "./serves.service";
+import {AppComponent, AppService} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 @ng.Component({
