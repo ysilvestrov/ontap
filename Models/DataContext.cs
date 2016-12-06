@@ -58,6 +58,9 @@ namespace Ontap.Models
                 .HasOne(ba => ba.Pub)
                 .WithMany(b => b.Admins)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Beer>()
+                .Property(b => b.ServeKind)
+                .HasDefaultValue(Beer.Serve.OnTap);
 
         }
 

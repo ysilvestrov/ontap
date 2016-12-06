@@ -17,6 +17,12 @@ namespace Ontap.Models
             Wild
         }
 
+        public enum Serve
+        {
+            OnTap,
+            Bottle
+        }
+
         public string Id { get; set; }
 
         [Required]
@@ -44,5 +50,6 @@ namespace Ontap.Models
 
         public virtual Brewery Brewery { get; set; }
         public string Image { get; set; }
+        public Serve ServeKind { get; set; }
     }
 }
