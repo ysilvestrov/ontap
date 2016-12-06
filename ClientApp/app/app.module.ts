@@ -1,4 +1,4 @@
-import { NgModule }      from "@angular/core";
+import { APP_INITIALIZER, Injectable, NgModule } from '@angular/core';
 import { FormsModule }   from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { UniversalModule } from "angular2-universal";
@@ -18,9 +18,58 @@ import { PubAdminsComponent } from "./components/pubadmins/pubadmins.component";
 import { BreweryAdminsComponent } from "./components/breweryadmins/breweryadmins.component";
 import { HomeComponent } from "./components/home/home.component";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule, AlertModule  } from "ng2-bootstrap/ng2-bootstrap";
-import { LocaleModule, LocalizationModule } from "angular2localization";
+import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+
+/**
+ * Advanced initialization.
+ * 
+ * With these settings, translation file will be loaded before the app.
+ */
+@Injectable()
+export class LocalizationConfig {
+
+    constructor(public locale: LocaleService, public localization: LocalizationService) { }
+
+    load(): Promise<any> {
+
+        if (typeof (document) == "undefined") {
+            this.locale.enableCookie = false;
+            this.locale.enableLocalStorage = false;
+        }
+
+        // Adds the languages (ISO 639 two-letter or three-letter code).
+        this.locale.addLanguages(["uk", "ru", "en"]);
+
+        // Required: default language, country (ISO 3166 two-letter, uppercase code) and expiry (No days). If the expiry is omitted, the cookie becomes a session cookie.
+        // Selects the default language and country, regardless of the browser language, to avoid inconsistencies between the language and country.
+        this.locale.definePreferredLocale("uk", "UK", 30);
+
+        // Optional: default currency (ISO 4217 three-letter code).
+        this.locale.definePreferredCurrency("UAH");
+
+        // Initializes LocalizationService: asynchronous loading.
+        this.localization.translationProvider("./resources/locale-"); // Required: initializes the translation provider with the given path prefix.
+
+        var promise: Promise<any> = new Promise((resolve: any) => {
+            this.localization.translationChanged.subscribe(() => {
+                resolve(true);
+            });
+        });
+
+        this.localization.updateTranslation(); // Need to update the translation.
+
+        return promise;
+    }
+}
+
+/**
+ * Aot compilation requires a reference to an exported function.
+ */
+export function initLocalization(localizationConfig: LocalizationConfig): Function {
+    return () => localizationConfig.load();
+}
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -64,6 +113,15 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
             { path: "brewery-admins", component: BreweryAdminsComponent },
             { path: "**", redirectTo: "home" }
         ])
+    ],
+    providers: [
+        LocalizationConfig,
+        {
+            provide: APP_INITIALIZER, // APP_INITIALIZER will execute the function when the app is initialized and delay what it provides.
+            useFactory: initLocalization,
+            deps: [LocalizationConfig],
+            multi: true
+        }
     ],
 })
 export class AppModule {
