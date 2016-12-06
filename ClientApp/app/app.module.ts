@@ -53,7 +53,10 @@ export class LocalizationConfig {
         if (typeof (document) == "undefined") {
             this.localization
                 .translationProvider("https://ontap.in.ua/resources/locale-");
-// Required: initializes the translation provider with the given path prefix.
+            // Required: initializes the translation provider with the given path prefix.
+        } else {
+            this.localization
+                .translationProvider("./resources/locale-");
         }
 
         var promise: Promise<any> = new Promise((resolve: any) => {
