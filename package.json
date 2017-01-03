@@ -36,7 +36,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.1",
     "moment": "^2.15.1",
-    "ng2-bootstrap": "^1.1.11",
+    "ng2-bootstrap": "^1.1.16",
     "ng2-cloudinary": "^0.6.0",
     "preboot": "^4.5.2",
     "raw-loader": "^0.5.1",
