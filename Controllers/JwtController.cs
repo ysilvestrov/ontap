@@ -55,33 +55,36 @@ namespace Ontap.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, applicationUser.Name),
                 new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
                 new Claim(JwtRegisteredClaimNames.Iat,
-                    ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(),
+                    ToUnixEpochDate(DateTime.Now).ToString(),
                     ClaimValueTypes.Integer64)
             });
             claims.AddRange(identity.FindAll("UserType"));
             
 
             // Create the JWT security token and encode it.
+            var validForTotalSeconds = (int)_jwtOptions.ValidFor.TotalSeconds;
+            var expiresAt = DateTime.UtcNow.AddSeconds(validForTotalSeconds);
+
             var jwt = new JwtSecurityToken(
                 issuer: _jwtOptions.Issuer,
                 audience: _jwtOptions.Audience,
                 claims: claims,
                 notBefore: _jwtOptions.NotBefore,
-                expires: _jwtOptions.Expiration,
+                expires: expiresAt,
                 signingCredentials: _jwtOptions.SigningCredentials);
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             // Serialize and return the response
-            var response = new
+            var accessToken = new AccessToken
             {
                 accessToken = encodedJwt,
-                expiresIn = (int)_jwtOptions.ValidFor.TotalSeconds,
-                expiresAt = DateTime.UtcNow.AddSeconds((int)_jwtOptions.ValidFor.TotalSeconds)
+                expiresIn = validForTotalSeconds,
+                expiresAt = expiresAt
             };
 
-            var json = JsonConvert.SerializeObject(response, _serializerSettings);
-            return new OkObjectResult(json);
+            //var json = JsonConvert.SerializeObject(response, _serializerSettings);
+            return Ok(accessToken);
         }
 
         private static void ThrowIfInvalidOptions(JwtIssuerOptions options)
@@ -139,6 +142,15 @@ namespace Ontap.Controllers
                 claims.Add(new Claim("UserType", "BreweryAdmin"));
             }
             return Task.FromResult(new ClaimsIdentity(new GenericIdentity(user.Name, "Token"), claims));
+        }
+
+        public class AccessToken
+        {
+            // ReSharper disable InconsistentNaming
+            public string accessToken { get; set; }
+            public DateTime expiresAt { get; set; }
+            public int expiresIn { get; set; }
+            // ReSharper restore InconsistentNaming
         }
     }
 }
