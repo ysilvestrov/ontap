@@ -115,7 +115,7 @@ namespace Ontap.Controllers
         public async Task<Pub> Put(string id, [FromBody]Pub pub)
         { 
             if (Pubs.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No pub with id {id}", id));
+                throw new KeyNotFoundException($"No pub with id {id}");
             var current = Pubs.First(c => c.Id == id);
             if (!(await GetUser()).HasRights(pub))
             {

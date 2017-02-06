@@ -77,7 +77,7 @@ namespace Ontap.Controllers
         public async Task<BeerServedInPubs> Put(int id, [FromBody]BeerServedInPubs serve)
         {
             if (Serves.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No record with id {id}", id));
+                throw new KeyNotFoundException($"No record with id {id}");
             var current = Serves.First(c => c.Id == id);
             if (!(await GetUser()).HasRights(current))
             {
@@ -98,7 +98,7 @@ namespace Ontap.Controllers
         public async Task<BeerServedInPubs> Delete(int id)
         {
             if (Serves.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No record with id {id}", id));
+                throw new KeyNotFoundException($"No record with id {id}");
             var current = Serves.First(c => c.Id == id);
             if (!(await GetUser()).HasRights(current))
             {

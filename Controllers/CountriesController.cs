@@ -43,7 +43,7 @@ namespace Ontap.Controllers
         public async Task<Country> Post([FromBody] Country country)
         {
             if (Countries.Any(c => c.Id == country.Id))
-                throw new AlreadyExistsException(string.Format("Country with id {id} already exists", country.Id));
+                throw new AlreadyExistsException($"Country with id {country.Id} already exists");
             _context.Countries.Add(country);
             await _context.SaveChangesAsync();
             return country;
@@ -55,7 +55,7 @@ namespace Ontap.Controllers
         public async Task<Country> Put(string id, [FromBody]Country country)
         {
             if (Countries.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No country with id {id}", id));
+                throw new KeyNotFoundException($"No country with id {id}");
             var currentCity = Countries.First(c => c.Id == id);
             currentCity.Name = country.Name;
             await _context.SaveChangesAsync();

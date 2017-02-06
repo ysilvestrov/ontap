@@ -59,7 +59,7 @@ namespace Ontap.Controllers
         public async Task<Brewery> Put(string id, [FromBody]Brewery brewery)
         {
             if (Breweries.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No beer with id {id}", id));
+                throw new KeyNotFoundException($"No beer with id {id}");
             var current = Breweries.First(c => c.Id == id);
             current.Name = brewery.Name;
             current.Address = brewery.Address;
@@ -75,7 +75,7 @@ namespace Ontap.Controllers
         public async Task Delete(string id)
         {
             if (Breweries.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No brewery with id {id}", id));
+                throw new KeyNotFoundException($"No brewery with id {id}");
             if(_context.Beers.Any(b => b.Brewery.Id == id))
                 throw new AlreadyExistsException("Cannot delete brewery with beers");
             _context.Breweries.Remove(_context.Breweries.First(c => c.Id == id));

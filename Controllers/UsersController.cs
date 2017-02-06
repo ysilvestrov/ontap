@@ -58,7 +58,7 @@ namespace Ontap.Controllers
         public async Task<User> Post([FromBody] User user)
         {
             if (_context.Users.Any(c => c.Id == user.Id))
-                throw new AlreadyExistsException(string.Format("User with id {id} already exists", user.Id));
+                throw new AlreadyExistsException($"User with id {user.Id} already exists");
             user.Password = UserBase.GetHash(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -72,7 +72,7 @@ namespace Ontap.Controllers
         public async Task<User> Put(string id, [FromBody]User user)
         { 
             if (_context.Users.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No user with id {id}", id));
+                throw new KeyNotFoundException($"No user with id {id}");
             var current = _context.Users.First(c => c.Id == id);
             current.Name = user.Name;
             current.Password = string.IsNullOrWhiteSpace(user.Password)

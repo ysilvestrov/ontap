@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Ontap.Auth;
 using Ontap.Models;
+using Ontap.Util;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -42,8 +43,12 @@ namespace Ontap.Controllers
         [HttpPost]
         public async Task<Beer> Post([FromBody] Beer beer)
         {
-            if (Beers.Any(c => c.Id == beer.Id))
-                throw new AlreadyExistsException(string.Format("Beer with id {id} already exists", beer.Id));
+            var pid = beer.Name.MakeId();
+            var id = pid;
+
+            for (var i = 0; Beers.Any(c => c.Id == id); id = $"{pid}_{i}", i++) ;
+
+            beer.Id = id;
             beer.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
             _context.Beers.Add(beer);
             await _context.SaveChangesAsync();
@@ -55,7 +60,7 @@ namespace Ontap.Controllers
         public async Task<Beer> Put(string id, [FromBody]Beer beer)
         {
             if (Beers.All(c => c.Id != id))
-                throw new KeyNotFoundException(string.Format("No beer with id {id}", id));
+                throw new KeyNotFoundException($"No beer with id {id}");
             var current = Beers.First(c => c.Id == id);
             current.Name = beer.Name;
             current.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
