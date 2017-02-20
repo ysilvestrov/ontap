@@ -4,15 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
-using Google.Apis.Sheets.v4.Data;
-using NuGet.Packaging;
-using ontap.Migrations;
 using Ontap.Models;
 
 namespace Ontap.Util
@@ -33,12 +28,12 @@ namespace Ontap.Util
             }
         }
 
-        static readonly string[] Scopes = {SheetsService.Scope.SpreadsheetsReadonly};
+        static readonly string[] Scopes = {SheetsService.Scope.SpreadsheetsReadonly, DriveService.Scope.DriveReadonly};
         static string ApplicationName = "ontap.in.ua";
 
         public ICollection<BeerServedInPubs> Parse(Pub pub, 
             IEnumerable<Beer> enumBeers, IEnumerable<Brewery> enumBreweries, 
-            Dictionary<string, object> options, Country country)
+            Dictionary<string, object> options, Country country, bool force = false)
         {
             var result = new List<BeerServedInPubs>();
             var beers = new List<Beer>(enumBeers);
@@ -71,6 +66,12 @@ namespace Ontap.Util
                 ApplicationName = ApplicationName,
             });
 
+            var driveService = new DriveService(new BaseClientService.Initializer
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+
             decimal volume, targetVolume, priceMultiplicator;
             options["volume"].TryParse(out volume, 1);
             options["targetVolume"].TryParse(out targetVolume, 0.5M);
@@ -84,11 +85,25 @@ namespace Ontap.Util
 
             // Define request parameters.
             var range = $"{options["firstCell"]}:{'A' + columns.Count}";
-            SpreadsheetsResource.ValuesResource.GetRequest request =
-                service.Spreadsheets.Values.Get(options["sheetId"].ToString(), range);
+
+            var spreadsheetId = options["sheetId"].ToString();
+
+            var request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+
+            var driveRequest = driveService.Files.Get(spreadsheetId);
+
+            driveRequest.Fields = "createdTime,modifiedTime";
+
+            var time = driveRequest.Execute().ModifiedTime;
+            var lastUpdated = pub.BeerServedInPubs.Count > 0 ? pub.BeerServedInPubs.Max(b => b.Updated) : DateTime.MinValue;
+
+            if (time < lastUpdated && !force)
+                return result;
 
             IList<IList<object>> values = request.Execute().Values;
-            if (values == null || values.Count <= 0) return result;
+            if (values == null || values.Count <= 0)
+                return result;
+
 
             result.AddRange(GetValue(values, pub, country, columns, targetVolume, priceMultiplicator, volume, beers, breweries));
 

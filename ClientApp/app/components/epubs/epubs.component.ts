@@ -98,6 +98,24 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
         this.editing = null;
     }
 
+    importAll() {
+        this.status = ProcessingStatus.Importing;
+        this.elmService.importAll()
+            .subscribe(
+            message => {
+                this.successMessage = message;
+                this.outputs = message.split(/\n/);
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.status = ProcessingStatus.None;
+                this.processingId = null;
+            });
+        this.editing = null;
+    }
+
     canParsePub(pub) {
         return pub.parserOptions && this.canEditPub(pub)           ;
     }
@@ -107,6 +125,11 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
             (this.loginService.currentUser.isAdmin ||
             (this.loginService.currentUser.canAdminPub &&
                 new List(this.loginService.currentUser.pubs).Any(p => p.id === pub.id)));
+    }
+
+    isAdmin() {
+        return this.loginService.currentUser &&
+            this.loginService.currentUser.isAdmin;
     }
 
 }

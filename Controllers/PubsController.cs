@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Authentication;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -72,7 +73,7 @@ namespace Ontap.Controllers
             return await _context.Pubs.FirstAsync(p => p.Id == pub.Id);
         }
 
-        // POST api/pubs
+        // PATCH api/pubs/id
         /// <summary>
         /// Import pub's beers
         /// </summary>
@@ -91,22 +92,68 @@ namespace Ontap.Controllers
             var parser = new GoogleSheetParser();
             var serves = parser
                 .Parse(pub, _context.Beers, _context.Breweries, options,
-                    _context.Countries.First(c => c.Id == "UA"))
+                    _context.Countries.First(c => c.Id == "UA"), force: true)
                 .Where(s => s.Served?.Brewery != null).ToArray();
-            var beers = serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id));
-            _context.Beers.AddRange(beers);
-            _context.Breweries.AddRange(
-                serves.Select(s => s.Served.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
-            _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == id));
-            foreach (var serve in serves)
+            string result = "";
+            if (serves.Length <= 0) return result;
             {
-                serve.Served = _context.Beers.FirstOrDefault(_ => _.Id == serve.Served.Id) ?? serve.Served;
+                var beers = serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id));
+                _context.Beers.AddRange(beers);
+                _context.Breweries.AddRange(
+                    serves.Select(s => s.Served.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
+                _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == id));
+                foreach (var serve in serves)
+                {
+                    serve.Served = _context.Beers.FirstOrDefault(_ => _.Id == serve.Served.Id) ?? serve.Served;
+                }
+                _context.BeerServedInPubs.AddRange(serves);
+                await _context.SaveChangesAsync();
+                result = string.Join("\r\n",
+                    serves.Select(
+                        s => $"{s.Tap}: {s.Served.Brewery.Name} - {s.Served.Name}, {s.Volume}l for {s.Price} UAH"));
             }
-            _context.BeerServedInPubs.AddRange(serves);
-            await _context.SaveChangesAsync();
-            var result = string.Join("\r\n",
-                serves.Select(s => $"{s.Tap}: {s.Served.Brewery.Name} - {s.Served.Name}, {s.Volume}l for {s.Price} UAH"));
             return result;
+        }
+
+        // PATCH api/pubs
+        /// <summary>
+        /// Import all pub's beers
+        /// </summary>
+        /// <returns>Import log</returns>
+        [HttpPatch]
+        [Authorize(Policy = "AdminUser")]
+        public async Task<string> Run()
+        {
+            var parser = new GoogleSheetParser();
+            var result = new StringBuilder();
+            foreach (var pub in Pubs.Where(p => !string.IsNullOrWhiteSpace(p.ParserOptions)))
+            {
+                var options = JsonConvert.DeserializeObject<Dictionary<string, object>>(pub.ParserOptions);
+                var serves = parser
+                    .Parse(pub, _context.Beers, _context.Breweries, options,
+                        _context.Countries.First(c => c.Id == "UA"), force: false)
+                    .Where(s => s.Served?.Brewery != null).ToArray();
+
+                if (serves.Length == 0) continue;
+
+                var beers = serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id));
+                _context.Beers.AddRange(beers);
+                _context.Breweries.AddRange(
+                    serves.Select(s => s.Served.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
+                _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == pub.Id));
+                foreach (var serve in serves)
+                {
+                    serve.Served = _context.Beers.FirstOrDefault(_ => _.Id == serve.Served.Id) ?? serve.Served;
+                }
+                _context.BeerServedInPubs.AddRange(serves);
+                foreach (var s in serves)
+                {
+                    result.AppendLine(
+                        $"{pub.Name} #{s.Tap}: {s.Served.Brewery.Name} - {s.Served.Name}, {s.Volume}l for {s.Price} UAH");
+                }
+            }
+            await _context.SaveChangesAsync();
+            return result.ToString();
         }
 
         // PUT api/cities/Kharkiv

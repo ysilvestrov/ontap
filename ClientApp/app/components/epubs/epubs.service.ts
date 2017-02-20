@@ -56,4 +56,11 @@ export class EPubService extends AppService<IPub> {
             .map(this.extractString, this)
             .catch(this.handleError);
     }
+
+    importAll(): Observable<string> {
+        let body = "";
+        return this.http.patch(this.serverUrl, body, this.options)
+            .map(this.extractString, this)
+            .catch(this.handleError);
+    }
 }

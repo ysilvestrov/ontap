@@ -4,8 +4,6 @@
       "version": "1.1.0",
       "type": "platform"
     },
-
-
     "Elmah.Io.AspNetCore": "1.0.27-pre",
     "Google.Apis.Auth": "1.20.0",
     "Google.Apis.Sheets.v4": "1.20.0.714",
@@ -34,7 +32,8 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.NETCore.ILDAsm": "1.1.0",
     "MySql.Data.EntityFrameworkCore": "7.0.5-IR21",
-    "NickBuhro.Translit": "1.0.0"
+    "NickBuhro.Translit": "1.0.0",
+    "Google.Apis.Drive.v3": "1.21.0.761"
   },
 
   "tools": {

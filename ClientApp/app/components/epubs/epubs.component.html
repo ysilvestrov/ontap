@@ -177,6 +177,10 @@
     </div>
 </div>
 
-<button (click)="startAdd()" type="button" class="btn btn-default" aria-label="Add">
+<button (click)="startAdd()" type="button" class="btn btn-default" aria-label="Add" *ngIf="isAdmin()">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+</button>
+<button (click)="importAll()" type="button" class="btn btn-default" aria-label="Import" *ngIf="isAdmin()">
+    <span class="fa fa-cloud-upload fa-lg" aria-hidden="true" *ngIf="!isImporting(null)"></span>
+    <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isImporting(null)"></span>
 </button>
