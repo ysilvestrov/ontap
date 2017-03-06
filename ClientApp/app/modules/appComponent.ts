@@ -9,6 +9,7 @@ import {IStronglyTypedEvents, EventDispatcher, IEvent} from './StronglyTypedEven
 import { FormsModule }   from '@angular/forms';
 import { LoginService } from "../components/login/login.service";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { CloudinaryUploader } from 'ng2-cloudinary';
 
 export enum ProcessingStatus {
     None,
@@ -18,6 +19,17 @@ export enum ProcessingStatus {
     Deleting,
     Importing
 }
+
+export class Options {
+    value: any;
+    label: string;
+
+    constructor(value: any, label: string) {
+        this.value = value;
+        this.label = label;
+    }
+}
+
 
 @Injectable()
 export class AppComponent<TInterface extends IElement, TService extends AppService<TInterface>> extends Locale {
@@ -29,10 +41,41 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
     public processingId: any;
     public status: ProcessingStatus = ProcessingStatus.None;
 
-    constructor(protected  elmService: TService, public locale: LocaleService, public localization: LocalizationService) {
+    constructor(protected elmService: TService, public locale: LocaleService, public localization: LocalizationService, public uploader: CloudinaryUploader = null) {
         super(locale, localization);
         this.isBrowser = typeof (document) != "undefined";
         this.get();
+
+        if (this.uploader) {
+            //Override onSuccessItem function to record cloudinary response data
+            this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
+                //response is the cloudinary response
+                //see http://cloudinary.com/documentation/upload_images#upload_response
+                const cloudinaryImage = JSON.parse(response);
+                if (this.editing) {
+                    var e: any = this.editing;
+                    e.image = cloudinaryImage.public_id;
+                }
+                if (this.adding) {
+                    var a: any = this.adding;
+                    a.image = cloudinaryImage.public_id;
+                }
+
+                return { item, response, status, headers };
+            };
+
+            //Override onSuccessItem function to record cloudinary response data
+            this.uploader.onErrorItem = (item: any, response: string, status: number, headers: any) => {
+                //response is the cloudinary response
+                //see http://cloudinary.com/documentation/upload_images#upload_response
+                console.error(response);
+                return { item, response, status, headers };
+            };
+
+            this.uploader.onCompleteAll = () => {
+                this.editing ? this.save() : this.add();
+            }
+        }
     }
 
     get() {
@@ -54,19 +97,23 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         if (!this.adding) { return; }
         this.status = ProcessingStatus.Adding;
         this.processingId = this.adding.id;
-        this.elmService.add(this.adding)
-            .subscribe(
-            element => {
-                this.elements.push(element);
-                this.adding = null;
-                this.status = ProcessingStatus.None;
-                this.processingId = null;
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.status = ProcessingStatus.None;
-                this.processingId = null;
-            });
+        if (this.uploader.getNotUploadedItems().length > 0) {
+            this.uploader.uploadAll();
+        } else {
+            this.elmService.add(this.adding)
+                .subscribe(
+                    element => {
+                        this.elements.push(element);
+                        this.adding = null;
+                        this.status = ProcessingStatus.None;
+                        this.processingId = null;
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.status = ProcessingStatus.None;
+                        this.processingId = null;
+                    });
+        }
     }
 
     edit(id) {
@@ -79,11 +126,11 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         this.adding = null;
     }
 
-    delete() {
+    delete(replacement = false) {
         if (!this.editing) { return; }
         this.status = ProcessingStatus.Deleting;
         this.processingId = this.editing.id;
-        this.elmService.delete(this.editing)
+        this.elmService.delete(this.editing, replacement)
             .subscribe(
             element => {
                 for (let c of this.elements) {
@@ -98,7 +145,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
                 this.processingId = null;
             },
             error => {
-                this.errorMessage = <any>error;
+                this.errorMessage = error;
                 this.status = ProcessingStatus.None;
                 this.processingId = null;
             });
@@ -109,23 +156,27 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         if (!this.editing) { return; }
         this.status = ProcessingStatus.Saving;
         this.processingId = this.editing.id;
-        this.elmService.change(this.editing)
-            .subscribe(
-            element => {
-                for (let c of this.elements) {
-                    if (c.id === element.id) {
-                        this.elmService.copy(element, c);
-                    }
-                }
-                this.status = ProcessingStatus.None;
-                this.processingId = null;
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.status = ProcessingStatus.None;
-                this.processingId = null;
-            });
-        this.editing = null;
+        if (this.uploader.getNotUploadedItems().length > 0) {
+            this.uploader.uploadAll();
+        } else {
+            this.elmService.change(this.editing)
+                .subscribe(
+                    element => {
+                        for (let c of this.elements) {
+                            if (c.id === element.id) {
+                                this.elmService.copy(element, c);
+                            }
+                        }
+                        this.status = ProcessingStatus.None;
+                        this.processingId = null;
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.status = ProcessingStatus.None;
+                        this.processingId = null;
+                    });
+            this.editing = null;
+        }
     }
 
     startAdd() {
@@ -206,8 +257,12 @@ export abstract class AppService<TInteface extends IElement> {
             .catch(this.handleError);
     }
 
-    delete(element: TInteface): Observable<TInteface> {
-        return this.http.delete(this.serverUrl + "/" + element.id, this.options)
+    delete(element: TInteface, replacement: any): Observable<TInteface> {
+        var query = this.serverUrl + "/" + element.id;
+        if (replacement) {
+            query += "?replacementId=" + replacement;
+        }
+        return this.http.delete(query, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }

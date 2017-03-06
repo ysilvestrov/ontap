@@ -1,5 +1,5 @@
-import * as ng from '@angular/core';
-import { Http } from '@angular/http';
+import * as ng from "@angular/core";
+import { Http } from "@angular/http";
 import { List } from "../../modules/linq";
 import {IPub, ICity, Pub} from "../../models/ontap.models";
 import {EPubService} from "./epubs.service";
@@ -7,28 +7,21 @@ import { CityService } from "../cities/cities.service";
 import { LoginService } from "../login/login.service";
 import {AppComponent, AppService, ProcessingStatus} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
-import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
-import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
+import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
+import { FileSelectDirective, FileDropDirective, FileUploader } from "ng2-file-upload";
 import { Ng2BootstrapModule, AlertModule } from "ng2-bootstrap/ng2-bootstrap";
 
 
 @ng.Component({
-    selector: 'epubs',
+    selector: "epubs",
     providers: [EPubService, CityService],
-    styles: [require('./epubs.component.css')],
-  template: require('./epubs.component.html')
+    styles: [require("./epubs.component.css")],
+  template: require("./epubs.component.html")
 })
 export class EPubsComponent extends  AppComponent<IPub, EPubService> {
     public cities: ICity[];
     cloudinaryImage: any;
 
-    cloudinaryOptions: CloudinaryOptions = new CloudinaryOptions({
-        cloud_name: 'ontap-in-ua',
-        upload_preset: 'ontapInUa_pubs',
-        autoUpload: true
-    });
-
-    uploader: CloudinaryUploader = new CloudinaryUploader(this.cloudinaryOptions);
     successMessage: string;
     outputs: string[];
     importInProgress: boolean;
@@ -38,21 +31,11 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
         private cityService: CityService,
         public locale: LocaleService,
         public localization: LocalizationService) {
-        super(elmService, locale, localization);
+        super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
+            cloudName: "ontap-in-ua",
+            uploadPreset: "ontapInUa_pubs"
+        })));
         this.getCities();
-
-        //Override onSuccessItem function to record cloudinary response data
-        this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
-            //response is the cloudinary response
-            //see http://cloudinary.com/documentation/upload_images#upload_response
-            this.cloudinaryImage = JSON.parse(response);
-            if (this.editing)
-                this.editing.image = this.cloudinaryImage.public_id;
-            if (this.adding)
-                this.adding.image = this.cloudinaryImage.public_id;
-
-            return { item, response, status, headers };
-        };
     }
 
     startAdd() {
@@ -64,7 +47,7 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
         this.cityService.get()
             .subscribe(
             cities => this.cities = cities,
-            error => this.errorMessage = <any>error);
+            error => this.errorMessage = error);
     }
 
     onEditChangeCity(id) {
@@ -131,5 +114,4 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
         return this.loginService.currentUser &&
             this.loginService.currentUser.isAdmin;
     }
-
 }

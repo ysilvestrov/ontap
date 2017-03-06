@@ -13,12 +13,13 @@ namespace ontap.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
+                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Ontap.Models.Beer", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("Alcohol");
 
@@ -84,7 +85,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.Brewery", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
 
@@ -119,9 +121,27 @@ namespace ontap.Migrations
                     b.ToTable("BreweryAdmins");
                 });
 
+            modelBuilder.Entity("Ontap.Models.BrewerySubstitution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BreweryId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BreweryId");
+
+                    b.ToTable("BrewerySubstitutions");
+                });
+
             modelBuilder.Entity("Ontap.Models.City", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -133,7 +153,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.Country", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -144,7 +165,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.Pub", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
 
@@ -192,7 +214,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.User", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("CanAdminBrewery");
 
@@ -246,6 +269,14 @@ namespace ontap.Migrations
                     b.HasOne("Ontap.Models.User", "User")
                         .WithMany("BreweryAdmins")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Ontap.Models.BrewerySubstitution", b =>
+                {
+                    b.HasOne("Ontap.Models.Brewery", "Brewery")
+                        .WithMany("Substitutions")
+                        .HasForeignKey("BreweryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

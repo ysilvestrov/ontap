@@ -5,7 +5,7 @@ import {IPub, IBeer, IServe, Serve} from "../../models/ontap.models";
 import {EPubService} from "../epubs/epubs.service";
 import {BeerService} from "../beers/beers.service";
 import {ServeService} from "./serves.service";
-import {AppComponent, AppService} from "../../modules/appComponent";
+import {AppComponent, AppService, Options} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 @ng.Component({
@@ -17,7 +17,9 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
     public serves: IServe[];
     public pubs: IPub[];
     public beers: IBeer[];
-    public pub:IPub;
+    public pub: IPub;
+    public selectingPubs: Options[];
+    public selectingBeers: Options[];
 
     constructor(elmService: ServeService, private pubService: EPubService, private beerService: BeerService, public locale: LocaleService, public localization: LocalizationService) {
         super(elmService, locale, localization);
@@ -27,21 +29,34 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
 
     public startAdd() {
         super.startAdd();
-        this.adding.servedIn = new List(this.pubs).First();
+        if (this.pub) {
+            this.adding.servedIn = new List(this.pubs).First(p => p.id === this.pub.id);
+        } else {
+            this.adding.servedIn = new List(this.pubs).First();
+        }
         this.adding.served = new List(this.beers).First();
     }
 
     getPubs() {
         this.pubService.get()
             .subscribe(
-            pubs => this.pubs = pubs,
+            pubs => {
+                this.pubs = pubs;
+                this.selectingPubs = new List(this.pubs).OrderBy(p => p.name).Select(p => new Options(p.id, p.name))
+                    .ToArray();
+            },
             error => this.errorMessage = <any>error);
     }
 
     getBeers() {
         this.beerService.get()
             .subscribe(
-            beers => this.beers = beers,
+            beers => {
+                this.beers = beers;
+                this.selectingBeers = new List(this.beers).OrderBy(b => b.brewery.name).ThenBy(b => b.name)
+                    .Select(b => new Options(b.id, b.name + " (" + b.brewery.name + ")"))
+                    .ToArray();
+            },
             error => this.errorMessage = <any>error);
     }
 

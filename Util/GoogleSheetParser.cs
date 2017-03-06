@@ -33,7 +33,7 @@ namespace Ontap.Util
 
         public ICollection<BeerServedInPubs> Parse(Pub pub, 
             IEnumerable<Beer> enumBeers, IEnumerable<Brewery> enumBreweries, 
-            Dictionary<string, object> options, Country country, bool force = false)
+            Dictionary<string, object> options, Country country, bool force = false, IDictionary<string, Brewery> substitutions = null)
         {
             var result = new List<BeerServedInPubs>();
             var beers = new List<Beer>(enumBeers);
@@ -105,14 +105,14 @@ namespace Ontap.Util
                 return result;
 
 
-            result.AddRange(GetValue(values, pub, country, columns, targetVolume, priceMultiplicator, volume, beers, breweries));
+            result.AddRange(GetValue(values, pub, country, columns, targetVolume, priceMultiplicator, volume, beers, breweries, substitutions));
 
 
             return result;
         }
 
         private static IList<BeerServedInPubs> GetValue(IList<IList<object>> values, Pub pub, Country country, Dictionary<string, int> columns, decimal targetVolume,
-            decimal priceMultiplicator, decimal volume, List<Beer> beers, List<Brewery> breweries)
+            decimal priceMultiplicator, decimal volume, List<Beer> beers, List<Brewery> breweries, IDictionary<string, Brewery> substitutions)
         {
             var result = new List<BeerServedInPubs>();
 
@@ -162,8 +162,9 @@ namespace Ontap.Util
                                            b.Brewery?.Name.MakeSoundexKey() == soundexBreweryName);
                         if (beer == null)
                         {
-                            var brewery = breweries.FirstOrDefault(b => b.Name == breweryName) ??
-                                          breweries.FirstOrDefault(b => b.Name.MakeSoundexKey() == soundexBreweryName);
+                            var brewery = breweries.FirstOrDefault(b => b.Name == breweryName) 
+                                ?? (substitutions != null && substitutions.ContainsKey(breweryName) ? substitutions[breweryName] : null) 
+                                ?? breweries.FirstOrDefault(b => b.Name.MakeSoundexKey() == soundexBreweryName);
                             if (brewery == null)
                             {
                                 brewery = new Brewery

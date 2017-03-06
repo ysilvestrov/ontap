@@ -29,6 +29,7 @@
                 <button (click)="edit(brewery.id)" type="button" class="btn btn-default" aria-label="Edit">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
+                <span class="badge" *ngIf="breweryCounts[brewery.id]">{{ breweryCounts[brewery.id] }} <i class="fa fa-beer" aria-hidden="true"></i></span>
             </div>
         </div>
         <div *ngIf="editing && (editing.id == brewery.id)">
@@ -53,7 +54,7 @@
                         <span class="fa fa-floppy-o fa-lg" aria-hidden="true" *ngIf="!isSaving(editing.id)"></span>
                         <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isSaving(editing.id)"></span>
                     </button>
-                    <button (click)="delete()" type="button" class="btn btn-default" aria-label="Delete">
+                    <button (click)="startDelete()" type="button" class="btn btn-default" aria-label="Delete">
                         <span class="fa fa-trash-o fa-lg" aria-hidden="true" *ngIf="!isDeleting(editing.id)"></span>
                         <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isDeleting(editing.id)"></span>
                     </button>
@@ -64,7 +65,7 @@
             </div>
             <div class="row edit2">
                 <div class="col-md-1">
-                    <cl-image public-id="{{editing.image}}" [options]="cloudinaryOptions" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
+                    <cl-image public-id="{{editing.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
                 </div>
                 <div class="col-md-4">
                     <input type="file" ng2FileSelect [uploader]="uploader" />
@@ -101,7 +102,7 @@
         </div>
         <div class="row edit2">
             <div class="col-md-1">
-                <cl-image public-id="{{adding.image}}" [options]="cloudinaryOptions" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
+                <cl-image public-id="{{adding.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
             </div>
             <div class="col-md-4">
                 <input type="file" ng2FileSelect [uploader]="uploader" />

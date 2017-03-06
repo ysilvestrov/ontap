@@ -30,8 +30,8 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
     public subscription: Subscription;
 
     cloudinaryOptions: CloudinaryOptions = new CloudinaryOptions({
-        cloud_name: 'ontap-in-ua',
-        upload_preset: 'ontapInUa_pubs',
+        cloudName: 'ontap-in-ua',
+        uploadPreset: 'ontapInUa_pubs',
         autoUpload: true
     });
 

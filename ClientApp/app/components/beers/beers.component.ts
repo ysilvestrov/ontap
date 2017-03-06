@@ -22,36 +22,17 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
     public breweries: IBrewery[];
     public allBeers: IBeer[];
     public brewery: IBrewery;
-    cloudinaryImage: any;
-
-    cloudinaryOptions: CloudinaryOptions = new CloudinaryOptions({
-        cloud_name: 'ontap-in-ua',
-        upload_preset: 'ontapInUa_pubs',
-        autoUpload: true
-    });
-
-    uploader: CloudinaryUploader = new CloudinaryUploader(this.cloudinaryOptions);
 
     constructor(elmService: BeerService, private breweryService: BreweryService, public locale: LocaleService, public localization: LocalizationService) {
-        super(elmService, locale, localization);
+        super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
+            cloudName: 'ontap-in-ua',
+            uploadPreset: 'ontapInUa_pubs'
+        })));
         this.getBreweries();
         if (this.elements) {
             this.onElementsLoad(this.elements);
         }
         this.onLoad.subscribe((s: BeersComponent, elements: IBeer[]) => { this.onElementsLoad(elements) });
-
-        //Override onSuccessItem function to record cloudinary response data
-        this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
-            //response is the cloudinary response
-            //see http://cloudinary.com/documentation/upload_images#upload_response
-            this.cloudinaryImage = JSON.parse(response);
-            if (this.editing)
-                this.editing.image = this.cloudinaryImage.public_id;
-            if (this.adding)
-                this.adding.image = this.cloudinaryImage.public_id;
-
-            return { item, response, status, headers };
-        };
     }
 
     onElementsLoad(elements: IBeer[]) {

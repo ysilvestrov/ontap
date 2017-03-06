@@ -18,5 +18,8 @@ namespace Ontap.Models
         public virtual IList<Beer> Beers { get; set; }
         public ICollection<BreweryAdmin> Admins { get; set; }
         public string Image { get; set; }
+        [IgnoreDataMember]
+        [JsonIgnore]
+        public ICollection<BrewerySubstitution> Substitutions { get; set; }
     }
 }

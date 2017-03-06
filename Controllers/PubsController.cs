@@ -92,7 +92,7 @@ namespace Ontap.Controllers
             var parser = new GoogleSheetParser();
             var serves = parser
                 .Parse(pub, _context.Beers, _context.Breweries, options,
-                    _context.Countries.First(c => c.Id == "UA"), force: true)
+                    _context.Countries.First(c => c.Id == "UA"), force: true, substitutions: _context.BrewerySubstitutions.ToDictionary(s => s.Name, s=> s.Brewery))
                 .Where(s => s.Served?.Brewery != null).ToArray();
             string result = "";
             if (serves.Length <= 0) return result;
@@ -131,7 +131,7 @@ namespace Ontap.Controllers
                 var options = JsonConvert.DeserializeObject<Dictionary<string, object>>(pub.ParserOptions);
                 var serves = parser
                     .Parse(pub, _context.Beers, _context.Breweries, options,
-                        _context.Countries.First(c => c.Id == "UA"), force: false)
+                        _context.Countries.First(c => c.Id == "UA"), force: false, substitutions: _context.BrewerySubstitutions.ToDictionary(s => s.Name, s => s.Brewery))
                     .Where(s => s.Served?.Brewery != null).ToArray();
 
                 if (serves.Length == 0) continue;

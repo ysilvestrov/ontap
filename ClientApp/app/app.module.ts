@@ -17,10 +17,13 @@ import { LocaleComponent } from "./components/locale/locale.component";
 import { PubAdminsComponent } from "./components/pubadmins/pubadmins.component";
 import { BreweryAdminsComponent } from "./components/breweryadmins/breweryadmins.component";
 import { HomeComponent } from "./components/home/home.component";
+import { SelectorComponent } from "./components/selector/selector.component";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule, AlertModule  } from "ng2-bootstrap/ng2-bootstrap";
 import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
-import { FileSelectDirective } from 'ng2-file-upload';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { FileUploadModule } from 'ng2-file-upload';
+import { SelectModule } from 'angular2-select';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 /**
  * Advanced initialization.
@@ -94,16 +97,19 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         PubAdminsComponent,
         BreweryAdminsComponent,
         UsersComponent,
+        SelectorComponent,
         LocaleComponent,
         SortByTap,
-        FileSelectDirective,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
         TooltipModule,
         AlertModule, 
+        BootstrapModalModule,
         Ng2CloudinaryModule,
+        FileUploadModule,
+        SelectModule,
         LocaleModule.forRoot(), // New instance of LocaleService.
         LocalizationModule.forRoot(), // New instance of LocalizationService
         RouterModule.forRoot([
@@ -120,6 +126,9 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
             { path: "brewery-admins", component: BreweryAdminsComponent },
             { path: "**", redirectTo: "home" }
         ])
+    ],
+    entryComponents: [
+        SelectorComponent
     ],
     providers: [
         LocalizationConfig,

@@ -72,14 +72,25 @@ namespace Ontap.Controllers
         // DELETE api/values/5
         [HttpDelete("{id}")]
         [Authorize(Policy = "AdminUser")]
-        public async Task Delete(string id)
+        public async Task<Brewery> Delete(string id, [FromQuery] string replacementId)
         {
             if (Breweries.All(c => c.Id != id))
                 throw new KeyNotFoundException($"No brewery with id {id}");
-            if(_context.Beers.Any(b => b.Brewery.Id == id))
+            var current = _context.Breweries.First(c => c.Id == id);
+            if (!string.IsNullOrWhiteSpace(replacementId) && Breweries.Any(c => c.Id == replacementId))
+            {
+                var replacement = _context.Breweries.First(b => b.Id == replacementId);
+                _context.BrewerySubstitutions.Add(new BrewerySubstitution { Brewery = replacement, Name = current.Name });
+                var beers = _context.Beers.Where(b => b.Brewery.Id == id);
+                foreach (var beer in beers)
+                {
+                    beer.Brewery = replacement;
+                }
+            } else if (_context.Beers.Any(b => b.Brewery.Id == id))
                 throw new AlreadyExistsException("Cannot delete brewery with beers");
-            _context.Breweries.Remove(_context.Breweries.First(c => c.Id == id));
+            _context.Breweries.Remove(current);
             await _context.SaveChangesAsync();
+            return current;
         }
     }
 }

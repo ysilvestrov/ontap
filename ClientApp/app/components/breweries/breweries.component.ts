@@ -1,50 +1,41 @@
-import * as ng from '@angular/core';
-import { Http } from '@angular/http';
+import * as ng from "@angular/core";
+import { Http } from "@angular/http";
 import { List } from "../../modules/linq";
-import {IBrewery, Brewery , ICountry} from "../../models/ontap.models";
+import {IBrewery, Brewery, ICountry, IBeer} from "../../models/ontap.models";
 import {BreweryService} from "./breweries.service";
 import {CountryService} from "../countries/countries.service";
-import {AppComponent, AppService} from "../../modules/appComponent";
+import {BeerService} from "../beers/beers.service";
+import {SelectorComponent} from "../selector/selector.component";
+import {AppComponent, AppService, Options} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
-import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
-import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
+import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
+import { FileSelectDirective, FileDropDirective, FileUploader } from "ng2-file-upload";
+import { DialogService } from "ng2-bootstrap-modal";
 
 @ng.Component({
-    selector: 'breweries',
-    providers: [BreweryService, CountryService],
-    styles: [require('./breweries.component.css')],
-    template: require('./breweries.component.html')
+    selector: "breweries",
+    providers: [BreweryService, CountryService, BeerService],
+    styles: [require("./breweries.component.css")],
+    template: require("./breweries.component.html")
 })
 export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
 
     public countries: ICountry[];
+    public beers: IBeer[];
+    public breweryCounts = {};
 
-    cloudinaryImage: any;
-
-    cloudinaryOptions: CloudinaryOptions = new CloudinaryOptions({
-        cloud_name: 'ontap-in-ua',
-        upload_preset: 'ontapInUa_breweries',
-        autoUpload: true
-    });
-
-    uploader: CloudinaryUploader = new CloudinaryUploader(this.cloudinaryOptions);
-
-    constructor(elmService: BreweryService, private countryService: CountryService, public locale: LocaleService, public localization: LocalizationService) {
-        super(elmService, locale, localization);
+    constructor(elmService: BreweryService,
+        private dialogService: DialogService,
+        private countryService: CountryService,
+        private beerService: BeerService,
+        public locale: LocaleService,
+        public localization: LocalizationService) {
+        super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
+            cloudName: "ontap-in-ua",
+            uploadPreset: "ontapInUa_breweries"
+        })));
         this.getCountries();
-
-        //Override onSuccessItem function to record cloudinary response data
-        this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
-            //response is the cloudinary response
-            //see http://cloudinary.com/documentation/upload_images#upload_response
-            this.cloudinaryImage = JSON.parse(response);
-            if (this.editing)
-                this.editing.image = this.cloudinaryImage.public_id;
-            if (this.adding)
-                this.adding.image = this.cloudinaryImage.public_id;
-
-            return { item, response, status, headers };
-        };
+        this.getBeers();
     }
 
     startAdd() {
@@ -56,7 +47,24 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
         this.countryService.get()
             .subscribe(
             countries => this.countries = countries,
-            error => this.errorMessage = <any>error);
+            error => this.errorMessage = error);
+    }
+
+    getBeers() {
+        this.beerService.get()
+            .subscribe(
+            beers => {
+                this.beers = beers;
+                this.breweryCounts = new List(beers)
+                    .Aggregate((ac, b: IBeer) => {
+                        ac[b.brewery.id]
+                            ? ac[b.brewery.id] += 1
+                            : ac[b.brewery.id] = 1;
+                        return ac;
+                    }, {});
+                this.get();
+            },
+            error => this.errorMessage = error);
     }
 
     onEditChangeCountry(id) {
@@ -70,5 +78,31 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
     onChangeCountry(obj: IBrewery, id: string) {
         obj.country = new List(this.countries).Where(c => c.id === id).First();
     }
-
+    startDelete() {
+        if (!this.editing)
+            return;
+        if (this.breweryCounts[this.editing.id]) {
+            let disposable = this.dialogService.addDialog(SelectorComponent, {
+                title: 'Заменить на',
+                message: 'У выбранной пивоварни есть сорта пива. Выберите замену:',
+                options: new List(this.elements).Where(b => b.id !== this.editing.id).OrderBy(b => b.name).Select(b => new Options(b.id, b.name)).ToArray()
+            })
+                .subscribe((replacement) => {
+                    //We get dialog result
+                    if (replacement) {
+                        super.delete(replacement);
+                    }
+                    else {
+                        return;
+                    }
+                });
+            //We can close dialog calling disposable.unsubscribe();
+            //If dialog was not closed manually close it by timeout
+            setTimeout(() => {
+                disposable.unsubscribe();
+            }, 10000);
+        } else {
+            super.delete();
+        }
+    }
 }
