@@ -16,8 +16,9 @@ RUN ["dotnet", "build"]
 RUN ["node", "-v"]
 RUN ["npm", "-v"]
 RUN ["npm", "install"]
-CMD ["webpack", "--config.webpack.config.vendor.js", "--env.prod"]
-RUN ["node", "node_modules/webpack/bin/webpack.js", "--env.prod"]
+RUN ["npm", "install"]
+RUN ["node_modules/.bin/webpack", "--config webpack.config.vendor.js", "--env.prod"]
+RUN ["node_modules/.bin/webpack", "--env.prod"]
 
 EXPOSE 80/tcp
 
