@@ -9,7 +9,7 @@
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
     "webpack-cfg": "webpack --config webpack.config.vendor.js --env.prod",
-    "webpack": "--env.prod"
+    "webpack": "webpack --env.prod"
   },
   "dependencies": {
     "@angular/common": "^2.4.5",
