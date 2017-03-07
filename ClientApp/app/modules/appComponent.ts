@@ -1,8 +1,8 @@
-﻿import { Injectable }     from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import Linq = require("./linq");
 import Ontapmodels = require("../models/ontap.models");
 import IElement = Ontapmodels.IElement;
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import './rxjs.operators.ts';
 import {IStronglyTypedEvents, EventDispatcher, IEvent} from './StronglyTypedEvents';
@@ -84,7 +84,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
             .subscribe(
             elements => {
                 this.elements = elements;
-                this.signal(elements);
+                this.onLoadSignal(elements);
                 this.status = ProcessingStatus.None;
             },
             error => {
@@ -141,6 +141,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
                         }
                     }
                 }
+                this.onDeleteSignal(element, replacement);
                 this.status = ProcessingStatus.None;
                 this.processingId = null;
             },
@@ -189,9 +190,21 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         return this._load.asEvent();
     }
 
-    public signal(elements: TInterface[]) {
+    public onLoadSignal(elements: TInterface[]) {
         if (elements) {
             this._load.dispatch(this, elements);
+        }
+    }
+
+    private _delete = new EventDispatcher<AppComponent<TInterface, TService>, [TInterface, any]>();
+
+    public get onDelete(): IEvent<AppComponent<TInterface, TService>, [TInterface, any]> {
+        return this._delete.asEvent();
+    }
+
+    public onDeleteSignal(element: TInterface, replacement: any) {
+        if (element) {
+            this._delete.dispatch(this, [element, replacement]);
         }
     }
 
@@ -259,10 +272,13 @@ export abstract class AppService<TInteface extends IElement> {
 
     delete(element: TInteface, replacement: any): Observable<TInteface> {
         var query = this.serverUrl + "/" + element.id;
+        let options = this.options;
         if (replacement) {
-            query += "?replacementId=" + replacement;
+            let params: URLSearchParams = new URLSearchParams();
+            params.set('replacementId', replacement);
+            options.search = params;
         }
-        return this.http.delete(query, this.options)
+        return this.http.delete(query, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

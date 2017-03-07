@@ -29,13 +29,15 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
         private countryService: CountryService,
         private beerService: BeerService,
         public locale: LocaleService,
-        public localization: LocalizationService) {
+        public localization: LocalizationService)
+    {
         super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
             cloudName: "ontap-in-ua",
             uploadPreset: "ontapInUa_breweries"
         })));
         this.getCountries();
         this.getBeers();
+        this.onDelete.subscribe((s: BreweriesComponent, res: [IBrewery, any]) => { this.onElementDeleted(res[0], res[1]) });
     }
 
     startAdd() {
@@ -84,7 +86,7 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
         if (this.breweryCounts[this.editing.id]) {
             let disposable = this.dialogService.addDialog(SelectorComponent, {
                 title: 'Заменить на',
-                message: 'У выбранной пивоварни есть сорта пива. Выберите замену:',
+                message: 'У выбранной пивоварни есть ' + this.breweryCounts[this.editing.id] +' сортов пива. Выберите замену:',
                 options: new List(this.elements).Where(b => b.id !== this.editing.id).OrderBy(b => b.name).Select(b => new Options(b.id, b.name)).ToArray()
             })
                 .subscribe((replacement) => {
@@ -98,11 +100,17 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
                 });
             //We can close dialog calling disposable.unsubscribe();
             //If dialog was not closed manually close it by timeout
-            setTimeout(() => {
-                disposable.unsubscribe();
-            }, 10000);
+            //setTimeout(() => {
+            //    disposable.unsubscribe();
+            //}, 10000);
         } else {
             super.delete();
         }
+    }
+
+    onElementDeleted(deleted: IBrewery, replacement: any) {
+        if (replacement) {
+            this.breweryCounts[replacement] = (this.breweryCounts[replacement] || 0) + this.breweryCounts[deleted.id];
+        }                
     }
 }

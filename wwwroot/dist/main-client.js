@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "388b7d5d77e0edea7e79"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b56b46bd60a55b2d8cff"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -5101,6 +5101,7 @@ var AppComponent = (function (_super) {
         _this.uploader = uploader;
         _this.status = ProcessingStatus.None;
         _this._load = new StronglyTypedEvents_1.EventDispatcher();
+        _this._delete = new StronglyTypedEvents_1.EventDispatcher();
         _this.isBrowser = typeof (document) != "undefined";
         _this.get();
         if (_this.uploader) {
@@ -5138,7 +5139,7 @@ var AppComponent = (function (_super) {
         this.elmService.get()
             .subscribe(function (elements) {
             _this.elements = elements;
-            _this.signal(elements);
+            _this.onLoadSignal(elements);
             _this.status = ProcessingStatus.None;
         }, function (error) {
             _this.errorMessage = error;
@@ -5196,6 +5197,7 @@ var AppComponent = (function (_super) {
                     }
                 }
             }
+            _this.onDeleteSignal(element, replacement);
             _this.status = ProcessingStatus.None;
             _this.processingId = null;
         }, function (error) {
@@ -5244,9 +5246,21 @@ var AppComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    AppComponent.prototype.signal = function (elements) {
+    AppComponent.prototype.onLoadSignal = function (elements) {
         if (elements) {
             this._load.dispatch(this, elements);
+        }
+    };
+    Object.defineProperty(AppComponent.prototype, "onDelete", {
+        get: function () {
+            return this._delete.asEvent();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AppComponent.prototype.onDeleteSignal = function (element, replacement) {
+        if (element) {
+            this._delete.dispatch(this, [element, replacement]);
         }
     };
     AppComponent.prototype.isImporting = function (id) {
@@ -5312,10 +5326,13 @@ var AppService = (function () {
     };
     AppService.prototype.delete = function (element, replacement) {
         var query = this.serverUrl + "/" + element.id;
+        var options = this.options;
         if (replacement) {
-            query += "?replacementId=" + replacement;
+            var params = new http_1.URLSearchParams();
+            params.set('replacementId', replacement);
+            options.search = params;
         }
-        return this.http.delete(query, this.options)
+        return this.http.delete(query, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -37914,6 +37931,7 @@ var BreweriesComponent = (function (_super) {
         _this.breweryCounts = {};
         _this.getCountries();
         _this.getBeers();
+        _this.onDelete.subscribe(function (s, res) { _this.onElementDeleted(res[0], res[1]); });
         return _this;
     }
     BreweriesComponent.prototype.startAdd = function () {
@@ -37954,9 +37972,9 @@ var BreweriesComponent = (function (_super) {
         if (!this.editing)
             return;
         if (this.breweryCounts[this.editing.id]) {
-            var disposable_1 = this.dialogService.addDialog(selector_component_1.SelectorComponent, {
+            var disposable = this.dialogService.addDialog(selector_component_1.SelectorComponent, {
                 title: 'Заменить на',
-                message: 'У выбранной пивоварни есть сорта пива. Выберите замену:',
+                message: 'У выбранной пивоварни есть ' + this.breweryCounts[this.editing.id] + ' сортов пива. Выберите замену:',
                 options: new linq_1.List(this.elements).Where(function (b) { return b.id !== _this.editing.id; }).OrderBy(function (b) { return b.name; }).Select(function (b) { return new appComponent_1.Options(b.id, b.name); }).ToArray()
             })
                 .subscribe(function (replacement) {
@@ -37968,14 +37986,14 @@ var BreweriesComponent = (function (_super) {
                     return;
                 }
             });
-            //We can close dialog calling disposable.unsubscribe();
-            //If dialog was not closed manually close it by timeout
-            setTimeout(function () {
-                disposable_1.unsubscribe();
-            }, 10000);
         }
         else {
             _super.prototype.delete.call(this);
+        }
+    };
+    BreweriesComponent.prototype.onElementDeleted = function (deleted, replacement) {
+        if (replacement) {
+            this.breweryCounts[replacement] = (this.breweryCounts[replacement] || 0) + this.breweryCounts[deleted.id];
         }
     };
     return BreweriesComponent;
