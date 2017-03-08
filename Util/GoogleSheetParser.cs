@@ -97,7 +97,7 @@ namespace Ontap.Util
             var time = driveRequest.Execute().ModifiedTime;
             var lastUpdated = pub.BeerServedInPubs.Count > 0 ? pub.BeerServedInPubs.Max(b => b.Updated) : DateTime.MinValue;
 
-            if (time < lastUpdated && !force)
+            if (time <= lastUpdated && !force)
                 return result;
 
             IList<IList<object>> values = request.Execute().Values;
@@ -105,14 +105,14 @@ namespace Ontap.Util
                 return result;
 
 
-            result.AddRange(GetValue(values, pub, country, columns, targetVolume, priceMultiplicator, volume, beers, breweries, substitutions));
+            result.AddRange(GetValue(values, pub, country, columns, targetVolume, priceMultiplicator, volume, beers, breweries, substitutions, time.HasValue && lastUpdated < time ? time.Value : lastUpdated));
 
 
             return result;
         }
 
         private static IList<BeerServedInPubs> GetValue(IList<IList<object>> values, Pub pub, Country country, Dictionary<string, int> columns, decimal targetVolume,
-            decimal priceMultiplicator, decimal volume, List<Beer> beers, List<Brewery> breweries, IDictionary<string, Brewery> substitutions)
+            decimal priceMultiplicator, decimal volume, List<Beer> beers, List<Brewery> breweries, IDictionary<string, Brewery> substitutions, DateTime updateTime)
         {
             var result = new List<BeerServedInPubs>();
 
@@ -122,7 +122,7 @@ namespace Ontap.Util
                 {
                     ServedIn = pub,
                     Volume = targetVolume,
-                    Updated = DateTime.Now,
+                    Updated = updateTime.ToUniversalTime(),
                 };
                 if (columns.Keys.Contains("tap") && columns["tap"] < row.Count)
                 {

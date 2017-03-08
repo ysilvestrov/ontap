@@ -5,7 +5,7 @@ import { List } from "../../modules/linq";
 import {IBeer, Beer, IBrewery} from "../../models/ontap.models";
 import {BeerService} from "./beers.service";
 import {BreweryService} from "../breweries/breweries.service";
-import {AppComponent, AppService} from "../../modules/appComponent";
+import {AppComponent, AppService, Options} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
@@ -22,6 +22,7 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
     public breweries: IBrewery[];
     public allBeers: IBeer[];
     public brewery: IBrewery;
+    public selectingBreweries: Options[];
 
     constructor(elmService: BeerService, private breweryService: BreweryService, public locale: LocaleService, public localization: LocalizationService) {
         super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
@@ -57,7 +58,7 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
 
     startAdd() {
         super.startAdd();
-        this.adding.brewery = new List(this.breweries).First();
+        this.adding.brewery = this.brewery || new List(this.breweries).First();
     }
 
     getBreweries() {
@@ -65,6 +66,8 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
             .subscribe(
             breweries => {
                 this.breweries = new List(breweries).OrderBy((_: IBrewery) => _.name).ToArray();
+                this.selectingBreweries = new List(this.breweries).OrderBy(b => b.name).Select(b => new Options(b.id, b.name))
+                    .ToArray();
             },
             error => this.errorMessage = <any>error);
     }

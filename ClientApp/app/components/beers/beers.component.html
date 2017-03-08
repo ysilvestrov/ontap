@@ -57,9 +57,10 @@
                            [(ngModel)]="editing.name" name="name">
                 </div>
                 <div class="col-md-2">
-                    <select class="form-control" [(ngModel)]="editing.brewery.id" (change)="onEditChangeBrewery($event.target.value)">
-                        <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
-                    </select>
+                    <ng-select [options]="selectingBreweries"
+                               [multiple]="false"
+                               [(ngModel)]="editing.brewery.id">
+                    </ng-select>
                 </div>
                 <div class="col-md-3">
                     <textarea class="form-control" id="editing.description"
@@ -114,9 +115,10 @@
                        [(ngModel)]="adding.name" name="name">
             </div>
             <div class="col-md-2">
-                <select class="form-control" [(ngModel)]="adding.brewery.id" (change)="onAddChangeBrewery($event.target.value)">
-                    <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
-                </select>
+                <ng-select [options]="selectingBreweries"
+                           [multiple]="false"
+                           [(ngModel)]="adding.brewery.id">
+                </ng-select>
             </div>
             <div class="col-md-3">
                 <textarea class="form-control" id="adding.description"

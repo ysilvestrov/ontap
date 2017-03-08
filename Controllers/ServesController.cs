@@ -66,7 +66,7 @@ namespace Ontap.Controllers
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
             }
-            current.Updated = DateTime.Now;
+            current.Updated = DateTime.Now.ToUniversalTime();
             _context.BeerServedInPubs.Add(current);
             await _context.SaveChangesAsync();
             return serve;

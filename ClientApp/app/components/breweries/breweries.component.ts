@@ -23,6 +23,7 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
     public countries: ICountry[];
     public beers: IBeer[];
     public breweryCounts = {};
+    public selectingCountries: Options[];
 
     constructor(elmService: BreweryService,
         private dialogService: DialogService,
@@ -48,7 +49,11 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
     getCountries() {
         this.countryService.get()
             .subscribe(
-            countries => this.countries = countries,
+            countries => {
+                this.countries = countries;
+                this.selectingCountries = new List(this.countries).OrderBy(p => p.name).Select(p => new Options(p.id, p.name))
+                    .ToArray();
+            },
             error => this.errorMessage = error);
     }
 
@@ -69,17 +74,6 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
             error => this.errorMessage = error);
     }
 
-    onEditChangeCountry(id) {
-        this.onChangeCountry(this.editing, id);
-    }
-
-    onAddChangeCountry(id) {
-        this.onChangeCountry(this.adding, id);
-    }
-
-    onChangeCountry(obj: IBrewery, id: string) {
-        obj.country = new List(this.countries).Where(c => c.id === id).First();
-    }
     startDelete() {
         if (!this.editing)
             return;

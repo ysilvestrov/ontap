@@ -97,7 +97,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         if (!this.adding) { return; }
         this.status = ProcessingStatus.Adding;
         this.processingId = this.adding.id;
-        if (this.uploader.getNotUploadedItems().length > 0) {
+        if (this.uploader && this.uploader.getNotUploadedItems().length > 0) {
             this.uploader.uploadAll();
         } else {
             this.elmService.add(this.adding)
@@ -157,7 +157,7 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         if (!this.editing) { return; }
         this.status = ProcessingStatus.Saving;
         this.processingId = this.editing.id;
-        if (this.uploader.getNotUploadedItems().length > 0) {
+        if (this.uploader && this.uploader.getNotUploadedItems().length > 0) {
             this.uploader.uploadAll();
         } else {
             this.elmService.change(this.editing)

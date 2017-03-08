@@ -40,9 +40,10 @@
                            [(ngModel)]="editing.name" name="name">
                 </div>
                 <div class="col-md-2">
-                    <select class="form-control" [(ngModel)]="editing.country.id" (change)="onEditChangeCountry($event.target.value)">
-                        <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
-                    </select>
+                    <ng-select [options]="selectingCountries"
+                               [multiple]="false"
+                               [(ngModel)]="editing.country.id">
+                    </ng-select>
                 </div>
                 <div class="col-md-5">
                     <input type="text" class="form-control" id="editing.address"
@@ -82,9 +83,10 @@
                        [(ngModel)]="adding.name" name="name">
             </div>
             <div class="col-md-2">
-                <select class="form-control" [(ngModel)]="adding.country.id" (change)="onAddChangeCountry($event.target.value)">
-                    <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
-                </select>
+                <ng-select [options]="selectingCountries"
+                           [multiple]="false"
+                           [(ngModel)]="adding.country.id">
+                </ng-select>
             </div>
             <div class="col-md-5">
                 <input type="text" class="form-control" id="adding.address"

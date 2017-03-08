@@ -88,7 +88,7 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
    public recalcDates() {
        var allDates = new List(this.allPubs).Select(p => [p.id, new List(p.serves).Select(s => s.updated).Max()]);
        var selectedDates = allDates.Where(t => typeof (t[1]) != "undefined" && t[1] && moment(t[1]).diff(moment().subtract(1, "year")) > 0);
-       this.pubUpdates = selectedDates.ToDictionary(t => t[0], t => moment(t[1]).calendar());          
+       this.pubUpdates = selectedDates.ToDictionary(t => t[0], t => moment.utc(t[1]).local().calendar());          
    }
 
     public setCity(name) {
