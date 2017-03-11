@@ -20,7 +20,7 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="breweryChooser">
         <li><a (click)="setBrewery('')">*</a></li>
-        <li *ngFor="let brewery of breweries"><a (click)="setBrewery(brewery.name)">{{ brewery.name }}</a></li>
+        <li *ngFor="let brewery of selectingBreweries"><a (click)="setBrewery(brewery.value)">{{ brewery.label }}</a></li>
     </ul>
 </div>
 

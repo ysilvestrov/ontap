@@ -162,9 +162,13 @@ namespace Ontap.Util
                                            b.Brewery?.Name.MakeSoundexKey() == soundexBreweryName);
                         if (beer == null)
                         {
-                            var brewery = breweries.FirstOrDefault(b => b.Name == breweryName) 
-                                ?? (substitutions != null && substitutions.ContainsKey(breweryName) ? substitutions[breweryName] : null) 
-                                ?? breweries.FirstOrDefault(b => b.Name.MakeSoundexKey() == soundexBreweryName);
+                            var brewery = breweries.FirstOrDefault(b => b.Name == breweryName)
+                                          ??
+                                          (substitutions != null && substitutions.ContainsKey(breweryName)
+                                              ? substitutions[breweryName]
+                                              : null)
+                                          ??
+                                          breweries.FirstOrDefault(b => b.Name.MakeSoundexKey() == soundexBreweryName);
                             if (brewery == null)
                             {
                                 brewery = new Brewery
@@ -206,6 +210,13 @@ namespace Ontap.Util
                                 beer.Description = row[columns["description"]].ToString();
                             }
                             beers.AddRange(new[] {beer});
+                        }
+                        else
+                        {
+                            if (columns.ContainsKey("description") && columns["description"] < row.Count && (string.IsNullOrWhiteSpace(beer.Description) || beer.Description.Length < row[columns["description"]].ToString().Length))
+                            {
+                                beer.Description = row[columns["description"]].ToString();
+                            }
                         }
                         serve.Served = beer;
                     }

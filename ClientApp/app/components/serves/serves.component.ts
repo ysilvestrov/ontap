@@ -35,6 +35,12 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
             this.adding.servedIn = new List(this.pubs).First();
         }
         this.adding.served = new List(this.beers).First();
+        this.adding.tap = (new List(this.elements).Select(s => s.tap).Max() || 0) + 1;
+        if (this.elements.length > 0) {
+            var last = new List(this.elements).Last();
+            this.adding.volume = last.volume;
+            this.adding.price = last.price;
+        }
     }
 
     getPubs() {

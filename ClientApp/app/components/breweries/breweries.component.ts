@@ -36,9 +36,14 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
             cloudName: "ontap-in-ua",
             uploadPreset: "ontapInUa_breweries"
         })));
+        this.onLoad.subscribe((s: BreweriesComponent, elements: IBrewery[]) => { this.onElementsLoad(elements) });
         this.getCountries();
         this.getBeers();
         this.onDelete.subscribe((s: BreweriesComponent, res: [IBrewery, any]) => { this.onElementDeleted(res[0], res[1]) });
+    }
+
+    onElementsLoad(elements: IBrewery[]) {
+        this.elements = new List(elements).OrderBy(b => b.name).ToArray();
     }
 
     startAdd() {

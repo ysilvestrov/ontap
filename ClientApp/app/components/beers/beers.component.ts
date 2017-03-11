@@ -42,11 +42,11 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
         this.setBrewery("");
     }
 
-    public setBrewery(name) {
+    public setBrewery(id) {
         this.brewery = new List(this.breweries)
-            .Where((brewery) => brewery.name === name)
+            .Where((brewery) => brewery.id === id)
             .First();
-        this.elements = (name === "") ?
+        this.elements = (id === "") ?
             new List(this.allBeers)
                 .OrderBy((beer: IBeer) => beer.brewery.name)
                 .ToArray() :
