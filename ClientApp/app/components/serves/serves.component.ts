@@ -99,7 +99,7 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
             .First();
         this.elements = (name === "") ? this.serves :
             new List(this.serves)
-                .Where((serve) => serve.servedIn.name === this.pub.name).OrderBy((serve) => serve.tap)
+                .Where((serve) => serve.servedIn.id === this.pub.id).OrderBy((serve) => serve.tap)
                 .ToArray();
     }
 }

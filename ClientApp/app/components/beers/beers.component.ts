@@ -59,6 +59,11 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
     startAdd() {
         super.startAdd();
         this.adding.brewery = this.brewery || new List(this.breweries).First();
+        this.adding.name = '';
+        this.adding.description = '';
+        this.adding.alcohol = 5;
+        this.adding.gravity = 0;
+        this.adding.ibu = 0;
     }
 
     getBreweries() {

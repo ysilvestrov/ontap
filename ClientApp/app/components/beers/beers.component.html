@@ -154,7 +154,7 @@
             <div class="col-md-8">&nbsp;
             </div>
             <div class="col-md-4">
-                <div class="pull-left" style="margin-right: 20px;">
+                <div class="pull-left" style="margin-right: 20px;" *ngIf="adding.image">
                     <cl-image public-id="{{adding.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
                 </div>
                 <input type="file" ng2FileSelect [uploader]="uploader" />

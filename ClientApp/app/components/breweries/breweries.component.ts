@@ -48,7 +48,7 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
 
     startAdd() {
         super.startAdd();
-        this.adding.country = new List(this.countries).First();
+        this.adding.country = new List(this.countries).First(c => c.id === 'UA');
     }
 
     getCountries() {

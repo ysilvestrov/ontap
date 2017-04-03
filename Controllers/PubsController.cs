@@ -35,12 +35,13 @@ namespace Ontap.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IEnumerable<Pub> Pubs => _context.Pubs
+        private IEnumerable<Pub> Pubs => _context.Pubs
             .Include(p => p.City)
             .Include(p => p.BeerServedInPubs)
             .ThenInclude(s => s.Served)
             .ThenInclude(b => b.Brewery)
-            .ThenInclude(b=>b.Country)
+            .ThenInclude(b => b.Country)
+            .OrderBy(p => p.Name)
             .ToArray();
 
 
@@ -67,8 +68,10 @@ namespace Ontap.Controllers
         [Authorize(Policy = "AdminUser")]
         public async Task<Pub> Post([FromBody] Pub pub)
         {
-            pub.Id = Utilities.CreateId(pub.Name, i => Pubs.Any(c => c.Id == i));
-            _context.Pubs.Add(pub);
+            var current = pub;
+            current.Id = Utilities.CreateId(pub.Name, i => Pubs.Any(c => c.Id == i));
+            current.City = _context.Cities.First(c => c.Id == pub.City.Id);
+            _context.Pubs.Add(current);
             await _context.SaveChangesAsync();
             return await _context.Pubs.FirstAsync(p => p.Id == pub.Id);
         }
