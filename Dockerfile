@@ -12,6 +12,7 @@ COPY . /app
 RUN ["dotnet", "restore"]
 RUN ["dotnet", "build"]
 
+
 RUN ["node", "-v"]
 RUN ["npm", "-v"]
 RUN ["npm", "install"]
