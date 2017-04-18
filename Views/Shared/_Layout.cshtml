@@ -1,11 +1,19 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - WebApplicationBasic</title>
+        <title>@ViewData["Title"]</title>
         <base href="/" />
         <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/app.css" asp-append-version="true" />
+        <link rel="shortcut icon" type="image/png" href="~/favicon.png" />
+        <link rel="shortcut icon" type="image/ico" href="~/favicon.ico" />
+        <meta property="og:title" content="Україна: на кранах" />
+        <meta property="og:site_name" content="На кранах" />
+        <meta property="og:url" content="http://ontap.in.ua/" />
+        <meta property="og:description" content="Шукаєте список усіх крафтових пабів в Україні? Так, це до нас." />
+        <meta property="og:image" content="http://ontap.in.ua/beer1.jpg" />
     </head>
     <body>
         @RenderBody()

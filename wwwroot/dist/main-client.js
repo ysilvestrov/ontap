@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dcced7547051b3909ce3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "654b9dbe9916228589cd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -713,7 +713,7 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(13);
+module.exports = (__webpack_require__(3))(14);
 
 /***/ }),
 /* 1 */
@@ -4965,7 +4965,7 @@ module.exports = (__webpack_require__(3))(0);
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = vendor_3690649d77ce9fd560b6;
+module.exports = vendor_e02ccbe4e81a8373aeb7;
 
 /***/ }),
 /* 4 */
@@ -4983,7 +4983,7 @@ module.exports = (__webpack_require__(3))(185);
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(192);
+module.exports = (__webpack_require__(3))(193);
 
 /***/ }),
 /* 7 */
@@ -5050,16 +5050,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5069,12 +5064,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var Linq = __webpack_require__(25);
 var http_1 = __webpack_require__(17);
 var Observable_1 = __webpack_require__(0);
-__webpack_require__(76);
+__webpack_require__(75);
 var StronglyTypedEvents_1 = __webpack_require__(350);
 var login_service_1 = __webpack_require__(15);
 var angular2localization_1 = __webpack_require__(11);
@@ -5372,13 +5366,13 @@ exports.AppService = AppService;
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(49);
+module.exports = (__webpack_require__(3))(48);
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(83);
+module.exports = (__webpack_require__(3))(82);
 
 /***/ }),
 /* 11 */
@@ -5386,7 +5380,7 @@ module.exports = (__webpack_require__(3))(83);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_services_localization_service__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_services_localization_service__ = __webpack_require__(72);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LocalizationService", function() { return __WEBPACK_IMPORTED_MODULE_0__src_services_localization_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceState", function() { return __WEBPACK_IMPORTED_MODULE_0__src_services_localization_service__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LoadingMode", function() { return __WEBPACK_IMPORTED_MODULE_0__src_services_localization_service__["c"]; });
@@ -5514,7 +5508,7 @@ module.exports = (__webpack_require__(3))(323);
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(565);
+module.exports = (__webpack_require__(3))(561);
 
 /***/ }),
 /* 15 */
@@ -5531,11 +5525,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var Observable_1 = __webpack_require__(0);
-__webpack_require__(76);
+__webpack_require__(75);
 var moment = __webpack_require__(2);
 var LoginService = (function () {
     function LoginService(http) {
@@ -5555,7 +5548,6 @@ var LoginService = (function () {
             }
         }
         catch (e) {
-            //do nothing
         }
     }
     LoginService.prototype.extractData = function (res) {
@@ -5607,48 +5599,6 @@ exports.LoginService = LoginService;
 
 var AsyncAction_1 = __webpack_require__(47);
 var AsyncScheduler_1 = __webpack_require__(48);
-/**
- *
- * Async Scheduler
- *
- * <span class="informal">Schedule task as if you used setTimeout(task, duration)</span>
- *
- * `async` scheduler schedules tasks asynchronously, by putting them on the JavaScript
- * event loop queue. It is best used to delay tasks in time or to schedule tasks repeating
- * in intervals.
- *
- * If you just want to "defer" task, that is to perform it right after currently
- * executing synchronous code ends (commonly achieved by `setTimeout(deferredTask, 0)`),
- * better choice will be the {@link asap} scheduler.
- *
- * @example <caption>Use async scheduler to delay task</caption>
- * const task = () => console.log('it works!');
- *
- * Rx.Scheduler.async.schedule(task, 2000);
- *
- * // After 2 seconds logs:
- * // "it works!"
- *
- *
- * @example <caption>Use async scheduler to repeat task in intervals</caption>
- * function task(state) {
- *   console.log(state);
- *   this.schedule(state + 1, 1000); // `this` references currently executing Action,
- *                                   // which we reschedule with new state and delay
- * }
- *
- * Rx.Scheduler.async.schedule(task, 3000, 0);
- *
- * // Logs:
- * // 0 after 3s
- * // 1 after 4s
- * // 2 after 5s
- * // 3 after 6s
- *
- * @static true
- * @name async
- * @owner Scheduler
- */
 exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
 //# sourceMappingURL=async.js.map
 
@@ -5656,7 +5606,7 @@ exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(194);
+module.exports = (__webpack_require__(3))(195);
 
 /***/ }),
 /* 18 */
@@ -5906,7 +5856,7 @@ function _mergeErrors(arrayOfErrors) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_control_directive__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_control_directive__ = __webpack_require__(65);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlContainer; });
 /**
  * @license
@@ -6081,7 +6031,7 @@ exports.ComponentsHelper = ComponentsHelper;
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(48);
+module.exports = (__webpack_require__(3))(47);
 
 /***/ }),
 /* 23 */
@@ -6093,9 +6043,9 @@ module.exports = (__webpack_require__(3))(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__checkbox_value_accessor__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__default_value_accessor__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__normalize_validator__ = __webpack_require__(312);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__number_value_accessor__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__number_value_accessor__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__radio_control_value_accessor__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__range_value_accessor__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__range_value_accessor__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__select_control_value_accessor__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__select_multiple_control_value_accessor__ = __webpack_require__(54);
 /* harmony export (immutable) */ __webpack_exports__["c"] = controlPath;
@@ -6316,7 +6266,6 @@ function selectValueAccessor(dir, valueAccessors) {
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
 var Pub = (function () {
     function Pub(pub) {
         this.id = pub.id;
@@ -6426,17 +6375,11 @@ exports.BreweryAdmin = BreweryAdmin;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 /**
  * LinQ to TypeScript
  *
@@ -6886,73 +6829,12 @@ exports.Enumerable = Enumerable;
 
 
 /***/ }),
-/* 26 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-
-/***/ }),
+/* 26 */,
 /* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(3))(563);
-
-/***/ }),
-/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_control_directive__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_control_directive__ = __webpack_require__(65);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgControl; });
 /**
  * @license
@@ -7043,10 +6925,16 @@ function NgControl_tsickle_Closure_declarations() {
 //# sourceMappingURL=ng_control.js.map
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(11);
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(3))(192);
 
 /***/ }),
 /* 30 */
@@ -7058,7 +6946,7 @@ module.exports = (__webpack_require__(3))(312);
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(324);
+module.exports = (__webpack_require__(3))(559);
 
 /***/ }),
 /* 32 */
@@ -7416,7 +7304,7 @@ function escapeRegExp(s) {
     return s.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
 }
 //# sourceMappingURL=lang.js.map
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(28)))
 
 /***/ }),
 /* 34 */
@@ -7501,7 +7389,7 @@ var IntlSupport = (function () {
 
 "use strict";
 
-var browser_1 = __webpack_require__(106);
+var browser_1 = __webpack_require__(105);
 (function (Ng2BootstrapTheme) {
     Ng2BootstrapTheme[Ng2BootstrapTheme["BS3"] = 1] = "BS3";
     Ng2BootstrapTheme[Ng2BootstrapTheme["BS4"] = 2] = "BS4";
@@ -7543,7 +7431,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryTransforms", function() { return __WEBPACK_IMPORTED_MODULE_2__cloudinary_transforms_class__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__ = __webpack_require__(401);
 /* harmony reexport (binding) */ if(__webpack_require__.o(__WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__, "CloudinaryUploader")) __webpack_require__.d(__webpack_exports__, "CloudinaryUploader", function() { return __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__["CloudinaryUploader"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(106);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryImageService", function() { return __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__cloudinary_image_component__ = __webpack_require__(262);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryImageComponent", function() { return __WEBPACK_IMPORTED_MODULE_5__cloudinary_image_component__["a"]; });
@@ -7562,21 +7450,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 
 var ConnectableObservable_1 = __webpack_require__(276);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits the results of invoking a specified selector on items
  * emitted by a ConnectableObservable that shares a single subscription to the underlying stream.
  *
  * <img src="./img/multicast.png" width="100%">
  *
- * @param {Function|Subject} subjectOrSubjectFactory - Factory function to create an intermediate subject through
+ * @param {Function|Subject} Factory function to create an intermediate subject through
  * which the source sequence's elements will be multicast to the selector function
  * or Subject to push source elements into.
- * @param {Function} [selector] - Optional selector function that can use the multicasted source stream
+ * @param {Function} Optional selector function that can use the multicasted source stream
  * as many times as needed, without causing multiple subscriptions to the source stream.
  * Subscribers to the given source will receive all notifications of the source from the
  * time of the subscription forward.
- * @return {Observable} An Observable that emits the results of invoking the selector
+ * @return {Observable} an Observable that emits the results of invoking the selector
  * on the items emitted by a `ConnectableObservable` that shares a single subscription to
  * the underlying stream.
  * @method multicast
@@ -8011,7 +7899,7 @@ function NgForm_tsickle_Closure_declarations() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_control__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_control__ = __webpack_require__(27);
 /* unused harmony export RADIO_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return RadioControlRegistry; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RadioControlValueAccessor; });
@@ -9505,16 +9393,11 @@ var LocaleService = (function () {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9524,7 +9407,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -12809,16 +12691,11 @@ function FormArray_tsickle_Closure_declarations() {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12828,7 +12705,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -13207,28 +13083,10 @@ exports.isDate = isDate;
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-var isArray_1 = __webpack_require__(31);
-function isNumeric(val) {
-    // parseFloat NaNs numeric-cast false positives (null|true|false|"")
-    // ...but misinterprets leading-number strings, particularly hex literals ("0x...")
-    // subtraction forces infinities to NaN
-    // adding 1 corrects loss of precision from parseFloat (#15100)
-    return !isArray_1.isArray(val) && (val - parseFloat(val) + 1) >= 0;
-}
-exports.isNumeric = isNumeric;
-;
-//# sourceMappingURL=isNumeric.js.map
+module.exports = (__webpack_require__(3))(549);
 
 /***/ }),
 /* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(3))(553);
-
-/***/ }),
-/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13403,13 +13261,13 @@ var AbstractControlDirective = (function () {
 //# sourceMappingURL=abstract_control_directive.js.map
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_container__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_control__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_control__ = __webpack_require__(27);
 /* unused harmony export AbstractControlStatus */
 /* unused harmony export ngControlStatusHost */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgControlStatus; });
@@ -13577,7 +13435,7 @@ function NgControlStatusGroup_tsickle_Closure_declarations() {
 //# sourceMappingURL=ng_control_status.js.map
 
 /***/ }),
-/* 68 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13588,7 +13446,7 @@ function NgControlStatusGroup_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_form_group_directive__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_container__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__control_value_accessor__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_control__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_control__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_form__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_model_group__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared__ = __webpack_require__(23);
@@ -13927,7 +13785,7 @@ function NgModel_tsickle_Closure_declarations() {
 //# sourceMappingURL=ng_model.js.map
 
 /***/ }),
-/* 69 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14035,7 +13893,7 @@ function NumberValueAccessor_tsickle_Closure_declarations() {
 //# sourceMappingURL=number_value_accessor.js.map
 
 /***/ }),
-/* 70 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14141,7 +13999,7 @@ function RangeValueAccessor_tsickle_Closure_declarations() {
 //# sourceMappingURL=range_value_accessor.js.map
 
 /***/ }),
-/* 71 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14149,7 +14007,7 @@ function RangeValueAccessor_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_value_accessor__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_control__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_control__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__reactive_errors__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared__ = __webpack_require__(23);
 /* unused harmony export formControlBinding */
@@ -14347,7 +14205,7 @@ function FormControlDirective_tsickle_Closure_declarations() {
 //# sourceMappingURL=form_control_directive.js.map
 
 /***/ }),
-/* 72 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14357,7 +14215,7 @@ function FormControlDirective_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__abstract_form_group_directive__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_value_accessor__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ng_control__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ng_control__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reactive_errors__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__form_group_directive__ = __webpack_require__(42);
@@ -14612,7 +14470,7 @@ function FormControlName_tsickle_Closure_declarations() {
 //# sourceMappingURL=form_control_name.js.map
 
 /***/ }),
-/* 73 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15193,21 +15051,16 @@ var LoadingMode;
 //# sourceMappingURL=localization.service.js.map
 
 /***/ }),
-/* 74 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15217,7 +15070,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -15256,21 +15108,16 @@ exports.BeerService = BeerService;
 
 
 /***/ }),
-/* 75 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15280,7 +15127,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -15321,20 +15167,19 @@ exports.BreweryService = BreweryService;
 
 
 /***/ }),
-/* 76 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // import 'rxjs/Rx'; // adds ALL RxJS statics & operators to Observable
 
-Object.defineProperty(exports, "__esModule", { value: true });
 // See node_module/rxjs/Rxjs.js
 // Import just the rxjs statics and operators we need for THIS app.
 // Statics
 __webpack_require__(268);
 // Operators
 __webpack_require__(269);
-__webpack_require__(109);
+__webpack_require__(108);
 __webpack_require__(270);
 __webpack_require__(61);
 __webpack_require__(273);
@@ -15342,7 +15187,7 @@ __webpack_require__(275);
 
 
 /***/ }),
-/* 77 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15418,7 +15263,7 @@ exports.DialogService = DialogService;
 //# sourceMappingURL=dialog.service.js.map
 
 /***/ }),
-/* 78 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -15428,7 +15273,7 @@ exports.DialogComponent = bootstrap_modal_module_1.DialogComponent;
 exports.DialogService = bootstrap_modal_module_1.DialogService;
 
 /***/ }),
-/* 79 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15479,7 +15324,7 @@ exports.AccordionComponent = AccordionComponent;
 
 
 /***/ }),
-/* 80 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15488,7 +15333,7 @@ var common_1 = __webpack_require__(9);
 var core_1 = __webpack_require__(1);
 var collapse_module_1 = __webpack_require__(57);
 var accordion_group_component_1 = __webpack_require__(236);
-var accordion_component_1 = __webpack_require__(79);
+var accordion_component_1 = __webpack_require__(78);
 var AccordionModule = (function () {
     function AccordionModule() {
     }
@@ -15507,7 +15352,7 @@ exports.AccordionModule = AccordionModule;
 
 
 /***/ }),
-/* 81 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15533,7 +15378,7 @@ exports.AlertModule = AlertModule;
 
 
 /***/ }),
-/* 82 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15560,7 +15405,7 @@ exports.ButtonsModule = ButtonsModule;
 
 
 /***/ }),
-/* 83 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15744,14 +15589,14 @@ exports.CarouselComponent = CarouselComponent;
 
 
 /***/ }),
-/* 84 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(9);
 var core_1 = __webpack_require__(1);
-var carousel_component_1 = __webpack_require__(83);
+var carousel_component_1 = __webpack_require__(82);
 var slide_component_1 = __webpack_require__(240);
 var CarouselModule = (function () {
     function CarouselModule() {
@@ -15771,7 +15616,7 @@ exports.CarouselModule = CarouselModule;
 
 
 /***/ }),
-/* 85 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15806,7 +15651,7 @@ exports.DatepickerModule = DatepickerModule;
 
 
 /***/ }),
-/* 86 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15832,13 +15677,13 @@ exports.DropdownModule = DropdownModule;
 
 
 /***/ }),
-/* 87 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var modal_options_class_1 = __webpack_require__(88);
+var modal_options_class_1 = __webpack_require__(87);
 var ModalBackdropOptions = (function () {
     function ModalBackdropOptions(options) {
         this.animate = true;
@@ -15895,7 +15740,7 @@ exports.ModalBackdropComponent = ModalBackdropComponent;
 
 
 /***/ }),
-/* 88 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15923,13 +15768,13 @@ exports.Selector = {
 
 
 /***/ }),
-/* 89 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var modal_backdrop_component_1 = __webpack_require__(87);
+var modal_backdrop_component_1 = __webpack_require__(86);
 var modal_component_1 = __webpack_require__(251);
 var components_helper_service_1 = __webpack_require__(21);
 var ModalModule = (function () {
@@ -15951,7 +15796,7 @@ exports.ModalModule = ModalModule;
 
 
 /***/ }),
-/* 90 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16194,10 +16039,10 @@ var PaginationComponent = (function () {
 }());
 exports.PaginationComponent = PaginationComponent;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
-/* 91 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16206,7 +16051,7 @@ var common_1 = __webpack_require__(9);
 var core_1 = __webpack_require__(1);
 var forms_1 = __webpack_require__(7);
 var pager_component_1 = __webpack_require__(252);
-var pagination_component_1 = __webpack_require__(90);
+var pagination_component_1 = __webpack_require__(89);
 var PaginationModule = (function () {
     function PaginationModule() {
     }
@@ -16225,7 +16070,7 @@ exports.PaginationModule = PaginationModule;
 
 
 /***/ }),
-/* 92 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16383,7 +16228,7 @@ exports.positionService = new PositionService();
 
 
 /***/ }),
-/* 93 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16444,7 +16289,7 @@ exports.ProgressDirective = ProgressDirective;
 
 
 /***/ }),
-/* 94 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16452,7 +16297,7 @@ exports.ProgressDirective = ProgressDirective;
 var common_1 = __webpack_require__(9);
 var core_1 = __webpack_require__(1);
 var bar_component_1 = __webpack_require__(253);
-var progress_directive_1 = __webpack_require__(93);
+var progress_directive_1 = __webpack_require__(92);
 var progressbar_component_1 = __webpack_require__(254);
 var ProgressbarModule = (function () {
     function ProgressbarModule() {
@@ -16472,7 +16317,7 @@ exports.ProgressbarModule = ProgressbarModule;
 
 
 /***/ }),
-/* 95 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16499,13 +16344,13 @@ exports.RatingModule = RatingModule;
 
 
 /***/ }),
-/* 96 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var tabset_component_1 = __webpack_require__(98);
+var tabset_component_1 = __webpack_require__(97);
 /* tslint:disable */
 /* tslint:enable */
 var TabDirective = (function () {
@@ -16572,7 +16417,7 @@ exports.TabDirective = TabDirective;
 
 
 /***/ }),
-/* 97 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16581,8 +16426,8 @@ var common_1 = __webpack_require__(9);
 var core_1 = __webpack_require__(1);
 var common_2 = __webpack_require__(242);
 var tab_heading_directive_1 = __webpack_require__(256);
-var tab_directive_1 = __webpack_require__(96);
-var tabset_component_1 = __webpack_require__(98);
+var tab_directive_1 = __webpack_require__(95);
+var tabset_component_1 = __webpack_require__(97);
 var TabsModule = (function () {
     function TabsModule() {
     }
@@ -16601,7 +16446,7 @@ exports.TabsModule = TabsModule;
 
 
 /***/ }),
-/* 98 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16733,7 +16578,7 @@ exports.TabsetComponent = TabsetComponent;
 
 
 /***/ }),
-/* 99 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16760,13 +16605,13 @@ exports.TimepickerModule = TimepickerModule;
 
 
 /***/ }),
-/* 100 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var position_1 = __webpack_require__(92);
+var position_1 = __webpack_require__(91);
 var tooltip_options_class_1 = __webpack_require__(258);
 var TooltipContainerComponent = (function () {
     function TooltipContainerComponent(element, cdr, options) {
@@ -16820,14 +16665,14 @@ exports.TooltipContainerComponent = TooltipContainerComponent;
 
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(9);
 var core_1 = __webpack_require__(1);
-var tooltip_container_component_1 = __webpack_require__(100);
+var tooltip_container_component_1 = __webpack_require__(99);
 var tooltip_directive_1 = __webpack_require__(259);
 var components_helper_service_1 = __webpack_require__(21);
 var TooltipModule = (function () {
@@ -16850,16 +16695,16 @@ exports.TooltipModule = TooltipModule;
 
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
 var ng2_bootstrap_config_1 = __webpack_require__(35);
-var position_1 = __webpack_require__(92);
-var typeahead_options_class_1 = __webpack_require__(103);
-var typeahead_utils_1 = __webpack_require__(104);
+var position_1 = __webpack_require__(91);
+var typeahead_options_class_1 = __webpack_require__(102);
+var typeahead_utils_1 = __webpack_require__(103);
 var bs4 = "\n  <div class=\"dropdown-menu\"\n       [ngStyle]=\"{top: top, left: left, display: 'block'}\"\n       (mouseleave)=\"focusLost()\">\n    <template ngFor let-match let-i=\"index\" [ngForOf]=\"matches\">\n       <h6 *ngIf=\"match.isHeader()\" class=\"dropdown-header\">{{match}}</h6>\n       <div *ngIf=\"!match.isHeader() && !itemTemplate\">\n          <a href=\"#\"\n            class=\"dropdown-item\"\n            (click)=\"selectMatch(match, $event)\"\n            (mouseenter)=\"selectActive(match)\"\n            [class.active]=\"isActive(match)\"\n            [innerHtml]=\"hightlight(match, query)\"></a>\n      </div>\n      <div *ngIf=\"!match.isHeader() && itemTemplate\">\n        <a href=\"#\"\n         class=\"dropdown-item\"\n         (click)=\"selectMatch(match, $event)\"\n         (mouseenter)=\"selectActive(match)\"\n         [class.active]=\"isActive(match)\">\n          <template [ngTemplateOutlet]=\"itemTemplate\"\n                    [ngOutletContext]=\"{item: match.item, index: i}\">\n          </template>\n         </a>\n      </div>\n    </template>\n  </div>\n";
 var bs3 = "\n  <ul class=\"dropdown-menu\"\n      [ngStyle]=\"{top: top, left: left, display: 'block'}\"\n      (mouseleave)=\"focusLost()\">\n    <template ngFor let-match let-i=\"index\" [ngForOf]=\"matches\">\n      <li *ngIf=\"match.isHeader()\" class=\"dropdown-header\">{{match}}</li>\n      <li *ngIf=\"!match.isHeader()\"\n        [class.active]=\"isActive(match)\"\n        (mouseenter)=\"selectActive(match)\">\n        <a href=\"#\"\n           *ngIf=\"!itemTemplate\"\n           (click)=\"selectMatch(match, $event)\"\n           tabindex=\"-1\"\n           [innerHtml]=\"hightlight(match, query)\"></a>\n        <a href=\"#\"\n           *ngIf=\"itemTemplate\"\n           (click)=\"selectMatch(match, $event)\"\n           tabindex=\"-1\">\n            <template [ngTemplateOutlet]=\"itemTemplate\"\n                      [ngOutletContext]=\"{item: match.item, index: i}\">\n            </template>\n        </a>\n      </li>\n    </template>\n  </ul>\n";
 var isBS4 = ng2_bootstrap_config_1.Ng2BootstrapConfig.theme === ng2_bootstrap_config_1.Ng2BootstrapTheme.BS4;
@@ -16993,7 +16838,7 @@ exports.TypeaheadContainerComponent = TypeaheadContainerComponent;
 
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17008,7 +16853,7 @@ exports.TypeaheadOptions = TypeaheadOptions;
 
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17076,7 +16921,7 @@ exports.TypeaheadUtils = TypeaheadUtils;
 
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17084,7 +16929,7 @@ exports.TypeaheadUtils = TypeaheadUtils;
 var common_1 = __webpack_require__(9);
 var core_1 = __webpack_require__(1);
 var forms_1 = __webpack_require__(7);
-var typeahead_container_component_1 = __webpack_require__(102);
+var typeahead_container_component_1 = __webpack_require__(101);
 var typeahead_directive_1 = __webpack_require__(261);
 var components_helper_service_1 = __webpack_require__(21);
 var TypeaheadModule = (function () {
@@ -17107,7 +16952,7 @@ exports.TypeaheadModule = TypeaheadModule;
 
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17139,7 +16984,7 @@ exports.EventListener = win['EventListener'];
 
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17168,7 +17013,7 @@ var CloudinaryImageService = (function () {
 //# sourceMappingURL=cloudinary-image.service.js.map
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17276,7 +17121,7 @@ var ReplayEvent = (function () {
 //# sourceMappingURL=ReplaySubject.js.map
 
 /***/ }),
-/* 109 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17287,7 +17132,7 @@ Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
 //# sourceMappingURL=debounceTime.js.map
 
 /***/ }),
-/* 110 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17298,11 +17143,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var ArrayObservable_1 = __webpack_require__(30);
-var isArray_1 = __webpack_require__(31);
+var isArray_1 = __webpack_require__(29);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
 var none = {};
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Combines multiple Observables to create an Observable whose values are
  * calculated from the latest values of each of its input Observables.
@@ -17336,7 +17181,7 @@ var none = {};
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
+ * @param {Observable} other An input Observable to combine with the source
  * Observable. More than one input Observables may be given as argument.
  * @param {function} [project] An optional function to project the values from
  * the combined latest values into a new value on the output Observable.
@@ -17445,16 +17290,15 @@ exports.CombineLatestSubscriber = CombineLatestSubscriber;
 //# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
-/* 111 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var Observable_1 = __webpack_require__(0);
-var isScheduler_1 = __webpack_require__(27);
+var isScheduler_1 = __webpack_require__(31);
 var ArrayObservable_1 = __webpack_require__(30);
 var mergeAll_1 = __webpack_require__(114);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Creates an output Observable which sequentially emits all values from every
  * given input Observable after the current Observable.
@@ -17495,7 +17339,7 @@ var mergeAll_1 = __webpack_require__(114);
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} other An input Observable to concatenate after the source
+ * @param {Observable} other An input Observable to concatenate after the source
  * Observable. More than one input Observables may be given as argument.
  * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
  * Observable subscription on.
@@ -17514,41 +17358,17 @@ function concat() {
 exports.concat = concat;
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which sequentially emits all values from given
- * Observable and then moves on to the next.
+ * Creates an output Observable which sequentially emits all values from every
+ * given input Observable after the current Observable.
  *
  * <span class="informal">Concatenates multiple Observables together by
  * sequentially emitting their values, one Observable after the other.</span>
  *
  * <img src="./img/concat.png" width="100%">
  *
- * `concat` joins multiple Observables together, by subscribing to them one at a time and
- * merging their results into the output Observable. You can pass either an array of
- * Observables, or put them directly as arguments. Passing an empty array will result
- * in Observable that completes immediately.
- *
- * `concat` will subscribe to first input Observable and emit all its values, without
- * changing or affecting them in any way. When that Observable completes, it will
- * subscribe to then next Observable passed and, again, emit its values. This will be
- * repeated, until the operator runs out of Observables. When last input Observable completes,
- * `concat` will complete as well. At any given moment only one Observable passed to operator
- * emits values. If you would like to emit values from passed Observables concurrently, check out
- * {@link merge} instead, especially with optional `concurrent` parameter. As a matter of fact,
- * `concat` is an equivalent of `merge` operator with `concurrent` parameter set to `1`.
- *
- * Note that if some input Observable never completes, `concat` will also never complete
- * and Observables following the one that did not complete will never be subscribed. On the other
- * hand, if some Observable simply completes immediately after it is subscribed, it will be
- * invisible for `concat`, which will just move on to the next Observable.
- *
- * If any Observable in chain errors, instead of passing control to the next Observable,
- * `concat` will error immediately as well. Observables that would be subscribed after
- * the one that emitted error, never will.
- *
- * If you pass to `concat` the same Observable many times, its stream of values
- * will be "replayed" on every subscription, which means you can repeat given Observable
- * as many times as you like. If passing the same Observable to `concat` 1000 times becomes tedious,
- * you can always use {@link repeat}.
+ * Joins multiple Observables together by subscribing to them one at a time and
+ * merging their results into the output Observable. Will wait for each
+ * Observable to complete before moving on to the next.
  *
  * @example <caption>Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10</caption>
  * var timer = Rx.Observable.interval(1000).take(4);
@@ -17559,12 +17379,11 @@ exports.concat = concat;
  * // results in:
  * // 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
  *
- *
- * @example <caption>Concatenate an array of 3 Observables</caption>
+ * @example <caption>Concatenate 3 Observables</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
- * var result = Rx.Observable.concat([timer1, timer2, timer3]); // note that array is passed
+ * var result = Rx.Observable.concat(timer1, timer2, timer3);
  * result.subscribe(x => console.log(x));
  *
  * // results in the following:
@@ -17573,30 +17392,12 @@ exports.concat = concat;
  * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
  * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
  *
- *
- * @example <caption>Concatenate the same Observable to repeat it</caption>
- * const timer = Rx.Observable.interval(1000).take(2);
- *
- * Rx.Observable.concat(timer, timer) // concating the same Observable!
- * .subscribe(
- *   value => console.log(value),
- *   err => {},
- *   () => console.log('...and it is done!')
- * );
- *
- * // Logs:
- * // 0 after 1s
- * // 1 after 2s
- * // 0 after 3s
- * // 1 after 4s
- * // "...and it is done!" also after 4s
- *
  * @see {@link concatAll}
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} input1 An input Observable to concatenate with others.
- * @param {ObservableInput} input2 An input Observable to concatenate with others.
+ * @param {Observable} input1 An input Observable to concatenate with others.
+ * @param {Observable} input2 An input Observable to concatenate with others.
  * More than one input Observables may be given as argument.
  * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
  * Observable subscription on.
@@ -17616,7 +17417,7 @@ function concatStatic() {
     if (isScheduler_1.isScheduler(args[observables.length - 1])) {
         scheduler = args.pop();
     }
-    if (scheduler === null && observables.length === 1 && observables[0] instanceof Observable_1.Observable) {
+    if (scheduler === null && observables.length === 1) {
         return observables[0];
     }
     return new ArrayObservable_1.ArrayObservable(observables, scheduler).lift(new mergeAll_1.MergeAllOperator(1));
@@ -17625,7 +17426,7 @@ exports.concatStatic = concatStatic;
 //# sourceMappingURL=concat.js.map
 
 /***/ }),
-/* 112 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17636,12 +17437,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var ArrayObservable_1 = __webpack_require__(30);
-var isArray_1 = __webpack_require__(31);
+var isArray_1 = __webpack_require__(29);
 var Subscriber_1 = __webpack_require__(4);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
 var iterator_1 = __webpack_require__(297);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * @param observables
  * @return {Observable<R>}
@@ -17678,9 +17479,9 @@ exports.zipProto = zipProto;
  *     .subscribe(x => console.log(x));
  *
  * // outputs
- * // { age: 27, name: 'Foo', isDev: true }
- * // { age: 25, name: 'Bar', isDev: true }
- * // { age: 29, name: 'Beer', isDev: false }
+ * // { age: 7, name: 'Foo', isDev: true }
+ * // { age: 5, name: 'Bar', isDev: true }
+ * // { age: 9, name: 'Beer', isDev: false }
  *
  * @param observables
  * @return {Observable<R>}
@@ -17906,6 +17707,24 @@ var ZipBufferIterator = (function (_super) {
 //# sourceMappingURL=zip.js.map
 
 /***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var isArray_1 = __webpack_require__(29);
+function isNumeric(val) {
+    // parseFloat NaNs numeric-cast false positives (null|true|false|"")
+    // ...but misinterprets leading-number strings, particularly hex literals ("0x...")
+    // subtraction forces infinities to NaN
+    // adding 1 corrects loss of precision from parseFloat (#15100)
+    return !isArray_1.isArray(val) && (val - parseFloat(val) + 1) >= 0;
+}
+exports.isNumeric = isNumeric;
+;
+//# sourceMappingURL=isNumeric.js.map
+
+/***/ }),
 /* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17921,7 +17740,7 @@ module.exports = (__webpack_require__(3))(188);
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(561);
+module.exports = (__webpack_require__(3))(557);
 
 /***/ }),
 /* 116 */
@@ -19181,7 +19000,7 @@ var LocaleCurrencyPipe = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_localization_service__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_localization_service__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_locale_service__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_Intl_support__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TranslatePipe; });
@@ -19564,16 +19383,11 @@ var NumberWrapper = (function () {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19583,7 +19397,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -19624,16 +19437,11 @@ exports.CityService = CityService;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19643,9 +19451,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var ng2_bootstrap_modal_1 = __webpack_require__(78);
+var ng2_bootstrap_modal_1 = __webpack_require__(77);
 var SelectorComponent = (function (_super) {
     __extends(SelectorComponent, _super);
     function SelectorComponent(dialogService) {
@@ -29900,7 +29707,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var dialog_service_1 = __webpack_require__(77);
+var dialog_service_1 = __webpack_require__(76);
 var DialogWrapperComponent = (function () {
     function DialogWrapperComponent(resolver, dialogService) {
         this.resolver = resolver;
@@ -29952,7 +29759,7 @@ exports.DialogWrapperComponent = DialogWrapperComponent;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 var core_1 = __webpack_require__(1);
-var accordion_component_1 = __webpack_require__(79);
+var accordion_component_1 = __webpack_require__(78);
 /* tslint:disable-next-line */
 var MouseEvent = global.MouseEvent;
 /* tslint:disable:component-selector-name */
@@ -30007,7 +29814,7 @@ var AccordionPanelComponent = (function () {
 }());
 exports.AccordionPanelComponent = AccordionPanelComponent;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
 /* 237 */
@@ -30223,7 +30030,7 @@ exports.ButtonRadioDirective = ButtonRadioDirective;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var carousel_component_1 = __webpack_require__(83);
+var carousel_component_1 = __webpack_require__(82);
 var SlideComponent = (function () {
     function SlideComponent(carousel) {
         this.addClass = true;
@@ -30920,7 +30727,7 @@ var DropdownToggleDirective = (function () {
 }());
 exports.DropdownToggleDirective = DropdownToggleDirective;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
 /* 250 */
@@ -31001,7 +30808,7 @@ var DropdownService = (function () {
 exports.DropdownService = DropdownService;
 exports.dropdownService = new DropdownService();
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
 /* 251 */
@@ -31015,9 +30822,9 @@ exports.dropdownService = new DropdownService();
 var core_1 = __webpack_require__(1);
 var components_helper_service_1 = __webpack_require__(21);
 var utils_class_1 = __webpack_require__(398);
-var modal_backdrop_component_1 = __webpack_require__(87);
-var modal_options_class_1 = __webpack_require__(88);
-var browser_1 = __webpack_require__(106);
+var modal_backdrop_component_1 = __webpack_require__(86);
+var modal_options_class_1 = __webpack_require__(87);
+var browser_1 = __webpack_require__(105);
 var TRANSITION_DURATION = 300;
 var BACKDROP_TRANSITION_DURATION = 150;
 var ModalDirective = (function () {
@@ -31333,7 +31140,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core_1 = __webpack_require__(1);
 var forms_1 = __webpack_require__(7);
-var pagination_component_1 = __webpack_require__(90);
+var pagination_component_1 = __webpack_require__(89);
 var pagerConfig = {
     itemsPerPage: 10,
     previousText: '« Previous',
@@ -31375,7 +31182,7 @@ exports.PagerComponent = PagerComponent;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var progress_directive_1 = __webpack_require__(93);
+var progress_directive_1 = __webpack_require__(92);
 // todo: number pipe
 // todo: use query from progress?
 var BarComponent = (function () {
@@ -31576,7 +31383,7 @@ var RatingComponent = (function () {
 }());
 exports.RatingComponent = RatingComponent;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
 /* 256 */
@@ -31585,7 +31392,7 @@ exports.RatingComponent = RatingComponent;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var tab_directive_1 = __webpack_require__(96);
+var tab_directive_1 = __webpack_require__(95);
 var TabHeadingDirective = (function () {
     function TabHeadingDirective(templateRef, tab) {
         tab.headingRef = templateRef;
@@ -31962,7 +31769,7 @@ exports.TooltipOptions = TooltipOptions;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var tooltip_container_component_1 = __webpack_require__(100);
+var tooltip_container_component_1 = __webpack_require__(99);
 var tooltip_options_class_1 = __webpack_require__(258);
 var components_helper_service_1 = __webpack_require__(21);
 /* tslint:disable */
@@ -32102,12 +31909,12 @@ exports.TypeaheadMatch = TypeaheadMatch;
 /* WEBPACK VAR INJECTION */(function(global) {
 var core_1 = __webpack_require__(1);
 var forms_1 = __webpack_require__(7);
-var typeahead_container_component_1 = __webpack_require__(102);
-var typeahead_options_class_1 = __webpack_require__(103);
-var typeahead_utils_1 = __webpack_require__(104);
+var typeahead_container_component_1 = __webpack_require__(101);
+var typeahead_options_class_1 = __webpack_require__(102);
+var typeahead_utils_1 = __webpack_require__(103);
 var Observable_1 = __webpack_require__(0);
 __webpack_require__(267);
-__webpack_require__(109);
+__webpack_require__(108);
 __webpack_require__(271);
 __webpack_require__(61);
 __webpack_require__(272);
@@ -32408,7 +32215,7 @@ var TypeaheadDirective = (function () {
 }());
 exports.TypeaheadDirective = TypeaheadDirective;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
 /* 262 */
@@ -32417,7 +32224,7 @@ exports.TypeaheadDirective = TypeaheadDirective;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cloudinary_transforms_class__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cloudinary_image_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cloudinary_image_service__ = __webpack_require__(106);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CloudinaryImageComponent; });
 
 
@@ -33187,10 +32994,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var isNumeric_1 = __webpack_require__(64);
+var isNumeric_1 = __webpack_require__(112);
 var Observable_1 = __webpack_require__(0);
 var async_1 = __webpack_require__(16);
-var isScheduler_1 = __webpack_require__(27);
+var isScheduler_1 = __webpack_require__(31);
 var isDate_1 = __webpack_require__(63);
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -33308,7 +33115,11 @@ var Subscriber_1 = __webpack_require__(4);
 var map_1 = __webpack_require__(113);
 function getCORSRequest() {
     if (root_1.root.XMLHttpRequest) {
-        return new root_1.root.XMLHttpRequest();
+        var xhr = new root_1.root.XMLHttpRequest();
+        if ('withCredentials' in xhr) {
+            xhr.withCredentials = !!this.withCredentials;
+        }
+        return xhr;
     }
     else if (!!root_1.root.XDomainRequest) {
         return new root_1.root.XDomainRequest();
@@ -33362,11 +33173,6 @@ function ajaxPut(url, body, headers) {
     return new AjaxObservable({ method: 'PUT', url: url, body: body, headers: headers });
 }
 exports.ajaxPut = ajaxPut;
-;
-function ajaxPatch(url, body, headers) {
-    return new AjaxObservable({ method: 'PATCH', url: url, body: body, headers: headers });
-}
-exports.ajaxPatch = ajaxPatch;
 ;
 function ajaxGetJSON(url, headers) {
     return new AjaxObservable({ method: 'GET', url: url, responseType: 'json', headers: headers })
@@ -33444,7 +33250,6 @@ var AjaxObservable = (function (_super) {
         create.post = ajaxPost;
         create.delete = ajaxDelete;
         create.put = ajaxPut;
-        create.patch = ajaxPatch;
         create.getJSON = ajaxGetJSON;
         return create;
     })();
@@ -33507,12 +33312,9 @@ var AjaxSubscriber = (function (_super) {
                 this.error(errorObject_1.errorObject.e);
                 return null;
             }
-            // timeout, responseType and withCredentials can be set once the XHR is open
+            // timeout and responseType can be set once the XHR is open
             xhr.timeout = request.timeout;
             xhr.responseType = request.responseType;
-            if ('withCredentials' in xhr) {
-                xhr.withCredentials = !!request.withCredentials;
-            }
             // set headers
             this.setHeaders(xhr, headers);
             // finally send the request
@@ -33722,7 +33524,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Subscriber_1 = __webpack_require__(4);
 var tryCatch_1 = __webpack_require__(14);
 var errorObject_1 = __webpack_require__(13);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item.
  *
@@ -33757,8 +33559,8 @@ var errorObject_1 = __webpack_require__(13);
  * @see {@link distinct}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @param {function} [compare] optional comparison function called to test if an item is distinct from the previous item in the source.
+ * @return {Observable} an Observable that emits items from the source Observable with distinct values.
  * @method distinctUntilChanged
  * @owner Observable
  */
@@ -33834,7 +33636,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(4);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Emits only the first value emitted by the source Observable that meets some
  * condition.
@@ -33935,11 +33737,10 @@ exports.FindValueSubscriber = FindValueSubscriber;
 
 "use strict";
 
-var Observable_1 = __webpack_require__(0);
 var ArrayObservable_1 = __webpack_require__(30);
 var mergeAll_1 = __webpack_require__(114);
-var isScheduler_1 = __webpack_require__(27);
-/* tslint:enable:max-line-length */
+var isScheduler_1 = __webpack_require__(31);
+/* tslint:disable:max-line-length */
 /**
  * Creates an output Observable which concurrently emits all values from every
  * given input Observable.
@@ -33975,13 +33776,13 @@ var isScheduler_1 = __webpack_require__(27);
  * @see {@link mergeMapTo}
  * @see {@link mergeScan}
  *
- * @param {ObservableInput} other An input Observable to merge with the source
+ * @param {Observable} other An input Observable to merge with the source
  * Observable. More than one input Observables may be given as argument.
  * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
  * Observables being subscribed to concurrently.
  * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
  * concurrency of input Observables.
- * @return {Observable} An Observable that emits items that are the result of
+ * @return {Observable} an Observable that emits items that are the result of
  * every input Observable.
  * @method merge
  * @owner Observable
@@ -34044,7 +33845,7 @@ exports.merge = merge;
  * @see {@link mergeMapTo}
  * @see {@link mergeScan}
  *
- * @param {...ObservableInput} observables Input Observables to merge together.
+ * @param {...Observable} observables Input Observables to merge together.
  * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
  * Observables being subscribed to concurrently.
  * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
@@ -34072,7 +33873,7 @@ function mergeStatic() {
     else if (typeof last === 'number') {
         concurrent = observables.pop();
     }
-    if (scheduler === null && observables.length === 1 && observables[0] instanceof Observable_1.Observable) {
+    if (scheduler === null && observables.length === 1) {
         return observables[0];
     }
     return new ArrayObservable_1.ArrayObservable(observables, scheduler).lift(new mergeAll_1.MergeAllOperator(concurrent));
@@ -34093,7 +33894,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to the same Observable which is merged multiple
  * times in the output Observable.
@@ -34119,7 +33920,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link mergeScan}
  * @see {@link switchMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
+ * @param {Observable} innerObservable An Observable to replace each value from
  * the source Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
  * A function to produce the value on the output Observable based on the values
@@ -34253,10 +34054,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var FromObservable_1 = __webpack_require__(684);
-var isArray_1 = __webpack_require__(31);
+var isArray_1 = __webpack_require__(29);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 function onErrorResumeNext() {
     var nextSources = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -34334,16 +34135,16 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var isArray_1 = __webpack_require__(31);
+var isArray_1 = __webpack_require__(29);
 var ArrayObservable_1 = __webpack_require__(30);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that mirrors the first source Observable to emit an item
- * from the combination of this Observable and supplied Observables.
- * @param {...Observables} ...observables Sources used to race for which Observable emits first.
- * @return {Observable} An Observable that mirrors the output of the first Observable to emit an item.
+ * from the combination of this Observable and supplied Observables
+ * @param {...Observables} ...observables sources used to race for which Observable emits first.
+ * @return {Observable} an Observable that mirrors the output of the first Observable to emit an item.
  * @method race
  * @owner Observable
  */
@@ -34568,7 +34369,7 @@ var TimestampSubscriber = (function (_super) {
 "use strict";
 
 var root_1 = __webpack_require__(22);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Converts an Observable sequence to a ES2015 compliant promise.
  *
@@ -34759,40 +34560,6 @@ exports.VirtualAction = VirtualAction;
 
 var AsapAction_1 = __webpack_require__(643);
 var AsapScheduler_1 = __webpack_require__(644);
-/**
- *
- * Asap Scheduler
- *
- * <span class="informal">Perform task as fast as it can be performed asynchronously</span>
- *
- * `asap` scheduler behaves the same as {@link async} scheduler when you use it to delay task
- * in time. If however you set delay to `0`, `asap` will wait for current synchronously executing
- * code to end and then it will try to execute given task as fast as possible.
- *
- * `asap` scheduler will do its best to minimize time between end of currently executing code
- * and start of scheduled task. This makes it best candidate for performing so called "deferring".
- * Traditionally this was achieved by calling `setTimeout(deferredTask, 0)`, but that technique involves
- * some (although minimal) unwanted delay.
- *
- * Note that using `asap` scheduler does not necessarily mean that your task will be first to process
- * after currently executing code. In particular, if some task was also scheduled with `asap` before,
- * that task will execute first. That being said, if you need to schedule task asynchronously, but
- * as soon as possible, `asap` scheduler is your best bet.
- *
- * @example <caption>Compare async and asap scheduler</caption>
- *
- * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...
- * Rx.Scheduler.asap.schedule(() => console.log('asap'));
- *
- * // Logs:
- * // "asap"
- * // "async"
- * // ... but 'asap' goes first!
- *
- * @static true
- * @name asap
- * @owner Scheduler
- */
 exports.asap = new AsapScheduler_1.AsapScheduler(AsapAction_1.AsapAction);
 //# sourceMappingURL=asap.js.map
 
@@ -34804,67 +34571,6 @@ exports.asap = new AsapScheduler_1.AsapScheduler(AsapAction_1.AsapAction);
 
 var QueueAction_1 = __webpack_require__(645);
 var QueueScheduler_1 = __webpack_require__(646);
-/**
- *
- * Queue Scheduler
- *
- * <span class="informal">Put every next task on a queue, instead of executing it immediately</span>
- *
- * `queue` scheduler, when used with delay, behaves the same as {@link async} scheduler.
- *
- * When used without delay, it schedules given task synchronously - executes it right when
- * it is scheduled. However when called recursively, that is when inside the scheduled task,
- * another task is scheduled with queue scheduler, instead of executing immediately as well,
- * that task will be put on a queue and wait for current one to finish.
- *
- * This means that when you execute task with `queue` scheduler, you are sure it will end
- * before any other task scheduled with that scheduler will start.
- *
- * @examples <caption>Schedule recursively first, then do something</caption>
- *
- * Rx.Scheduler.queue.schedule(() => {
- *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue
- *
- *   console.log('first');
- * });
- *
- * // Logs:
- * // "first"
- * // "second"
- *
- *
- * @example <caption>Reschedule itself recursively</caption>
- *
- * Rx.Scheduler.queue.schedule(function(state) {
- *   if (state !== 0) {
- *     console.log('before', state);
- *     this.schedule(state - 1); // `this` references currently executing Action,
- *                               // which we reschedule with new state
- *     console.log('after', state);
- *   }
- * }, 0, 3);
- *
- * // In scheduler that runs recursively, you would expect:
- * // "before", 3
- * // "before", 2
- * // "before", 1
- * // "after", 1
- * // "after", 2
- * // "after", 3
- *
- * // But with queue it logs:
- * // "before", 3
- * // "after", 3
- * // "before", 2
- * // "after", 2
- * // "before", 1
- * // "after", 1
- *
- *
- * @static true
- * @name queue
- * @owner Scheduler
- */
 exports.queue = new QueueScheduler_1.QueueScheduler(QueueAction_1.QueueAction);
 //# sourceMappingURL=queue.js.map
 
@@ -35005,43 +34711,43 @@ module.exports = (__webpack_require__(3))(322);
 /* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(326);
+module.exports = (__webpack_require__(3))(324);
 
 /***/ }),
 /* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(332);
+module.exports = (__webpack_require__(3))(330);
 
 /***/ }),
 /* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(334);
+module.exports = (__webpack_require__(3))(332);
 
 /***/ }),
 /* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(558);
+module.exports = (__webpack_require__(3))(554);
 
 /***/ }),
 /* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(560);
+module.exports = (__webpack_require__(3))(556);
 
 /***/ }),
 /* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(572);
+module.exports = (__webpack_require__(3))(568);
 
 /***/ }),
 /* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(577);
+module.exports = (__webpack_require__(3))(573);
 
 /***/ }),
 /* 308 */
@@ -35049,7 +34755,6 @@ module.exports = (__webpack_require__(3))(577);
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(680);
 var core_1 = __webpack_require__(1);
 var angular2_universal_1 = __webpack_require__(303);
@@ -35346,7 +35051,7 @@ if (module) {
 /* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(336);
+module.exports = (__webpack_require__(3))(334);
 
 /***/ }),
 /* 311 */
@@ -35356,15 +35061,15 @@ module.exports = (__webpack_require__(3))(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_checkbox_value_accessor__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_default_value_accessor__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__directives_ng_control_status__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__directives_ng_control_status__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_ng_form__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_ng_model__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_ng_model__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__directives_ng_model_group__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__directives_number_value_accessor__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__directives_number_value_accessor__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__directives_radio_control_value_accessor__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__directives_range_value_accessor__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__directives_reactive_directives_form_control_directive__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_reactive_directives_form_control_name__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__directives_range_value_accessor__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__directives_reactive_directives_form_control_directive__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_reactive_directives_form_control_name__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_group_directive__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_name__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__directives_select_control_value_accessor__ = __webpack_require__(53);
@@ -35372,7 +35077,7 @@ module.exports = (__webpack_require__(3))(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_validators__ = __webpack_require__(118);
 /* unused harmony reexport CheckboxControlValueAccessor */
 /* unused harmony reexport DefaultValueAccessor */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__directives_ng_control__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__directives_ng_control__ = __webpack_require__(27);
 /* unused harmony reexport NgControl */
 /* unused harmony reexport NgControlStatus */
 /* unused harmony reexport NgControlStatusGroup */
@@ -35605,7 +35310,7 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__ = __webpack_require__(65);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__ = __webpack_require__(39);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__["a"]; });
@@ -35617,22 +35322,22 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__directives_control_value_accessor__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_default_value_accessor__ = __webpack_require__(50);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_5__directives_default_value_accessor__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__directives_ng_control__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__directives_ng_control__ = __webpack_require__(27);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_6__directives_ng_control__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__directives_ng_control_status__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__directives_ng_control_status__ = __webpack_require__(66);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_7__directives_ng_control_status__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_7__directives_ng_control_status__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__directives_ng_form__ = __webpack_require__(40);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_8__directives_ng_form__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__directives_ng_model__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__directives_ng_model__ = __webpack_require__(67);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_9__directives_ng_model__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__directives_ng_model_group__ = __webpack_require__(51);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_10__directives_ng_model_group__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_radio_control_value_accessor__ = __webpack_require__(41);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_11__directives_radio_control_value_accessor__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_control_directive__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_control_directive__ = __webpack_require__(70);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_control_directive__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_control_name__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_control_name__ = __webpack_require__(71);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_control_name__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__directives_reactive_directives_form_group_directive__ = __webpack_require__(42);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_14__directives_reactive_directives_form_group_directive__["a"]; });
@@ -35728,7 +35433,7 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /**
  * @stable
  */
-var /** @type {?} */ VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["Version"]('2.4.10');
+var /** @type {?} */ VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["Version"]('2.4.8');
 //# sourceMappingURL=version.js.map
 
 /***/ }),
@@ -37616,7 +37321,7 @@ var _styles = {
 }
 var _openTags = {
   '1': 'font-weight:bold', // bold
-  '2': 'opacity:0.5', // dim
+  '2': 'opacity:0.8', // dim
   '3': '<i>', // italic
   '4': '<u>', // underscore
   '8': 'display:none', // hidden
@@ -37789,7 +37494,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var forms_1 = __webpack_require__(7);
 var router_1 = __webpack_require__(302);
@@ -37815,7 +37519,7 @@ var angular2localization_1 = __webpack_require__(11);
 var ng2_cloudinary_1 = __webpack_require__(36);
 var ng2_file_upload_1 = __webpack_require__(59);
 var angular2_select_1 = __webpack_require__(326);
-var ng2_bootstrap_modal_1 = __webpack_require__(78);
+var ng2_bootstrap_modal_1 = __webpack_require__(77);
 /**
  * Advanced initialization.
  *
@@ -37843,7 +37547,6 @@ var LocalizationConfig = (function () {
         if (typeof (document) == "undefined") {
             this.localization
                 .translationProvider("https://ontap.in.ua/resources/locale-");
-            // Required: initializes the translation provider with the given path prefix.
         }
         else {
             this.localization
@@ -37955,11 +37658,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var login_service_1 = __webpack_require__(15);
 var router_1 = __webpack_require__(302);
-__webpack_require__(76);
+__webpack_require__(75);
 var angular2localization_1 = __webpack_require__(11);
 var AppComponent = (function () {
     function AppComponent(router, locale, localization) {
@@ -38004,7 +37706,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var SortByTap = (function () {
     function SortByTap() {
@@ -38039,16 +37740,11 @@ exports.SortByTap = SortByTap;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38058,11 +37754,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
 var linq_1 = __webpack_require__(25);
-var beers_service_1 = __webpack_require__(74);
-var breweries_service_1 = __webpack_require__(75);
+var beers_service_1 = __webpack_require__(73);
+var breweries_service_1 = __webpack_require__(74);
 var appComponent_1 = __webpack_require__(8);
 var angular2localization_1 = __webpack_require__(11);
 var ng2_cloudinary_1 = __webpack_require__(36);
@@ -38145,142 +37840,9 @@ exports.BeersComponent = BeersComponent;
 
 /***/ }),
 /* 334 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(25);
-var breweries_service_1 = __webpack_require__(75);
-var countries_service_1 = __webpack_require__(338);
-var beers_service_1 = __webpack_require__(74);
-var selector_component_1 = __webpack_require__(128);
-var appComponent_1 = __webpack_require__(8);
-var angular2localization_1 = __webpack_require__(11);
-var ng2_cloudinary_1 = __webpack_require__(36);
-var ng2_bootstrap_modal_1 = __webpack_require__(78);
-var BreweriesComponent = (function (_super) {
-    __extends(BreweriesComponent, _super);
-    function BreweriesComponent(elmService, dialogService, countryService, beerService, locale, localization) {
-        var _this = _super.call(this, elmService, locale, localization, new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
-            cloudName: "ontap-in-ua",
-            uploadPreset: "ontapInUa_breweries"
-        }))) || this;
-        _this.dialogService = dialogService;
-        _this.countryService = countryService;
-        _this.beerService = beerService;
-        _this.locale = locale;
-        _this.localization = localization;
-        _this.breweryCounts = {};
-        _this.onLoad.subscribe(function (s, elements) { _this.onElementsLoad(elements); });
-        _this.getCountries();
-        _this.getBeers();
-        _this.onDelete.subscribe(function (s, res) { _this.onElementDeleted(res[0], res[1]); });
-        return _this;
-    }
-    BreweriesComponent.prototype.onElementsLoad = function (elements) {
-        this.elements = new linq_1.List(elements).OrderBy(function (b) { return b.name; }).ToArray();
-    };
-    BreweriesComponent.prototype.startAdd = function () {
-        _super.prototype.startAdd.call(this);
-        this.adding.country = new linq_1.List(this.countries).First(function (c) { return c.id === 'UA'; });
-    };
-    BreweriesComponent.prototype.getCountries = function () {
-        var _this = this;
-        this.countryService.get()
-            .subscribe(function (countries) {
-            _this.countries = countries;
-            _this.selectingCountries = new linq_1.List(_this.countries).OrderBy(function (p) { return p.name; }).Select(function (p) { return new appComponent_1.Options(p.id, p.name); })
-                .ToArray();
-        }, function (error) { return _this.errorMessage = error; });
-    };
-    BreweriesComponent.prototype.getBeers = function () {
-        var _this = this;
-        this.beerService.get()
-            .subscribe(function (beers) {
-            _this.beers = beers;
-            _this.breweryCounts = new linq_1.List(beers)
-                .Aggregate(function (ac, b) {
-                ac[b.brewery.id]
-                    ? ac[b.brewery.id] += 1
-                    : ac[b.brewery.id] = 1;
-                return ac;
-            }, {});
-            _this.get();
-        }, function (error) { return _this.errorMessage = error; });
-    };
-    BreweriesComponent.prototype.startDelete = function () {
-        var _this = this;
-        if (!this.editing)
-            return;
-        if (this.breweryCounts[this.editing.id]) {
-            var disposable = this.dialogService.addDialog(selector_component_1.SelectorComponent, {
-                title: 'Заменить на',
-                message: 'У выбранной пивоварни есть ' + this.breweryCounts[this.editing.id] + ' сортов пива. Выберите замену:',
-                options: new linq_1.List(this.elements).Where(function (b) { return b.id !== _this.editing.id; }).OrderBy(function (b) { return b.name; }).Select(function (b) { return new appComponent_1.Options(b.id, b.name); }).ToArray()
-            })
-                .subscribe(function (replacement) {
-                //We get dialog result
-                if (replacement) {
-                    _super.prototype.delete.call(_this, replacement);
-                }
-                else {
-                    return;
-                }
-            });
-            //We can close dialog calling disposable.unsubscribe();
-            //If dialog was not closed manually close it by timeout
-            //setTimeout(() => {
-            //    disposable.unsubscribe();
-            //}, 10000);
-        }
-        else {
-            _super.prototype.delete.call(this);
-        }
-    };
-    BreweriesComponent.prototype.onElementDeleted = function (deleted, replacement) {
-        if (replacement) {
-            this.breweryCounts[replacement] = (this.breweryCounts[replacement] || 0) + this.breweryCounts[deleted.id];
-        }
-    };
-    return BreweriesComponent;
-}(appComponent_1.AppComponent));
-BreweriesComponent = __decorate([
-    ng.Component({
-        selector: "breweries",
-        providers: [breweries_service_1.BreweryService, countries_service_1.CountryService, beers_service_1.BeerService],
-        styles: [__webpack_require__(662)],
-        template: __webpack_require__(364)
-    }),
-    __metadata("design:paramtypes", [breweries_service_1.BreweryService,
-        ng2_bootstrap_modal_1.DialogService,
-        countries_service_1.CountryService,
-        beers_service_1.BeerService,
-        angular2localization_1.LocaleService,
-        angular2localization_1.LocalizationService])
-], BreweriesComponent);
-exports.BreweriesComponent = BreweriesComponent;
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\breweries\\breweries.component.ts'\n    at Error (native)");
 
 /***/ }),
 /* 335 */
@@ -38288,16 +37850,11 @@ exports.BreweriesComponent = BreweriesComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38307,10 +37864,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
 var linq_1 = __webpack_require__(25);
-var breweries_service_1 = __webpack_require__(75);
+var breweries_service_1 = __webpack_require__(74);
 var users_service_1 = __webpack_require__(45);
 var breweryadmins_service_1 = __webpack_require__(336);
 var appComponent_1 = __webpack_require__(8);
@@ -38379,16 +37935,11 @@ exports.BreweryAdminsComponent = BreweryAdminsComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38398,7 +37949,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -38455,16 +38005,11 @@ exports.BreweryAdminService = BreweryAdminService;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38474,7 +38019,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
 var cities_service_1 = __webpack_require__(127);
 var appComponent_1 = __webpack_require__(8);
@@ -38501,81 +38045,17 @@ exports.CitiesComponent = CitiesComponent;
 
 
 /***/ }),
-/* 338 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(17);
-var appComponent_1 = __webpack_require__(8);
-var Loginservice = __webpack_require__(15);
-var CountryService = (function (_super) {
-    __extends(CountryService, _super);
-    function CountryService(http, loginService) {
-        var _this = _super.call(this, http, loginService) || this;
-        _this.serverUrl = "api/countries";
-        return _this;
-    }
-    CountryService.prototype.default = function () {
-        return {
-            id: 'id',
-            name: 'name'
-        };
-    };
-    CountryService.prototype.new = function (source) {
-        var country = this.default();
-        this.copy(source, country);
-        return country;
-    };
-    CountryService.prototype.copy = function (source, dest) {
-        dest.name = source.name;
-    };
-    return CountryService;
-}(appComponent_1.AppService));
-CountryService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, Loginservice.LoginService])
-], CountryService);
-exports.CountryService = CountryService;
-
-
-/***/ }),
+/* 338 */,
 /* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38585,7 +38065,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
 var linq_1 = __webpack_require__(25);
 var epubs_service_1 = __webpack_require__(56);
@@ -38696,16 +38175,11 @@ exports.EPubsComponent = EPubsComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38715,7 +38189,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var angular2localization_1 = __webpack_require__(11);
 var HomeComponent = (function (_super) {
@@ -38758,7 +38231,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 // Services.
 var angular2localization_1 = __webpack_require__(11);
@@ -38802,7 +38274,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var login_service_1 = __webpack_require__(15);
 var users_service_1 = __webpack_require__(45);
@@ -38873,16 +38344,11 @@ exports.LoginComponent = LoginComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38892,7 +38358,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var login_service_1 = __webpack_require__(15);
 var users_service_1 = __webpack_require__(45);
@@ -38932,16 +38397,11 @@ exports.NavMenuComponent = NavMenuComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38951,7 +38411,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
 var linq_1 = __webpack_require__(25);
 var epubs_service_1 = __webpack_require__(56);
@@ -39023,16 +38482,11 @@ exports.PubAdminsComponent = PubAdminsComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39042,7 +38496,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -39105,16 +38558,11 @@ exports.PubAdminService = PubAdminService;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39124,7 +38572,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var TimerObservable_1 = __webpack_require__(277);
 var linq_1 = __webpack_require__(25);
@@ -39225,16 +38672,11 @@ exports.PubsComponent = PubsComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39244,11 +38686,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
 var linq_1 = __webpack_require__(25);
 var epubs_service_1 = __webpack_require__(56);
-var beers_service_1 = __webpack_require__(74);
+var beers_service_1 = __webpack_require__(73);
 var serves_service_1 = __webpack_require__(348);
 var appComponent_1 = __webpack_require__(8);
 var angular2localization_1 = __webpack_require__(11);
@@ -39350,16 +38791,11 @@ exports.ServesComponent = ServesComponent;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39369,7 +38805,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var http_1 = __webpack_require__(17);
 var ontap_models_1 = __webpack_require__(24);
@@ -39441,16 +38876,11 @@ exports.ServeService = ServeService;
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39460,7 +38890,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
 var users_service_1 = __webpack_require__(45);
 var appComponent_1 = __webpack_require__(8);
@@ -39500,17 +38929,11 @@ exports.UsersComponent = UsersComponent;
  * Released under the MIT license
  */
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
  * and unsubscribe methods based on generic handlers. The TEventType specifies
@@ -40101,115 +39524,46 @@ function createSignalList() {
 
 /***/ }),
 /* 351 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\app\\app.component.css'\n    at Error (native)");
 
 /***/ }),
 /* 352 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\beers\\beers.component.css'\n    at Error (native)");
 
 /***/ }),
-/* 353 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 353 */,
 /* 354 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\epubs\\epubs.component.css'\n    at Error (native)");
 
 /***/ }),
 /* 355 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, ".locale {\r\n    padding: 15px 10px 0 0;\r\n}\r\n", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\locale\\locale.component.css'\n    at Error (native)");
 
 /***/ }),
 /* 356 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, ".logged-in {\r\n    color: lightskyblue;\r\n}", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\login\\login.component.css'\n    at Error (native)");
 
 /***/ }),
 /* 357 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, "li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highlighting rules for nav menu items */\nli.link-active a,\nli.link-active a:hover,\nli.link-active a:focus {\n    background-color: #4189C7;\n    color: white;\n}\n\n/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n\n.copyright {\n    margin-top: 20px;\n    color: lightgray;\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(15% - 20px);\n    }\n    .navbar {\n        border-radius: 0px;\n        border-width: 0px;\n        height: 100%;\n    }\n    .navbar-header {\n        float: none;\n    }\n    .navbar-collapse {\n        border-top: 1px solid #444;\n        padding: 0px;\n    }\n    .navbar ul {\n        float: none;\n    }\n    .navbar li {\n        float: none;\n        font-size: 15px;\n        margin: 2px;\n    }\n    .navbar li a {\n        padding: 4px 16px;\n        border-radius: 4px;\n    }\n    .navbar a {\n        /* If a menu item's text is too long, truncate it */\n        /*width: 100%;*/\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n}\n", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\navmenu\\navmenu.component.css'\n    at Error (native)");
 
 /***/ }),
 /* 358 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(26)();
-// imports
-
-
-// module
-exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
-
-// exports
-
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\pubs\\pubs.component.css'\n    at Error (native)");
 
 /***/ }),
 /* 359 */
@@ -40550,22 +39904,17 @@ module.exports = "<div class='container-fluid'>\n    <div class='row'>\n        
 module.exports = "<h1>Редактировать список пива</h1>\r\n\r\n<p>На этой странице можно редактировать сорта пива, а также добавлять новые сорта.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</alert>\r\n\r\n<div class=\"dropdown\" *ngIf=\"breweries\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"breweryChooser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Пивоварня: <span *ngIf=\"brewery\">{{brewery.name}}</span><span *ngIf=\"!brewery\">все</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"breweryChooser\">\r\n        <li><a (click)=\"setBrewery('')\">*</a></li>\r\n        <li *ngFor=\"let brewery of selectingBreweries\"><a (click)=\"setBrewery(brewery.value)\">{{ brewery.label }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-2\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Производитель</strong></h4></div>\r\n        <div class=\"col-md-3\"><h4><strong>Описание</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Алкоголь, &deg;</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Плотность, %</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Горькость, IBU</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Действия</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let beer of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != beer.id)\">\r\n            <div class=\"col-md-2\" title=\"{{beer.id}}\">{{ beer.name }}</div>\r\n            <div class=\"col-md-2\">{{ beer.brewery.name }}</div>\r\n            <div class=\"col-md-3\">{{ beer.description }}</div>\r\n            <div class=\"col-md-1\">{{ beer.alcohol }}</div>\r\n            <div class=\"col-md-1\">{{ beer.gravity }}</div>\r\n            <div class=\"col-md-1\">{{ beer.ibu }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(beer.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"fa fa-pencil-square-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(beer.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(beer.id)\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == beer.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-2\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingBreweries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.brewery.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <textarea class=\"form-control\" id=\"editing.description\"\r\n                                  required\r\n                                  [(ngModel)]=\"editing.description\" name=\"description\"></textarea>\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.alcohol\"\r\n                           required\r\n                           [(ngModel)]=\"editing.alcohol\" name=\"alcohol\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.gravity\"\r\n                           [(ngModel)]=\"editing.gravity\" name=\"gravity\">\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.ibu\"\r\n                           [(ngModel)]=\"editing.ibu\" name=\"ibu\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>    \r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>  \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-10\">&nbsp;</div>\r\n                <div class=\"col-md-4\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingBreweries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.brewery.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <textarea class=\"form-control\" id=\"adding.description\"\r\n                          required\r\n                          [(ngModel)]=\"adding.description\" name=\"description\"></textarea>\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.alcohol\"\r\n                       required\r\n                       [(ngModel)]=\"adding.alcohol\" name=\"alcohol\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.gravity\"\r\n                       [(ngModel)]=\"adding.gravity\" name=\"gravity\">\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.ibu\"\r\n                       [(ngModel)]=\"adding.ibu\" name=\"ibu\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isAdding(adding.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isAdding(adding.id)\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-8\">&nbsp;\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\" *ngIf=\"adding.image\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
-/* 364 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Редактировать список пивоварен</h1>\r\n\r\n<p>На этой странице можно редактировать пивоварни, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Страна</strong></h4></div>\r\n        <div class=\"col-md-5\"><h4><strong>Адрес</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Действия</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let brewery of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != brewery.id)\">\r\n            <div class=\"col-md-3\" title=\"{{brewery.id}}\">{{ brewery.name }}</div>\r\n            <div class=\"col-md-2\">{{ brewery.country.name }}</div>\r\n            <div class=\"col-md-5\">{{ brewery.address }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(brewery.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <span class=\"badge\" *ngIf=\"breweryCounts[brewery.id]\">{{ breweryCounts[brewery.id] }} <i class=\"fa fa-beer\" aria-hidden=\"true\"></i></span>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == brewery.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingCountries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.country.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-5\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"startDelete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-1\">\r\n                    <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n                </div>\r\n                <div class=\"col-md-7\"></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingCountries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.country.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-5\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                       required\r\n                       [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-1\">\r\n                <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n            </div>\r\n            <div class=\"col-md-7\"></div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
-
-/***/ }),
+/* 364 */,
 /* 365 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пивоварням.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Пивоварня</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let breweryAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.brewery.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.brewery.id\" (change)=\"onEditChangeBrewery($event.target.value)\">\n                        <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    <button (click)=\"edit(breweryAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.brewery.id\" (change)=\"onAddChangeBrewery($event.target.value)\">\n                    <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\breweryadmins\\breweryadmins.component.html'\n    at Error (native)");
 
 /***/ }),
 /* 366 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список городов</h1>\n\n<p>На этой странице вы можете редактировать список городов, а также добавлять новые.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n    <tr>\n        <th>Служебный Id</th>\n        <th>Название</th>\n        <th>Действия</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let city of elements\">\n        <td>{{ city.id }}</td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                    {{ city.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                <button (click)=\"edit(city.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\n    </tr>\n\n    <tr *ngIf=\"adding\">\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\n                   required\n                   [(ngModel)]=\"adding.id\" name=\"id\">\n        </td>\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\n                   required\n                   [(ngModel)]=\"adding.name\" name=\"name\">\n        </td>\n        <td>\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\n        </td>\n    </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\cities\\cities.component.html'\n    at Error (native)");
 
 /***/ }),
 /* 367 */
@@ -40577,7 +39926,7 @@ module.exports = "<h1>Редактировать список пабов</h1>\r\
 /* 368 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\r\n    {{'MENU.ONTAP' | translate:lang}}<!--Що на кранах-->?\r\n</h1>\r\n<p>    \r\n    {{'HOME.DESCRIPTION' | translate:lang}}<!--На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.-->\r\n</p>\r\n<div class=\"panel panel-warning\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">\r\n            {{'HOME.ASSERTION' | translate:lang}}<!--Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років-->:\r\n        </h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n            <a class=\"btn btn-success btn-lg\" [routerLink]=\"['/pubs']\" role=\"button\"><span class=\"glyphicon glyphicon-ok-circle\"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>\r\n            <a class=\"btn btn-danger btn-lg\" href=\"http://prom.ua/Podemnyj-kran-igrushki.html\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> {{'HOME.NO' | translate:lang}}<!--Ні--></a>\r\n    </div>\r\n</div>";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\home\\home.component.html'\n    at Error (native)");
 
 /***/ }),
 /* 369 */
@@ -40601,7 +39950,7 @@ module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-invers
 /* 372 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пабам.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Паб</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let pubAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.pub.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    <button (click)=\"edit(pubAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\pubadmins\\pubadmins.component.html'\n    at Error (native)");
 
 /***/ }),
 /* 373 */
@@ -40613,19 +39962,19 @@ module.exports = "<h1>\r\n    {{'PUBS.TITLE' | translate:lang}}<!--Крафто�
 /* 374 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n            <h4 class=\"modal-title\">{{title || 'Confirm'}}</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n            <p>{{message || 'Are you sure?'}}</p>\r\n            <p>\r\n                <ng-select [options]=\"options\"\r\n                                [multiple]=\"false\"\r\n                                [(ngModel)]=\"selected\">\r\n                </ng-select>\r\n            </p>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"confirm()\">OK</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\selector\\selector.component.html'\n    at Error (native)");
 
 /***/ }),
 /* 375 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать цены на пиво в пабах, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"dropdown\" *ngIf=\"pubs\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Паб<span *ngIf=\"pub\">: {{pub.name}}</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n        <li><a (click)=\"setPub('')\">*</a></li>\r\n        <li *ngFor=\"let pub of pubs\"><a (click)=\"setPub(pub.name)\">{{ pub.name }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-xs-3\">Паб</th>\r\n            <th class=\"col-xs-1\">Кран</th>\r\n            <th class=\"col-xs-4\">Пиво</th>\r\n            <th class=\"col-xs-1\">Цена</th>\r\n            <th class=\"col-xs-1\">Объём</th>\r\n            <th class=\"col-xs-3\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let serve of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.servedIn.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <ng-select [options]=\"selectingPubs\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.servedIn.id\">\r\n                    </ng-select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.tap }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.tap\"\r\n                           required\r\n                           [(ngModel)]=\"editing.tap\" name=\"tap\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.served.name }} ({{serve.served.brewery.name}})\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <ng-select [options]=\"selectingBeers\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.served.id\">\r\n                    </ng-select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.price }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.price\"\r\n                           required\r\n                           [(ngModel)]=\"editing.price\" name=\"price\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.volume }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.volume\"\r\n                           required\r\n                           [(ngModel)]=\"editing.volume\" name=\"volume\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    <button (click)=\"edit(serve.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                <ng-select [options]=\"selectingPubs\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.servedIn.id\">\r\n                </ng-select>\r\n            </td>\r\n            <td>\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.tap\"\r\n                       required\r\n                       [(ngModel)]=\"adding.tap\" name=\"tap\">\r\n            </td>\r\n            <td>\r\n                <ng-select [options]=\"selectingBeers\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.served.id\">\r\n                </ng-select>\r\n            </td>\r\n            <td>\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.price\"\r\n                       required\r\n                       [(ngModel)]=\"adding.price\" name=\"price\">\r\n            </td>\r\n            <td>\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.volume\"\r\n                       required\r\n                       [(ngModel)]=\"adding.volume\" name=\"volume\">\r\n            </td>\r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\serves\\serves.component.html'\n    at Error (native)");
 
 /***/ }),
 /* 376 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список пользователей</h1>\r\n\r\n<p>На этой странице вы можете редактировать список пользователей, а также добавлять новые.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n    <tr>\r\n        <th>Логин</th>\r\n        <th>Имя</th>\r\n        <th>Пароль</th>\r\n        <th>Админ?</th>\r\n        <th>Представляет паб?</th>\r\n        <th>Представляет пивоварню?</th>\r\n        <th>Действия</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let user of elements\">\r\n        <td>{{ user.id }}</td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    {{ user.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    ***\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"password\" class=\"form-control\" id=\"password\"\n                           required\n                           [(ngModel)]=\"editing.password\" name=\"password\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.isAdmin\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"isAdmin\"\n                           required\n                           [(ngModel)]=\"editing.isAdmin\" name=\"isAdmin\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminPub\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminPub\"\n                           required\n                           [(ngModel)]=\"editing.canAdminPub\" name=\"canAdminPub\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminBrewery\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminBrewery\"\n                           required\n                           [(ngModel)]=\"editing.canAdminBrewery\" name=\"canAdminBrewery\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <button (click)=\"edit(user.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\r\n    </tr>\r\n\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\r\n                   required\r\n                   [(ngModel)]=\"adding.id\" name=\"id\">\r\n        </td>\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                   required\r\n                   [(ngModel)]=\"adding.name\" name=\"name\">\r\n        </td>\r\n        <td>\r\n            <input type=\"password\" class=\"form-control\" id=\"adding.password\"\r\n                   required\r\n                   [(ngModel)]=\"adding.password\" name=\"password\">\r\n        </td>\r\n        <td>\r\n\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.isAdmin\"\r\n                   required\r\n                   [(ngModel)]=\"adding.isAdmin\" name=\"isAdmin\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminPub\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminPub\" name=\"canAdminPub\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminBrewery\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminBrewery\" name=\"canAdminBrewery\">\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projects\\ontap\\ClientApp\\app\\components\\users\\users.component.html'\n    at Error (native)");
 
 /***/ }),
 /* 377 */
@@ -40846,7 +40195,7 @@ function webpackContext(req) {
 };
 function webpackContextResolve(req) {
 	var id = map[req];
-	if(!(id + 1)) // check for number or string
+	if(!(id + 1)) // check for number
 		throw new Error("Cannot find module '" + req + "'.");
 	return id;
 };
@@ -40856,6 +40205,7 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = 377;
+
 
 /***/ }),
 /* 378 */
@@ -40874,7 +40224,7 @@ var core_1 = __webpack_require__(1);
 var common_1 = __webpack_require__(9);
 var dialog_holder_component_1 = __webpack_require__(234);
 var dialog_wrapper_component_1 = __webpack_require__(235);
-var dialog_service_1 = __webpack_require__(77);
+var dialog_service_1 = __webpack_require__(76);
 function dialogServiceFactory(resolver, applicationRef, injector, options) {
     return new dialog_service_1.DialogService(resolver, applicationRef, injector, options);
 }
@@ -40970,7 +40320,7 @@ var bootstrap_modal_module_1 = __webpack_require__(378);
 exports.BootstrapModalModule = bootstrap_modal_module_1.BootstrapModalModule;
 var dialog_component_1 = __webpack_require__(379);
 exports.DialogComponent = dialog_component_1.DialogComponent;
-var dialog_service_1 = __webpack_require__(77);
+var dialog_service_1 = __webpack_require__(76);
 exports.DialogService = dialog_service_1.DialogService;
 exports.DialogServiceConfig = dialog_service_1.DialogServiceConfig;
 //# sourceMappingURL=index.js.map
@@ -40983,9 +40333,9 @@ exports.DialogServiceConfig = dialog_service_1.DialogServiceConfig;
 
 var accordion_group_component_1 = __webpack_require__(236);
 exports.AccordionPanelComponent = accordion_group_component_1.AccordionPanelComponent;
-var accordion_component_1 = __webpack_require__(79);
+var accordion_component_1 = __webpack_require__(78);
 exports.AccordionComponent = accordion_component_1.AccordionComponent;
-var accordion_module_1 = __webpack_require__(80);
+var accordion_module_1 = __webpack_require__(79);
 exports.AccordionModule = accordion_module_1.AccordionModule;
 
 
@@ -40997,7 +40347,7 @@ exports.AccordionModule = accordion_module_1.AccordionModule;
 
 var alert_component_1 = __webpack_require__(237);
 exports.AlertComponent = alert_component_1.AlertComponent;
-var alert_module_1 = __webpack_require__(81);
+var alert_module_1 = __webpack_require__(80);
 exports.AlertModule = alert_module_1.AlertModule;
 
 
@@ -41011,7 +40361,7 @@ var button_checkbox_directive_1 = __webpack_require__(238);
 exports.ButtonCheckboxDirective = button_checkbox_directive_1.ButtonCheckboxDirective;
 var button_radio_directive_1 = __webpack_require__(239);
 exports.ButtonRadioDirective = button_radio_directive_1.ButtonRadioDirective;
-var buttons_module_1 = __webpack_require__(82);
+var buttons_module_1 = __webpack_require__(81);
 exports.ButtonsModule = buttons_module_1.ButtonsModule;
 
 
@@ -41021,9 +40371,9 @@ exports.ButtonsModule = buttons_module_1.ButtonsModule;
 
 "use strict";
 
-var carousel_component_1 = __webpack_require__(83);
+var carousel_component_1 = __webpack_require__(82);
 exports.CarouselComponent = carousel_component_1.CarouselComponent;
-var carousel_module_1 = __webpack_require__(84);
+var carousel_module_1 = __webpack_require__(83);
 exports.CarouselModule = carousel_module_1.CarouselModule;
 var slide_component_1 = __webpack_require__(240);
 exports.SlideComponent = slide_component_1.SlideComponent;
@@ -41057,7 +40407,7 @@ exports.CollapseModule = collapse_module_1.CollapseModule;
  */
 var datepicker_component_1 = __webpack_require__(244);
 exports.DatePickerComponent = datepicker_component_1.DatePickerComponent;
-var datepicker_module_1 = __webpack_require__(85);
+var datepicker_module_1 = __webpack_require__(84);
 exports.DatepickerModule = datepicker_module_1.DatepickerModule;
 var daypicker_component_1 = __webpack_require__(245);
 exports.DayPickerComponent = daypicker_component_1.DayPickerComponent;
@@ -41083,7 +40433,7 @@ var dropdown_directive_1 = __webpack_require__(58);
 exports.DropdownDirective = dropdown_directive_1.DropdownDirective;
 var dropdown_service_1 = __webpack_require__(250);
 exports.DropdownService = dropdown_service_1.DropdownService;
-var dropdown_module_1 = __webpack_require__(86);
+var dropdown_module_1 = __webpack_require__(85);
 exports.DropdownModule = dropdown_module_1.DropdownModule;
 
 
@@ -41094,21 +40444,21 @@ exports.DropdownModule = dropdown_module_1.DropdownModule;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var accordion_module_1 = __webpack_require__(80);
-var alert_module_1 = __webpack_require__(81);
-var buttons_module_1 = __webpack_require__(82);
-var carousel_module_1 = __webpack_require__(84);
+var accordion_module_1 = __webpack_require__(79);
+var alert_module_1 = __webpack_require__(80);
+var buttons_module_1 = __webpack_require__(81);
+var carousel_module_1 = __webpack_require__(83);
 var collapse_module_1 = __webpack_require__(57);
-var datepicker_module_1 = __webpack_require__(85);
-var dropdown_module_1 = __webpack_require__(86);
-var modal_module_1 = __webpack_require__(89);
-var pagination_module_1 = __webpack_require__(91);
-var progressbar_module_1 = __webpack_require__(94);
-var rating_module_1 = __webpack_require__(95);
-var tabs_module_1 = __webpack_require__(97);
-var timepicker_module_1 = __webpack_require__(99);
-var tooltip_module_1 = __webpack_require__(101);
-var typeahead_module_1 = __webpack_require__(105);
+var datepicker_module_1 = __webpack_require__(84);
+var dropdown_module_1 = __webpack_require__(85);
+var modal_module_1 = __webpack_require__(88);
+var pagination_module_1 = __webpack_require__(90);
+var progressbar_module_1 = __webpack_require__(93);
+var rating_module_1 = __webpack_require__(94);
+var tabs_module_1 = __webpack_require__(96);
+var timepicker_module_1 = __webpack_require__(98);
+var tooltip_module_1 = __webpack_require__(100);
+var typeahead_module_1 = __webpack_require__(104);
 var components_helper_service_1 = __webpack_require__(21);
 var Ng2BootstrapModule = (function () {
     function Ng2BootstrapModule() {
@@ -41141,10 +40491,10 @@ exports.Ng2BootstrapModule = Ng2BootstrapModule;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
+__export(__webpack_require__(86));
 __export(__webpack_require__(87));
-__export(__webpack_require__(88));
 __export(__webpack_require__(251));
-var modal_module_1 = __webpack_require__(89);
+var modal_module_1 = __webpack_require__(88);
 exports.ModalModule = modal_module_1.ModalModule;
 
 
@@ -41156,9 +40506,9 @@ exports.ModalModule = modal_module_1.ModalModule;
 
 var pager_component_1 = __webpack_require__(252);
 exports.PagerComponent = pager_component_1.PagerComponent;
-var pagination_component_1 = __webpack_require__(90);
+var pagination_component_1 = __webpack_require__(89);
 exports.PaginationComponent = pagination_component_1.PaginationComponent;
-var pagination_module_1 = __webpack_require__(91);
+var pagination_module_1 = __webpack_require__(90);
 exports.PaginationModule = pagination_module_1.PaginationModule;
 
 
@@ -41170,11 +40520,11 @@ exports.PaginationModule = pagination_module_1.PaginationModule;
 
 var bar_component_1 = __webpack_require__(253);
 exports.BarComponent = bar_component_1.BarComponent;
-var progress_directive_1 = __webpack_require__(93);
+var progress_directive_1 = __webpack_require__(92);
 exports.ProgressDirective = progress_directive_1.ProgressDirective;
 var progressbar_component_1 = __webpack_require__(254);
 exports.ProgressbarComponent = progressbar_component_1.ProgressbarComponent;
-var progressbar_module_1 = __webpack_require__(94);
+var progressbar_module_1 = __webpack_require__(93);
 exports.ProgressbarModule = progressbar_module_1.ProgressbarModule;
 
 
@@ -41186,7 +40536,7 @@ exports.ProgressbarModule = progressbar_module_1.ProgressbarModule;
 
 var rating_component_1 = __webpack_require__(255);
 exports.RatingComponent = rating_component_1.RatingComponent;
-var rating_module_1 = __webpack_require__(95);
+var rating_module_1 = __webpack_require__(94);
 exports.RatingModule = rating_module_1.RatingModule;
 
 
@@ -41198,11 +40548,11 @@ exports.RatingModule = rating_module_1.RatingModule;
 
 var tab_heading_directive_1 = __webpack_require__(256);
 exports.TabHeadingDirective = tab_heading_directive_1.TabHeadingDirective;
-var tabset_component_1 = __webpack_require__(98);
+var tabset_component_1 = __webpack_require__(97);
 exports.TabsetComponent = tabset_component_1.TabsetComponent;
-var tab_directive_1 = __webpack_require__(96);
+var tab_directive_1 = __webpack_require__(95);
 exports.TabDirective = tab_directive_1.TabDirective;
-var tabs_module_1 = __webpack_require__(97);
+var tabs_module_1 = __webpack_require__(96);
 exports.TabsModule = tabs_module_1.TabsModule;
 
 
@@ -41214,7 +40564,7 @@ exports.TabsModule = tabs_module_1.TabsModule;
 
 var timepicker_component_1 = __webpack_require__(257);
 exports.TimepickerComponent = timepicker_component_1.TimepickerComponent;
-var timepicker_module_1 = __webpack_require__(99);
+var timepicker_module_1 = __webpack_require__(98);
 exports.TimepickerModule = timepicker_module_1.TimepickerModule;
 
 
@@ -41224,11 +40574,11 @@ exports.TimepickerModule = timepicker_module_1.TimepickerModule;
 
 "use strict";
 
-var tooltip_container_component_1 = __webpack_require__(100);
+var tooltip_container_component_1 = __webpack_require__(99);
 exports.TooltipContainerComponent = tooltip_container_component_1.TooltipContainerComponent;
 var tooltip_directive_1 = __webpack_require__(259);
 exports.TooltipDirective = tooltip_directive_1.TooltipDirective;
-var tooltip_module_1 = __webpack_require__(101);
+var tooltip_module_1 = __webpack_require__(100);
 exports.TooltipModule = tooltip_module_1.TooltipModule;
 
 
@@ -41240,15 +40590,15 @@ exports.TooltipModule = tooltip_module_1.TooltipModule;
 
 var typeahead_match_class_1 = __webpack_require__(260);
 exports.TypeaheadMatch = typeahead_match_class_1.TypeaheadMatch;
-var typeahead_options_class_1 = __webpack_require__(103);
+var typeahead_options_class_1 = __webpack_require__(102);
 exports.TypeaheadOptions = typeahead_options_class_1.TypeaheadOptions;
-var typeahead_utils_1 = __webpack_require__(104);
+var typeahead_utils_1 = __webpack_require__(103);
 exports.TypeaheadUtils = typeahead_utils_1.TypeaheadUtils;
-var typeahead_container_component_1 = __webpack_require__(102);
+var typeahead_container_component_1 = __webpack_require__(101);
 exports.TypeaheadContainerComponent = typeahead_container_component_1.TypeaheadContainerComponent;
 var typeahead_directive_1 = __webpack_require__(261);
 exports.TypeaheadDirective = typeahead_directive_1.TypeaheadDirective;
-var typeahead_module_1 = __webpack_require__(105);
+var typeahead_module_1 = __webpack_require__(104);
 exports.TypeaheadModule = typeahead_module_1.TypeaheadModule;
 
 
@@ -42092,7 +41442,7 @@ exports.latinMap = {
 
 "use strict";
 
-var browser_1 = __webpack_require__(106);
+var browser_1 = __webpack_require__(105);
 var Utils = (function () {
     function Utils() {
     }
@@ -42139,38 +41489,38 @@ __export(__webpack_require__(393));
 __export(__webpack_require__(394));
 __export(__webpack_require__(395));
 __export(__webpack_require__(396));
-__export(__webpack_require__(92));
+__export(__webpack_require__(91));
 __export(__webpack_require__(242));
 __export(__webpack_require__(35));
-var accordion_module_1 = __webpack_require__(80);
+var accordion_module_1 = __webpack_require__(79);
 exports.AccordionModule = accordion_module_1.AccordionModule;
-var alert_module_1 = __webpack_require__(81);
+var alert_module_1 = __webpack_require__(80);
 exports.AlertModule = alert_module_1.AlertModule;
-var buttons_module_1 = __webpack_require__(82);
+var buttons_module_1 = __webpack_require__(81);
 exports.ButtonsModule = buttons_module_1.ButtonsModule;
-var carousel_module_1 = __webpack_require__(84);
+var carousel_module_1 = __webpack_require__(83);
 exports.CarouselModule = carousel_module_1.CarouselModule;
 var collapse_module_1 = __webpack_require__(57);
 exports.CollapseModule = collapse_module_1.CollapseModule;
-var datepicker_module_1 = __webpack_require__(85);
+var datepicker_module_1 = __webpack_require__(84);
 exports.DatepickerModule = datepicker_module_1.DatepickerModule;
-var dropdown_module_1 = __webpack_require__(86);
+var dropdown_module_1 = __webpack_require__(85);
 exports.DropdownModule = dropdown_module_1.DropdownModule;
-var modal_module_1 = __webpack_require__(89);
+var modal_module_1 = __webpack_require__(88);
 exports.ModalModule = modal_module_1.ModalModule;
-var pagination_module_1 = __webpack_require__(91);
+var pagination_module_1 = __webpack_require__(90);
 exports.PaginationModule = pagination_module_1.PaginationModule;
-var progressbar_module_1 = __webpack_require__(94);
+var progressbar_module_1 = __webpack_require__(93);
 exports.ProgressbarModule = progressbar_module_1.ProgressbarModule;
-var rating_module_1 = __webpack_require__(95);
+var rating_module_1 = __webpack_require__(94);
 exports.RatingModule = rating_module_1.RatingModule;
-var tabs_module_1 = __webpack_require__(97);
+var tabs_module_1 = __webpack_require__(96);
 exports.TabsModule = tabs_module_1.TabsModule;
-var timepicker_module_1 = __webpack_require__(99);
+var timepicker_module_1 = __webpack_require__(98);
 exports.TimepickerModule = timepicker_module_1.TimepickerModule;
-var tooltip_module_1 = __webpack_require__(101);
+var tooltip_module_1 = __webpack_require__(100);
 exports.TooltipModule = tooltip_module_1.TooltipModule;
-var typeahead_module_1 = __webpack_require__(105);
+var typeahead_module_1 = __webpack_require__(104);
 exports.TypeaheadModule = typeahead_module_1.TypeaheadModule;
 var components_helper_service_1 = __webpack_require__(21);
 exports.ComponentsHelper = components_helper_service_1.ComponentsHelper;
@@ -42280,7 +41630,7 @@ var CloudinaryUploader = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_file_upload__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_file_upload__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cloudinary_image_component__ = __webpack_require__(262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(106);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Ng2CloudinaryModule; });
 
 
@@ -43303,7 +42653,7 @@ __webpack_require__(449);
 __webpack_require__(450);
 __webpack_require__(455);
 __webpack_require__(451);
-__webpack_require__(109);
+__webpack_require__(108);
 __webpack_require__(452);
 __webpack_require__(453);
 __webpack_require__(454);
@@ -43395,13 +42745,13 @@ var Subscriber_1 = __webpack_require__(4);
 exports.Subscriber = Subscriber_1.Subscriber;
 var AsyncSubject_1 = __webpack_require__(60);
 exports.AsyncSubject = AsyncSubject_1.AsyncSubject;
-var ReplaySubject_1 = __webpack_require__(108);
+var ReplaySubject_1 = __webpack_require__(107);
 exports.ReplaySubject = ReplaySubject_1.ReplaySubject;
 var BehaviorSubject_1 = __webpack_require__(296);
 exports.BehaviorSubject = BehaviorSubject_1.BehaviorSubject;
 var ConnectableObservable_1 = __webpack_require__(276);
 exports.ConnectableObservable = ConnectableObservable_1.ConnectableObservable;
-var Notification_1 = __webpack_require__(65);
+var Notification_1 = __webpack_require__(64);
 exports.Notification = Notification_1.Notification;
 var EmptyError_1 = __webpack_require__(298);
 exports.EmptyError = EmptyError_1.EmptyError;
@@ -43899,7 +43249,7 @@ Observable_1.Observable.prototype.combineAll = combineAll_1.combineAll;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var combineLatest_1 = __webpack_require__(110);
+var combineLatest_1 = __webpack_require__(109);
 Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
 //# sourceMappingURL=combineLatest.js.map
 
@@ -43910,7 +43260,7 @@ Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var concat_1 = __webpack_require__(111);
+var concat_1 = __webpack_require__(110);
 Observable_1.Observable.prototype.concat = concat_1.concat;
 //# sourceMappingURL=concat.js.map
 
@@ -44795,7 +44145,7 @@ Observable_1.Observable.prototype.withLatestFrom = withLatestFrom_1.withLatestFr
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var zip_1 = __webpack_require__(112);
+var zip_1 = __webpack_require__(111);
 Observable_1.Observable.prototype.zip = zip_1.zipProto;
 //# sourceMappingURL=zip.js.map
 
@@ -44853,60 +44203,16 @@ var BoundCallbackObservable = (function (_super) {
      * last parameter must be a callback function that `func` calls when it is
      * done.
      *
-     * The output of `bindCallback` is a function that takes the same parameters
-     * as `func`, except the last one (the callback). When the output function
-     * is called with arguments, it will return an Observable. If `func` function
-     * calls its callback with one argument, the Observable will emit that value.
-     * If on the other hand callback is called with multiple values, resulting
-     * Observable will emit an array with these arguments.
-     *
-     * It is very important to remember, that input function `func` is not called
-     * when output function is, but rather when Observable returned by output
-     * function is subscribed. This means if `func` makes AJAX request, that request
-     * will be made every time someone subscribes to resulting Observable, but not before.
-     *
-     * Optionally, selector function can be passed to `bindObservable`. That function
-     * takes the same arguments as callback, and returns value
-     * that will be emitted by Observable instead of callback parameters themselves.
-     * Even though by default multiple arguments passed to callback appear in the stream as array,
-     * selector function will be called with arguments directly, just as callback would.
-     * This means you can imagine default selector (when one is not provided explicitly)
-     * as function that aggregates all its arguments into array, or simply returns first argument,
-     * if there is only one.
-     *
-     * Last optional parameter - {@link Scheduler} - can be used to control when call
-     * to `func` happens after someone subscribes to Observable, as well as when results
-     * passed to callback will be emitted. By default subscription to Observable calls `func`
-     * synchronously, but using `Scheduler.async` as last parameter will defer call to input function,
-     * just like wrapping that call in `setTimeout` with time `0` would. So if you use async Scheduler
-     * and call `subscribe` on output Observable, all function calls that are currently executing,
-     * will end before `func` is invoked.
-     *
-     * When it comes to emitting results passed to callback, by default they are emitted
-     * immediately after `func` invokes callback. In particular, if callback is called synchronously,
-     * then subscription to resulting Observable will call `next` function synchronously as well.
-     * If you want to defer that call, using `Scheduler.async` will, again, do the job.
-     * This means that by using `Scheduler.async` you can, in a sense, ensure that `func`
-     * always calls its callback asynchronously, thus avoiding terrifying Zalgo.
-     *
-     * Note that Observable created by output function will always emit only one value
-     * and then complete right after. Even if `func` calls callback multiple times, values from
-     * second and following calls will never appear in the stream. If you need to
-     * listen for multiple calls, you probably want to use {@link fromEvent} or
-     * {@link fromEventPattern} instead.
+     * The output of `bindCallback` is a function that takes the same
+     * parameters as `func`, except the last one (the callback). When the output
+     * function is called with arguments, it will return an Observable where the
+     * results will be delivered to.
      *
      * If `func` depends on some context (`this` property), that context will be set
-     * to the same context that output function has at call time. In particular, if `func`
-     * is called as method of some object, in order to preserve proper behaviour,
+     * to the same context that returned function has at call time. In particular, if `func`
+     * is usually called as method of some object, in order to preserve proper behaviour,
      * it is recommended to set context of output function to that object as well,
      * provided `func` is not already bound.
-     *
-     * If input function calls its callback in "node style" (i.e. first argument to callback is
-     * optional error parameter signaling whether call failed or not), {@link bindNodeCallback}
-     * provides convenient error handling and probably is a better choice.
-     * `bindCallback` will treat such functions without any difference and error parameter
-     * (whether passed or not) will always be interpreted as regular callback argument.
-     *
      *
      * @example <caption>Convert jQuery's getJSON to an Observable API</caption>
      * // Suppose we have jQuery.getJSON('/my/url', callback)
@@ -44914,56 +44220,10 @@ var BoundCallbackObservable = (function (_super) {
      * var result = getJSONAsObservable('/my/url');
      * result.subscribe(x => console.log(x), e => console.error(e));
      *
-     *
-     * @example <caption>Receive array of arguments passed to callback</caption>
-     * someFunction((a, b, c) => {
-     *   console.log(a); // 5
-     *   console.log(b); // 'some string'
-     *   console.log(c); // {someProperty: 'someValue'}
-     * });
-     *
-     * const boundSomeFunction = Rx.Observable.bindCallback(someFunction);
-     * boundSomeFunction.subscribe(values => {
-     *   console.log(values) // [5, 'some string', {someProperty: 'someValue'}]
-     * });
-     *
-     *
-     * @example <caption>Use bindCallback with selector function</caption>
-     * someFunction((a, b, c) => {
-     *   console.log(a); // 'a'
-     *   console.log(b); // 'b'
-     *   console.log(c); // 'c'
-     * });
-     *
-     * const boundSomeFunction = Rx.Observable.bindCallback(someFunction, (a, b, c) => a + b + c);
-     * boundSomeFunction.subscribe(value => {
-     *   console.log(value) // 'abc'
-     * });
-     *
-     *
-     * @example <caption>Compare behaviour with and without async Scheduler</caption>
-     * function iCallMyCallbackSynchronously(cb) {
-     *   cb();
-     * }
-     *
-     * const boundSyncFn = Rx.Observable.bindCallback(iCallMyCallbackSynchronously);
-     * const boundAsyncFn = Rx.Observable.bindCallback(iCallMyCallbackSynchronously, null, Rx.Scheduler.async);
-     *
-     * boundSyncFn().subscribe(() => console.log('I was sync!'));
-     * boundAsyncFn().subscribe(() => console.log('I was async!'));
-     * console.log('This happened...');
-     *
-     * // Logs:
-     * // I was sync!
-     * // This happened...
-     * // I was async!
-     *
-     *
      * @example <caption>Use bindCallback on object method</caption>
      * const boundMethod = Rx.Observable.bindCallback(someObject.methodWithCallback);
      * boundMethod.call(someObject) // make sure methodWithCallback has access to someObject
      * .subscribe(subscriber);
-     *
      *
      * @see {@link bindNodeCallback}
      * @see {@link from}
@@ -44971,7 +44231,7 @@ var BoundCallbackObservable = (function (_super) {
      *
      * @param {function} func Function with a callback as the last parameter.
      * @param {function} [selector] A function which takes the arguments from the
-     * callback and maps those to a value to emit on the output Observable.
+     * callback and maps those a value to emit on the output Observable.
      * @param {Scheduler} [scheduler] The scheduler on which to schedule the
      * callbacks.
      * @return {function(...params: *): Observable} A function which returns the
@@ -45016,7 +44276,7 @@ var BoundCallbackObservable = (function (_super) {
                         }
                     }
                     else {
-                        subject.next(innerArgs.length <= 1 ? innerArgs[0] : innerArgs);
+                        subject.next(innerArgs.length === 1 ? innerArgs[0] : innerArgs);
                         subject.complete();
                     }
                 };
@@ -45057,7 +44317,7 @@ var BoundCallbackObservable = (function (_super) {
                     }
                 }
                 else {
-                    var value = innerArgs.length <= 1 ? innerArgs[0] : innerArgs;
+                    var value = innerArgs.length === 1 ? innerArgs[0] : innerArgs;
                     self.add(scheduler.schedule(dispatchNext, 0, { value: value, subject: subject }));
                 }
             };
@@ -45126,58 +44386,16 @@ var BoundNodeCallbackObservable = (function (_super) {
      * Observables. The input is a function `func` with some parameters, but the
      * last parameter must be a callback function that `func` calls when it is
      * done. The callback function is expected to follow Node.js conventions,
-     * where the first argument to the callback is an error object, signaling
-     * whether call was successful. If that object is passed to callback, it means
-     * something went wrong.
+     * where the first argument to the callback is an error, while remaining
+     * arguments are the callback result.
      *
-     * The output of `bindNodeCallback` is a function that takes the same
-     * parameters as `func`, except the last one (the callback). When the output
-     * function is called with arguments, it will return an Observable.
-     * If `func` calls its callback with error parameter present, Observable will
-     * error with that value as well. If error parameter is not passed, Observable will emit
-     * second parameter. If there are more parameters (third and so on),
-     * Observable will emit an array with all arguments, except first error argument.
-     *
-     * Optionally `bindNodeCallback` accepts selector function, which allows you to
-     * make resulting Observable emit value computed by selector, instead of regular
-     * callback arguments. It works similarly to {@link bindCallback} selector, but
-     * Node.js-style error argument will never be passed to that function.
-     *
-     * Note that `func` will not be called at the same time output function is,
-     * but rather whenever resulting Observable is subscribed. By default call to
-     * `func` will happen synchronously after subscription, but that can be changed
-     * with proper {@link Scheduler} provided as optional third parameter. Scheduler
-     * can also control when values from callback will be emitted by Observable.
-     * To find out more, check out documentation for {@link bindCallback}, where
-     * Scheduler works exactly the same.
+     * The output of `bindNodeCallback` is a
+     * function that takes the same parameters as `func`, except the last one (the
+     * callback). When the output function is called with arguments, it will
+     * return an Observable where the results will be delivered to.
      *
      * As in {@link bindCallback}, context (`this` property) of input function will be set to context
      * of returned function, when it is called.
-     *
-     * After Observable emits value, it will complete immediately. This means
-     * even if `func` calls callback again, values from second and consecutive
-     * calls will never appear on the stream. If you need to handle functions
-     * that call callbacks multiple times, check out {@link fromEvent} or
-     * {@link fromEventPattern} instead.
-     *
-     * Note that `bindNodeCallback` can be used in non-Node.js environments as well.
-     * "Node.js-style" callbacks are just a convention, so if you write for
-     * browsers or any other environment and API you use implements that callback style,
-     * `bindNodeCallback` can be safely used on that API functions as well.
-     *
-     * Remember that Error object passed to callback does not have to be an instance
-     * of JavaScript built-in `Error` object. In fact, it does not even have to an object.
-     * Error parameter of callback function is interpreted as "present", when value
-     * of that parameter is truthy. It could be, for example, non-zero number, non-empty
-     * string or boolean `true`. In all of these cases resulting Observable would error
-     * with that value. This means usually regular style callbacks will fail very often when
-     * `bindNodeCallback` is used. If your Observable errors much more often then you
-     * would expect, check if callback really is called in Node.js-style and, if not,
-     * switch to {@link bindCallback} instead.
-     *
-     * Note that even if error parameter is technically present in callback, but its value
-     * is falsy, it still won't appear in array emitted by Observable or in selector function.
-     *
      *
      * @example <caption>Read a file from the filesystem and get the data as an Observable</caption>
      * import * as fs from 'fs';
@@ -45185,52 +44403,13 @@ var BoundNodeCallbackObservable = (function (_super) {
      * var result = readFileAsObservable('./roadNames.txt', 'utf8');
      * result.subscribe(x => console.log(x), e => console.error(e));
      *
-     *
-     * @example <caption>Use on function calling callback with multiple arguments</caption>
-     * someFunction((err, a, b) => {
-     *   console.log(err); // null
-     *   console.log(a); // 5
-     *   console.log(b); // "some string"
-     * });
-     * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction);
-     * boundSomeFunction()
-     * .subscribe(value => {
-     *   console.log(value); // [5, "some string"]
-     * });
-     *
-     *
-     * @example <caption>Use with selector function</caption>
-     * someFunction((err, a, b) => {
-     *   console.log(err); // undefined
-     *   console.log(a); // "abc"
-     *   console.log(b); // "DEF"
-     * });
-     * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction, (a, b) => a + b);
-     * boundSomeFunction()
-     * .subscribe(value => {
-     *   console.log(value); // "abcDEF"
-     * });
-     *
-     *
-     * @example <caption>Use on function calling callback in regular style</caption>
-     * someFunction(a => {
-     *   console.log(a); // 5
-     * });
-     * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction);
-     * boundSomeFunction()
-     * .subscribe(
-     *   value => {}             // never gets called
-     *   err => console.log(err) // 5
-     *);
-     *
-     *
      * @see {@link bindCallback}
      * @see {@link from}
      * @see {@link fromPromise}
      *
-     * @param {function} func Function with a Node.js-style callback as the last parameter.
+     * @param {function} func Function with a callback as the last parameter.
      * @param {function} [selector] A function which takes the arguments from the
-     * callback and maps those to a value to emit on the output Observable.
+     * callback and maps those a value to emit on the output Observable.
      * @param {Scheduler} [scheduler] The scheduler on which to schedule the
      * callbacks.
      * @return {function(...params: *): Observable} A function which returns the
@@ -45280,7 +44459,7 @@ var BoundNodeCallbackObservable = (function (_super) {
                         }
                     }
                     else {
-                        subject.next(innerArgs.length <= 1 ? innerArgs[0] : innerArgs);
+                        subject.next(innerArgs.length === 1 ? innerArgs[0] : innerArgs);
                         subject.complete();
                     }
                 };
@@ -45317,7 +44496,7 @@ function dispatch(state) {
             var selector = source.selector, subject = source.subject;
             var err = innerArgs.shift();
             if (err) {
-                self.add(scheduler.schedule(dispatchError, 0, { err: err, subject: subject }));
+                subject.error(err);
             }
             else if (selector) {
                 var result_2 = tryCatch_1.tryCatch(selector).apply(this, innerArgs);
@@ -45329,7 +44508,7 @@ function dispatch(state) {
                 }
             }
             else {
-                var value = innerArgs.length <= 1 ? innerArgs[0] : innerArgs;
+                var value = innerArgs.length === 1 ? innerArgs[0] : innerArgs;
                 self.add(scheduler.schedule(dispatchNext, 0, { value: value, subject: subject }));
             }
         };
@@ -45337,7 +44516,7 @@ function dispatch(state) {
         handler.source = source;
         var result = tryCatch_1.tryCatch(callbackFunc).apply(context, args.concat(handler));
         if (result === errorObject_1.errorObject) {
-            self.add(scheduler.schedule(dispatchError, 0, { err: errorObject_1.errorObject.e, subject: subject }));
+            subject.error(errorObject_1.errorObject.e);
         }
     }
     self.add(subject.subscribe(subscriber));
@@ -45414,7 +44593,7 @@ var DeferObservable = (function (_super) {
      *
      * @see {@link create}
      *
-     * @param {function(): SubscribableOrPromise} observableFactory The Observable
+     * @param {function(): Observable|Promise} observableFactory The Observable
      * factory function to invoke for each Observer that subscribes to the output
      * Observable. May also return a Promise, which will be converted on the fly
      * to an Observable.
@@ -45499,7 +44678,7 @@ var ErrorObservable = (function (_super) {
      * var result = Rx.Observable.throw(new Error('oops!')).startWith(7);
      * result.subscribe(x => console.log(x), e => console.error(e));
      *
-     * @example <caption>Map and flatten numbers to the sequence 'a', 'b', 'c', but throw an error for 13</caption>
+     * @example <caption>Map and flattens numbers to the sequence 'a', 'b', 'c', but throw an error for 13</caption>
      * var interval = Rx.Observable.interval(1000);
      * var result = interval.mergeMap(x =>
      *   x === 13 ?
@@ -45559,7 +44738,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Observable_1 = __webpack_require__(0);
 var EmptyObservable_1 = __webpack_require__(38);
-var isArray_1 = __webpack_require__(31);
+var isArray_1 = __webpack_require__(29);
 var subscribeToResult_1 = __webpack_require__(6);
 var OuterSubscriber_1 = __webpack_require__(5);
 /**
@@ -45941,7 +45120,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Observable_1 = __webpack_require__(0);
-var isScheduler_1 = __webpack_require__(27);
+var isScheduler_1 = __webpack_require__(31);
 var selfSelector = function (value) { return value; };
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -46148,7 +45327,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var isNumeric_1 = __webpack_require__(64);
+var isNumeric_1 = __webpack_require__(112);
 var Observable_1 = __webpack_require__(0);
 var async_1 = __webpack_require__(16);
 /**
@@ -46502,7 +45681,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Observable_1 = __webpack_require__(0);
 var asap_1 = __webpack_require__(289);
-var isNumeric_1 = __webpack_require__(64);
+var isNumeric_1 = __webpack_require__(112);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -46639,10 +45818,10 @@ exports.bindNodeCallback = BoundNodeCallbackObservable_1.BoundNodeCallbackObserv
 
 "use strict";
 
-var isScheduler_1 = __webpack_require__(27);
-var isArray_1 = __webpack_require__(31);
+var isScheduler_1 = __webpack_require__(31);
+var isArray_1 = __webpack_require__(29);
 var ArrayObservable_1 = __webpack_require__(30);
-var combineLatest_1 = __webpack_require__(110);
+var combineLatest_1 = __webpack_require__(109);
 /* tslint:enable:max-line-length */
 /**
  * Combines multiple Observables to create an Observable whose values are
@@ -46655,73 +45834,14 @@ var combineLatest_1 = __webpack_require__(110);
  * <img src="./img/combineLatest.png" width="100%">
  *
  * `combineLatest` combines the values from all the Observables passed as
- * arguments. This is done by subscribing to each Observable in order and,
- * whenever any Observable emits, collecting an array of the most recent
- * values from each Observable. So if you pass `n` Observables to operator,
- * returned Observable will always emit an array of `n` values, in order
- * corresponding to order of passed Observables (value from the first Observable
- * on the first place and so on).
+ * arguments. This is done by subscribing to each Observable, in order, and
+ * collecting an array of each of the most recent values any time any of the
+ * input Observables emits, then either taking that array and passing it as
+ * arguments to an optional `project` function and emitting the return value of
+ * that, or just emitting the array of recent values directly if there is no
+ * `project` function.
  *
- * Static version of `combineLatest` accepts either an array of Observables
- * or each Observable can be put directly as an argument. Note that array of
- * Observables is good choice, if you don't know beforehand how many Observables
- * you will combine. Passing empty array will result in Observable that
- * completes immediately.
- *
- * To ensure output array has always the same length, `combineLatest` will
- * actually wait for all input Observables to emit at least once,
- * before it starts emitting results. This means if some Observable emits
- * values before other Observables started emitting, all that values but last
- * will be lost. On the other hand, is some Observable does not emit value but
- * completes, resulting Observable will complete at the same moment without
- * emitting anything, since it will be now impossible to include value from
- * completed Observable in resulting array. Also, if some input Observable does
- * not emit any value and never completes, `combineLatest` will also never emit
- * and never complete, since, again, it will wait for all streams to emit some
- * value.
- *
- * If at least one Observable was passed to `combineLatest` and all passed Observables
- * emitted something, resulting Observable will complete when all combined
- * streams complete. So even if some Observable completes, result of
- * `combineLatest` will still emit values when other Observables do. In case
- * of completed Observable, its value from now on will always be the last
- * emitted value. On the other hand, if any Observable errors, `combineLatest`
- * will error immediately as well, and all other Observables will be unsubscribed.
- *
- * `combineLatest` accepts as optional parameter `project` function, which takes
- * as arguments all values that would normally be emitted by resulting Observable.
- * `project` can return any kind of value, which will be then emitted by Observable
- * instead of default array. Note that `project` does not take as argument that array
- * of values, but values themselves. That means default `project` can be imagined
- * as function that takes all its arguments and puts them into an array.
- *
- *
- * @example <caption>Combine two timer Observables</caption>
- * const firstTimer = Rx.Observable.timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
- * const secondTimer = Rx.Observable.timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
- * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);
- * combinedTimers.subscribe(value => console.log(value));
- * // Logs
- * // [0, 0] after 0.5s
- * // [1, 0] after 1s
- * // [1, 1] after 1.5s
- * // [2, 1] after 2s
- *
- *
- * @example <caption>Combine an array of Observables</caption>
- * const observables = [1, 5, 10].map(
- *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // emit 0 and then emit n after n seconds
- * );
- * const combined = Rx.Observable.combineLatest(observables);
- * combined.subscribe(value => console.log(value));
- * // Logs
- * // [0, 0, 0] immediately
- * // [1, 0, 0] after 1s
- * // [1, 5, 0] after 5s
- * // [1, 5, 10] after 10s
- *
- *
- * @example <caption>Use project function to dynamically calculate the Body-Mass Index</caption>
+ * @example <caption>Dynamically calculate the Body-Mass Index from an Observable of weight and one for height</caption>
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));
@@ -46732,15 +45852,14 @@ var combineLatest_1 = __webpack_require__(110);
  * // BMI is 23.93948099205209
  * // BMI is 23.671253629592222
  *
- *
  * @see {@link combineAll}
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} observable1 An input Observable to combine with other Observables.
- * @param {ObservableInput} observable2 An input Observable to combine with other Observables.
- * More than one input Observables may be given as arguments
- * or an array of Observables may be given as the first argument.
+ * @param {Observable} observable1 An input Observable to combine with the
+ * source Observable.
+ * @param {Observable} observable2 An input Observable to combine with the
+ * source Observable. More than one input Observables may be given as argument.
  * @param {function} [project] An optional function to project the values from
  * the combined latest values into a new value on the output Observable.
  * @param {Scheduler} [scheduler=null] The IScheduler to use for subscribing to
@@ -46781,7 +45900,7 @@ exports.combineLatest = combineLatest;
 
 "use strict";
 
-var concat_1 = __webpack_require__(111);
+var concat_1 = __webpack_require__(110);
 exports.concat = concat_1.concatStatic;
 //# sourceMappingURL=concat.js.map
 
@@ -46811,7 +45930,7 @@ var Subscriber_1 = __webpack_require__(4);
 var Observable_1 = __webpack_require__(0);
 var Subscription_1 = __webpack_require__(12);
 var root_1 = __webpack_require__(22);
-var ReplaySubject_1 = __webpack_require__(108);
+var ReplaySubject_1 = __webpack_require__(107);
 var tryCatch_1 = __webpack_require__(14);
 var errorObject_1 = __webpack_require__(13);
 var assign_1 = __webpack_require__(657);
@@ -46939,9 +46058,6 @@ var WebSocketSubject = (function (_super) {
                 new WebSocketCtor(this.url, this.protocol) :
                 new WebSocketCtor(this.url);
             this.socket = socket;
-            if (this.binaryType) {
-                this.socket.binaryType = this.binaryType;
-            }
         }
         catch (e) {
             observer.error(e);
@@ -47205,7 +46321,7 @@ exports.using = UsingObservable_1.UsingObservable.create;
 
 "use strict";
 
-var zip_1 = __webpack_require__(112);
+var zip_1 = __webpack_require__(111);
 exports.zip = zip_1.zipStatic;
 //# sourceMappingURL=zip.js.map
 
@@ -47256,7 +46372,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link sample}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
+ * @param {function(value: T): Observable|Promise} durationSelector A function
  * that receives a value from the source Observable, for computing the silencing
  * duration, returned as an Observable or a Promise.
  * @return {Observable<T>} An Observable that performs rate-limiting of
@@ -47643,8 +46759,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var async_1 = __webpack_require__(16);
 var Subscriber_1 = __webpack_require__(4);
-var isScheduler_1 = __webpack_require__(27);
-/* tslint:enable:max-line-length */
+var isScheduler_1 = __webpack_require__(31);
+/* tslint:disable:max-line-length */
 /**
  * Buffers the source Observable values for a specific time period.
  *
@@ -48127,7 +47243,7 @@ var BufferWhenSubscriber = (function (_super) {
 
 "use strict";
 
-var combineLatest_1 = __webpack_require__(110);
+var combineLatest_1 = __webpack_require__(109);
 /**
  * Converts a higher-order Observable into a first-order Observable by waiting
  * for the outer Observable to complete, then applying {@link combineLatest}.
@@ -48181,7 +47297,7 @@ exports.combineAll = combineAll;
 "use strict";
 
 var mergeMapTo_1 = __webpack_require__(282);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to the same Observable which is merged multiple
  * times in a serialized fashion on the output Observable.
@@ -48222,7 +47338,7 @@ var mergeMapTo_1 = __webpack_require__(282);
  * @see {@link mergeMapTo}
  * @see {@link switchMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
+ * @param {Observable} innerObservable An Observable to replace each value from
  * the source Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
  * A function to produce the value on the output Observable based on the values
@@ -48407,7 +47523,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link delayWhen}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
+ * @param {function(value: T): Observable|Promise} durationSelector A function
  * that receives a value from the source Observable, for computing the timeout
  * duration for each source value, returned as an Observable or a Promise.
  * @return {Observable} An Observable that delays the emissions of the source
@@ -48628,7 +47744,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(4);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Emits a given value if the source Observable completes without emitting any
  * `next` value, otherwise mirrors the source Observable.
@@ -48713,7 +47829,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var async_1 = __webpack_require__(16);
 var isDate_1 = __webpack_require__(63);
 var Subscriber_1 = __webpack_require__(4);
-var Notification_1 = __webpack_require__(65);
+var Notification_1 = __webpack_require__(64);
 /**
  * Delays the emission of items from the source Observable by a given timeout or
  * until a given Date.
@@ -49170,9 +48286,9 @@ var Set_1 = __webpack_require__(656);
  * @see {@link distinctUntilChanged}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [keySelector] Optional function to select which value you want to check as distinct.
- * @param {Observable} [flushes] Optional Observable for flushing the internal HashSet of the operator.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @param {function} [keySelector] optional function to select which value you want to check as distinct.
+ * @param {Observable} [flushes] optional Observable for flushing the internal HashSet of the operator.
+ * @return {Observable} an Observable that emits items from the source Observable with distinct values.
  * @method distinct
  * @owner Observable
  */
@@ -49250,7 +48366,7 @@ exports.DistinctSubscriber = DistinctSubscriber;
 "use strict";
 
 var distinctUntilChanged_1 = __webpack_require__(279);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item,
  * using a property accessed by using the key provided to check if the two items are distinct.
@@ -49302,9 +48418,9 @@ var distinctUntilChanged_1 = __webpack_require__(279);
  * @see {@link distinct}
  * @see {@link distinctUntilChanged}
  *
- * @param {string} key String key for object property lookup on each item.
- * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values based on the key specified.
+ * @param {string} key string key for object property lookup on each item.
+ * @param {function} [compare] optional comparison function called to test if an item is distinct from the previous item in the source.
+ * @return {Observable} an Observable that emits items from the source Observable with distinct values based on the key specified.
  * @method distinctUntilKeyChanged
  * @owner Observable
  */
@@ -49331,7 +48447,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(4);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Perform a side effect for every emission on the source Observable, but return
  * an Observable that is identical to the source.
@@ -49587,8 +48703,9 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link exhaustMap}
  * @see {@link zipAll}
  *
- * @return {Observable} An Observable that takes a source of Observables and propagates the first observable
- * exclusively until it completes before subscribing to the next.
+ * @return {Observable} Returns an Observable that takes a source of Observables
+ * and propagates the first observable exclusively until it completes before
+ * subscribing to the next.
  * @method exhaust
  * @owner Observable
  */
@@ -49652,7 +48769,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to an Observable which is merged in the output
  * Observable only if the previous projected Observable has completed.
@@ -49681,7 +48798,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link mergeMap}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
+ * @param {function(value: T, ?index: number): Observable} project A function
  * that, when applied to an item emitted by the source Observable, returns an
  * Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
@@ -49798,7 +48915,7 @@ var tryCatch_1 = __webpack_require__(14);
 var errorObject_1 = __webpack_require__(13);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Recursively projects each source value to an Observable which is merged in
  * the output Observable.
@@ -49956,8 +49073,8 @@ var Subscription_1 = __webpack_require__(12);
 /**
  * Returns an Observable that mirrors the source Observable, but will call a specified function when
  * the source terminates on complete or error.
- * @param {function} callback Function to be called when source terminates.
- * @return {Observable} An Observable that mirrors the source, but will call the specified function on termination.
+ * @param {function} callback function to be called when source terminates.
+ * @return {Observable} an Observable that mirrors the source, but will call the specified function on termination.
  * @method finally
  * @owner Observable
  */
@@ -50053,7 +49170,7 @@ var Observable_1 = __webpack_require__(0);
 var Subject_1 = __webpack_require__(10);
 var Map_1 = __webpack_require__(654);
 var FastMap_1 = __webpack_require__(652);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Groups the items emitted by an Observable according to a specified criterion,
  * and emits these grouped items as `GroupedObservables`, one
@@ -50061,14 +49178,14 @@ var FastMap_1 = __webpack_require__(652);
  *
  * <img src="./img/groupBy.png" width="100%">
  *
- * @param {function(value: T): K} keySelector A function that extracts the key
+ * @param {function(value: T): K} keySelector a function that extracts the key
  * for each item.
- * @param {function(value: T): R} [elementSelector] A function that extracts the
+ * @param {function(value: T): R} [elementSelector] a function that extracts the
  * return element for each item.
  * @param {function(grouped: GroupedObservable<K,R>): Observable<any>} [durationSelector]
- * A function that returns an Observable to determine how long each group should
+ * a function that returns an Observable to determine how long each group should
  * exist.
- * @return {Observable<GroupedObservable<K,R>>} An Observable that emits
+ * @return {Observable<GroupedObservable<K,R>>} an Observable that emits
  * GroupedObservables, each of which corresponds to a unique key value and each
  * of which emits those items from the source Observable that share that key
  * value.
@@ -50295,7 +49412,7 @@ var noop_1 = __webpack_require__(295);
  *
  * <img src="./img/ignoreElements.png" width="100%">
  *
- * @return {Observable} An empty Observable that only calls `complete`
+ * @return {Observable} an empty Observable that only calls `complete`
  * or `error`, based on which one is called by the source Observable.
  * @method ignoreElements
  * @owner Observable
@@ -50347,7 +49464,7 @@ var Subscriber_1 = __webpack_require__(4);
  *
  * <img src="./img/isEmpty.png" width="100%">
  *
- * @return {Observable} An Observable that emits a Boolean.
+ * @return {Observable} an Observable that emits a Boolean.
  * @method isEmpty
  * @owner Observable
  */
@@ -50487,7 +49604,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(4);
-var Notification_1 = __webpack_require__(65);
+var Notification_1 = __webpack_require__(64);
 /**
  * Represents all of the notifications from the source Observable as `next`
  * emissions marked with their original types within {@link Notification}
@@ -50603,9 +49720,9 @@ var reduce_1 = __webpack_require__(115);
  *
  * @see {@link min}
  *
- * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the
- * value of two items.
- * @return {Observable} An Observable that emits item with the largest value.
+ * @param {Function} optional comparer function that it will use instead of its default to compare the value of two
+ * items.
+ * @return {Observable} an Observable that emits item with the largest value.
  * @method max
  * @owner Observable
  */
@@ -50785,9 +49902,8 @@ var reduce_1 = __webpack_require__(115);
  *
  * @see {@link max}
  *
- * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the
- * value of two items.
- * @return {Observable<R>} An Observable that emits item with the smallest value.
+ * @param {Function} optional comparer function that it will use instead of its default to compare the value of two items.
+ * @return {Observable<R>} an Observable that emits item with the smallest value.
  * @method min
  * @owner Observable
  */
@@ -50970,7 +50086,8 @@ var map_1 = __webpack_require__(113);
  *
  * @param {...string} properties The nested properties to pluck from each source
  * value (an object).
- * @return {Observable} A new Observable of property values from the source values.
+ * @return {Observable} Returns a new Observable of property values from the
+ * source values.
  * @method pluck
  * @owner Observable
  */
@@ -51012,17 +50129,17 @@ function plucker(props, length) {
 
 var Subject_1 = __webpack_require__(10);
 var multicast_1 = __webpack_require__(37);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Returns a ConnectableObservable, which is a variety of Observable that waits until its connect method is called
  * before it begins emitting items to those Observers that have subscribed to it.
  *
  * <img src="./img/publish.png" width="100%">
  *
- * @param {Function} [selector] - Optional selector function which can use the multicasted source sequence as many times
- * as needed, without causing multiple subscriptions to the source sequence.
+ * @param {Function} Optional selector function which can use the multicasted source sequence as many times as needed,
+ * without causing multiple subscriptions to the source sequence.
  * Subscribers to the given source will receive all notifications of the source from the time of the subscription on.
- * @return A ConnectableObservable that upon connection causes the source Observable to emit items to its Observers.
+ * @return a ConnectableObservable that upon connection causes the source Observable to emit items to its Observers.
  * @method publish
  * @owner Observable
  */
@@ -51078,7 +50195,7 @@ exports.publishLast = publishLast;
 
 "use strict";
 
-var ReplaySubject_1 = __webpack_require__(108);
+var ReplaySubject_1 = __webpack_require__(107);
 var multicast_1 = __webpack_require__(37);
 /**
  * @param bufferSize
@@ -51110,13 +50227,15 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Subscriber_1 = __webpack_require__(4);
 var EmptyObservable_1 = __webpack_require__(38);
 /**
- * Returns an Observable that repeats the stream of items emitted by the source Observable at most count times.
+ * Returns an Observable that repeats the stream of items emitted by the source Observable at most count times,
+ * on a particular IScheduler.
  *
  * <img src="./img/repeat.png" width="100%">
  *
- * @param {number} [count] The number of times the source Observable items are repeated, a count of 0 will yield
+ * @param {Scheduler} [scheduler] the IScheduler to emit the items on.
+ * @param {number} [count] the number of times the source Observable items are repeated, a count of 0 will yield
  * an empty Observable.
- * @return {Observable} An Observable that repeats the stream of items emitted by the source Observable at most
+ * @return {Observable} an Observable that repeats the stream of items emitted by the source Observable at most
  * count times.
  * @method repeat
  * @owner Observable
@@ -51189,16 +50308,18 @@ var errorObject_1 = __webpack_require__(13);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
 /**
- * Returns an Observable that mirrors the source Observable with the exception of a `complete`. If the source
- * Observable calls `complete`, this method will emit to the Observable returned from `notifier`. If that Observable
- * calls `complete` or `error`, then this method will call `complete` or `error` on the child subscription. Otherwise
- * this method will resubscribe to the source Observable.
+ * Returns an Observable that emits the same values as the source observable with the exception of a `complete`.
+ * A `complete` will cause the emission of the Throwable that cause the complete to the Observable returned from
+ * notificationHandler. If that Observable calls onComplete or `complete` then retry will call `complete` or `error`
+ * on the child subscription. Otherwise, this Observable will resubscribe to the source observable, on a particular
+ * IScheduler.
  *
  * <img src="./img/repeatWhen.png" width="100%">
  *
- * @param {function(notifications: Observable): Observable} notifier - Receives an Observable of notifications with
- * which a user can `complete` or `error`, aborting the repetition.
- * @return {Observable} The source Observable modified with repeat logic.
+ * @param {notificationHandler} receives an Observable of notifications with which a user can `complete` or `error`,
+ * aborting the retry.
+ * @param {scheduler} the IScheduler on which to subscribe to the source Observable.
+ * @return {Observable} the source Observable modified with retry logic.
  * @method repeatWhen
  * @owner Observable
  */
@@ -51299,9 +50420,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Subscriber_1 = __webpack_require__(4);
 /**
- * Returns an Observable that mirrors the source Observable with the exception of an `error`. If the source Observable
- * calls `error`, this method will resubscribe to the source Observable for a maximum of `count` resubscriptions (given
- * as a number parameter) rather than propagating the `error` call.
+ * Returns an Observable that mirrors the source Observable, resubscribing to it if it calls `error` and the
+ * predicate returns true for that specific exception and retry count.
+ * If the source Observable calls `error`, this method will resubscribe to the source Observable for a maximum of
+ * count resubscriptions (given as a number parameter) rather than propagating the `error` call.
  *
  * <img src="./img/retry.png" width="100%">
  *
@@ -51309,8 +50431,8 @@ var Subscriber_1 = __webpack_require__(4);
  * during failed subscriptions. For example, if an Observable fails at first but emits [1, 2] then succeeds the second
  * time and emits: [1, 2, 3, 4, 5] then the complete stream of emissions and notifications
  * would be: [1, 2, 1, 2, 3, 4, 5, `complete`].
- * @param {number} count - Number of retry attempts before failing.
- * @return {Observable} The source Observable modified with the retry logic.
+ * @param {number} number of retry attempts before failing.
+ * @return {Observable} the source Observable modified with the retry logic.
  * @method retry
  * @owner Observable
  */
@@ -51374,16 +50496,18 @@ var errorObject_1 = __webpack_require__(13);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
 /**
- * Returns an Observable that mirrors the source Observable with the exception of an `error`. If the source Observable
- * calls `error`, this method will emit the Throwable that caused the error to the Observable returned from `notifier`.
- * If that Observable calls `complete` or `error` then this method will call `complete` or `error` on the child
- * subscription. Otherwise this method will resubscribe to the source Observable.
+ * Returns an Observable that emits the same values as the source observable with the exception of an `error`.
+ * An `error` will cause the emission of the Throwable that cause the error to the Observable returned from
+ * notificationHandler. If that Observable calls onComplete or `error` then retry will call `complete` or `error`
+ * on the child subscription. Otherwise, this Observable will resubscribe to the source observable, on a particular
+ * IScheduler.
  *
  * <img src="./img/retryWhen.png" width="100%">
  *
- * @param {function(errors: Observable): Observable} notifier - Receives an Observable of notifications with which a
- * user can `complete` or `error`, aborting the retry.
- * @return {Observable} The source Observable modified with retry logic.
+ * @param {notificationHandler} receives an Observable of notifications with which a user can `complete` or `error`,
+ * aborting the retry.
+ * @param {scheduler} the IScheduler on which to subscribe to the source Observable.
+ * @return {Observable} the source Observable modified with retry logic.
  * @method retryWhen
  * @owner Observable
  */
@@ -51667,7 +50791,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__(4);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Applies an accumulator function over the source Observable, and returns each
  * intermediate result, with an optional seed value.
@@ -51839,10 +50963,10 @@ var errorObject_1 = __webpack_require__(13);
  * @see {@link zip}
  * @see {@link withLatestFrom}
  *
- * @param {Observable} compareTo The observable sequence to compare the source sequence to.
+ * @param {Observable} compareTo the observable sequence to compare the source sequence to.
  * @param {function} [comparor] An optional function to compare each value pair
  * @return {Observable} An Observable of a single boolean value representing whether or not
- * the values emitted by both observables were equal in sequence.
+ * the values emitted by both observables were equal in sequence
  * @method sequenceEqual
  * @owner Observable
  */
@@ -51969,7 +51093,7 @@ function shareSubjectFactory() {
  *
  * <img src="./img/share.png" width="100%">
  *
- * @return {Observable<T>} An Observable that upon connection causes the source Observable to emit items to its Observers.
+ * @return {Observable<T>} an Observable that upon connection causes the source Observable to emit items to its Observers
  * @method share
  * @owner Observable
  */
@@ -52002,8 +51126,8 @@ var EmptyError_1 = __webpack_require__(298);
  *
  * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
  * callback if the Observable completes before any `next` notification was sent.
- * @param {Function} predicate - A predicate function to evaluate items emitted by the source Observable.
- * @return {Observable<T>} An Observable that emits the single item emitted by the source Observable that matches
+ * @param {Function} a predicate function to evaluate items emitted by the source Observable.
+ * @return {Observable<T>} an Observable that emits the single item emitted by the source Observable that matches
  * the predicate.
  .
  * @method single
@@ -52047,17 +51171,19 @@ var SingleSubscriber = (function (_super) {
         }
     };
     SingleSubscriber.prototype._next = function (value) {
-        var index = this.index++;
-        if (this.predicate) {
-            this.tryNext(value, index);
+        var predicate = this.predicate;
+        this.index++;
+        if (predicate) {
+            this.tryNext(value);
         }
         else {
             this.applySingleValue(value);
         }
     };
-    SingleSubscriber.prototype.tryNext = function (value, index) {
+    SingleSubscriber.prototype.tryNext = function (value) {
         try {
-            if (this.predicate(value, index, this.source)) {
+            var result = this.predicate(value, this.index, this.source);
+            if (result) {
                 this.applySingleValue(value);
             }
         }
@@ -52092,18 +51218,18 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Subscriber_1 = __webpack_require__(4);
 /**
- * Returns an Observable that skips the first `count` items emitted by the source Observable.
+ * Returns an Observable that skips `n` items emitted by an Observable.
  *
  * <img src="./img/skip.png" width="100%">
  *
- * @param {Number} count - The number of times, items emitted by source Observable should be skipped.
- * @return {Observable} An Observable that skips values emitted by the source Observable.
+ * @param {Number} the `n` of times, items emitted by source Observable should be skipped.
+ * @return {Observable} an Observable that skips values emitted by the source Observable.
  *
  * @method skip
  * @owner Observable
  */
-function skip(count) {
-    return this.lift(new SkipOperator(count));
+function skip(total) {
+    return this.lift(new SkipOperator(total));
 }
 exports.skip = skip;
 var SkipOperator = (function () {
@@ -52154,9 +51280,9 @@ var subscribeToResult_1 = __webpack_require__(6);
  *
  * <img src="./img/skipUntil.png" width="100%">
  *
- * @param {Observable} notifier - The second Observable that has to emit an item before the source Observable's elements begin to
+ * @param {Observable} the second Observable that has to emit an item before the source Observable's elements begin to
  * be mirrored by the resulting Observable.
- * @return {Observable<T>} An Observable that skips items from the source Observable until the second Observable emits
+ * @return {Observable<T>} an Observable that skips items from the source Observable until the second Observable emits
  * an item, then emits the remaining items.
  * @method skipUntil
  * @owner Observable
@@ -52231,8 +51357,8 @@ var Subscriber_1 = __webpack_require__(4);
  *
  * <img src="./img/skipWhile.png" width="100%">
  *
- * @param {Function} predicate - A function to test each item emitted from the source Observable.
- * @return {Observable<T>} An Observable that begins emitting items emitted by the source Observable when the
+ * @param {Function} predicate - a function to test each item emitted from the source Observable.
+ * @return {Observable<T>} an Observable that begins emitting items emitted by the source Observable when the
  * specified predicate becomes false.
  * @method skipWhile
  * @owner Observable
@@ -52294,19 +51420,17 @@ var SkipWhileSubscriber = (function (_super) {
 var ArrayObservable_1 = __webpack_require__(30);
 var ScalarObservable_1 = __webpack_require__(674);
 var EmptyObservable_1 = __webpack_require__(38);
-var concat_1 = __webpack_require__(111);
-var isScheduler_1 = __webpack_require__(27);
-/* tslint:enable:max-line-length */
+var concat_1 = __webpack_require__(110);
+var isScheduler_1 = __webpack_require__(31);
+/* tslint:disable:max-line-length */
 /**
- * Returns an Observable that emits the items you specify as arguments before it begins to emit
- * items emitted by the source Observable.
+ * Returns an Observable that emits the items in a specified Iterable before it begins to emit items emitted by the
+ * source Observable.
  *
  * <img src="./img/startWith.png" width="100%">
  *
- * @param {...T} values - Items you want the modified Observable to emit first.
- * @param {Scheduler} [scheduler] - A {@link IScheduler} to use for scheduling
- * the emissions of the `next` notifications.
- * @return {Observable} An Observable that emits the items in the specified Iterable and then emits the items
+ * @param {Values} an Iterable that contains the items you want the modified Observable to emit first.
+ * @return {Observable} an Observable that emits the items in the specified Iterable and then emits the items
  * emitted by the source Observable.
  * @method startWith
  * @owner Observable
@@ -52349,8 +51473,8 @@ var SubscribeOnObservable_1 = __webpack_require__(541);
  *
  * <img src="./img/subscribeOn.png" width="100%">
  *
- * @param {Scheduler} scheduler - The IScheduler to perform subscription actions on.
- * @return {Observable<T>} The source Observable modified so that its subscriptions happen on the specified IScheduler.
+ * @param {Scheduler} the IScheduler to perform subscription actions on.
+ * @return {Observable<T>} the source Observable modified so that its subscriptions happen on the specified IScheduler
  .
  * @method subscribeOn
  * @owner Observable
@@ -52499,7 +51623,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to an Observable which is merged in the output
  * Observable, emitting values only from the most recently projected Observable.
@@ -52529,7 +51653,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link switch}
  * @see {@link switchMapTo}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
+ * @param {function(value: T, ?index: number): Observable} project A function
  * that, when applied to an item emitted by the source Observable, returns an
  * Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
@@ -52645,7 +51769,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to the same Observable which is flattened multiple
  * times with {@link switch} in the output Observable.
@@ -52671,7 +51795,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link switchMap}
  * @see {@link mergeMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
+ * @param {Observable} innerObservable An Observable to replace each value from
  * the source Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
  * A function to produce the value on the output Observable based on the values
@@ -52681,6 +51805,8 @@ var subscribeToResult_1 = __webpack_require__(6);
  * - `innerValue`: the value that came from the projected Observable
  * - `outerIndex`: the "index" of the value that came from the source
  * - `innerIndex`: the "index" of the value from the projected Observable
+ * @return {Observable} An Observable that emits items from the given
+ * `innerObservable` every time a value is emitted on the source Observable.
  * @return {Observable} An Observable that emits items from the given
  * `innerObservable` (and optionally transformed through `resultSelector`) every
  * time a value is emitted on the source Observable, and taking only the values
@@ -53193,7 +52319,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  * @see {@link sample}
  * @see {@link throttleTime}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
+ * @param {function(value: T): Observable|Promise} durationSelector A function
  * that receives a value from the source Observable, for computing the silencing
  * duration for each source value, returned as an Observable or a Promise.
  * @return {Observable<T>} An Observable that performs the throttle operation to
@@ -53487,7 +52613,7 @@ var async_1 = __webpack_require__(16);
 var isDate_1 = __webpack_require__(63);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * @param due
  * @param withObservable
@@ -53907,61 +53033,72 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Subject_1 = __webpack_require__(10);
 var async_1 = __webpack_require__(16);
 var Subscriber_1 = __webpack_require__(4);
-var isNumeric_1 = __webpack_require__(64);
-var isScheduler_1 = __webpack_require__(27);
-function windowTime(windowTimeSpan) {
-    var scheduler = async_1.async;
-    var windowCreationInterval = null;
-    var maxWindowSize = Number.POSITIVE_INFINITY;
-    if (isScheduler_1.isScheduler(arguments[3])) {
-        scheduler = arguments[3];
-    }
-    if (isScheduler_1.isScheduler(arguments[2])) {
-        scheduler = arguments[2];
-    }
-    else if (isNumeric_1.isNumeric(arguments[2])) {
-        maxWindowSize = arguments[2];
-    }
-    if (isScheduler_1.isScheduler(arguments[1])) {
-        scheduler = arguments[1];
-    }
-    else if (isNumeric_1.isNumeric(arguments[1])) {
-        windowCreationInterval = arguments[1];
-    }
-    return this.lift(new WindowTimeOperator(windowTimeSpan, windowCreationInterval, maxWindowSize, scheduler));
+/**
+ * Branch out the source Observable values as a nested Observable periodically
+ * in time.
+ *
+ * <span class="informal">It's like {@link bufferTime}, but emits a nested
+ * Observable instead of an array.</span>
+ *
+ * <img src="./img/windowTime.png" width="100%">
+ *
+ * Returns an Observable that emits windows of items it collects from the source
+ * Observable. The output Observable starts a new window periodically, as
+ * determined by the `windowCreationInterval` argument. It emits each window
+ * after a fixed timespan, specified by the `windowTimeSpan` argument. When the
+ * source Observable completes or encounters an error, the output Observable
+ * emits the current window and propagates the notification from the source
+ * Observable. If `windowCreationInterval` is not provided, the output
+ * Observable starts a new window when the previous window of duration
+ * `windowTimeSpan` completes.
+ *
+ * @example <caption>In every window of 1 second each, emit at most 2 click events</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.windowTime(1000)
+ *   .map(win => win.take(2)) // each window has at most 2 emissions
+ *   .mergeAll(); // flatten the Observable-of-Observables
+ * result.subscribe(x => console.log(x));
+ *
+ * @example <caption>Every 5 seconds start a window 1 second long, and emit at most 2 click events per window</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.windowTime(1000, 5000)
+ *   .map(win => win.take(2)) // each window has at most 2 emissions
+ *   .mergeAll(); // flatten the Observable-of-Observables
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link window}
+ * @see {@link windowCount}
+ * @see {@link windowToggle}
+ * @see {@link windowWhen}
+ * @see {@link bufferTime}
+ *
+ * @param {number} windowTimeSpan The amount of time to fill each window.
+ * @param {number} [windowCreationInterval] The interval at which to start new
+ * windows.
+ * @param {Scheduler} [scheduler=async] The scheduler on which to schedule the
+ * intervals that determine window boundaries.
+ * @return {Observable<Observable<T>>} An observable of windows, which in turn
+ * are Observables.
+ * @method windowTime
+ * @owner Observable
+ */
+function windowTime(windowTimeSpan, windowCreationInterval, scheduler) {
+    if (windowCreationInterval === void 0) { windowCreationInterval = null; }
+    if (scheduler === void 0) { scheduler = async_1.async; }
+    return this.lift(new WindowTimeOperator(windowTimeSpan, windowCreationInterval, scheduler));
 }
 exports.windowTime = windowTime;
 var WindowTimeOperator = (function () {
-    function WindowTimeOperator(windowTimeSpan, windowCreationInterval, maxWindowSize, scheduler) {
+    function WindowTimeOperator(windowTimeSpan, windowCreationInterval, scheduler) {
         this.windowTimeSpan = windowTimeSpan;
         this.windowCreationInterval = windowCreationInterval;
-        this.maxWindowSize = maxWindowSize;
         this.scheduler = scheduler;
     }
     WindowTimeOperator.prototype.call = function (subscriber, source) {
-        return source.subscribe(new WindowTimeSubscriber(subscriber, this.windowTimeSpan, this.windowCreationInterval, this.maxWindowSize, this.scheduler));
+        return source.subscribe(new WindowTimeSubscriber(subscriber, this.windowTimeSpan, this.windowCreationInterval, this.scheduler));
     };
     return WindowTimeOperator;
 }());
-var CountedSubject = (function (_super) {
-    __extends(CountedSubject, _super);
-    function CountedSubject() {
-        _super.apply(this, arguments);
-        this._numberOfNextedValues = 0;
-    }
-    CountedSubject.prototype.next = function (value) {
-        this._numberOfNextedValues++;
-        _super.prototype.next.call(this, value);
-    };
-    Object.defineProperty(CountedSubject.prototype, "numberOfNextedValues", {
-        get: function () {
-            return this._numberOfNextedValues;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return CountedSubject;
-}(Subject_1.Subject));
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -53969,12 +53106,11 @@ var CountedSubject = (function (_super) {
  */
 var WindowTimeSubscriber = (function (_super) {
     __extends(WindowTimeSubscriber, _super);
-    function WindowTimeSubscriber(destination, windowTimeSpan, windowCreationInterval, maxWindowSize, scheduler) {
+    function WindowTimeSubscriber(destination, windowTimeSpan, windowCreationInterval, scheduler) {
         _super.call(this, destination);
         this.destination = destination;
         this.windowTimeSpan = windowTimeSpan;
         this.windowCreationInterval = windowCreationInterval;
-        this.maxWindowSize = maxWindowSize;
         this.scheduler = scheduler;
         this.windows = [];
         var window = this.openWindow();
@@ -53996,9 +53132,6 @@ var WindowTimeSubscriber = (function (_super) {
             var window_1 = windows[i];
             if (!window_1.closed) {
                 window_1.next(value);
-                if (window_1.numberOfNextedValues >= this.maxWindowSize) {
-                    this.closeWindow(window_1);
-                }
             }
         }
     };
@@ -54020,7 +53153,7 @@ var WindowTimeSubscriber = (function (_super) {
         this.destination.complete();
     };
     WindowTimeSubscriber.prototype.openWindow = function () {
-        var window = new CountedSubject();
+        var window = new Subject_1.Subject();
         this.windows.push(window);
         var destination = this.destination;
         destination.next(window);
@@ -54392,7 +53525,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Combines the source Observable with other Observables to create an Observable
  * whose values are calculated from the latest values of each, only when the
@@ -54418,7 +53551,7 @@ var subscribeToResult_1 = __webpack_require__(6);
  *
  * @see {@link combineLatest}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
+ * @param {Observable} other An input Observable to combine with the source
  * Observable. More than one input Observables may be given as argument.
  * @param {Function} [project] Projection function for combining values
  * together. Receives all values in order of the Observables passed, where the
@@ -54521,7 +53654,7 @@ var WithLatestFromSubscriber = (function (_super) {
 
 "use strict";
 
-var zip_1 = __webpack_require__(112);
+var zip_1 = __webpack_require__(111);
 /**
  * @param project
  * @return {Observable<R>|WebSocketSubject<T>|Observable<T>}
@@ -54877,36 +54010,6 @@ exports.QueueScheduler = QueueScheduler;
 
 var AnimationFrameAction_1 = __webpack_require__(641);
 var AnimationFrameScheduler_1 = __webpack_require__(642);
-/**
- *
- * Animation Frame Scheduler
- *
- * <span class="informal">Perform task when `window.requestAnimationFrame` would fire</span>
- *
- * When `animationFrame` scheduler is used with delay, it will fall back to {@link async} scheduler
- * behaviour.
- *
- * Without delay, `animationFrame` scheduler can be used to create smooth browser animations.
- * It makes sure scheduled task will happen just before next browser content repaint,
- * thus performing animations as efficiently as possible.
- *
- * @example <caption>Schedule div height animation</caption>
- * const div = document.querySelector('.some-div');
- *
- * Rx.Scheduler.schedule(function(height) {
- *   div.style.height = height + "px";
- *
- *   this.schedule(height + 1);  // `this` references currently executing Action,
- *                               // which we reschedule with new state
- * }, 0, 0);
- *
- * // You will see .some-div element growing in height
- *
- *
- * @static true
- * @name animationFrame
- * @owner Scheduler
- */
 exports.animationFrame = new AnimationFrameScheduler_1.AnimationFrameScheduler(AnimationFrameAction_1.AnimationFrameAction);
 //# sourceMappingURL=animationFrame.js.map
 
@@ -55028,7 +54131,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Observable_1 = __webpack_require__(0);
-var Notification_1 = __webpack_require__(65);
+var Notification_1 = __webpack_require__(64);
 var ColdObservable_1 = __webpack_require__(648);
 var HotObservable_1 = __webpack_require__(649);
 var SubscriptionLog_1 = __webpack_require__(291);
@@ -55732,20 +54835,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 662 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__(353);
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
+/* 662 */,
 /* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -56102,49 +55192,49 @@ module.exports = (__webpack_require__(3))(321);
 /* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(333);
+module.exports = (__webpack_require__(3))(331);
 
 /***/ }),
 /* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(335);
+module.exports = (__webpack_require__(3))(333);
 
 /***/ }),
 /* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(47);
+module.exports = (__webpack_require__(3))(46);
 
 /***/ }),
 /* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(554);
+module.exports = (__webpack_require__(3))(550);
 
 /***/ }),
 /* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(556);
+module.exports = (__webpack_require__(3))(552);
 
 /***/ }),
 /* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(559);
+module.exports = (__webpack_require__(3))(555);
 
 /***/ }),
 /* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(562);
+module.exports = (__webpack_require__(3))(558);
 
 /***/ }),
 /* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(3))(84);
+module.exports = (__webpack_require__(3))(83);
 
 /***/ }),
 /* 688 */

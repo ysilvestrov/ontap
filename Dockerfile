@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.1.1-sdk
+FROM microsoft/dotnet:1.1.0-sdk-projectjson
 
 RUN apt-get update
 RUN apt-get install -y build-essential nodejs nodejs-legacy npm
@@ -7,11 +7,11 @@ RUN apt-get install -y nodejs
 
 WORKDIR /app
 
-#COPY ontap.csproj .
-COPY . /app
+COPY project.json .
 RUN ["dotnet", "restore"]
-RUN ["dotnet", "build"]
 
+COPY . /app
+RUN ["dotnet", "build"]
 
 RUN ["node", "-v"]
 RUN ["npm", "-v"]
@@ -19,6 +19,6 @@ RUN ["npm", "install"]
 RUN ["npm", "run", "webpack-cfg"]
 RUN ["npm", "run", "webpack"]
 
-EXPOSE 5000/tcp
+EXPOSE 80/tcp
 
-ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:5000"]
+ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:80"]

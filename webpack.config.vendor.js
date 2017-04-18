@@ -67,6 +67,7 @@ module.exports = (env) => {
         ])
     });
 
+
     const serverBundleConfig = merge(sharedConfig, {
         target: 'node',
         resolve: { mainFields: ['main'] },
@@ -75,7 +76,7 @@ module.exports = (env) => {
             libraryTarget: 'commonjs2',
         },
         module: {
-            rules: [ { test: /\.css(\?|$)/, use: ['to-string-loader', 'css-loader'] } ]
+            rules: [{ test: /\.css(\?|$)/, use: ['to-string-loader', 'css-loader'] }]
         },
         entry: { vendor: ['aspnet-prerendering'] },
         plugins: [
