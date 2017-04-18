@@ -19,6 +19,6 @@ RUN ["npm", "install"]
 RUN ["npm", "run", "webpack-cfg"]
 RUN ["npm", "run", "webpack"]
 
-EXPOSE 80/tcp
+EXPOSE 5000/tcp
 
-ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:80"]
+ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:5000"]
