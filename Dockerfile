@@ -7,7 +7,7 @@ RUN apt-get install -y nodejs
 
 WORKDIR /app
 
-#COPY project.json .
+COPY ontap.csproj .
 RUN ["dotnet", "restore"]
 
 COPY . /app
