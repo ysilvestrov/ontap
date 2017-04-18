@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.1.0-sdk-projectjson
+FROM microsoft/dotnet:1.1.1-sdk
 
 RUN apt-get update
 RUN apt-get install -y build-essential nodejs nodejs-legacy npm
@@ -7,7 +7,7 @@ RUN apt-get install -y nodejs
 
 WORKDIR /app
 
-COPY project.json .
+#COPY project.json .
 RUN ["dotnet", "restore"]
 
 COPY . /app

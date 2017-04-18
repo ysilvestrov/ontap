@@ -191,6 +191,7 @@ ClientBin/
 *.pfx
 *.publishsettings
 orleans.codegen.cs
+launchSettings.json
 
 # Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
 /node_modules/**

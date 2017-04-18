@@ -85,8 +85,11 @@ namespace Ontap
             //loggerFactory.CreateLogger("MyLog");
             //loggerFactory.AddLoggr(LogLevel.Error, "ysilvestrov", "7b35847110724b9fba13359525810c9a");
 
-            app.UseElmahIo(Configuration.GetValue<string>("ELMAH_API"),
-                new Guid(Configuration.GetValue<string>("ELMAH_LOG")));
+            var apiKey = Configuration.GetValue<string>("ELMAH_API");
+            var apiGuid = Configuration.GetValue<string>("ELMAH_LOG");
+
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiGuid))
+                app.UseElmahIo(apiKey, new Guid(apiGuid));
 
             if (env.IsDevelopment())
             {
