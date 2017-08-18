@@ -58,6 +58,15 @@ namespace Ontap.Controllers
             return enumerable;
         }
 
+        // GET: api/pubs/id
+        [HttpGet("{id}")]
+        public Pub Get(string id)
+        {
+            var pub = Pubs.First(p => p.Id == id);
+            pub.BeerServedInPubs.ToArray();
+            return pub;
+        }
+
         // POST api/pubs
         /// <summary>
         /// Creates new pub
@@ -180,6 +189,7 @@ namespace Ontap.Controllers
             current.VkontakteUrl = pub.VkontakteUrl;
             current.WebsiteUrl = pub.WebsiteUrl;
             current.ParserOptions = pub.ParserOptions;
+            current.TapNumber = pub.TapNumber;
             await _context.SaveChangesAsync();
             return current;
         }

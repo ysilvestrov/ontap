@@ -11,7 +11,7 @@
         </h3>
     </div>
     <div class="panel-body">
-            <a class="btn btn-success btn-lg" [routerLink]="['/pubs']" role="button"><span class="glyphicon glyphicon-ok-circle"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>
+            <a class="btn btn-success btn-lg" (click)="goToPubs()" role="button"><span class="glyphicon glyphicon-ok-circle"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>
             <a class="btn btn-danger btn-lg" href="http://prom.ua/Podemnyj-kran-igrushki.html" role="button"><span class="glyphicon glyphicon-remove-circle"></span> {{'HOME.NO' | translate:lang}}<!--Ні--></a>
     </div>
 </div>

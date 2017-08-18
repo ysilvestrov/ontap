@@ -11,7 +11,8 @@ import {SortByTap} from "../app/sortbytap.pipe";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 import * as moment from 'moment';
 import { LocaleService, LocalizationService } from 'angular2localization';
-import { CloudinaryOptions} from 'ng2-cloudinary';
+import { CloudinaryOptions } from 'ng2-cloudinary';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'pubs',
@@ -35,8 +36,23 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
         autoUpload: true
     });
 
-    constructor(elmService: EPubService, public locale: LocaleService, public localization: LocalizationService) {
+    constructor(elmService: EPubService, public locale: LocaleService, public localization: LocalizationService,
+        private route: ActivatedRoute,
+        private router: Router) {
         super(elmService, locale, localization);
+
+        try {
+            if (sessionStorage) {
+                let is18 = sessionStorage.getItem("is18");
+                if (!is18 || is18 !== "true") {
+                    sessionStorage.setItem("goTo", JSON.stringify(['/pubs']));
+                    this.router.navigate(['/home']);
+                }
+            }
+        } catch (e) {
+            //do nothing
+        } 
+
         if (this.elements) {
             this.onElementsLoad(this.elements);
         }

@@ -50,8 +50,9 @@
     <div *ngFor="let pub of elements">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" [id]="pub.id">{{ pub.name }} 
+                <h3 class="panel-title" [id]="pub.id"><a [routerLink]="['/pub', pub.id]">{{ pub.name }}</a>
                     <span class="label label-success">{{ pub.city.name }}</span>
+                    <span *ngIf="pub.tapNumber > 0" class="badge">{{ pub.tapNumber }} <span class="fa fa-map-pin" aria-hidden="true"></span></span>
                     <small>{{ pub.address }}</small>
                     <a *ngIf="pub.facebookUrl" [href]="pub.facebookUrl" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
                     <a *ngIf="pub.vkontakteUrl" [href]="pub.vkontakteUrl" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>

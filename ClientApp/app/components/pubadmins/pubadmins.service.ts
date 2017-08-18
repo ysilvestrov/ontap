@@ -36,6 +36,7 @@ export class PubAdminService extends AppService<IPubAdmin> {
                 websiteUrl: '',
                 bookingUrl: '',
                 parserOptions: '',
+                tapNumber: 0,
             })
         });
     }

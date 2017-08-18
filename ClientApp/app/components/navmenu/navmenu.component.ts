@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from "../login/login.service";
 import { UserService } from "../users/users.service";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'nav-menu',

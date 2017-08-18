@@ -6,6 +6,7 @@ import { AppComponent } from "./components/app/app.component"
 import { SortByTap } from "./components/app/sortbytap.pipe"
 import { NavMenuComponent } from "./components/navmenu/navmenu.component";
 import { PubsComponent } from "./components/pubs/pubs.component";
+import { PubComponent } from "./components/pub/pub.component";
 import { CitiesComponent } from "./components/cities/cities.component";
 import { BeersComponent } from "./components/beers/beers.component";
 import { EPubsComponent } from "./components/epubs/epubs.component";
@@ -92,6 +93,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         CitiesComponent,
         EPubsComponent,
         PubsComponent,
+        PubComponent,
         ServesComponent,
         LoginComponent,
         PubAdminsComponent,
@@ -120,6 +122,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
             { path: "cities", component: CitiesComponent },
             { path: "epubs", component: EPubsComponent },
             { path: "pubs", component: PubsComponent },
+            { path: "pub/:id", component: PubComponent },
             { path: "serves", component: ServesComponent },
             { path: "users", component: UsersComponent },
             { path: "pub-admins", component: PubAdminsComponent },

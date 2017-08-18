@@ -66,6 +66,9 @@ namespace Ontap.Controllers
             current.Brewery = _context.Breweries.First(b => b.Id == beer.Brewery.Id);
             current.Description = beer.Description;
             current.Image = beer.Image;
+            current.Alcohol = beer.Alcohol;
+            current.Gravity = beer.Gravity;
+            current.Ibu = beer.Ibu;
             await _context.SaveChangesAsync();
             return current;
         }

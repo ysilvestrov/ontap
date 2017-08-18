@@ -25,5 +25,6 @@ namespace Ontap.Models
         public string WebsiteUrl { get; set; }
         public string BookingUrl { get; set; }
         public string ParserOptions { get; set; }
+        public int TapNumber { get; set; } = 0;
     }
 }

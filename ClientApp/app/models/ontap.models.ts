@@ -32,6 +32,7 @@ export interface IPub {
     websiteUrl: string;
     bookingUrl: string;
     parserOptions: string;
+    tapNumber: number;
 }
 
 export interface ICity {
@@ -73,6 +74,7 @@ export class Pub implements IPub {
     websiteUrl: string;
     bookingUrl: string;
     parserOptions: string;
+    tapNumber: number;
 
     constructor(pub: IPub) {
         this.id = pub.id;
@@ -86,6 +88,7 @@ export class Pub implements IPub {
         this.websiteUrl = pub.websiteUrl;
         this.bookingUrl = pub.bookingUrl;
         this.parserOptions = pub.parserOptions;
+        this.tapNumber = pub.tapNumber;
     }    
 }
 export class City implements ICity {

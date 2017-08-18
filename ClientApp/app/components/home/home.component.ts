@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Locale, LocaleService, LocalizationService, ServiceState } from "angular2localization";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'home',
@@ -10,7 +11,9 @@ export class HomeComponent extends Locale {
     public isBrowser: boolean;
     public isLoaded: boolean;
 
-    constructor(public locale: LocaleService, public localization: LocalizationService) {
+    constructor(public locale: LocaleService, public localization: LocalizationService,
+        private route: ActivatedRoute,
+        private router: Router) {
         super(locale, localization);
         this.isBrowser = typeof (document) != "undefined";
         this.isLoaded = this.localization.serviceState === ServiceState.isReady;
@@ -20,5 +23,17 @@ export class HomeComponent extends Locale {
             () => { this.isLoaded = true; }
 
         );
+    }
+
+    goToPubs() {
+        var location = ['/pubs'];
+        if (sessionStorage) {
+            sessionStorage.setItem("is18", "true");
+            var storedLocation = sessionStorage.getItem("goTo");
+            if (storedLocation) {
+                location = JSON.parse(storedLocation);
+            }
+        }
+        this.router.navigate(location);
     }
 }

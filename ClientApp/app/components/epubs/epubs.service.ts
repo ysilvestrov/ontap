@@ -25,6 +25,7 @@ export class EPubService extends AppService<IPub> {
             websiteUrl: '',
             bookingUrl: '',
             parserOptions: '',
+            tapNumber: 0,
         });
     }
 
@@ -43,6 +44,7 @@ export class EPubService extends AppService<IPub> {
         dest.vkontakteUrl = source.vkontakteUrl;
         dest.websiteUrl = source.websiteUrl;
         dest.parserOptions = source.parserOptions;
+        dest.tapNumber = source.tapNumber;
     }
 
     private extractString(res: Response) {

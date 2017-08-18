@@ -1,0 +1,61 @@
+﻿<div *ngIf="!pub">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" 
+             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">            
+        </div>
+    </div>
+</div>
+
+
+<template #toolTipTemplate let-model="model">
+    <div class="pull-left pub-image" *ngIf="model.served.brewery.image">
+        <cl-image public-id="{{model.served.image}}" *ngIf="model.served.image" cloud-name="ontap-in-ua" crop="scale" height="100" dpr="auto"
+                  format="png" quality="100" alt="{{model.served.brewery.name}} logo" title="{{model.served.brewery.name}}"></cl-image>
+        <cl-image public-id="{{model.served.brewery.image}}" *ngIf="!model.served.image" cloud-name="ontap-in-ua" crop="scale" height="100" dpr="auto"
+                  format="png" quality="100" alt="{{model.served.brewery.name}} logo" title="{{model.served.brewery.name}}"></cl-image>
+    </div>    
+    <div>
+        <p>{{model.served.description}}</p>
+        <p>
+            <strong>{{model.served.alcohol}}</strong>&deg;
+            <span *ngIf="model.served.gravity > 0">
+            <strong>{{model.served.gravity}}</strong>%
+        </span>
+            <strong>{{model.served.ibu}}</strong>&nbsp;IBU
+            <strong>{{model.volume}}</strong>&nbsp;л
+        </p>
+    </div>
+</template>
+
+<div *ngIf="pub" style="margin-top: 20px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title" [id]="pub.id">{{ pub.name }} 
+                <span class="label label-success">{{ pub.city.name }}</span>
+                <small>{{ pub.address }}</small>
+                <a *ngIf="pub.facebookUrl" [href]="pub.facebookUrl" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                <a *ngIf="pub.vkontakteUrl" [href]="pub.vkontakteUrl" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                <a *ngIf="pub.websiteUrl" [href]="pub.websiteUrl" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                <a *ngIf="pub.bookingUrl" [href]="pub.bookingUrl" target="_blank"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div>
+                <div class="pull-left pub-image" *ngIf="pub.image">
+                    <cl-image public-id="{{pub.image}}" cloud-name="ontap-in-ua" height="100" dpr="auto" crop="scale" 
+                              format="png" quality="100" alt="{{pub.name}} logo" title="{{pub.name}}"></cl-image>
+                </div>
+                <div>
+                    <button *ngFor="let serve of pub.serves | sortByTap" class="btn btn-s red-tooltip"
+                            [ngClass]="serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'" role="button"
+                            [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve">
+                        <span class="badge">{{ serve.tap }}</span>
+                        {{ serve.served.name }}
+                        <span class="label" [ngClass]="serve.served.brewery.country.id=='UA'?'label-info':'label-success'" >{{ serve.served.brewery.name }}</span>
+                        <span class="badge">{{ serve.price | number:'2.2-2' }} ₴</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

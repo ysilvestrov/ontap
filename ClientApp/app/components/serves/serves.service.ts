@@ -37,6 +37,7 @@ export class ServeService extends AppService<IServe> {
                 websiteUrl: '',
                 bookingUrl: '',
                 parserOptions: '',
+                tapNumber: 0,
             }),
             price: 0,
             tap: 1,

@@ -13,7 +13,7 @@ namespace ontap.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
+                .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Ontap.Models.Beer", b =>
@@ -182,6 +182,8 @@ namespace ontap.Migrations
                         .IsRequired();
 
                     b.Property<string>("ParserOptions");
+
+                    b.Property<int>("TapNumber");
 
                     b.Property<string>("VkontakteUrl");
 
