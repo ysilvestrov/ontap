@@ -62,5 +62,17 @@ namespace Ontap.Util
 
             return id;
         }
+
+        public static bool TryParseDatabaseUrl(string databaseUrl, out string connectionString)
+        {
+            if (Uri.TryCreate(databaseUrl, UriKind.Absolute, out var url))
+            {
+                //"Server=localhost;database=ontap;uid=ontap;pwd=ontap;"
+                connectionString = $"Server={url.Host};database={url.LocalPath.Substring(1)};uid={url.UserInfo.Split(':')[0]};pwd={url.UserInfo.Split(':')[1]};";
+                return true;
+            }
+            connectionString = null;
+            return false;
+        }
     }
 }

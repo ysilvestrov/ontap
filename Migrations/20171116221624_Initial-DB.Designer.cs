@@ -5,21 +5,21 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Ontap.Models;
 
-namespace ontap.Migrations
+namespace Ontap.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20161206200154_Beer Serve Kinds")]
-    partial class BeerServeKinds
+    [Migration("20171116221624_Initial-DB")]
+    partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.1")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.1.2");
 
             modelBuilder.Entity("Ontap.Models.Beer", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("Alcohol");
 
@@ -85,7 +85,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.Brewery", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
 
@@ -120,9 +121,26 @@ namespace ontap.Migrations
                     b.ToTable("BreweryAdmins");
                 });
 
+            modelBuilder.Entity("Ontap.Models.BrewerySubstitution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BreweryId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BreweryId");
+
+                    b.ToTable("BrewerySubstitutions");
+                });
+
             modelBuilder.Entity("Ontap.Models.City", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -134,7 +152,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.Country", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -145,7 +164,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.Pub", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
 
@@ -161,6 +181,8 @@ namespace ontap.Migrations
                         .IsRequired();
 
                     b.Property<string>("ParserOptions");
+
+                    b.Property<int>("TapNumber");
 
                     b.Property<string>("VkontakteUrl");
 
@@ -193,7 +215,8 @@ namespace ontap.Migrations
 
             modelBuilder.Entity("Ontap.Models.User", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("CanAdminBrewery");
 
@@ -247,6 +270,14 @@ namespace ontap.Migrations
                     b.HasOne("Ontap.Models.User", "User")
                         .WithMany("BreweryAdmins")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Ontap.Models.BrewerySubstitution", b =>
+                {
+                    b.HasOne("Ontap.Models.Brewery", "Brewery")
+                        .WithMany("Substitutions")
+                        .HasForeignKey("BreweryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

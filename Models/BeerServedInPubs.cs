@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -7,6 +8,7 @@ namespace Ontap.Models
 {
     public class BeerServedInPubs
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public virtual Beer Served { get; set; }
         public virtual Pub ServedIn { get; set; }

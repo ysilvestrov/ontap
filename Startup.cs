@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Ontap.Auth;
 using Elmah.Io.AspNetCore;
+using Ontap.Util;
 
 namespace Ontap
 {
@@ -34,9 +36,35 @@ namespace Ontap
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //var sqlConnectionOptions = Configuration.GetSection(nameof(SqlConnectionOptions));
             services.AddDbContext<DataContext>(options 
-                => options.UseSqlServer(Configuration.GetValue<string>("SQLSERVER_CONNECTION_STRING") 
-                ?? Configuration.GetConnectionString("DefaultConnection")));
+                =>
+            {
+                if (!Enum.TryParse(
+                    Configuration.GetValue<string>("SqlConnectionOptions:ConnectionType"),
+                    out SqlConnectionOptions.ConnectionTypes connectionType))
+                {
+                    connectionType = SqlConnectionOptions.ConnectionTypes.Sqlserver;
+                }
+
+                var connectionName = Configuration.GetValue<string>("SqlConnectionOptions:ConnectionString");
+                var connectionString = Configuration.GetConnectionString(connectionName);
+                if (connectionType == SqlConnectionOptions.ConnectionTypes.Mysql)
+                {
+                    var databaseUrl = Configuration.GetValue<string>("DATABASE_URL");
+                    if (Utilities.TryParseDatabaseUrl(databaseUrl, out var s))
+                    {
+                        connectionString = s;
+                    }
+                    options.UseMySql(connectionString);
+                }
+                else
+                {
+                    options.UseSqlServer(connectionString);
+                }
+                //options.UseSqlServer(Configuration.GetValue<string>("SQLSERVER_CONNECTION_STRING")
+                //                     ?? Configuration.GetConnectionString("DefaultConnection"));
+            });
             // Add framework services.
             services.AddMvc(config =>
             {
