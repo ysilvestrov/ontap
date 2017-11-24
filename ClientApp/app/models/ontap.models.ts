@@ -27,6 +27,8 @@ export interface IPub {
     city: ICity;
     serves: IServe[];
     image: string;
+    taplistHeaderImage: string;
+    taplistFooterImage: string;
     facebookUrl: string;
     vkontakteUrl: string;
     websiteUrl: string;
@@ -67,6 +69,8 @@ export class Pub implements IPub {
     name: string;
     address: string;
     image: string;
+    taplistHeaderImage: string;
+    taplistFooterImage: string;
     city: ICity;
     serves: IServe[];
     facebookUrl: string;
@@ -83,6 +87,8 @@ export class Pub implements IPub {
         this.city = pub.city;
         this.serves = pub.serves;
         this.image = pub.image;
+        this.taplistHeaderImage = pub.taplistHeaderImage;
+        this.taplistFooterImage = pub.taplistFooterImage;
         this.facebookUrl = pub.facebookUrl;
         this.vkontakteUrl = pub.vkontakteUrl;
         this.websiteUrl = pub.websiteUrl;

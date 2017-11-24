@@ -23,6 +23,9 @@
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.1.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+	<DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />	
+	<DotNetCliToolReference Include="xunit.runner.visualstudio" Version="2.3.1" />	
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->

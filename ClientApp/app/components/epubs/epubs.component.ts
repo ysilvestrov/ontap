@@ -5,11 +5,12 @@ import {IPub, ICity, Pub} from "../../models/ontap.models";
 import {EPubService} from "./epubs.service";
 import { CityService } from "../cities/cities.service";
 import { LoginService } from "../login/login.service";
-import {AppComponent, AppService, ProcessingStatus} from "../../modules/appComponent";
+import { AppComponent, AppService, ProcessingStatus, LabeledCloudinaryUploader} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
 import { FileSelectDirective, FileDropDirective, FileUploader } from "ng2-file-upload";
 import { Ng2BootstrapModule, AlertModule } from "ng2-bootstrap/ng2-bootstrap";
+import Component = require("../../modules/appComponent");
 
 
 @ng.Component({
@@ -31,10 +32,10 @@ export class EPubsComponent extends  AppComponent<IPub, EPubService> {
         private cityService: CityService,
         public locale: LocaleService,
         public localization: LocalizationService) {
-        super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
-            cloudName: "ontap-in-ua",
-            uploadPreset: "ontapInUa_pubs"
-        })));
+        super(elmService, locale, localization, [
+            new LabeledCloudinaryUploader(new CloudinaryOptions({ cloudName: "ontap-in-ua", uploadPreset: "ontapInUa_pubs" })),
+            new LabeledCloudinaryUploader(new CloudinaryOptions({ cloudName: "ontap-in-ua", uploadPreset: "ontapInUa_pubs" }), 'taplistHeaderImage')
+        ]);
         this.getCities();
     }
 

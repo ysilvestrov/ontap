@@ -29,6 +29,8 @@ export class PubAdminService extends AppService<IPubAdmin> {
                 name: 'name',
                 address: 'address',
                 image: '',
+                taplistHeaderImage: '',
+                taplistFooterImage: '',
                 city: new City({ id: 'kyiv', name: 'Kyiv' }),
                 serves: [],
                 facebookUrl: '',

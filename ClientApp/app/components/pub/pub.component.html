@@ -30,7 +30,8 @@
 <div *ngIf="pub" style="margin-top: 20px;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title" [id]="pub.id">{{ pub.name }} 
+            <h3 class="panel-title" [id]="pub.id">
+                {{ pub.name }}
                 <span class="label label-success">{{ pub.city.name }}</span>
                 <small>{{ pub.address }}</small>
                 <a *ngIf="pub.facebookUrl" [href]="pub.facebookUrl" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
@@ -42,7 +43,7 @@
         <div class="panel-body">
             <div>
                 <div class="pull-left pub-image" *ngIf="pub.image">
-                    <cl-image public-id="{{pub.image}}" cloud-name="ontap-in-ua" height="100" dpr="auto" crop="scale" 
+                    <cl-image public-id="{{pub.image}}" cloud-name="ontap-in-ua" height="100" dpr="auto" crop="scale"
                               format="png" quality="100" alt="{{pub.name}} logo" title="{{pub.name}}"></cl-image>
                 </div>
                 <div>
@@ -51,7 +52,7 @@
                             [tooltipHtml]="toolTipTemplate" tooltipPlacement="left" [tooltipContext]="serve">
                         <span class="badge">{{ serve.tap }}</span>
                         {{ serve.served.name }}
-                        <span class="label" [ngClass]="serve.served.brewery.country.id=='UA'?'label-info':'label-success'" >{{ serve.served.brewery.name }}</span>
+                        <span class="label" [ngClass]="serve.served.brewery.country.id=='UA'?'label-info':'label-success'">{{ serve.served.brewery.name }}</span>
                         <span class="badge">{{ serve.price | number:'2.2-2' }} ₴</span>
                     </button>
                 </div>

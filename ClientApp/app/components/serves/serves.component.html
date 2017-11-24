@@ -26,127 +26,172 @@
 
 <table class='table' *ngIf="elements">
     <thead>
-        <tr>
-            <th class="col-xs-3">Паб</th>
-            <th class="col-xs-1">Кран</th>
-            <th class="col-xs-4">Пиво</th>
-            <th class="col-xs-1">Цена</th>
-            <th class="col-xs-1">Объём</th>
-            <th class="col-xs-3">Действия</th>
-        </tr>
+    <tr>
+        <th class="col-xs-3">Паб</th>
+        <th class="col-xs-1">Кран</th>
+        <th class="col-xs-4">Пиво</th>
+        <th class="col-xs-1">Цена</th>
+        <th class="col-xs-1">Объём</th>
+        <th class="col-xs-3">Действия</th>
+    </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let serve of elements">
-            <td>
-                <span *ngIf="!editing || (editing.id != serve.id)">
-                    {{ serve.servedIn.name }}
-                </span>
-                <span *ngIf="editing && (editing.id == serve.id)">
-                    <ng-select [options]="selectingPubs"
-                               [multiple]="false"
-                               [(ngModel)]="editing.servedIn.id">
-                    </ng-select>
-                </span>
-            </td>
-            <td>
-                <span *ngIf="!editing || (editing.id != serve.id)">
-                    {{ serve.tap }}
-                </span>
-                <span *ngIf="editing && (editing.id == serve.id)">
-                    <input type="number" class="form-control" id="editing.tap"
-                           required
-                           [(ngModel)]="editing.tap" name="tap">
-                </span>
-            </td>
-            <td>
-                <span *ngIf="!editing || (editing.id != serve.id)">
-                    {{ serve.served.name }} ({{serve.served.brewery.name}})
-                </span>
-                <span *ngIf="editing && (editing.id == serve.id)">
-                    <ng-select [options]="selectingBeers"
-                               [multiple]="false"
-                               [(ngModel)]="editing.served.id">
-                    </ng-select>
-                </span>
-            </td>
-            <td>
-                <span *ngIf="!editing || (editing.id != serve.id)">
-                    {{ serve.price }}
-                </span>
-                <span *ngIf="editing && (editing.id == serve.id)">
-                    <input type="number" class="form-control" id="editing.price"
-                           required
-                           [(ngModel)]="editing.price" name="price">
-                </span>
-            </td>
-            <td>
-                <span *ngIf="!editing || (editing.id != serve.id)">
-                    {{ serve.volume }}
-                </span>
-                <span *ngIf="editing && (editing.id == serve.id)">
-                    <input type="number" class="form-control" id="editing.volume"
-                           required
-                           [(ngModel)]="editing.volume" name="volume">
-                </span>
-            </td>
-            <td>
-                <span *ngIf="!editing || (editing.id != serve.id)">
-                    <button (click)="edit(serve.id)" type="button" class="btn btn-default" aria-label="Edit">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    </button>
-                </span>
-                <span *ngIf="editing && (editing.id == serve.id)">
-                    <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                    </button>
-                    <button (click)="delete()" type="button" class="btn btn-default" aria-label="Delete">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </button>
-                    <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </button>
-                </span>
-            </td>
-        </tr>
-        <tr *ngIf="adding">
-            <td>
+    <tr *ngFor="let serve of elements">
+        <td>
+            <span *ngIf="!editing || (editing.id != serve.id)">
+                {{ serve.servedIn.name }}
+            </span>
+            <span *ngIf="editing && (editing.id == serve.id)">
                 <ng-select [options]="selectingPubs"
                            [multiple]="false"
-                           [(ngModel)]="adding.servedIn.id">
+                           [(ngModel)]="editing.servedIn.id">
                 </ng-select>
-            </td>
-            <td>
-                <input type="number" class="form-control" id="adding.tap"
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != serve.id)">
+                {{ serve.tap }}
+            </span>
+            <span *ngIf="editing && (editing.id == serve.id)">
+                <input type="number" class="form-control" id="editing.tap"
                        required
-                       [(ngModel)]="adding.tap" name="tap">
-            </td>
-            <td>
+                       [(ngModel)]="editing.tap" name="tap">
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != serve.id)">
+                {{ serve.served.name }} ({{serve.served.brewery.name}})
+            </span>
+            <span *ngIf="editing && (editing.id == serve.id)">
                 <ng-select [options]="selectingBeers"
                            [multiple]="false"
-                           [(ngModel)]="adding.served.id">
+                           [(ngModel)]="editing.served.id">
                 </ng-select>
-            </td>
-            <td>
-                <input type="number" class="form-control" id="adding.price"
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != serve.id)">
+                {{ serve.price }}
+            </span>
+            <span *ngIf="editing && (editing.id == serve.id)">
+                <input type="number" class="form-control" id="editing.price"
                        required
-                       [(ngModel)]="adding.price" name="price">
-            </td>
-            <td>
-                <input type="number" class="form-control" id="adding.volume"
+                       [(ngModel)]="editing.price" name="price">
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != serve.id)">
+                {{ serve.volume }}
+            </span>
+            <span *ngIf="editing && (editing.id == serve.id)">
+                <input type="number" class="form-control" id="editing.volume"
                        required
-                       [(ngModel)]="adding.volume" name="volume">
-            </td>
-            <td>
-                <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
+                       [(ngModel)]="editing.volume" name="volume">
+            </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != serve.id)">
+                <button (click)="edit(serve.id)" type="button" class="btn btn-default" aria-label="Edit">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+            </span>
+            <span *ngIf="editing && (editing.id == serve.id)">
+                <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                </button>
+                <button (click)="delete()" type="button" class="btn btn-default" aria-label="Delete">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
                 <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
-            </td>
-        </tr>
+            </span>
+        </td>
+    </tr>
+    <tr *ngIf="adding">
+        <td>
+            <ng-select [options]="selectingPubs"
+                       [multiple]="false"
+                       [(ngModel)]="adding.servedIn.id">
+            </ng-select>
+        </td>
+        <td>
+            <input type="number" class="form-control" id="adding.tap"
+                   required
+                   [(ngModel)]="adding.tap" name="tap">
+        </td>
+        <td>
+            <ng-select [options]="selectingBeers"
+                       [multiple]="false"
+                       [(ngModel)]="adding.served.id">
+            </ng-select>
+        </td>
+        <td>
+            <input type="number" class="form-control" id="adding.price"
+                   required
+                   [(ngModel)]="adding.price" name="price">
+        </td>
+        <td>
+            <input type="number" class="form-control" id="adding.volume"
+                   required
+                   [(ngModel)]="adding.volume" name="volume">
+        </td>
+        <td>
+            <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+            </button>
+            <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
     </tbody>
 </table>
+
+
+
 <button (click)="startAdd()" type="button" class="btn btn-default" aria-label="Add">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-</button>
+</button>&nbsp;
+<print-page section="printable" *ngIf="pub"></print-page>
+<div id="printable" *ngIf="pub" style="visibility: collapse">
+    <div style='width: 740px; height: 101px; display: block;'>
+        <cl-image public-id="{{pub.taplistHeaderImage}}" cloud-name="ontap-in-ua" height="101" width="740" dpr="auto" format="png" quality="100" alt="" title=""></cl-image>
+    </div>
+    <div class="ritz grid-container" dir="ltr">
+        <table class="waffle no-grid" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr style='height: 42px;'>
+                <td class="s0" dir="ltr">Кран</td>
+                <td class="s0" dir="ltr">Описание</td>
+                <td class="s0" dir="ltr">ABV</td>
+                <td class="s0" dir="ltr">PL</td>
+                <td class="s0" dir="ltr">IBU</td>
+                <td class="s1" dir="ltr"></td>
+                <td class="s2 softmerge" dir="ltr">
+                    <div class="softmerge-inner" style="width: 49px; left: -8px;">Цена</div>
+                </td>
+                <td class="s0" dir="ltr">Объем</td>
+            </tr>
+            <ng-container *ngFor="let serve of pub.serves | sortByTap; let isOdd = odd; let isEven = even">
+                <tr style='height: 20px;'>
+                    <td [ngClass]="{'s3':isEven,'s8':isOdd}" dir="ltr" rowspan="2">{{ serve.tap }}</td>
+                    <td [ngClass]="{'s4':isEven,'s9':isOdd}" dir="ltr">{{ serve.served.brewery.name }} — {{ serve.served.name }}</td>
+                    <td [ngClass]="{'s5':isEven,'s10':isOdd}" dir="ltr" rowspan="2">{{serve.served.alcohol}}</td>
+                    <td [ngClass]="{'s5':isEven,'s10':isOdd}" dir="ltr" rowspan="2">{{serve.served.gravity}}</td>
+                    <td [ngClass]="{'s5':isEven,'s10':isOdd}" dir="ltr" rowspan="2">{{serve.served.ibu}}</td>
+                    <td [ngClass]="{'s6':isEven,'s11':isOdd}" dir="ltr"></td>
+                    <td [ngClass]="{'s6':isEven,'s11':isOdd}" dir="ltr" rowspan="2">{{ serve.price | number:'2.0-2' }}</td>
+                    <td [ngClass]="{'s6':isEven,'s11':isOdd}" dir="ltr" rowspan="2">{{serve.volume}}</td>
+                </tr>
+                <tr style='height: 20px;'>
+                    <td [ngClass]="{'s7':isEven,'s12':isOdd, 'softmerge':true}">
+                        <div class="softmerge-inner" style="width: 445px; left: -1px;">{{serve.served.description}}</div>
+                    </td>
+                    <td [ngClass]="{'s6':isEven,'s11':isOdd}" dir="ltr"></td>
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

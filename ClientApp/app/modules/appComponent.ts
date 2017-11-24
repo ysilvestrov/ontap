@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿ import { Injectable } from '@angular/core';
 import Linq = require("./linq");
 import Ontapmodels = require("../models/ontap.models");
 import IElement = Ontapmodels.IElement;
@@ -9,7 +9,7 @@ import {IStronglyTypedEvents, EventDispatcher, IEvent} from './StronglyTypedEven
 import { FormsModule }   from '@angular/forms';
 import { LoginService } from "../components/login/login.service";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
-import { CloudinaryUploader } from 'ng2-cloudinary';
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 
 export enum ProcessingStatus {
     None,
@@ -30,6 +30,11 @@ export class Options {
     }
 }
 
+export class LabeledCloudinaryUploader extends CloudinaryUploader {
+    constructor(options: CloudinaryOptions, public label: string = 'image') {
+        super(options);
+    }
+}
 
 @Injectable()
 export class AppComponent<TInterface extends IElement, TService extends AppService<TInterface>> extends Locale {
@@ -41,39 +46,41 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
     public processingId: any;
     public status: ProcessingStatus = ProcessingStatus.None;
 
-    constructor(protected elmService: TService, public locale: LocaleService, public localization: LocalizationService, public uploader: CloudinaryUploader = null) {
+    constructor(protected elmService: TService, public locale: LocaleService, public localization: LocalizationService, public uploaders: LabeledCloudinaryUploader[] = []) {
         super(locale, localization);
         this.isBrowser = typeof (document) != "undefined";
         this.get();
 
-        if (this.uploader) {
+        for (let uploader of uploaders) {
             //Override onSuccessItem function to record cloudinary response data
-            this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
+            uploader.onSuccessItem = (item: any, response: string, status: number, headers: any) => {
                 //response is the cloudinary response
                 //see http://cloudinary.com/documentation/upload_images#upload_response
                 const cloudinaryImage = JSON.parse(response);
                 if (this.editing) {
                     var e: any = this.editing;
-                    e.image = cloudinaryImage.public_id;
+                    e[uploader.label] = cloudinaryImage.public_id;
                 }
                 if (this.adding) {
                     var a: any = this.adding;
-                    a.image = cloudinaryImage.public_id;
+                    e[uploader.label] = cloudinaryImage.public_id;
                 }
 
                 return { item, response, status, headers };
             };
 
             //Override onSuccessItem function to record cloudinary response data
-            this.uploader.onErrorItem = (item: any, response: string, status: number, headers: any) => {
+            uploader.onErrorItem = (item: any, response: string, status: number, headers: any) => {
                 //response is the cloudinary response
                 //see http://cloudinary.com/documentation/upload_images#upload_response
                 console.error(response);
                 return { item, response, status, headers };
             };
 
-            this.uploader.onCompleteAll = () => {
-                this.editing ? this.save() : this.add();
+            uploader.onCompleteAll = () => {
+                if (!this.hasSomethingToUpload()) {
+                    this.editing ? this.save() : this.add();
+                }
             }
         }
     }
@@ -97,8 +104,8 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         if (!this.adding) { return; }
         this.status = ProcessingStatus.Adding;
         this.processingId = this.adding.id;
-        if (this.uploader && this.uploader.getNotUploadedItems().length > 0) {
-            this.uploader.uploadAll();
+        if (this.hasSomethingToUpload()) {
+            this.uploadAll();
         } else {
             this.elmService.add(this.adding)
                 .subscribe(
@@ -157,8 +164,8 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
         if (!this.editing) { return; }
         this.status = ProcessingStatus.Saving;
         this.processingId = this.editing.id;
-        if (this.uploader && this.uploader.getNotUploadedItems().length > 0) {
-            this.uploader.uploadAll();
+        if (this.hasSomethingToUpload()) {
+            this.uploadAll();
         } else {
             this.elmService.change(this.editing)
                 .subscribe(
@@ -182,6 +189,14 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
 
     startAdd() {
         this.adding = this.elmService.default();
+    }
+
+    hasSomethingToUpload() {
+        return !this.uploaders.every((u) => { return u && u.getNotUploadedItems().length < 1 });
+    }
+
+    uploadAll() {
+        this.uploaders.forEach((u) => { u.uploadAll() });
     }
 
     private _load = new EventDispatcher<AppComponent<TInterface, TService>, TInterface[]>();

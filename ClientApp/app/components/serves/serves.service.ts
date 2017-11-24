@@ -30,6 +30,8 @@ export class ServeService extends AppService<IServe> {
                 name: 'name',
                 address: 'address',
                 image: '',
+                taplistHeaderImage: '',
+                taplistFooterImage: '',
                 city: new City({ id: 'kyiv', name: 'Kyiv' }),
                 serves: [],
                 facebookUrl: '',

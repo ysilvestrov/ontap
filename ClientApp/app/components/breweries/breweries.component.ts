@@ -6,7 +6,7 @@ import {BreweryService} from "./breweries.service";
 import {CountryService} from "../countries/countries.service";
 import {BeerService} from "../beers/beers.service";
 import {SelectorComponent} from "../selector/selector.component";
-import {AppComponent, AppService, Options} from "../../modules/appComponent";
+import {AppComponent, AppService, Options, LabeledCloudinaryUploader} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from "ng2-cloudinary";
 import { FileSelectDirective, FileDropDirective, FileUploader } from "ng2-file-upload";
@@ -32,10 +32,10 @@ export class BreweriesComponent extends AppComponent<IBrewery, BreweryService> {
         public locale: LocaleService,
         public localization: LocalizationService)
     {
-        super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
+        super(elmService, locale, localization, [new LabeledCloudinaryUploader(new CloudinaryOptions({
             cloudName: "ontap-in-ua",
             uploadPreset: "ontapInUa_breweries"
-        })));
+        }))]);
         this.onLoad.subscribe((s: BreweriesComponent, elements: IBrewery[]) => { this.onElementsLoad(elements) });
         this.getCountries();
         this.getBeers();

@@ -85,12 +85,6 @@
                 </div>
                 <div class="col-md-2">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-vk" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" [(ngModel)]="editing.vkontakteUrl" id="editing.vkontakteUrl" name="editing.vkontakteUrl" >
-                    </div>                    
-                </div>
-                <div class="col-md-2">
-                    <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-external-link" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" id="editing.websiteUrl"  [(ngModel)]="editing.websiteUrl" name="editing.websiteUrl" >
                     </div>                    
@@ -101,11 +95,17 @@
                         <input type="text" class="form-control" id="editing.bookingUrl"  [(ngModel)]="editing.bookingUrl" name="editing.bookingUrl" >
                     </div>                    
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="pull-left" style="margin-right: 20px;">
-                        <cl-image public-id="{{editing.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
+                        <cl-image public-id="{{editing.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="" title=""></cl-image>
                     </div>
-                    <input type="file" ng2FileSelect [uploader]="uploader"/>
+                    <input type="file" ng2FileSelect [uploader]="uploaders[0]"/>
+                </div>
+                <div class="col-md-3">
+                    <div class="pull-left" style="margin-right: 20px;">
+                        <cl-image public-id="{{editing.taplistHeaderImage}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="" title=""></cl-image>
+                    </div>
+                    <input type="file" ng2FileSelect [uploader]="uploaders[1]"/>
                 </div>
             </div> 
             <div class="row edit2">
@@ -156,12 +156,7 @@
                     <input type="text" class="form-control" [(ngModel)]="adding.facebookUrl" id="adding.facebookUrl" name="adding.facebookUrl">
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-vk" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" [(ngModel)]="adding.vkontakteUrl" id="adding.vkontakteUrl" name="adding.vkontakteUrl">
-                </div>
-            </div>
+
             <div class="col-md-2">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-external-link" aria-hidden="true"></i></span>
@@ -174,11 +169,17 @@
                     <input type="text" class="form-control" id="adding.bookingUrl" [(ngModel)]="adding.bookingUrl" name="adding.bookingUrl">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="pull-left" style="margin-right: 20px;">
                     <cl-image public-id="{{adding.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
                 </div>
-                <input type="file" ng2FileSelect [uploader]="uploader" />
+                <input type="file" ng2FileSelect [uploader]="uploaders[0]" />
+            </div>
+            <div class="col-md-3">
+                <div class="pull-left" style="margin-right: 20px;">
+                    <cl-image public-id="{{adding.taplistHeaderImage}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="" title=""></cl-image>
+                </div>
+                <input type="file" ng2FileSelect [uploader]="uploaders[1]"/>
             </div>
         </div>
         <div class="row edit2">

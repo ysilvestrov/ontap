@@ -18,6 +18,8 @@ export class EPubService extends AppService<IPub> {
             name: 'name',
             address: 'address',
             image: '',
+            taplistHeaderImage: '',
+            taplistFooterImage: '',
             city: new City({ id: 'kyiv', name: 'Kyiv' }),
             serves: [],
             facebookUrl: '',
@@ -39,6 +41,8 @@ export class EPubService extends AppService<IPub> {
         dest.address = source.address;
         dest.serves = source.serves;
         dest.image = source.image;
+        dest.taplistHeaderImage = source.taplistHeaderImage;
+        dest.taplistFooterImage = source.taplistFooterImage;
         dest.facebookUrl = source.facebookUrl;
         dest.bookingUrl = source.facebookUrl;
         dest.vkontakteUrl = source.vkontakteUrl;

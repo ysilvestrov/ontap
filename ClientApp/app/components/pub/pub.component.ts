@@ -10,6 +10,7 @@ import {CityService} from "../cities/cities.service";
 import {AppComponent, AppService} from "../../modules/appComponent";
 import {SortByTap} from "../app/sortbytap.pipe";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
+import {PrintComponent} from "../print/print.component";
 import * as moment from 'moment';
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 import { CloudinaryOptions } from 'ng2-cloudinary';
@@ -18,8 +19,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'pub',
     providers: [EPubService],
-    styles: [require('./pub.component.css')],
-  template: require('./pub.component.html')
+    templateUrl: './pub.component.html',
+    styleUrls: ['./pub.component.css']
 })
 export class PubComponent extends Locale implements OnInit {
     public pub;

@@ -168,7 +168,7 @@ namespace Ontap.Controllers
             return result.ToString();
         }
 
-        // PUT api/cities/Kharkiv
+        // PUT api/pubs/BlackDoorPub
         [HttpPut("{id}")]
         [Authorize(Policy = "PubAdminUser")]
         public async Task<Pub> Put(string id, [FromBody]Pub pub)
@@ -184,6 +184,8 @@ namespace Ontap.Controllers
             current.City = _context.Cities.First(p => p.Id == pub.City.Id);
             current.Address = pub.Address;
             current.Image = pub.Image;
+            current.TaplistHeaderImage = pub.TaplistHeaderImage;
+            current.TaplistFooterImage = pub.TaplistFooterImage;
             current.BookingUrl = pub.BookingUrl;
             current.FacebookUrl = pub.FacebookUrl;
             current.VkontakteUrl = pub.VkontakteUrl;

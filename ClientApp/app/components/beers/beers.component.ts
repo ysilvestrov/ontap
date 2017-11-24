@@ -5,7 +5,7 @@ import { List } from "../../modules/linq";
 import {IBeer, Beer, IBrewery} from "../../models/ontap.models";
 import {BeerService} from "./beers.service";
 import {BreweryService} from "../breweries/breweries.service";
-import {AppComponent, AppService, Options} from "../../modules/appComponent";
+import { AppComponent, AppService, Options, LabeledCloudinaryUploader} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
@@ -14,8 +14,9 @@ import { Ng2BootstrapModule, AlertModule } from "ng2-bootstrap/ng2-bootstrap";
 @ng.Component({
     selector: 'beers',
     providers: [BeerService, BreweryService],
-    styles: [require('./beers.component.css')],
-  template: require('./beers.component.html')
+    templateUrl: './beers.component.html',
+    styleUrls: ['./beers.component.css']
+
 })
 export class BeersComponent extends AppComponent<IBeer, BeerService> {
 
@@ -25,10 +26,10 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
     public selectingBreweries: Options[];
 
     constructor(elmService: BeerService, private breweryService: BreweryService, public locale: LocaleService, public localization: LocalizationService) {
-        super(elmService, locale, localization, new CloudinaryUploader(new CloudinaryOptions({
+        super(elmService, locale, localization, [new LabeledCloudinaryUploader(new CloudinaryOptions({
             cloudName: 'ontap-in-ua',
             uploadPreset: 'ontapInUa_pubs'
-        })));
+        }))]);
         this.getBreweries();
         if (this.elements) {
             this.onElementsLoad(this.elements);

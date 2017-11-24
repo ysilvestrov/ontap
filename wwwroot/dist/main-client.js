@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "aaef34be4346f9b7ca98"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b229d9f2917c7264124c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(692)(__webpack_require__.s = 692);
+/******/ 	return hotCreateRequire(698)(__webpack_require__.s = 698);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2521,7 +2521,7 @@ module.exports = (__webpack_require__(3))(0);
                 module && module.exports) {
             try {
                 oldLocale = globalLocale._abbr;
-                __webpack_require__(380)("./" + name);
+                __webpack_require__(384)("./" + name);
                 // because defineLocale currently also sets the global locale, we
                 // want to undo that for lazy loaded locales
                 locale_locales__getSetGlobalLocale(oldLocale);
@@ -5075,7 +5075,7 @@ var Linq = __webpack_require__(26);
 var http_1 = __webpack_require__(17);
 var Observable_1 = __webpack_require__(0);
 __webpack_require__(77);
-var StronglyTypedEvents_1 = __webpack_require__(351);
+var StronglyTypedEvents_1 = __webpack_require__(352);
 var login_service_1 = __webpack_require__(15);
 var angular2localization_1 = __webpack_require__(11);
 var ng2_cloudinary_1 = __webpack_require__(29);
@@ -5096,46 +5096,63 @@ var Options = (function () {
     return Options;
 }());
 exports.Options = Options;
+var LabeledCloudinaryUploader = (function (_super) {
+    __extends(LabeledCloudinaryUploader, _super);
+    function LabeledCloudinaryUploader(options, label) {
+        if (label === void 0) { label = 'image'; }
+        var _this = _super.call(this, options) || this;
+        _this.label = label;
+        return _this;
+    }
+    return LabeledCloudinaryUploader;
+}(ng2_cloudinary_1.CloudinaryUploader));
+exports.LabeledCloudinaryUploader = LabeledCloudinaryUploader;
 var AppComponent = (function (_super) {
     __extends(AppComponent, _super);
-    function AppComponent(elmService, locale, localization, uploader) {
-        if (uploader === void 0) { uploader = null; }
+    function AppComponent(elmService, locale, localization, uploaders) {
+        if (uploaders === void 0) { uploaders = []; }
         var _this = _super.call(this, locale, localization) || this;
         _this.elmService = elmService;
         _this.locale = locale;
         _this.localization = localization;
-        _this.uploader = uploader;
+        _this.uploaders = uploaders;
         _this.status = ProcessingStatus.None;
         _this._load = new StronglyTypedEvents_1.EventDispatcher();
         _this._delete = new StronglyTypedEvents_1.EventDispatcher();
         _this.isBrowser = typeof (document) != "undefined";
         _this.get();
-        if (_this.uploader) {
+        var _loop_1 = function (uploader) {
             //Override onSuccessItem function to record cloudinary response data
-            _this.uploader.onSuccessItem = function (item, response, status, headers) {
+            uploader.onSuccessItem = function (item, response, status, headers) {
                 //response is the cloudinary response
                 //see http://cloudinary.com/documentation/upload_images#upload_response
                 var cloudinaryImage = JSON.parse(response);
                 if (_this.editing) {
                     var e = _this.editing;
-                    e.image = cloudinaryImage.public_id;
+                    e[uploader.label] = cloudinaryImage.public_id;
                 }
                 if (_this.adding) {
                     var a = _this.adding;
-                    a.image = cloudinaryImage.public_id;
+                    e[uploader.label] = cloudinaryImage.public_id;
                 }
                 return { item: item, response: response, status: status, headers: headers };
             };
             //Override onSuccessItem function to record cloudinary response data
-            _this.uploader.onErrorItem = function (item, response, status, headers) {
+            uploader.onErrorItem = function (item, response, status, headers) {
                 //response is the cloudinary response
                 //see http://cloudinary.com/documentation/upload_images#upload_response
                 console.error(response);
                 return { item: item, response: response, status: status, headers: headers };
             };
-            _this.uploader.onCompleteAll = function () {
-                _this.editing ? _this.save() : _this.add();
+            uploader.onCompleteAll = function () {
+                if (!_this.hasSomethingToUpload()) {
+                    _this.editing ? _this.save() : _this.add();
+                }
             };
+        };
+        for (var _i = 0, uploaders_1 = uploaders; _i < uploaders_1.length; _i++) {
+            var uploader = uploaders_1[_i];
+            _loop_1(uploader);
         }
         return _this;
     }
@@ -5159,8 +5176,8 @@ var AppComponent = (function (_super) {
         }
         this.status = ProcessingStatus.Adding;
         this.processingId = this.adding.id;
-        if (this.uploader && this.uploader.getNotUploadedItems().length > 0) {
-            this.uploader.uploadAll();
+        if (this.hasSomethingToUpload()) {
+            this.uploadAll();
         }
         else {
             this.elmService.add(this.adding)
@@ -5220,8 +5237,8 @@ var AppComponent = (function (_super) {
         }
         this.status = ProcessingStatus.Saving;
         this.processingId = this.editing.id;
-        if (this.uploader && this.uploader.getNotUploadedItems().length > 0) {
-            this.uploader.uploadAll();
+        if (this.hasSomethingToUpload()) {
+            this.uploadAll();
         }
         else {
             this.elmService.change(this.editing)
@@ -5244,6 +5261,12 @@ var AppComponent = (function (_super) {
     };
     AppComponent.prototype.startAdd = function () {
         this.adding = this.elmService.default();
+    };
+    AppComponent.prototype.hasSomethingToUpload = function () {
+        return !this.uploaders.every(function (u) { return u && u.getNotUploadedItems().length < 1; });
+    };
+    AppComponent.prototype.uploadAll = function () {
+        this.uploaders.forEach(function (u) { u.uploadAll(); });
     };
     Object.defineProperty(AppComponent.prototype, "onLoad", {
         get: function () {
@@ -5285,7 +5308,7 @@ var AppComponent = (function (_super) {
 }(angular2localization_1.Locale));
 AppComponent = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [Object, angular2localization_1.LocaleService, angular2localization_1.LocalizationService, ng2_cloudinary_1.CloudinaryUploader])
+    __metadata("design:paramtypes", [Object, angular2localization_1.LocaleService, angular2localization_1.LocalizationService, Array])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 var AppService = (function () {
@@ -5684,6 +5707,62 @@ var /** @type {?} */ NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angula
 
 /***/ }),
 /* 19 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ }),
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5902,7 +5981,7 @@ function _mergeErrors(arrayOfErrors) {
 //# sourceMappingURL=validators.js.map
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5960,69 +6039,13 @@ function ControlContainer_tsickle_Closure_declarations() {
 //# sourceMappingURL=control_container.js.map
 
 /***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-
-/***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var platform_browser_1 = __webpack_require__(677);
+var platform_browser_1 = __webpack_require__(683);
 /**
  * Components helper class to easily work with
  * allows to:
@@ -6145,7 +6168,7 @@ module.exports = (__webpack_require__(3))(48);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__facade_lang__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__checkbox_value_accessor__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__default_value_accessor__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__normalize_validator__ = __webpack_require__(312);
@@ -6381,6 +6404,8 @@ var Pub = (function () {
         this.city = pub.city;
         this.serves = pub.serves;
         this.image = pub.image;
+        this.taplistHeaderImage = pub.taplistHeaderImage;
+        this.taplistFooterImage = pub.taplistFooterImage;
         this.facebookUrl = pub.facebookUrl;
         this.vkontakteUrl = pub.vkontakteUrl;
         this.websiteUrl = pub.websiteUrl;
@@ -7049,13 +7074,13 @@ function NgControl_tsickle_Closure_declarations() {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cloudinary_module__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cloudinary_module__ = __webpack_require__(409);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Ng2CloudinaryModule", function() { return __WEBPACK_IMPORTED_MODULE_0__cloudinary_module__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cloudinary_options_class__ = __webpack_require__(403);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cloudinary_options_class__ = __webpack_require__(407);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryOptions", function() { return __WEBPACK_IMPORTED_MODULE_1__cloudinary_options_class__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cloudinary_transforms_class__ = __webpack_require__(265);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryTransforms", function() { return __WEBPACK_IMPORTED_MODULE_2__cloudinary_transforms_class__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__ = __webpack_require__(404);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__ = __webpack_require__(408);
 /* harmony reexport (binding) */ if(__webpack_require__.o(__WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__, "CloudinaryUploader")) __webpack_require__.d(__webpack_exports__, "CloudinaryUploader", function() { return __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__["CloudinaryUploader"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(108);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryImageService", function() { return __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__["a"]; });
@@ -7630,7 +7655,7 @@ module.exports = (__webpack_require__(3))(313);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared__ = __webpack_require__(24);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AbstractFormGroupDirective; });
 /**
@@ -7749,8 +7774,8 @@ function AbstractFormGroupDirective_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared__ = __webpack_require__(24);
 /* unused harmony export formDirectiveProvider */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgForm; });
@@ -8283,8 +8308,8 @@ function RadioControlValueAccessor_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__reactive_errors__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared__ = __webpack_require__(24);
 /* unused harmony export formDirectiveProvider */
@@ -8592,9 +8617,9 @@ function FormGroupDirective_tsickle_Closure_declarations() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reactive_errors__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__form_group_directive__ = __webpack_require__(42);
@@ -9544,6 +9569,8 @@ var EPubService = (function (_super) {
             name: 'name',
             address: 'address',
             image: '',
+            taplistHeaderImage: '',
+            taplistFooterImage: '',
             city: new ontap_models_1.City({ id: 'kyiv', name: 'Kyiv' }),
             serves: [],
             facebookUrl: '',
@@ -9563,6 +9590,8 @@ var EPubService = (function (_super) {
         dest.address = source.address;
         dest.serves = source.serves;
         dest.image = source.image;
+        dest.taplistHeaderImage = source.taplistHeaderImage;
+        dest.taplistFooterImage = source.taplistFooterImage;
         dest.facebookUrl = source.facebookUrl;
         dest.bookingUrl = source.facebookUrl;
         dest.vkontakteUrl = source.vkontakteUrl;
@@ -9963,7 +9992,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var root_1 = __webpack_require__(23);
-var Action_1 = __webpack_require__(643);
+var Action_1 = __webpack_require__(647);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -10110,7 +10139,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Scheduler_1 = __webpack_require__(414);
+var Scheduler_1 = __webpack_require__(418);
 var AsyncScheduler = (function (_super) {
     __extends(AsyncScheduler, _super);
     function AsyncScheduler() {
@@ -10375,9 +10404,9 @@ function DefaultValueAccessor_tsickle_Closure_declarations() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_form__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__ = __webpack_require__(119);
 /* unused harmony export modelGroupProvider */
@@ -13091,8 +13120,8 @@ function __export(m) {
 }
 __export(__webpack_require__(268));
 __export(__webpack_require__(266));
-__export(__webpack_require__(409));
-var file_upload_module_1 = __webpack_require__(408);
+__export(__webpack_require__(413));
+var file_upload_module_1 = __webpack_require__(412);
 exports.FileUploadModule = file_upload_module_1.FileUploadModule;
 
 
@@ -13417,7 +13446,7 @@ var AbstractControlDirective = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_control__ = __webpack_require__(28);
 /* unused harmony export AbstractControlStatus */
 /* unused harmony export ngControlStatusHost */
@@ -13593,9 +13622,9 @@ function NgControlStatusGroup_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_form_group_directive__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__control_value_accessor__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_control__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_form__ = __webpack_require__(40);
@@ -14156,7 +14185,7 @@ function RangeValueAccessor_tsickle_Closure_declarations() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_value_accessor__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_control__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__reactive_errors__ = __webpack_require__(54);
@@ -14362,9 +14391,9 @@ function FormControlDirective_tsickle_Closure_declarations() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__abstract_form_group_directive__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_value_accessor__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ng_control__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reactive_errors__ = __webpack_require__(54);
@@ -15431,7 +15460,7 @@ exports.DialogService = DialogService;
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var bootstrap_modal_module_1 = __webpack_require__(383);
+var bootstrap_modal_module_1 = __webpack_require__(387);
 exports.BootstrapModalModule = bootstrap_modal_module_1.BootstrapModalModule;
 exports.DialogComponent = bootstrap_modal_module_1.DialogComponent;
 exports.DialogService = bootstrap_modal_module_1.DialogService;
@@ -17022,7 +17051,7 @@ exports.TypeaheadOptions = TypeaheadOptions;
 
 "use strict";
 
-var latin_map_1 = __webpack_require__(400);
+var latin_map_1 = __webpack_require__(404);
 var TypeaheadUtils = (function () {
     function TypeaheadUtils() {
     }
@@ -17192,7 +17221,7 @@ var queue_1 = __webpack_require__(291);
 var Subscription_1 = __webpack_require__(12);
 var observeOn_1 = __webpack_require__(305);
 var ObjectUnsubscribedError_1 = __webpack_require__(301);
-var SubjectSubscription_1 = __webpack_require__(687);
+var SubjectSubscription_1 = __webpack_require__(693);
 /**
  * @class ReplaySubject<T>
  */
@@ -17291,7 +17320,7 @@ var ReplayEvent = (function () {
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var debounceTime_1 = __webpack_require__(579);
+var debounceTime_1 = __webpack_require__(583);
 Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
 //# sourceMappingURL=debounceTime.js.map
 
@@ -17302,7 +17331,7 @@ Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var switchMap_1 = __webpack_require__(625);
+var switchMap_1 = __webpack_require__(629);
 Observable_1.Observable.prototype.switchMap = switchMap_1.switchMap;
 //# sourceMappingURL=switchMap.js.map
 
@@ -18017,7 +18046,7 @@ var TemplateDrivenErrors = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(20);
 /* unused harmony export REQUIRED_VALIDATOR */
 /* unused harmony export CHECKBOX_REQUIRED_VALIDATOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return RequiredValidator; });
@@ -19682,7 +19711,7 @@ var SelectorComponent = (function (_super) {
 SelectorComponent = __decorate([
     core_1.Component({
         selector: 'confirm',
-        template: __webpack_require__(377)
+        template: __webpack_require__(381)
     }),
     __metadata("design:paramtypes", [ng2_bootstrap_modal_1.DialogService])
 ], SelectorComponent);
@@ -31034,7 +31063,7 @@ exports.dropdownService = new DropdownService();
 
 var core_1 = __webpack_require__(1);
 var components_helper_service_1 = __webpack_require__(22);
-var utils_class_1 = __webpack_require__(401);
+var utils_class_1 = __webpack_require__(405);
 var modal_backdrop_component_1 = __webpack_require__(88);
 var modal_options_class_1 = __webpack_require__(89);
 var browser_1 = __webpack_require__(107);
@@ -32934,7 +32963,7 @@ exports.FileSelectDirective = FileSelectDirective;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var from_1 = __webpack_require__(675);
+var from_1 = __webpack_require__(681);
 Observable_1.Observable.from = from_1.from;
 //# sourceMappingURL=from.js.map
 
@@ -32945,7 +32974,7 @@ Observable_1.Observable.from = from_1.from;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var throw_1 = __webpack_require__(564);
+var throw_1 = __webpack_require__(568);
 Observable_1.Observable.throw = throw_1._throw;
 //# sourceMappingURL=throw.js.map
 
@@ -32956,7 +32985,7 @@ Observable_1.Observable.throw = throw_1._throw;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var catch_1 = __webpack_require__(679);
+var catch_1 = __webpack_require__(685);
 Observable_1.Observable.prototype.catch = catch_1._catch;
 Observable_1.Observable.prototype._catch = catch_1._catch;
 //# sourceMappingURL=catch.js.map
@@ -32990,7 +33019,7 @@ Observable_1.Observable.prototype.filter = filter_1.filter;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var mergeMap_1 = __webpack_require__(691);
+var mergeMap_1 = __webpack_require__(697);
 Observable_1.Observable.prototype.mergeMap = mergeMap_1.mergeMap;
 Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
 //# sourceMappingURL=mergeMap.js.map
@@ -33002,7 +33031,7 @@ Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var toArray_1 = __webpack_require__(635);
+var toArray_1 = __webpack_require__(639);
 Observable_1.Observable.prototype.toArray = toArray_1.toArray;
 //# sourceMappingURL=toArray.js.map
 
@@ -34261,7 +34290,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var FromObservable_1 = __webpack_require__(688);
+var FromObservable_1 = __webpack_require__(694);
 var isArray_1 = __webpack_require__(32);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
@@ -34766,8 +34795,8 @@ exports.VirtualAction = VirtualAction;
 
 "use strict";
 
-var AsapAction_1 = __webpack_require__(646);
-var AsapScheduler_1 = __webpack_require__(647);
+var AsapAction_1 = __webpack_require__(650);
+var AsapScheduler_1 = __webpack_require__(651);
 /**
  *
  * Asap Scheduler
@@ -34811,8 +34840,8 @@ exports.asap = new AsapScheduler_1.AsapScheduler(AsapAction_1.AsapAction);
 
 "use strict";
 
-var QueueAction_1 = __webpack_require__(648);
-var QueueScheduler_1 = __webpack_require__(649);
+var QueueAction_1 = __webpack_require__(652);
+var QueueScheduler_1 = __webpack_require__(653);
 /**
  *
  * Queue Scheduler
@@ -35053,11 +35082,11 @@ module.exports = (__webpack_require__(3))(577);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(684);
+__webpack_require__(690);
 var core_1 = __webpack_require__(1);
 var angular2_universal_1 = __webpack_require__(303);
 var app_module_1 = __webpack_require__(330);
-__webpack_require__(685);
+__webpack_require__(691);
 var rootElemTagName = 'app'; // Update this if you change your root component selector
 // Enable either Hot Module Reloading or production mode
 if (true) {
@@ -35101,7 +35130,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var querystring = __webpack_require__(412);
+  var querystring = __webpack_require__(416);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -35221,11 +35250,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(662);
+  var strip = __webpack_require__(666);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(672);
+    overlay = __webpack_require__(678);
   }
 
   var styles = {
@@ -35278,7 +35307,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(673);
+var processUpdate = __webpack_require__(679);
 
 var customHandler;
 var subscribeAllHandler;
@@ -35614,7 +35643,7 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__ = __webpack_require__(51);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__directives_control_container__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__directives_control_container__ = __webpack_require__(21);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__directives_control_container__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_control_value_accessor__ = __webpack_require__(18);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__directives_control_value_accessor__["a"]; });
@@ -35660,7 +35689,7 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["c"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__validators__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__validators__ = __webpack_require__(20);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["c"]; });
@@ -37800,21 +37829,22 @@ var angular2_universal_1 = __webpack_require__(303);
 var app_component_1 = __webpack_require__(331);
 var sortbytap_pipe_1 = __webpack_require__(332);
 var navmenu_component_1 = __webpack_require__(343);
-var pubs_component_1 = __webpack_require__(347);
-var pub_component_1 = __webpack_require__(344);
+var pubs_component_1 = __webpack_require__(348);
+var pub_component_1 = __webpack_require__(345);
 var cities_component_1 = __webpack_require__(337);
 var beers_component_1 = __webpack_require__(333);
 var epubs_component_1 = __webpack_require__(339);
-var serves_component_1 = __webpack_require__(348);
+var serves_component_1 = __webpack_require__(349);
 var breweries_component_1 = __webpack_require__(334);
-var users_component_1 = __webpack_require__(350);
+var users_component_1 = __webpack_require__(351);
 var login_component_1 = __webpack_require__(342);
 var locale_component_1 = __webpack_require__(341);
-var pubadmins_component_1 = __webpack_require__(345);
+var pubadmins_component_1 = __webpack_require__(346);
 var breweryadmins_component_1 = __webpack_require__(335);
 var home_component_1 = __webpack_require__(340);
 var selector_component_1 = __webpack_require__(130);
-var ng2_bootstrap_1 = __webpack_require__(402);
+var print_component_1 = __webpack_require__(344);
+var ng2_bootstrap_1 = __webpack_require__(406);
 var angular2localization_1 = __webpack_require__(11);
 var ng2_cloudinary_1 = __webpack_require__(29);
 var ng2_file_upload_1 = __webpack_require__(60);
@@ -37900,6 +37930,7 @@ AppModule = __decorate([
             users_component_1.UsersComponent,
             selector_component_1.SelectorComponent,
             locale_component_1.LocaleComponent,
+            print_component_1.PrintComponent,
             sortbytap_pipe_1.SortByTap,
         ],
         imports: [
@@ -37989,8 +38020,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'app',
-        template: __webpack_require__(364),
-        styles: [__webpack_require__(663)],
+        template: __webpack_require__(367),
+        styles: [__webpack_require__(667)],
         providers: [login_service_1.LoginService],
     }),
     __metadata("design:paramtypes", [router_1.Router, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
@@ -38075,10 +38106,10 @@ var ng2_cloudinary_1 = __webpack_require__(29);
 var BeersComponent = (function (_super) {
     __extends(BeersComponent, _super);
     function BeersComponent(elmService, breweryService, locale, localization) {
-        var _this = _super.call(this, elmService, locale, localization, new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
-            cloudName: 'ontap-in-ua',
-            uploadPreset: 'ontapInUa_pubs'
-        }))) || this;
+        var _this = _super.call(this, elmService, locale, localization, [new appComponent_1.LabeledCloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
+                cloudName: 'ontap-in-ua',
+                uploadPreset: 'ontapInUa_pubs'
+            }))]) || this;
         _this.breweryService = breweryService;
         _this.locale = locale;
         _this.localization = localization;
@@ -38141,8 +38172,8 @@ BeersComponent = __decorate([
     ng.Component({
         selector: 'beers',
         providers: [beers_service_1.BeerService, breweries_service_1.BreweryService],
-        styles: [__webpack_require__(664)],
-        template: __webpack_require__(365)
+        template: __webpack_require__(368),
+        styles: [__webpack_require__(668)]
     }),
     __metadata("design:paramtypes", [beers_service_1.BeerService, breweries_service_1.BreweryService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], BeersComponent);
@@ -38188,10 +38219,10 @@ var ng2_bootstrap_modal_1 = __webpack_require__(79);
 var BreweriesComponent = (function (_super) {
     __extends(BreweriesComponent, _super);
     function BreweriesComponent(elmService, dialogService, countryService, beerService, locale, localization) {
-        var _this = _super.call(this, elmService, locale, localization, new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
-            cloudName: "ontap-in-ua",
-            uploadPreset: "ontapInUa_breweries"
-        }))) || this;
+        var _this = _super.call(this, elmService, locale, localization, [new appComponent_1.LabeledCloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
+                cloudName: "ontap-in-ua",
+                uploadPreset: "ontapInUa_breweries"
+            }))]) || this;
         _this.dialogService = dialogService;
         _this.countryService = countryService;
         _this.beerService = beerService;
@@ -38275,8 +38306,8 @@ BreweriesComponent = __decorate([
     ng.Component({
         selector: "breweries",
         providers: [breweries_service_1.BreweryService, countries_service_1.CountryService, beers_service_1.BeerService],
-        styles: [__webpack_require__(665)],
-        template: __webpack_require__(366)
+        styles: [__webpack_require__(669)],
+        template: __webpack_require__(369)
     }),
     __metadata("design:paramtypes", [breweries_service_1.BreweryService,
         ng2_bootstrap_modal_1.DialogService,
@@ -38372,7 +38403,7 @@ BreweryAdminsComponent = __decorate([
     ng.Component({
         selector: 'breweryAdmins',
         providers: [breweryadmins_service_1.BreweryAdminService, breweries_service_1.BreweryService, users_service_1.UserService],
-        template: __webpack_require__(367)
+        template: __webpack_require__(370)
     }),
     __metadata("design:paramtypes", [breweryadmins_service_1.BreweryAdminService, breweries_service_1.BreweryService, users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], BreweryAdminsComponent);
@@ -38499,7 +38530,7 @@ CitiesComponent = __decorate([
     ng.Component({
         selector: 'cities',
         providers: [cities_service_1.CityService],
-        template: __webpack_require__(368)
+        template: __webpack_require__(371)
     }),
     __metadata("design:paramtypes", [cities_service_1.CityService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], CitiesComponent);
@@ -38603,10 +38634,10 @@ var ng2_cloudinary_1 = __webpack_require__(29);
 var EPubsComponent = (function (_super) {
     __extends(EPubsComponent, _super);
     function EPubsComponent(elmService, loginService, cityService, locale, localization) {
-        var _this = _super.call(this, elmService, locale, localization, new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
-            cloudName: "ontap-in-ua",
-            uploadPreset: "ontapInUa_pubs"
-        }))) || this;
+        var _this = _super.call(this, elmService, locale, localization, [
+            new appComponent_1.LabeledCloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({ cloudName: "ontap-in-ua", uploadPreset: "ontapInUa_pubs" })),
+            new appComponent_1.LabeledCloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({ cloudName: "ontap-in-ua", uploadPreset: "ontapInUa_pubs" }), 'taplistHeaderImage')
+        ]) || this;
         _this.loginService = loginService;
         _this.cityService = cityService;
         _this.locale = locale;
@@ -38684,8 +38715,8 @@ EPubsComponent = __decorate([
     ng.Component({
         selector: "epubs",
         providers: [epubs_service_1.EPubService, cities_service_1.CityService],
-        styles: [__webpack_require__(666)],
-        template: __webpack_require__(369)
+        styles: [__webpack_require__(670)],
+        template: __webpack_require__(372)
     }),
     __metadata("design:paramtypes", [epubs_service_1.EPubService,
         login_service_1.LoginService,
@@ -38756,7 +38787,7 @@ var HomeComponent = (function (_super) {
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
-        template: __webpack_require__(370)
+        template: __webpack_require__(373)
     }),
     __metadata("design:paramtypes", [angular2localization_1.LocaleService, angular2localization_1.LocalizationService,
         router_1.ActivatedRoute,
@@ -38801,8 +38832,8 @@ var LocaleComponent = (function () {
 LocaleComponent = __decorate([
     core_1.Component({
         selector: "locale",
-        template: __webpack_require__(371),
-        styles: [__webpack_require__(667)],
+        template: __webpack_require__(374),
+        styles: [__webpack_require__(671)],
     }),
     __metadata("design:paramtypes", [angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], LocaleComponent);
@@ -38880,8 +38911,8 @@ var LoginComponent = (function () {
 LoginComponent = __decorate([
     core_1.Component({
         selector: 'log-in',
-        template: __webpack_require__(372),
-        styles: [__webpack_require__(668)],
+        template: __webpack_require__(375),
+        styles: [__webpack_require__(672)],
         providers: [users_service_1.UserService],
     }),
     __metadata("design:paramtypes", [login_service_1.LoginService, users_service_1.UserService])
@@ -38939,8 +38970,8 @@ var NavMenuComponent = (function (_super) {
 NavMenuComponent = __decorate([
     core_1.Component({
         selector: 'nav-menu',
-        template: __webpack_require__(373),
-        styles: [__webpack_require__(669)],
+        template: __webpack_require__(376),
+        styles: [__webpack_require__(673)],
         providers: [users_service_1.UserService],
     }),
     __metadata("design:paramtypes", [login_service_1.LoginService, users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
@@ -38950,6 +38981,99 @@ exports.NavMenuComponent = NavMenuComponent;
 
 /***/ }),
 /* 344 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(1);
+var PrintComponent = (function () {
+    function PrintComponent(ele) {
+        this.ele = ele;
+        this.sectionChange = new core_1.EventEmitter();
+        if (this.section === undefined)
+            this.section = '';
+    }
+    PrintComponent.prototype.ngOnChanges = function (changes) {
+        if (changes.section && changes.section.currentValue !== undefined && changes.section.currentValue !== '') {
+        }
+    };
+    PrintComponent.prototype.afterPrint = function () {
+        console.log("after print");
+        this.ele.nativeElement.children[0].innerHTML = '';
+        this.sectionChange.emit('');
+        this.section = '';
+    };
+    PrintComponent.prototype.printDiv = function () {
+        if (this.section && this.section != undefined && this.section != '') {
+            var printContents = document.getElementById(this.section).innerHTML;
+            var originalContents = document.body.innerHTML;
+            if (window) {
+                if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+                    var popup = window.open('', '_blank', 'width=740,height=600,scrollbars=no,menubar=no,toolbar=no,' +
+                        'location=no,status=no,titlebar=no');
+                    popup.window.focus();
+                    popup.document.write('<!DOCTYPE html><html><head>  ' +
+                        '<link rel="stylesheet" href="/print.css" media="screen,print">' +
+                        '</head><body onload="window.print()">' +
+                        printContents +
+                        '</html>');
+                    popup.onbeforeunload = function (event) {
+                        popup.close();
+                        //return '.\n';
+                    };
+                    popup.onabort = function (event) {
+                        popup.document.close();
+                        popup.close();
+                    };
+                }
+                else {
+                    var popup = window.open('', '_blank', 'width=800,height=600');
+                    popup.document.open();
+                    popup.document.write('<html><head>' +
+                        '<link rel="stylesheet" href="print.css" media="screen,print">' +
+                        '</head><body onload="window.print()">' +
+                        printContents +
+                        '</html>');
+                    popup.document.close();
+                }
+            }
+            return true;
+        }
+    };
+    return PrintComponent;
+}());
+__decorate([
+    core_1.Input('section'),
+    __metadata("design:type", String)
+], PrintComponent.prototype, "section", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], PrintComponent.prototype, "sectionChange", void 0);
+PrintComponent = __decorate([
+    core_1.Component({
+        selector: 'print-page',
+        encapsulation: core_1.ViewEncapsulation.None,
+        template: __webpack_require__(377),
+        styles: [__webpack_require__(674)]
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], PrintComponent);
+exports.PrintComponent = PrintComponent;
+
+
+/***/ }),
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39034,8 +39158,8 @@ PubComponent = __decorate([
     core_1.Component({
         selector: 'pub',
         providers: [epubs_service_1.EPubService],
-        styles: [__webpack_require__(670)],
-        template: __webpack_require__(374)
+        template: __webpack_require__(378),
+        styles: [__webpack_require__(675)]
     }),
     __metadata("design:paramtypes", [epubs_service_1.EPubService,
         angular2localization_1.LocaleService,
@@ -39047,7 +39171,7 @@ exports.PubComponent = PubComponent;
 
 
 /***/ }),
-/* 345 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39076,7 +39200,7 @@ var ng = __webpack_require__(1);
 var linq_1 = __webpack_require__(26);
 var epubs_service_1 = __webpack_require__(45);
 var users_service_1 = __webpack_require__(46);
-var pubadmins_service_1 = __webpack_require__(346);
+var pubadmins_service_1 = __webpack_require__(347);
 var appComponent_1 = __webpack_require__(8);
 var angular2localization_1 = __webpack_require__(11);
 var PubAdminsComponent = (function (_super) {
@@ -39130,7 +39254,7 @@ PubAdminsComponent = __decorate([
     ng.Component({
         selector: 'pubAdmins',
         providers: [pubadmins_service_1.PubAdminService, epubs_service_1.EPubService, users_service_1.UserService],
-        template: __webpack_require__(375)
+        template: __webpack_require__(379)
     }),
     __metadata("design:paramtypes", [pubadmins_service_1.PubAdminService, epubs_service_1.EPubService, users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], PubAdminsComponent);
@@ -39138,7 +39262,7 @@ exports.PubAdminsComponent = PubAdminsComponent;
 
 
 /***/ }),
-/* 346 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39193,6 +39317,8 @@ var PubAdminService = (function (_super) {
                 name: 'name',
                 address: 'address',
                 image: '',
+                taplistHeaderImage: '',
+                taplistFooterImage: '',
                 city: new ontap_models_1.City({ id: 'kyiv', name: 'Kyiv' }),
                 serves: [],
                 facebookUrl: '',
@@ -39221,7 +39347,7 @@ exports.PubAdminService = PubAdminService;
 
 
 /***/ }),
-/* 347 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39347,8 +39473,8 @@ PubsComponent = __decorate([
     core_1.Component({
         selector: 'pubs',
         providers: [epubs_service_1.EPubService],
-        styles: [__webpack_require__(671)],
-        template: __webpack_require__(376)
+        styles: [__webpack_require__(676)],
+        template: __webpack_require__(380)
     }),
     __metadata("design:paramtypes", [epubs_service_1.EPubService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService,
         router_1.ActivatedRoute,
@@ -39358,7 +39484,7 @@ exports.PubsComponent = PubsComponent;
 
 
 /***/ }),
-/* 348 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39387,7 +39513,7 @@ var ng = __webpack_require__(1);
 var linq_1 = __webpack_require__(26);
 var epubs_service_1 = __webpack_require__(45);
 var beers_service_1 = __webpack_require__(75);
-var serves_service_1 = __webpack_require__(349);
+var serves_service_1 = __webpack_require__(350);
 var appComponent_1 = __webpack_require__(8);
 var angular2localization_1 = __webpack_require__(11);
 var ServesComponent = (function (_super) {
@@ -39400,6 +39526,10 @@ var ServesComponent = (function (_super) {
         _this.localization = localization;
         _this.getPubs();
         _this.getBeers();
+        if (_this.elements) {
+            _this.onElementsLoad();
+        }
+        _this.onLoad.subscribe(function (s, elements) { _this.onElementsLoad(); });
         return _this;
     }
     ServesComponent.prototype.startAdd = function () {
@@ -39426,7 +39556,13 @@ var ServesComponent = (function (_super) {
             _this.pubs = pubs;
             _this.selectingPubs = new linq_1.List(_this.pubs).OrderBy(function (p) { return p.name; }).Select(function (p) { return new appComponent_1.Options(p.id, p.name); })
                 .ToArray();
+            _this.onElementsLoad();
         }, function (error) { return _this.errorMessage = error; });
+    };
+    ServesComponent.prototype.onElementsLoad = function () {
+        if (this.selectingPubs.length > 0) {
+            this.setPub(this.selectingPubs[0].label);
+        }
     };
     ServesComponent.prototype.getBeers = function () {
         var _this = this;
@@ -39475,7 +39611,8 @@ ServesComponent = __decorate([
     ng.Component({
         selector: 'serves',
         providers: [serves_service_1.ServeService, epubs_service_1.EPubService, beers_service_1.BeerService],
-        template: __webpack_require__(378)
+        template: __webpack_require__(382),
+        styles: [__webpack_require__(677)]
     }),
     __metadata("design:paramtypes", [serves_service_1.ServeService, epubs_service_1.EPubService, beers_service_1.BeerService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], ServesComponent);
@@ -39483,7 +39620,7 @@ exports.ServesComponent = ServesComponent;
 
 
 /***/ }),
-/* 349 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39539,6 +39676,8 @@ var ServeService = (function (_super) {
                 name: 'name',
                 address: 'address',
                 image: '',
+                taplistHeaderImage: '',
+                taplistFooterImage: '',
                 city: new ontap_models_1.City({ id: 'kyiv', name: 'Kyiv' }),
                 serves: [],
                 facebookUrl: '',
@@ -39575,7 +39714,7 @@ exports.ServeService = ServeService;
 
 
 /***/ }),
-/* 350 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39618,7 +39757,7 @@ UsersComponent = __decorate([
     ng.Component({
         selector: 'users',
         providers: [users_service_1.UserService],
-        template: __webpack_require__(379)
+        template: __webpack_require__(383)
     }),
     __metadata("design:paramtypes", [users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], UsersComponent);
@@ -39626,7 +39765,7 @@ exports.UsersComponent = UsersComponent;
 
 
 /***/ }),
-/* 351 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40239,10 +40378,10 @@ function createSignalList() {
 
 
 /***/ }),
-/* 352 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(21)();
+exports = module.exports = __webpack_require__(19)();
 // imports
 
 
@@ -40253,24 +40392,10 @@ exports.push([module.i, "@media (max-width: 767px) {\n    /* On small screens, t
 
 
 /***/ }),
-/* 353 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(21)();
-// imports
-
-
-// module
-exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
 /* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(21)();
+exports = module.exports = __webpack_require__(19)();
 // imports
 
 
@@ -40284,7 +40409,7 @@ exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\
 /* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(21)();
+exports = module.exports = __webpack_require__(19)();
 // imports
 
 
@@ -40298,7 +40423,21 @@ exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\
 /* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(21)();
+exports = module.exports = __webpack_require__(19)();
+// imports
+
+
+// module
+exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 357 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(19)();
 // imports
 
 
@@ -40309,10 +40448,10 @@ exports.push([module.i, ".locale {\r\n    padding: 15px 10px 0 0;\r\n}\r\n", ""]
 
 
 /***/ }),
-/* 357 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(21)();
+exports = module.exports = __webpack_require__(19)();
 // imports
 
 
@@ -40323,10 +40462,10 @@ exports.push([module.i, ".logged-in {\r\n    color: lightskyblue;\r\n}", ""]);
 
 
 /***/ }),
-/* 358 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(21)();
+exports = module.exports = __webpack_require__(19)();
 // imports
 
 
@@ -40337,29 +40476,15 @@ exports.push([module.i, "li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highl
 
 
 /***/ }),
-/* 359 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(21)();
-// imports
-
-
-// module
-exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
-
-// exports
-
-
-/***/ }),
 /* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(21)();
+exports = module.exports = __webpack_require__(19)();
 // imports
 
 
 // module
-exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
+exports.push([module.i, "@media screen {\r\n    #printpage, #printpage * {\r\n        display:none;\r\n    }\r\n}\r\n@media print {\r\n    body *{\r\n        visibility:hidden;\r\n        background: transparent;\r\n        -webkit-print-color-adjust: exact !important; \r\n    }\r\n          \r\n    #printpage, #printpage *{\r\n        visibility:visible;\r\n        -webkit-print-color-adjust: exact !important; \r\n    }\r\n\r\n    #printpage{\r\n        position:absolute;\r\n        left:0;\r\n        top:0;             \r\n    }\r\n}", ""]);
 
 // exports
 
@@ -40368,16 +40493,58 @@ exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n  
 /* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(19)();
+// imports
+
+
+// module
+exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 362 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(19)();
+// imports
+
+
+// module
+exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 363 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(19)();
+// imports
+
+
+// module
+exports.push([module.i, "body {\r\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 364 */
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports = {
-  XmlEntities: __webpack_require__(363),
-  Html4Entities: __webpack_require__(362),
+  XmlEntities: __webpack_require__(366),
+  Html4Entities: __webpack_require__(365),
   Html5Entities: __webpack_require__(131),
   AllHtmlEntities: __webpack_require__(131)
 };
 
 
 /***/ }),
-/* 362 */
+/* 365 */
 /***/ (function(module, exports) {
 
 var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'Oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'oelig', 'oelig', 'scaron', 'scaron', 'yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
@@ -40530,7 +40697,7 @@ module.exports = Html4Entities;
 
 
 /***/ }),
-/* 363 */
+/* 366 */
 /***/ (function(module, exports) {
 
 var ALPHA_INDEX = {
@@ -40691,103 +40858,109 @@ module.exports = XmlEntities;
 
 
 /***/ }),
-/* 364 */
+/* 367 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class='container-fluid'>\n    <div class='row'>\n        <div class='col-sm-2'>\t\t\n            <nav-menu></nav-menu>\n        </div>\n        <div class='col-sm-10 body-content'>\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }),
-/* 365 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Редактировать список пива</h1>\r\n\r\n<p>На этой странице можно редактировать сорта пива, а также добавлять новые сорта.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</alert>\r\n\r\n<div class=\"dropdown\" *ngIf=\"breweries\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"breweryChooser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Пивоварня: <span *ngIf=\"brewery\">{{brewery.name}}</span><span *ngIf=\"!brewery\">все</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"breweryChooser\">\r\n        <li><a (click)=\"setBrewery('')\">*</a></li>\r\n        <li *ngFor=\"let brewery of selectingBreweries\"><a (click)=\"setBrewery(brewery.value)\">{{ brewery.label }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-2\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Производитель</strong></h4></div>\r\n        <div class=\"col-md-3\"><h4><strong>Описание</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Алкоголь, &deg;</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Плотность, %</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Горькость, IBU</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Действия</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let beer of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != beer.id)\">\r\n            <div class=\"col-md-2\" title=\"{{beer.id}}\">{{ beer.name }}</div>\r\n            <div class=\"col-md-2\">{{ beer.brewery.name }}</div>\r\n            <div class=\"col-md-3\">{{ beer.description }}</div>\r\n            <div class=\"col-md-1\">{{ beer.alcohol }}</div>\r\n            <div class=\"col-md-1\">{{ beer.gravity }}</div>\r\n            <div class=\"col-md-1\">{{ beer.ibu }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(beer.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"fa fa-pencil-square-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(beer.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(beer.id)\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == beer.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-2\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingBreweries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.brewery.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <textarea class=\"form-control\" id=\"editing.description\"\r\n                                  required\r\n                                  [(ngModel)]=\"editing.description\" name=\"description\"></textarea>\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.alcohol\"\r\n                           required\r\n                           [(ngModel)]=\"editing.alcohol\" name=\"alcohol\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.gravity\"\r\n                           [(ngModel)]=\"editing.gravity\" name=\"gravity\">\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.ibu\"\r\n                           [(ngModel)]=\"editing.ibu\" name=\"ibu\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>    \r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>  \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-10\">&nbsp;</div>\r\n                <div class=\"col-md-4\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingBreweries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.brewery.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <textarea class=\"form-control\" id=\"adding.description\"\r\n                          required\r\n                          [(ngModel)]=\"adding.description\" name=\"description\"></textarea>\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.alcohol\"\r\n                       required\r\n                       [(ngModel)]=\"adding.alcohol\" name=\"alcohol\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.gravity\"\r\n                       [(ngModel)]=\"adding.gravity\" name=\"gravity\">\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.ibu\"\r\n                       [(ngModel)]=\"adding.ibu\" name=\"ibu\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isAdding(adding.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isAdding(adding.id)\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-8\">&nbsp;\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\" *ngIf=\"adding.image\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
-
-/***/ }),
-/* 366 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Редактировать список пивоварен</h1>\r\n\r\n<p>На этой странице можно редактировать пивоварни, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Страна</strong></h4></div>\r\n        <div class=\"col-md-5\"><h4><strong>Адрес</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Действия</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let brewery of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != brewery.id)\">\r\n            <div class=\"col-md-3\" title=\"{{brewery.id}}\">{{ brewery.name }}</div>\r\n            <div class=\"col-md-2\">{{ brewery.country.name }}</div>\r\n            <div class=\"col-md-5\">{{ brewery.address }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(brewery.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <span class=\"badge\" *ngIf=\"breweryCounts[brewery.id]\">{{ breweryCounts[brewery.id] }} <i class=\"fa fa-beer\" aria-hidden=\"true\"></i></span>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == brewery.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingCountries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.country.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-5\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"startDelete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-1\">\r\n                    <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n                </div>\r\n                <div class=\"col-md-7\"></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingCountries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.country.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-5\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                       required\r\n                       [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-1\">\r\n                <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n            </div>\r\n            <div class=\"col-md-7\"></div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
-
-/***/ }),
-/* 367 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пивоварням.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Пивоварня</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let breweryAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.brewery.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.brewery.id\" (change)=\"onEditChangeBrewery($event.target.value)\">\n                        <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    <button (click)=\"edit(breweryAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.brewery.id\" (change)=\"onAddChangeBrewery($event.target.value)\">\n                    <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
-
-/***/ }),
 /* 368 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список городов</h1>\n\n<p>На этой странице вы можете редактировать список городов, а также добавлять новые.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n    <tr>\n        <th>Служебный Id</th>\n        <th>Название</th>\n        <th>Действия</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let city of elements\">\n        <td>{{ city.id }}</td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                    {{ city.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                <button (click)=\"edit(city.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\n    </tr>\n\n    <tr *ngIf=\"adding\">\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\n                   required\n                   [(ngModel)]=\"adding.id\" name=\"id\">\n        </td>\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\n                   required\n                   [(ngModel)]=\"adding.name\" name=\"name\">\n        </td>\n        <td>\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\n        </td>\n    </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+module.exports = "<h1>Редактировать список пива</h1>\r\n\r\n<p>На этой странице можно редактировать сорта пива, а также добавлять новые сорта.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</alert>\r\n\r\n<div class=\"dropdown\" *ngIf=\"breweries\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"breweryChooser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Пивоварня: <span *ngIf=\"brewery\">{{brewery.name}}</span><span *ngIf=\"!brewery\">все</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"breweryChooser\">\r\n        <li><a (click)=\"setBrewery('')\">*</a></li>\r\n        <li *ngFor=\"let brewery of selectingBreweries\"><a (click)=\"setBrewery(brewery.value)\">{{ brewery.label }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-2\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Производитель</strong></h4></div>\r\n        <div class=\"col-md-3\"><h4><strong>Описание</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Алкоголь, &deg;</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Плотность, %</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>Горькость, IBU</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Действия</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let beer of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != beer.id)\">\r\n            <div class=\"col-md-2\" title=\"{{beer.id}}\">{{ beer.name }}</div>\r\n            <div class=\"col-md-2\">{{ beer.brewery.name }}</div>\r\n            <div class=\"col-md-3\">{{ beer.description }}</div>\r\n            <div class=\"col-md-1\">{{ beer.alcohol }}</div>\r\n            <div class=\"col-md-1\">{{ beer.gravity }}</div>\r\n            <div class=\"col-md-1\">{{ beer.ibu }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(beer.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"fa fa-pencil-square-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(beer.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(beer.id)\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == beer.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-2\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingBreweries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.brewery.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <textarea class=\"form-control\" id=\"editing.description\"\r\n                                  required\r\n                                  [(ngModel)]=\"editing.description\" name=\"description\"></textarea>\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.alcohol\"\r\n                           required\r\n                           [(ngModel)]=\"editing.alcohol\" name=\"alcohol\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.gravity\"\r\n                           [(ngModel)]=\"editing.gravity\" name=\"gravity\">\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.ibu\"\r\n                           [(ngModel)]=\"editing.ibu\" name=\"ibu\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>    \r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>  \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-10\">&nbsp;</div>\r\n                <div class=\"col-md-4\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingBreweries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.brewery.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <textarea class=\"form-control\" id=\"adding.description\"\r\n                          required\r\n                          [(ngModel)]=\"adding.description\" name=\"description\"></textarea>\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.alcohol\"\r\n                       required\r\n                       [(ngModel)]=\"adding.alcohol\" name=\"alcohol\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.gravity\"\r\n                       [(ngModel)]=\"adding.gravity\" name=\"gravity\">\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.ibu\"\r\n                       [(ngModel)]=\"adding.ibu\" name=\"ibu\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isAdding(adding.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isAdding(adding.id)\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-8\">&nbsp;\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\" *ngIf=\"adding.image\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
 /* 369 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список пабов</h1>\r\n\r\n<p>На этой странице можно редактировать список пабов, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n        {{errorMessage}}\r\n</alert>\r\n\r\n<alert type=\"success\" dismissible=\"true\" *ngIf=\"successMessage\">\r\n    <p *ngFor=\"let output of outputs\">\r\n        {{output}}\r\n    </p>\r\n</alert>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-map-signs\" title=\"City\"></i></strong></h4></div>\r\n        <div class=\"col-md-4\"><h4><strong><i class=\"fa fa-address-card-o\" title=\"Address\"></i></strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong><span class=\"fa fa-map-pin\" title=\"Taps\"></span></strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-bars\" aria-hidden=\"true\"></i></strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let pub of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != pub.id)\">\r\n            <div class=\"col-md-3\">{{ pub.name }}</div>\r\n            <div class=\"col-md-2\">{{ pub.city.name }}</div>\r\n            <div class=\"col-md-4\">{{ pub.address }}</div>\r\n            <div class=\"col-md-1\">{{ pub.tapNumber }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\" *ngIf=\"canEditPub(pub)\">\r\n                    <span class=\"fa fa-pencil-square-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(pub.id)\"></span>                    \r\n                </button>\r\n                <button (click)=\"import(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"canParsePub(pub)\">\r\n                    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(pub.id)\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == pub.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.city.id\" (change)=\"onEditChangeCity($event.target.value)\">\r\n                        <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                    </select>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.tapNumber\" min=\"0\"\r\n                           required\r\n                           [(ngModel)]=\"editing.tapNumber\" name=\"tapNumber\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span> \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"editing.facebookUrl\" id=\"editing.facebookUrl\" name=\"editing.facebookUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"editing.vkontakteUrl\" id=\"editing.vkontakteUrl\" name=\"editing.vkontakteUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.websiteUrl\"  [(ngModel)]=\"editing.websiteUrl\" name=\"editing.websiteUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.bookingUrl\"  [(ngModel)]=\"editing.bookingUrl\" name=\"editing.bookingUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploader\"/>\r\n                </div>\r\n            </div> \r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-10\">\r\n                    <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"editing.parserOptions\"></textarea>\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    &nbsp;\r\n                </div>\r\n            </div>                       \r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                        required\r\n                        [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.city.id\" (change)=\"onAddChangeCity($event.target.value)\">\r\n                    <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                        required\r\n                        [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.tapNumber\" min=\"0\"\r\n                       required\r\n                       [(ngModel)]=\"adding.tapNumber\" name=\"tapNumber\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"adding.facebookUrl\" id=\"adding.facebookUrl\" name=\"adding.facebookUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"adding.vkontakteUrl\" id=\"adding.vkontakteUrl\" name=\"adding.vkontakteUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.websiteUrl\" [(ngModel)]=\"adding.websiteUrl\" name=\"adding.websiteUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.bookingUrl\" [(ngModel)]=\"adding.bookingUrl\" name=\"adding.bookingUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploader\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-12\">\r\n                <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"adding.parserOptions\"></textarea>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\" *ngIf=\"isAdmin()\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>\r\n<button (click)=\"importAll()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"isAdmin()\">\r\n    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(null)\"></span>\r\n    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(null)\"></span>\r\n</button>";
+module.exports = "<h1>Редактировать список пивоварен</h1>\r\n\r\n<p>На этой странице можно редактировать пивоварни, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Страна</strong></h4></div>\r\n        <div class=\"col-md-5\"><h4><strong>Адрес</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Действия</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let brewery of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != brewery.id)\">\r\n            <div class=\"col-md-3\" title=\"{{brewery.id}}\">{{ brewery.name }}</div>\r\n            <div class=\"col-md-2\">{{ brewery.country.name }}</div>\r\n            <div class=\"col-md-5\">{{ brewery.address }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(brewery.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <span class=\"badge\" *ngIf=\"breweryCounts[brewery.id]\">{{ breweryCounts[brewery.id] }} <i class=\"fa fa-beer\" aria-hidden=\"true\"></i></span>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == brewery.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingCountries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.country.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-5\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"startDelete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-1\">\r\n                    <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n                </div>\r\n                <div class=\"col-md-7\"></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingCountries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.country.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-5\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                       required\r\n                       [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-1\">\r\n                <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-7\"></div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
 /* 370 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\r\n    {{'MENU.ONTAP' | translate:lang}}<!--Що на кранах-->?\r\n</h1>\r\n<p>    \r\n    {{'HOME.DESCRIPTION' | translate:lang}}<!--На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.-->\r\n</p>\r\n<div class=\"panel panel-warning\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">\r\n            {{'HOME.ASSERTION' | translate:lang}}<!--Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років-->:\r\n        </h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n            <a class=\"btn btn-success btn-lg\" (click)=\"goToPubs()\" role=\"button\"><span class=\"glyphicon glyphicon-ok-circle\"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>\r\n            <a class=\"btn btn-danger btn-lg\" href=\"http://prom.ua/Podemnyj-kran-igrushki.html\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> {{'HOME.NO' | translate:lang}}<!--Ні--></a>\r\n    </div>\r\n</div>";
+module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пивоварням.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Пивоварня</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let breweryAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.brewery.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.brewery.id\" (change)=\"onEditChangeBrewery($event.target.value)\">\n                        <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    <button (click)=\"edit(breweryAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.brewery.id\" (change)=\"onAddChangeBrewery($event.target.value)\">\n                    <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
 
 /***/ }),
 /* 371 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"locale btn-group btn-group-xs pull-right\" role=\"group\" aria-label=\"...\">\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='uk', 'btn-link': currentLocale !='uk'}\"\r\n            (click)=\"selectLocale('uk','UA')\">\r\n        <span class=\"flag-icon flag-icon-ua flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='en', 'btn-link': currentLocale !='en'}\"\r\n            (click)=\"selectLocale('en','US')\">\r\n        <span class=\"flag-icon flag-icon-gb flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='ru', 'btn-link': currentLocale !='ru'}\"\r\n            (click)=\"selectLocale('ru','RU')\">\r\n        <span class=\"flag-icon flag-icon-ru flag-icon-squared\"></span>\r\n    </button>\r\n</div>";
+module.exports = "<h1>Редактировать список городов</h1>\n\n<p>На этой странице вы можете редактировать список городов, а также добавлять новые.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n    <tr>\n        <th>Служебный Id</th>\n        <th>Название</th>\n        <th>Действия</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let city of elements\">\n        <td>{{ city.id }}</td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                    {{ city.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                <button (click)=\"edit(city.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\n    </tr>\n\n    <tr *ngIf=\"adding\">\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\n                   required\n                   [(ngModel)]=\"adding.id\" name=\"id\">\n        </td>\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\n                   required\n                   [(ngModel)]=\"adding.name\" name=\"name\">\n        </td>\n        <td>\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\n        </td>\n    </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
 
 /***/ }),
 /* 372 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='login'>\r\n    <span *ngIf=\"!user\">\r\n        <input type=\"text\" class=\"form-control input-sm\" [(ngModel)]=\"userLogin\" id=\"login\" placeholder=\"Login\">\r\n        <div class=\"input-group\">\r\n            <input type=\"password\" class=\"form-control input-sm\" [(ngModel)]=\"userPassword\" id=\"password\" placeholder=\"Password\">\r\n            <span class=\"input-group-btn\">\r\n                <button class=\"btn btn-default btn-sm\" type=\"button\" (click)=\"login()\"><i class=\"glyphicon glyphicon-log-in\"></i></button>\r\n            </span>\r\n        </div><!-- /input-group -->\r\n    </span>\r\n    <span *ngIf=\"user\" class=\"logged-in\">\r\n        <i class=\"glyphicon glyphicon-user\"></i> Привет, {{user.name}}! \r\n        <button class=\"btn btn-primary btn-xs\" type=\"button\" (click)=\"logout()\"><i class=\"glyphicon glyphicon-log-out\"></i></button>\r\n    </span>\r\n</div>\r\n        \r\n";
+module.exports = "<h1>Редактировать список пабов</h1>\r\n\r\n<p>На этой странице можно редактировать список пабов, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n        {{errorMessage}}\r\n</alert>\r\n\r\n<alert type=\"success\" dismissible=\"true\" *ngIf=\"successMessage\">\r\n    <p *ngFor=\"let output of outputs\">\r\n        {{output}}\r\n    </p>\r\n</alert>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-map-signs\" title=\"City\"></i></strong></h4></div>\r\n        <div class=\"col-md-4\"><h4><strong><i class=\"fa fa-address-card-o\" title=\"Address\"></i></strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong><span class=\"fa fa-map-pin\" title=\"Taps\"></span></strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-bars\" aria-hidden=\"true\"></i></strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let pub of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != pub.id)\">\r\n            <div class=\"col-md-3\">{{ pub.name }}</div>\r\n            <div class=\"col-md-2\">{{ pub.city.name }}</div>\r\n            <div class=\"col-md-4\">{{ pub.address }}</div>\r\n            <div class=\"col-md-1\">{{ pub.tapNumber }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\" *ngIf=\"canEditPub(pub)\">\r\n                    <span class=\"fa fa-pencil-square-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(pub.id)\"></span>                    \r\n                </button>\r\n                <button (click)=\"import(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"canParsePub(pub)\">\r\n                    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(pub.id)\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == pub.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.city.id\" (change)=\"onEditChangeCity($event.target.value)\">\r\n                        <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                    </select>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.tapNumber\" min=\"0\"\r\n                           required\r\n                           [(ngModel)]=\"editing.tapNumber\" name=\"tapNumber\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span> \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"editing.facebookUrl\" id=\"editing.facebookUrl\" name=\"editing.facebookUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.websiteUrl\"  [(ngModel)]=\"editing.websiteUrl\" name=\"editing.websiteUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.bookingUrl\"  [(ngModel)]=\"editing.bookingUrl\" name=\"editing.bookingUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\"/>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.taplistHeaderImage}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[1]\"/>\r\n                </div>\r\n            </div> \r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-10\">\r\n                    <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"editing.parserOptions\"></textarea>\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    &nbsp;\r\n                </div>\r\n            </div>                       \r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                        required\r\n                        [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.city.id\" (change)=\"onAddChangeCity($event.target.value)\">\r\n                    <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                        required\r\n                        [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.tapNumber\" min=\"0\"\r\n                       required\r\n                       [(ngModel)]=\"adding.tapNumber\" name=\"tapNumber\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"adding.facebookUrl\" id=\"adding.facebookUrl\" name=\"adding.facebookUrl\">\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.websiteUrl\" [(ngModel)]=\"adding.websiteUrl\" name=\"adding.websiteUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.bookingUrl\" [(ngModel)]=\"adding.bookingUrl\" name=\"adding.bookingUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                    <cl-image public-id=\"{{adding.taplistHeaderImage}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[1]\"/>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-12\">\r\n                <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"adding.parserOptions\"></textarea>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\" *ngIf=\"isAdmin()\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>\r\n<button (click)=\"importAll()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"isAdmin()\">\r\n    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(null)\"></span>\r\n    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(null)\"></span>\r\n</button>";
 
 /***/ }),
 /* 373 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/pubs']\">{{\"MENU.HOME\" | translate:lang }}<!--На кранах--></a>\r\n            <locale></locale>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/pubs']\">\r\n                        <span class='glyphicon glyphicon-question-sign'></span>\r\n                        {{\"MENU.ONTAP\" | translate:lang }}<!--Що на кранах-->\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/cities']\">\r\n                        <span class='glyphicon glyphicon-flag'></span> Города\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/beers']\">\r\n                        <span class='glyphicon glyphicon-glass'></span> Пиво\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/epubs']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Пабы\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/serves']\">\r\n                        <span class='glyphicon glyphicon-euro'></span> Цены\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/breweries']\">\r\n                        <span class='glyphicon glyphicon-star'></span> Пивоварни\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/users']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Пользователи\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/pub-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пабов\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/brewery-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пивоварен\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n        <log-in></log-in>\r\n        <div class=\"center-block text-center copyright\">\r\n            <i class=\"fa fa-copyright\"></i> 2016-2017 ontap.in.ua&nbsp;\r\n            <a href=\"https://fb.me/ontap.in.ua\"><i class=\"fa fa-facebook-square\"></i></a>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<h1>\r\n    {{'MENU.ONTAP' | translate:lang}}<!--Що на кранах-->?\r\n</h1>\r\n<p>    \r\n    {{'HOME.DESCRIPTION' | translate:lang}}<!--На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.-->\r\n</p>\r\n<div class=\"panel panel-warning\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">\r\n            {{'HOME.ASSERTION' | translate:lang}}<!--Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років-->:\r\n        </h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n            <a class=\"btn btn-success btn-lg\" (click)=\"goToPubs()\" role=\"button\"><span class=\"glyphicon glyphicon-ok-circle\"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>\r\n            <a class=\"btn btn-danger btn-lg\" href=\"http://prom.ua/Podemnyj-kran-igrushki.html\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> {{'HOME.NO' | translate:lang}}<!--Ні--></a>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 374 */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!pub\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"pub\" style=\"margin-top: 20px;\">\r\n    <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n            <h3 class=\"panel-title\" [id]=\"pub.id\">{{ pub.name }} \r\n                <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                <small>{{ pub.address }}</small>\r\n                <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n            </h3>\r\n        </div>\r\n        <div class=\"panel-body\">\r\n            <div>\r\n                <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                    <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\" \r\n                              format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                </div>\r\n                <div>\r\n                    <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                            [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                            [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                        <span class=\"badge\">{{ serve.tap }}</span>\r\n                        {{ serve.served.name }}\r\n                        <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\" >{{ serve.served.brewery.name }}</span>\r\n                        <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class=\"locale btn-group btn-group-xs pull-right\" role=\"group\" aria-label=\"...\">\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='uk', 'btn-link': currentLocale !='uk'}\"\r\n            (click)=\"selectLocale('uk','UA')\">\r\n        <span class=\"flag-icon flag-icon-ua flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='en', 'btn-link': currentLocale !='en'}\"\r\n            (click)=\"selectLocale('en','US')\">\r\n        <span class=\"flag-icon flag-icon-gb flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='ru', 'btn-link': currentLocale !='ru'}\"\r\n            (click)=\"selectLocale('ru','RU')\">\r\n        <span class=\"flag-icon flag-icon-ru flag-icon-squared\"></span>\r\n    </button>\r\n</div>";
 
 /***/ }),
 /* 375 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пабам.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Паб</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let pubAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.pub.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    <button (click)=\"edit(pubAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+module.exports = "<div class='login'>\r\n    <span *ngIf=\"!user\">\r\n        <input type=\"text\" class=\"form-control input-sm\" [(ngModel)]=\"userLogin\" id=\"login\" placeholder=\"Login\">\r\n        <div class=\"input-group\">\r\n            <input type=\"password\" class=\"form-control input-sm\" [(ngModel)]=\"userPassword\" id=\"password\" placeholder=\"Password\">\r\n            <span class=\"input-group-btn\">\r\n                <button class=\"btn btn-default btn-sm\" type=\"button\" (click)=\"login()\"><i class=\"glyphicon glyphicon-log-in\"></i></button>\r\n            </span>\r\n        </div><!-- /input-group -->\r\n    </span>\r\n    <span *ngIf=\"user\" class=\"logged-in\">\r\n        <i class=\"glyphicon glyphicon-user\"></i> Привет, {{user.name}}! \r\n        <button class=\"btn btn-primary btn-xs\" type=\"button\" (click)=\"logout()\"><i class=\"glyphicon glyphicon-log-out\"></i></button>\r\n    </span>\r\n</div>\r\n        \r\n";
 
 /***/ }),
 /* 376 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\r\n    {{'PUBS.TITLE' | translate:lang}}<!--Крафтові паби України-->\r\n</h1>\r\n\r\n<p>\r\n    {{'PUBS.DESCRIPTION' | translate:lang}}<!--На цей сторінці ви можете знайти список усіх крафтових пабів в Україні-->\r\n</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"dropdown\"  *ngIf=\"cities\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        {{'G.CITY' | translate:lang}}<!--Місто-->: <span *ngIf=\"city\">{{city.name}}</span><span *ngIf=\"!city\">{{'G.ALL' | translate:lang}}<!--усі--></span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n        <li><a (click)=\"setCity('')\">*</a></li>\r\n        <li *ngFor=\"let city of cities\"><a (click)=\"setCity(city.name)\">{{ city.name }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"elements\" style=\"margin-top: 20px;\">\r\n    <div *ngFor=\"let pub of elements\">\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-heading\">\r\n                <h3 class=\"panel-title\" [id]=\"pub.id\"><a [routerLink]=\"['/pub', pub.id]\">{{ pub.name }}</a>\r\n                    <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                    <span *ngIf=\"pub.tapNumber > 0\" class=\"badge\">{{ pub.tapNumber }} <span class=\"fa fa-map-pin\" aria-hidden=\"true\"></span></span>\r\n                    <small>{{ pub.address }}</small>\r\n                    <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n                    <span class=\"pull-right\" *ngIf=\"pubUpdates[pub.id]\"><small><i class=\"glyphicon glyphicon-calendar\"></i> {{pubUpdates[pub.id]}}</small></span>\r\n                </h3>\r\n            </div>\r\n            <div class=\"panel-body\">\r\n                <div>\r\n                    <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                        <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\" \r\n                                  format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                    </div>\r\n                    <div>\r\n                        <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                                [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                                [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                            <span class=\"badge\">{{ serve.tap }}</span>\r\n                            {{ serve.served.name }}\r\n                            <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\" >{{ serve.served.brewery.name }}</span>\r\n                            <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/pubs']\">{{\"MENU.HOME\" | translate:lang }}<!--На кранах--></a>\r\n            <locale></locale>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/pubs']\">\r\n                        <span class='glyphicon glyphicon-question-sign'></span>\r\n                        {{\"MENU.ONTAP\" | translate:lang }}<!--Що на кранах-->\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/cities']\">\r\n                        <span class='glyphicon glyphicon-flag'></span> Города\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/beers']\">\r\n                        <span class='glyphicon glyphicon-glass'></span> Пиво\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/epubs']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Пабы\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/serves']\">\r\n                        <span class='glyphicon glyphicon-euro'></span> Цены\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/breweries']\">\r\n                        <span class='glyphicon glyphicon-star'></span> Пивоварни\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/users']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Пользователи\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/pub-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пабов\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/brewery-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пивоварен\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n        <log-in></log-in>\r\n        <div class=\"center-block text-center copyright\">\r\n            <i class=\"fa fa-copyright\"></i> 2016-2017 ontap.in.ua&nbsp;\r\n            <a href=\"https://fb.me/ontap.in.ua\"><i class=\"fa fa-facebook-square\"></i></a>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 377 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n            <h4 class=\"modal-title\">{{title || 'Confirm'}}</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n            <p>{{message || 'Are you sure?'}}</p>\r\n            <p>\r\n                <ng-select [options]=\"options\"\r\n                                [multiple]=\"false\"\r\n                                [(ngModel)]=\"selected\">\r\n                </ng-select>\r\n            </p>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"confirm()\">OK</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
+module.exports = "<button (click)=\"printDiv()\" class=\"btn btn-default\">\r\n    <span class=\"fa fa-print\" aria-hidden=\"true\"></span>\r\n</button>\r\n<div id=\"printpage\">\r\n</div>";
 
 /***/ }),
 /* 378 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать цены на пиво в пабах, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"dropdown\" *ngIf=\"pubs\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Паб<span *ngIf=\"pub\">: {{pub.name}}</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n        <li><a (click)=\"setPub('')\">*</a></li>\r\n        <li *ngFor=\"let pub of pubs\"><a (click)=\"setPub(pub.name)\">{{ pub.name }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-xs-3\">Паб</th>\r\n            <th class=\"col-xs-1\">Кран</th>\r\n            <th class=\"col-xs-4\">Пиво</th>\r\n            <th class=\"col-xs-1\">Цена</th>\r\n            <th class=\"col-xs-1\">Объём</th>\r\n            <th class=\"col-xs-3\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let serve of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.servedIn.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <ng-select [options]=\"selectingPubs\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.servedIn.id\">\r\n                    </ng-select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.tap }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.tap\"\r\n                           required\r\n                           [(ngModel)]=\"editing.tap\" name=\"tap\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.served.name }} ({{serve.served.brewery.name}})\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <ng-select [options]=\"selectingBeers\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.served.id\">\r\n                    </ng-select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.price }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.price\"\r\n                           required\r\n                           [(ngModel)]=\"editing.price\" name=\"price\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    {{ serve.volume }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.volume\"\r\n                           required\r\n                           [(ngModel)]=\"editing.volume\" name=\"volume\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                    <button (click)=\"edit(serve.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                <ng-select [options]=\"selectingPubs\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.servedIn.id\">\r\n                </ng-select>\r\n            </td>\r\n            <td>\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.tap\"\r\n                       required\r\n                       [(ngModel)]=\"adding.tap\" name=\"tap\">\r\n            </td>\r\n            <td>\r\n                <ng-select [options]=\"selectingBeers\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.served.id\">\r\n                </ng-select>\r\n            </td>\r\n            <td>\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.price\"\r\n                       required\r\n                       [(ngModel)]=\"adding.price\" name=\"price\">\r\n            </td>\r\n            <td>\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.volume\"\r\n                       required\r\n                       [(ngModel)]=\"adding.volume\" name=\"volume\">\r\n            </td>\r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
+module.exports = "<div *ngIf=\"!pub\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"pub\" style=\"margin-top: 20px;\">\r\n    <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n            <h3 class=\"panel-title\" [id]=\"pub.id\">\r\n                {{ pub.name }}\r\n                <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                <small>{{ pub.address }}</small>\r\n                <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n            </h3>\r\n        </div>\r\n        <div class=\"panel-body\">\r\n            <div>\r\n                <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                    <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\"\r\n                              format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                </div>\r\n                <div>\r\n                    <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                            [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                            [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                        <span class=\"badge\">{{ serve.tap }}</span>\r\n                        {{ serve.served.name }}\r\n                        <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\">{{ serve.served.brewery.name }}</span>\r\n                        <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 379 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список пользователей</h1>\r\n\r\n<p>На этой странице вы можете редактировать список пользователей, а также добавлять новые.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n    <tr>\r\n        <th>Логин</th>\r\n        <th>Имя</th>\r\n        <th>Пароль</th>\r\n        <th>Админ?</th>\r\n        <th>Представляет паб?</th>\r\n        <th>Представляет пивоварню?</th>\r\n        <th>Действия</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let user of elements\">\r\n        <td>{{ user.id }}</td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    {{ user.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    ***\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"password\" class=\"form-control\" id=\"password\"\n                           required\n                           [(ngModel)]=\"editing.password\" name=\"password\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.isAdmin\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"isAdmin\"\n                           required\n                           [(ngModel)]=\"editing.isAdmin\" name=\"isAdmin\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminPub\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminPub\"\n                           required\n                           [(ngModel)]=\"editing.canAdminPub\" name=\"canAdminPub\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminBrewery\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminBrewery\"\n                           required\n                           [(ngModel)]=\"editing.canAdminBrewery\" name=\"canAdminBrewery\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <button (click)=\"edit(user.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\r\n    </tr>\r\n\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\r\n                   required\r\n                   [(ngModel)]=\"adding.id\" name=\"id\">\r\n        </td>\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                   required\r\n                   [(ngModel)]=\"adding.name\" name=\"name\">\r\n        </td>\r\n        <td>\r\n            <input type=\"password\" class=\"form-control\" id=\"adding.password\"\r\n                   required\r\n                   [(ngModel)]=\"adding.password\" name=\"password\">\r\n        </td>\r\n        <td>\r\n\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.isAdmin\"\r\n                   required\r\n                   [(ngModel)]=\"adding.isAdmin\" name=\"isAdmin\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminPub\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminPub\" name=\"canAdminPub\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminBrewery\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminBrewery\" name=\"canAdminBrewery\">\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пабам.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Паб</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let pubAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.pub.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    <button (click)=\"edit(pubAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
 
 /***/ }),
 /* 380 */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>\r\n    {{'PUBS.TITLE' | translate:lang}}<!--Крафтові паби України-->\r\n</h1>\r\n\r\n<p>\r\n    {{'PUBS.DESCRIPTION' | translate:lang}}<!--На цей сторінці ви можете знайти список усіх крафтових пабів в Україні-->\r\n</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"dropdown\"  *ngIf=\"cities\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        {{'G.CITY' | translate:lang}}<!--Місто-->: <span *ngIf=\"city\">{{city.name}}</span><span *ngIf=\"!city\">{{'G.ALL' | translate:lang}}<!--усі--></span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n        <li><a (click)=\"setCity('')\">*</a></li>\r\n        <li *ngFor=\"let city of cities\"><a (click)=\"setCity(city.name)\">{{ city.name }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"elements\" style=\"margin-top: 20px;\">\r\n    <div *ngFor=\"let pub of elements\">\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-heading\">\r\n                <h3 class=\"panel-title\" [id]=\"pub.id\"><a [routerLink]=\"['/pub', pub.id]\">{{ pub.name }}</a>\r\n                    <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                    <span *ngIf=\"pub.tapNumber > 0\" class=\"badge\">{{ pub.tapNumber }} <span class=\"fa fa-map-pin\" aria-hidden=\"true\"></span></span>\r\n                    <small>{{ pub.address }}</small>\r\n                    <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n                    <span class=\"pull-right\" *ngIf=\"pubUpdates[pub.id]\"><small><i class=\"glyphicon glyphicon-calendar\"></i> {{pubUpdates[pub.id]}}</small></span>\r\n                </h3>\r\n            </div>\r\n            <div class=\"panel-body\">\r\n                <div>\r\n                    <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                        <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\" \r\n                                  format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                    </div>\r\n                    <div>\r\n                        <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                                [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                                [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                            <span class=\"badge\">{{ serve.tap }}</span>\r\n                            {{ serve.served.name }}\r\n                            <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\" >{{ serve.served.brewery.name }}</span>\r\n                            <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+
+/***/ }),
+/* 381 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n            <h4 class=\"modal-title\">{{title || 'Confirm'}}</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n            <p>{{message || 'Are you sure?'}}</p>\r\n            <p>\r\n                <ng-select [options]=\"options\"\r\n                                [multiple]=\"false\"\r\n                                [(ngModel)]=\"selected\">\r\n                </ng-select>\r\n            </p>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"confirm()\">OK</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
+
+/***/ }),
+/* 382 */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать цены на пиво в пабах, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"dropdown\" *ngIf=\"pubs\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Паб<span *ngIf=\"pub\">: {{pub.name}}</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n        <li><a (click)=\"setPub('')\">*</a></li>\r\n        <li *ngFor=\"let pub of pubs\"><a (click)=\"setPub(pub.name)\">{{ pub.name }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n    <tr>\r\n        <th class=\"col-xs-3\">Паб</th>\r\n        <th class=\"col-xs-1\">Кран</th>\r\n        <th class=\"col-xs-4\">Пиво</th>\r\n        <th class=\"col-xs-1\">Цена</th>\r\n        <th class=\"col-xs-1\">Объём</th>\r\n        <th class=\"col-xs-3\">Действия</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let serve of elements\">\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                {{ serve.servedIn.name }}\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                <ng-select [options]=\"selectingPubs\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"editing.servedIn.id\">\r\n                </ng-select>\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                {{ serve.tap }}\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                <input type=\"number\" class=\"form-control\" id=\"editing.tap\"\r\n                       required\r\n                       [(ngModel)]=\"editing.tap\" name=\"tap\">\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                {{ serve.served.name }} ({{serve.served.brewery.name}})\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                <ng-select [options]=\"selectingBeers\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"editing.served.id\">\r\n                </ng-select>\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                {{ serve.price }}\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                <input type=\"number\" class=\"form-control\" id=\"editing.price\"\r\n                       required\r\n                       [(ngModel)]=\"editing.price\" name=\"price\">\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                {{ serve.volume }}\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                <input type=\"number\" class=\"form-control\" id=\"editing.volume\"\r\n                       required\r\n                       [(ngModel)]=\"editing.volume\" name=\"volume\">\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != serve.id)\">\r\n                <button (click)=\"edit(serve.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == serve.id)\">\r\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                    <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </span>\r\n        </td>\r\n    </tr>\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <ng-select [options]=\"selectingPubs\"\r\n                       [multiple]=\"false\"\r\n                       [(ngModel)]=\"adding.servedIn.id\">\r\n            </ng-select>\r\n        </td>\r\n        <td>\r\n            <input type=\"number\" class=\"form-control\" id=\"adding.tap\"\r\n                   required\r\n                   [(ngModel)]=\"adding.tap\" name=\"tap\">\r\n        </td>\r\n        <td>\r\n            <ng-select [options]=\"selectingBeers\"\r\n                       [multiple]=\"false\"\r\n                       [(ngModel)]=\"adding.served.id\">\r\n            </ng-select>\r\n        </td>\r\n        <td>\r\n            <input type=\"number\" class=\"form-control\" id=\"adding.price\"\r\n                   required\r\n                   [(ngModel)]=\"adding.price\" name=\"price\">\r\n        </td>\r\n        <td>\r\n            <input type=\"number\" class=\"form-control\" id=\"adding.volume\"\r\n                   required\r\n                   [(ngModel)]=\"adding.volume\" name=\"volume\">\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n\r\n\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>&nbsp;\r\n<print-page section=\"printable\" *ngIf=\"pub\"></print-page>\r\n<div id=\"printable\" *ngIf=\"pub\" style=\"visibility: collapse\">\r\n    <div style='width: 740px; height: 101px; display: block;'>\r\n        <cl-image public-id=\"{{pub.taplistHeaderImage}}\" cloud-name=\"ontap-in-ua\" height=\"101\" width=\"740\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n    </div>\r\n    <div class=\"ritz grid-container\" dir=\"ltr\">\r\n        <table class=\"waffle no-grid\" cellspacing=\"0\" cellpadding=\"0\">\r\n            <tbody>\r\n            <tr style='height: 42px;'>\r\n                <td class=\"s0\" dir=\"ltr\">Кран</td>\r\n                <td class=\"s0\" dir=\"ltr\">Описание</td>\r\n                <td class=\"s0\" dir=\"ltr\">ABV</td>\r\n                <td class=\"s0\" dir=\"ltr\">PL</td>\r\n                <td class=\"s0\" dir=\"ltr\">IBU</td>\r\n                <td class=\"s1\" dir=\"ltr\"></td>\r\n                <td class=\"s2 softmerge\" dir=\"ltr\">\r\n                    <div class=\"softmerge-inner\" style=\"width: 49px; left: -8px;\">Цена</div>\r\n                </td>\r\n                <td class=\"s0\" dir=\"ltr\">Объем</td>\r\n            </tr>\r\n            <ng-container *ngFor=\"let serve of pub.serves | sortByTap; let isOdd = odd; let isEven = even\">\r\n                <tr style='height: 20px;'>\r\n                    <td [ngClass]=\"{'s3':isEven,'s8':isOdd}\" dir=\"ltr\" rowspan=\"2\">{{ serve.tap }}</td>\r\n                    <td [ngClass]=\"{'s4':isEven,'s9':isOdd}\" dir=\"ltr\">{{ serve.served.brewery.name }} — {{ serve.served.name }}</td>\r\n                    <td [ngClass]=\"{'s5':isEven,'s10':isOdd}\" dir=\"ltr\" rowspan=\"2\">{{serve.served.alcohol}}</td>\r\n                    <td [ngClass]=\"{'s5':isEven,'s10':isOdd}\" dir=\"ltr\" rowspan=\"2\">{{serve.served.gravity}}</td>\r\n                    <td [ngClass]=\"{'s5':isEven,'s10':isOdd}\" dir=\"ltr\" rowspan=\"2\">{{serve.served.ibu}}</td>\r\n                    <td [ngClass]=\"{'s6':isEven,'s11':isOdd}\" dir=\"ltr\"></td>\r\n                    <td [ngClass]=\"{'s6':isEven,'s11':isOdd}\" dir=\"ltr\" rowspan=\"2\">{{ serve.price | number:'2.0-2' }}</td>\r\n                    <td [ngClass]=\"{'s6':isEven,'s11':isOdd}\" dir=\"ltr\" rowspan=\"2\">{{serve.volume}}</td>\r\n                </tr>\r\n                <tr style='height: 20px;'>\r\n                    <td [ngClass]=\"{'s7':isEven,'s12':isOdd, 'softmerge':true}\">\r\n                        <div class=\"softmerge-inner\" style=\"width: 445px; left: -1px;\">{{serve.served.description}}</div>\r\n                    </td>\r\n                    <td [ngClass]=\"{'s6':isEven,'s11':isOdd}\" dir=\"ltr\"></td>\r\n                </tr>\r\n            </ng-container>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>";
+
+/***/ }),
+/* 383 */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Редактировать список пользователей</h1>\r\n\r\n<p>На этой странице вы можете редактировать список пользователей, а также добавлять новые.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n    <tr>\r\n        <th>Логин</th>\r\n        <th>Имя</th>\r\n        <th>Пароль</th>\r\n        <th>Админ?</th>\r\n        <th>Представляет паб?</th>\r\n        <th>Представляет пивоварню?</th>\r\n        <th>Действия</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let user of elements\">\r\n        <td>{{ user.id }}</td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    {{ user.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    ***\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"password\" class=\"form-control\" id=\"password\"\n                           required\n                           [(ngModel)]=\"editing.password\" name=\"password\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.isAdmin\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"isAdmin\"\n                           required\n                           [(ngModel)]=\"editing.isAdmin\" name=\"isAdmin\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminPub\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminPub\"\n                           required\n                           [(ngModel)]=\"editing.canAdminPub\" name=\"canAdminPub\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminBrewery\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminBrewery\"\n                           required\n                           [(ngModel)]=\"editing.canAdminBrewery\" name=\"canAdminBrewery\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <button (click)=\"edit(user.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\r\n    </tr>\r\n\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\r\n                   required\r\n                   [(ngModel)]=\"adding.id\" name=\"id\">\r\n        </td>\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                   required\r\n                   [(ngModel)]=\"adding.name\" name=\"name\">\r\n        </td>\r\n        <td>\r\n            <input type=\"password\" class=\"form-control\" id=\"adding.password\"\r\n                   required\r\n                   [(ngModel)]=\"adding.password\" name=\"password\">\r\n        </td>\r\n        <td>\r\n\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.isAdmin\"\r\n                   required\r\n                   [(ngModel)]=\"adding.isAdmin\" name=\"isAdmin\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminPub\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminPub\" name=\"canAdminPub\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminBrewery\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminBrewery\" name=\"canAdminBrewery\">\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+
+/***/ }),
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -41014,10 +41187,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 380;
+webpackContext.id = 384;
 
 /***/ }),
-/* 381 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41079,13 +41252,13 @@ var BootstrapModalModule_1;
 //# sourceMappingURL=bootstrap-modal.module.js.map
 
 /***/ }),
-/* 382 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var rxjs_1 = __webpack_require__(413);
+var rxjs_1 = __webpack_require__(417);
 var DialogComponent = (function () {
     function DialogComponent(dialogService) {
         this.dialogService = dialogService;
@@ -41119,15 +41292,15 @@ exports.DialogComponent = DialogComponent;
 //# sourceMappingURL=dialog.component.js.map
 
 /***/ }),
-/* 383 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var bootstrap_modal_module_1 = __webpack_require__(381);
+var bootstrap_modal_module_1 = __webpack_require__(385);
 exports.BootstrapModalModule = bootstrap_modal_module_1.BootstrapModalModule;
-var dialog_component_1 = __webpack_require__(382);
+var dialog_component_1 = __webpack_require__(386);
 exports.DialogComponent = dialog_component_1.DialogComponent;
 var dialog_service_1 = __webpack_require__(78);
 exports.DialogService = dialog_service_1.DialogService;
@@ -41135,7 +41308,7 @@ exports.DialogServiceConfig = dialog_service_1.DialogServiceConfig;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 384 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41149,7 +41322,7 @@ exports.AccordionModule = accordion_module_1.AccordionModule;
 
 
 /***/ }),
-/* 385 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41161,7 +41334,7 @@ exports.AlertModule = alert_module_1.AlertModule;
 
 
 /***/ }),
-/* 386 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41175,7 +41348,7 @@ exports.ButtonsModule = buttons_module_1.ButtonsModule;
 
 
 /***/ }),
-/* 387 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41189,7 +41362,7 @@ exports.SlideComponent = slide_component_1.SlideComponent;
 
 
 /***/ }),
-/* 388 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41201,7 +41374,7 @@ exports.CollapseModule = collapse_module_1.CollapseModule;
 
 
 /***/ }),
-/* 389 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41229,7 +41402,7 @@ exports.DateFormatter = date_formatter_1.DateFormatter;
 
 
 /***/ }),
-/* 390 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41247,7 +41420,7 @@ exports.DropdownModule = dropdown_module_1.DropdownModule;
 
 
 /***/ }),
-/* 391 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41292,7 +41465,7 @@ exports.Ng2BootstrapModule = Ng2BootstrapModule;
 
 
 /***/ }),
-/* 392 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41308,7 +41481,7 @@ exports.ModalModule = modal_module_1.ModalModule;
 
 
 /***/ }),
-/* 393 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41322,7 +41495,7 @@ exports.PaginationModule = pagination_module_1.PaginationModule;
 
 
 /***/ }),
-/* 394 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41338,7 +41511,7 @@ exports.ProgressbarModule = progressbar_module_1.ProgressbarModule;
 
 
 /***/ }),
-/* 395 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41350,7 +41523,7 @@ exports.RatingModule = rating_module_1.RatingModule;
 
 
 /***/ }),
-/* 396 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41366,7 +41539,7 @@ exports.TabsModule = tabs_module_1.TabsModule;
 
 
 /***/ }),
-/* 397 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41378,7 +41551,7 @@ exports.TimepickerModule = timepicker_module_1.TimepickerModule;
 
 
 /***/ }),
-/* 398 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41392,7 +41565,7 @@ exports.TooltipModule = tooltip_module_1.TooltipModule;
 
 
 /***/ }),
-/* 399 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41412,7 +41585,7 @@ exports.TypeaheadModule = typeahead_module_1.TypeaheadModule;
 
 
 /***/ }),
-/* 400 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42246,7 +42419,7 @@ exports.latinMap = {
 
 
 /***/ }),
-/* 401 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42275,7 +42448,7 @@ exports.Utils = Utils;
 
 
 /***/ }),
-/* 402 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42283,21 +42456,21 @@ exports.Utils = Utils;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(384));
-__export(__webpack_require__(385));
-__export(__webpack_require__(386));
-__export(__webpack_require__(387));
 __export(__webpack_require__(388));
 __export(__webpack_require__(389));
-__export(__webpack_require__(392));
 __export(__webpack_require__(390));
+__export(__webpack_require__(391));
+__export(__webpack_require__(392));
 __export(__webpack_require__(393));
-__export(__webpack_require__(394));
-__export(__webpack_require__(395));
 __export(__webpack_require__(396));
+__export(__webpack_require__(394));
 __export(__webpack_require__(397));
 __export(__webpack_require__(398));
 __export(__webpack_require__(399));
+__export(__webpack_require__(400));
+__export(__webpack_require__(401));
+__export(__webpack_require__(402));
+__export(__webpack_require__(403));
 __export(__webpack_require__(93));
 __export(__webpack_require__(244));
 __export(__webpack_require__(36));
@@ -42333,12 +42506,12 @@ var typeahead_module_1 = __webpack_require__(106);
 exports.TypeaheadModule = typeahead_module_1.TypeaheadModule;
 var components_helper_service_1 = __webpack_require__(22);
 exports.ComponentsHelper = components_helper_service_1.ComponentsHelper;
-var index_1 = __webpack_require__(391);
+var index_1 = __webpack_require__(395);
 exports.Ng2BootstrapModule = index_1.Ng2BootstrapModule;
 
 
 /***/ }),
-/* 403 */
+/* 407 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42356,7 +42529,7 @@ var CloudinaryOptions = (function () {
 //# sourceMappingURL=cloudinary-options.class.js.map
 
 /***/ }),
-/* 404 */
+/* 408 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42430,7 +42603,7 @@ var CloudinaryUploader = (function (_super) {
 //# sourceMappingURL=cloudinary-uploader.service.js.map
 
 /***/ }),
-/* 405 */
+/* 409 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42473,7 +42646,7 @@ var Ng2CloudinaryModule = (function () {
 //# sourceMappingURL=cloudinary.module.js.map
 
 /***/ }),
-/* 406 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42606,7 +42779,7 @@ exports.FileItem = FileItem;
 
 
 /***/ }),
-/* 407 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42775,7 +42948,7 @@ exports.FileType = FileType;
 
 
 /***/ }),
-/* 408 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42802,14 +42975,14 @@ exports.FileUploadModule = FileUploadModule;
 
 
 /***/ }),
-/* 409 */
+/* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var file_like_object_class_1 = __webpack_require__(267);
-var file_item_class_1 = __webpack_require__(406);
-var file_type_class_1 = __webpack_require__(407);
+var file_item_class_1 = __webpack_require__(410);
+var file_type_class_1 = __webpack_require__(411);
 function isFile(value) {
     return (File && value instanceof File);
 }
@@ -43207,7 +43380,7 @@ exports.FileUploader = FileUploader;
 
 
 /***/ }),
-/* 410 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43298,7 +43471,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 411 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43390,18 +43563,18 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 412 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(410);
-exports.encode = exports.stringify = __webpack_require__(411);
+exports.decode = exports.parse = __webpack_require__(414);
+exports.encode = exports.stringify = __webpack_require__(415);
 
 
 /***/ }),
-/* 413 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43418,86 +43591,82 @@ var Observable_1 = __webpack_require__(0);
 exports.Observable = Observable_1.Observable;
 // statics
 /* tslint:disable:no-use-before-declare */
-__webpack_require__(415);
-__webpack_require__(416);
-__webpack_require__(417);
-__webpack_require__(418);
 __webpack_require__(419);
+__webpack_require__(420);
+__webpack_require__(421);
 __webpack_require__(422);
 __webpack_require__(423);
-__webpack_require__(269);
-__webpack_require__(424);
-__webpack_require__(425);
 __webpack_require__(426);
 __webpack_require__(427);
+__webpack_require__(269);
 __webpack_require__(428);
 __webpack_require__(429);
 __webpack_require__(430);
-__webpack_require__(435);
 __webpack_require__(431);
 __webpack_require__(432);
 __webpack_require__(433);
 __webpack_require__(434);
-__webpack_require__(436);
-__webpack_require__(438);
-__webpack_require__(270);
-__webpack_require__(437);
 __webpack_require__(439);
-//dom
-__webpack_require__(420);
-__webpack_require__(421);
-//operators
+__webpack_require__(435);
+__webpack_require__(436);
+__webpack_require__(437);
+__webpack_require__(438);
+__webpack_require__(440);
 __webpack_require__(442);
+__webpack_require__(270);
+__webpack_require__(441);
 __webpack_require__(443);
-__webpack_require__(444);
-__webpack_require__(445);
+//dom
+__webpack_require__(424);
+__webpack_require__(425);
+//operators
 __webpack_require__(446);
-__webpack_require__(271);
 __webpack_require__(447);
 __webpack_require__(448);
 __webpack_require__(449);
 __webpack_require__(450);
+__webpack_require__(271);
 __webpack_require__(451);
 __webpack_require__(452);
 __webpack_require__(453);
-__webpack_require__(458);
 __webpack_require__(454);
-__webpack_require__(110);
 __webpack_require__(455);
 __webpack_require__(456);
 __webpack_require__(457);
+__webpack_require__(462);
+__webpack_require__(458);
+__webpack_require__(110);
 __webpack_require__(459);
-__webpack_require__(272);
 __webpack_require__(460);
 __webpack_require__(461);
+__webpack_require__(463);
+__webpack_require__(272);
 __webpack_require__(464);
 __webpack_require__(465);
-__webpack_require__(466);
-__webpack_require__(462);
-__webpack_require__(273);
-__webpack_require__(467);
 __webpack_require__(468);
 __webpack_require__(469);
 __webpack_require__(470);
+__webpack_require__(466);
+__webpack_require__(273);
 __webpack_require__(471);
 __webpack_require__(472);
 __webpack_require__(473);
-__webpack_require__(440);
-__webpack_require__(441);
 __webpack_require__(474);
 __webpack_require__(475);
-__webpack_require__(463);
-__webpack_require__(62);
 __webpack_require__(476);
 __webpack_require__(477);
+__webpack_require__(444);
+__webpack_require__(445);
 __webpack_require__(478);
 __webpack_require__(479);
+__webpack_require__(467);
+__webpack_require__(62);
 __webpack_require__(480);
-__webpack_require__(274);
 __webpack_require__(481);
 __webpack_require__(482);
 __webpack_require__(483);
 __webpack_require__(484);
+__webpack_require__(274);
 __webpack_require__(485);
 __webpack_require__(486);
 __webpack_require__(487);
@@ -43505,12 +43674,12 @@ __webpack_require__(488);
 __webpack_require__(489);
 __webpack_require__(490);
 __webpack_require__(491);
-__webpack_require__(493);
 __webpack_require__(492);
+__webpack_require__(493);
 __webpack_require__(494);
 __webpack_require__(495);
-__webpack_require__(496);
 __webpack_require__(497);
+__webpack_require__(496);
 __webpack_require__(498);
 __webpack_require__(499);
 __webpack_require__(500);
@@ -43525,11 +43694,11 @@ __webpack_require__(508);
 __webpack_require__(509);
 __webpack_require__(510);
 __webpack_require__(511);
-__webpack_require__(111);
 __webpack_require__(512);
 __webpack_require__(513);
 __webpack_require__(514);
 __webpack_require__(515);
+__webpack_require__(111);
 __webpack_require__(516);
 __webpack_require__(517);
 __webpack_require__(518);
@@ -43537,16 +43706,20 @@ __webpack_require__(519);
 __webpack_require__(520);
 __webpack_require__(521);
 __webpack_require__(522);
-__webpack_require__(275);
-__webpack_require__(276);
 __webpack_require__(523);
 __webpack_require__(524);
 __webpack_require__(525);
 __webpack_require__(526);
+__webpack_require__(275);
+__webpack_require__(276);
 __webpack_require__(527);
 __webpack_require__(528);
 __webpack_require__(529);
 __webpack_require__(530);
+__webpack_require__(531);
+__webpack_require__(532);
+__webpack_require__(533);
+__webpack_require__(534);
 /* tslint:disable:no-unused-variable */
 var Subscription_1 = __webpack_require__(12);
 exports.Subscription = Subscription_1.Subscription;
@@ -43570,13 +43743,13 @@ var ObjectUnsubscribedError_1 = __webpack_require__(301);
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
 var TimeoutError_1 = __webpack_require__(294);
 exports.TimeoutError = TimeoutError_1.TimeoutError;
-var UnsubscriptionError_1 = __webpack_require__(690);
+var UnsubscriptionError_1 = __webpack_require__(696);
 exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
 var timeInterval_1 = __webpack_require__(286);
 exports.TimeInterval = timeInterval_1.TimeInterval;
 var timestamp_1 = __webpack_require__(287);
 exports.Timestamp = timestamp_1.Timestamp;
-var TestScheduler_1 = __webpack_require__(653);
+var TestScheduler_1 = __webpack_require__(657);
 exports.TestScheduler = TestScheduler_1.TestScheduler;
 var VirtualTimeScheduler_1 = __webpack_require__(289);
 exports.VirtualTimeScheduler = VirtualTimeScheduler_1.VirtualTimeScheduler;
@@ -43587,10 +43760,10 @@ exports.AjaxTimeoutError = AjaxObservable_1.AjaxTimeoutError;
 var asap_1 = __webpack_require__(290);
 var async_1 = __webpack_require__(16);
 var queue_1 = __webpack_require__(291);
-var animationFrame_1 = __webpack_require__(650);
-var rxSubscriber_1 = __webpack_require__(676);
+var animationFrame_1 = __webpack_require__(654);
+var rxSubscriber_1 = __webpack_require__(682);
 var iterator_1 = __webpack_require__(298);
-var observable_1 = __webpack_require__(674);
+var observable_1 = __webpack_require__(680);
 /* tslint:enable:no-unused-variable */
 /**
  * @typedef {Object} Rx.Scheduler
@@ -43634,7 +43807,7 @@ exports.Symbol = Symbol;
 //# sourceMappingURL=Rx.js.map
 
 /***/ }),
-/* 414 */
+/* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43689,59 +43862,15 @@ exports.Scheduler = Scheduler;
 //# sourceMappingURL=Scheduler.js.map
 
 /***/ }),
-/* 415 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var bindCallback_1 = __webpack_require__(546);
-Observable_1.Observable.bindCallback = bindCallback_1.bindCallback;
-//# sourceMappingURL=bindCallback.js.map
-
-/***/ }),
-/* 416 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var bindNodeCallback_1 = __webpack_require__(547);
-Observable_1.Observable.bindNodeCallback = bindNodeCallback_1.bindNodeCallback;
-//# sourceMappingURL=bindNodeCallback.js.map
-
-/***/ }),
-/* 417 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var combineLatest_1 = __webpack_require__(548);
-Observable_1.Observable.combineLatest = combineLatest_1.combineLatest;
-//# sourceMappingURL=combineLatest.js.map
-
-/***/ }),
-/* 418 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var concat_1 = __webpack_require__(549);
-Observable_1.Observable.concat = concat_1.concat;
-//# sourceMappingURL=concat.js.map
-
-/***/ }),
 /* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var defer_1 = __webpack_require__(550);
-Observable_1.Observable.defer = defer_1.defer;
-//# sourceMappingURL=defer.js.map
+var bindCallback_1 = __webpack_require__(550);
+Observable_1.Observable.bindCallback = bindCallback_1.bindCallback;
+//# sourceMappingURL=bindCallback.js.map
 
 /***/ }),
 /* 420 */
@@ -43750,9 +43879,9 @@ Observable_1.Observable.defer = defer_1.defer;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var ajax_1 = __webpack_require__(552);
-Observable_1.Observable.ajax = ajax_1.ajax;
-//# sourceMappingURL=ajax.js.map
+var bindNodeCallback_1 = __webpack_require__(551);
+Observable_1.Observable.bindNodeCallback = bindNodeCallback_1.bindNodeCallback;
+//# sourceMappingURL=bindNodeCallback.js.map
 
 /***/ }),
 /* 421 */
@@ -43761,9 +43890,9 @@ Observable_1.Observable.ajax = ajax_1.ajax;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var webSocket_1 = __webpack_require__(553);
-Observable_1.Observable.webSocket = webSocket_1.webSocket;
-//# sourceMappingURL=webSocket.js.map
+var combineLatest_1 = __webpack_require__(552);
+Observable_1.Observable.combineLatest = combineLatest_1.combineLatest;
+//# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
 /* 422 */
@@ -43772,9 +43901,9 @@ Observable_1.Observable.webSocket = webSocket_1.webSocket;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var empty_1 = __webpack_require__(554);
-Observable_1.Observable.empty = empty_1.empty;
-//# sourceMappingURL=empty.js.map
+var concat_1 = __webpack_require__(553);
+Observable_1.Observable.concat = concat_1.concat;
+//# sourceMappingURL=concat.js.map
 
 /***/ }),
 /* 423 */
@@ -43783,9 +43912,9 @@ Observable_1.Observable.empty = empty_1.empty;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var forkJoin_1 = __webpack_require__(555);
-Observable_1.Observable.forkJoin = forkJoin_1.forkJoin;
-//# sourceMappingURL=forkJoin.js.map
+var defer_1 = __webpack_require__(554);
+Observable_1.Observable.defer = defer_1.defer;
+//# sourceMappingURL=defer.js.map
 
 /***/ }),
 /* 424 */
@@ -43794,9 +43923,9 @@ Observable_1.Observable.forkJoin = forkJoin_1.forkJoin;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var fromEvent_1 = __webpack_require__(556);
-Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
-//# sourceMappingURL=fromEvent.js.map
+var ajax_1 = __webpack_require__(556);
+Observable_1.Observable.ajax = ajax_1.ajax;
+//# sourceMappingURL=ajax.js.map
 
 /***/ }),
 /* 425 */
@@ -43805,12 +43934,56 @@ Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var fromEventPattern_1 = __webpack_require__(557);
+var webSocket_1 = __webpack_require__(557);
+Observable_1.Observable.webSocket = webSocket_1.webSocket;
+//# sourceMappingURL=webSocket.js.map
+
+/***/ }),
+/* 426 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var empty_1 = __webpack_require__(558);
+Observable_1.Observable.empty = empty_1.empty;
+//# sourceMappingURL=empty.js.map
+
+/***/ }),
+/* 427 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var forkJoin_1 = __webpack_require__(559);
+Observable_1.Observable.forkJoin = forkJoin_1.forkJoin;
+//# sourceMappingURL=forkJoin.js.map
+
+/***/ }),
+/* 428 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var fromEvent_1 = __webpack_require__(560);
+Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
+//# sourceMappingURL=fromEvent.js.map
+
+/***/ }),
+/* 429 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var fromEventPattern_1 = __webpack_require__(561);
 Observable_1.Observable.fromEventPattern = fromEventPattern_1.fromEventPattern;
 //# sourceMappingURL=fromEventPattern.js.map
 
 /***/ }),
-/* 426 */
+/* 430 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43821,59 +43994,15 @@ Observable_1.Observable.fromPromise = fromPromise_1.fromPromise;
 //# sourceMappingURL=fromPromise.js.map
 
 /***/ }),
-/* 427 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var GenerateObservable_1 = __webpack_require__(538);
-Observable_1.Observable.generate = GenerateObservable_1.GenerateObservable.create;
-//# sourceMappingURL=generate.js.map
-
-/***/ }),
-/* 428 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var if_1 = __webpack_require__(558);
-Observable_1.Observable.if = if_1._if;
-//# sourceMappingURL=if.js.map
-
-/***/ }),
-/* 429 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var interval_1 = __webpack_require__(559);
-Observable_1.Observable.interval = interval_1.interval;
-//# sourceMappingURL=interval.js.map
-
-/***/ }),
-/* 430 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var merge_1 = __webpack_require__(560);
-Observable_1.Observable.merge = merge_1.merge;
-//# sourceMappingURL=merge.js.map
-
-/***/ }),
 /* 431 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var never_1 = __webpack_require__(561);
-Observable_1.Observable.never = never_1.never;
-//# sourceMappingURL=never.js.map
+var GenerateObservable_1 = __webpack_require__(542);
+Observable_1.Observable.generate = GenerateObservable_1.GenerateObservable.create;
+//# sourceMappingURL=generate.js.map
 
 /***/ }),
 /* 432 */
@@ -43882,12 +44011,56 @@ Observable_1.Observable.never = never_1.never;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var of_1 = __webpack_require__(686);
+var if_1 = __webpack_require__(562);
+Observable_1.Observable.if = if_1._if;
+//# sourceMappingURL=if.js.map
+
+/***/ }),
+/* 433 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var interval_1 = __webpack_require__(563);
+Observable_1.Observable.interval = interval_1.interval;
+//# sourceMappingURL=interval.js.map
+
+/***/ }),
+/* 434 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var merge_1 = __webpack_require__(564);
+Observable_1.Observable.merge = merge_1.merge;
+//# sourceMappingURL=merge.js.map
+
+/***/ }),
+/* 435 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var never_1 = __webpack_require__(565);
+Observable_1.Observable.never = never_1.never;
+//# sourceMappingURL=never.js.map
+
+/***/ }),
+/* 436 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var of_1 = __webpack_require__(692);
 Observable_1.Observable.of = of_1.of;
 //# sourceMappingURL=of.js.map
 
 /***/ }),
-/* 433 */
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43898,18 +44071,18 @@ Observable_1.Observable.onErrorResumeNext = onErrorResumeNext_1.onErrorResumeNex
 //# sourceMappingURL=onErrorResumeNext.js.map
 
 /***/ }),
-/* 434 */
+/* 438 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var pairs_1 = __webpack_require__(562);
+var pairs_1 = __webpack_require__(566);
 Observable_1.Observable.pairs = pairs_1.pairs;
 //# sourceMappingURL=pairs.js.map
 
 /***/ }),
-/* 435 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43920,59 +44093,15 @@ Observable_1.Observable.race = race_1.raceStatic;
 //# sourceMappingURL=race.js.map
 
 /***/ }),
-/* 436 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var range_1 = __webpack_require__(563);
-Observable_1.Observable.range = range_1.range;
-//# sourceMappingURL=range.js.map
-
-/***/ }),
-/* 437 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var timer_1 = __webpack_require__(565);
-Observable_1.Observable.timer = timer_1.timer;
-//# sourceMappingURL=timer.js.map
-
-/***/ }),
-/* 438 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var using_1 = __webpack_require__(566);
-Observable_1.Observable.using = using_1.using;
-//# sourceMappingURL=using.js.map
-
-/***/ }),
-/* 439 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var zip_1 = __webpack_require__(567);
-Observable_1.Observable.zip = zip_1.zip;
-//# sourceMappingURL=zip.js.map
-
-/***/ }),
 /* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var audit_1 = __webpack_require__(568);
-Observable_1.Observable.prototype.audit = audit_1.audit;
-//# sourceMappingURL=audit.js.map
+var range_1 = __webpack_require__(567);
+Observable_1.Observable.range = range_1.range;
+//# sourceMappingURL=range.js.map
 
 /***/ }),
 /* 441 */
@@ -43981,9 +44110,9 @@ Observable_1.Observable.prototype.audit = audit_1.audit;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var auditTime_1 = __webpack_require__(569);
-Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
-//# sourceMappingURL=auditTime.js.map
+var timer_1 = __webpack_require__(569);
+Observable_1.Observable.timer = timer_1.timer;
+//# sourceMappingURL=timer.js.map
 
 /***/ }),
 /* 442 */
@@ -43992,9 +44121,9 @@ Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var buffer_1 = __webpack_require__(570);
-Observable_1.Observable.prototype.buffer = buffer_1.buffer;
-//# sourceMappingURL=buffer.js.map
+var using_1 = __webpack_require__(570);
+Observable_1.Observable.using = using_1.using;
+//# sourceMappingURL=using.js.map
 
 /***/ }),
 /* 443 */
@@ -44003,9 +44132,9 @@ Observable_1.Observable.prototype.buffer = buffer_1.buffer;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferCount_1 = __webpack_require__(571);
-Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
-//# sourceMappingURL=bufferCount.js.map
+var zip_1 = __webpack_require__(571);
+Observable_1.Observable.zip = zip_1.zip;
+//# sourceMappingURL=zip.js.map
 
 /***/ }),
 /* 444 */
@@ -44014,9 +44143,9 @@ Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferTime_1 = __webpack_require__(572);
-Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
-//# sourceMappingURL=bufferTime.js.map
+var audit_1 = __webpack_require__(572);
+Observable_1.Observable.prototype.audit = audit_1.audit;
+//# sourceMappingURL=audit.js.map
 
 /***/ }),
 /* 445 */
@@ -44025,9 +44154,9 @@ Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferToggle_1 = __webpack_require__(573);
-Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
-//# sourceMappingURL=bufferToggle.js.map
+var auditTime_1 = __webpack_require__(573);
+Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
+//# sourceMappingURL=auditTime.js.map
 
 /***/ }),
 /* 446 */
@@ -44036,9 +44165,9 @@ Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferWhen_1 = __webpack_require__(574);
-Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
-//# sourceMappingURL=bufferWhen.js.map
+var buffer_1 = __webpack_require__(574);
+Observable_1.Observable.prototype.buffer = buffer_1.buffer;
+//# sourceMappingURL=buffer.js.map
 
 /***/ }),
 /* 447 */
@@ -44047,12 +44176,56 @@ Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var combineAll_1 = __webpack_require__(575);
+var bufferCount_1 = __webpack_require__(575);
+Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
+//# sourceMappingURL=bufferCount.js.map
+
+/***/ }),
+/* 448 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var bufferTime_1 = __webpack_require__(576);
+Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
+//# sourceMappingURL=bufferTime.js.map
+
+/***/ }),
+/* 449 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var bufferToggle_1 = __webpack_require__(577);
+Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
+//# sourceMappingURL=bufferToggle.js.map
+
+/***/ }),
+/* 450 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var bufferWhen_1 = __webpack_require__(578);
+Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
+//# sourceMappingURL=bufferWhen.js.map
+
+/***/ }),
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var combineAll_1 = __webpack_require__(579);
 Observable_1.Observable.prototype.combineAll = combineAll_1.combineAll;
 //# sourceMappingURL=combineAll.js.map
 
 /***/ }),
-/* 448 */
+/* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44063,7 +44236,7 @@ Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
 //# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
-/* 449 */
+/* 453 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44074,59 +44247,15 @@ Observable_1.Observable.prototype.concat = concat_1.concat;
 //# sourceMappingURL=concat.js.map
 
 /***/ }),
-/* 450 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var concatAll_1 = __webpack_require__(680);
-Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
-//# sourceMappingURL=concatAll.js.map
-
-/***/ }),
-/* 451 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var concatMap_1 = __webpack_require__(681);
-Observable_1.Observable.prototype.concatMap = concatMap_1.concatMap;
-//# sourceMappingURL=concatMap.js.map
-
-/***/ }),
-/* 452 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var concatMapTo_1 = __webpack_require__(576);
-Observable_1.Observable.prototype.concatMapTo = concatMapTo_1.concatMapTo;
-//# sourceMappingURL=concatMapTo.js.map
-
-/***/ }),
-/* 453 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var count_1 = __webpack_require__(577);
-Observable_1.Observable.prototype.count = count_1.count;
-//# sourceMappingURL=count.js.map
-
-/***/ }),
 /* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var debounce_1 = __webpack_require__(578);
-Observable_1.Observable.prototype.debounce = debounce_1.debounce;
-//# sourceMappingURL=debounce.js.map
+var concatAll_1 = __webpack_require__(686);
+Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
+//# sourceMappingURL=concatAll.js.map
 
 /***/ }),
 /* 455 */
@@ -44135,9 +44264,9 @@ Observable_1.Observable.prototype.debounce = debounce_1.debounce;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var defaultIfEmpty_1 = __webpack_require__(580);
-Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmpty;
-//# sourceMappingURL=defaultIfEmpty.js.map
+var concatMap_1 = __webpack_require__(687);
+Observable_1.Observable.prototype.concatMap = concatMap_1.concatMap;
+//# sourceMappingURL=concatMap.js.map
 
 /***/ }),
 /* 456 */
@@ -44146,9 +44275,9 @@ Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmp
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var delay_1 = __webpack_require__(581);
-Observable_1.Observable.prototype.delay = delay_1.delay;
-//# sourceMappingURL=delay.js.map
+var concatMapTo_1 = __webpack_require__(580);
+Observable_1.Observable.prototype.concatMapTo = concatMapTo_1.concatMapTo;
+//# sourceMappingURL=concatMapTo.js.map
 
 /***/ }),
 /* 457 */
@@ -44157,9 +44286,9 @@ Observable_1.Observable.prototype.delay = delay_1.delay;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var delayWhen_1 = __webpack_require__(582);
-Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
-//# sourceMappingURL=delayWhen.js.map
+var count_1 = __webpack_require__(581);
+Observable_1.Observable.prototype.count = count_1.count;
+//# sourceMappingURL=count.js.map
 
 /***/ }),
 /* 458 */
@@ -44168,9 +44297,9 @@ Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var dematerialize_1 = __webpack_require__(583);
-Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
-//# sourceMappingURL=dematerialize.js.map
+var debounce_1 = __webpack_require__(582);
+Observable_1.Observable.prototype.debounce = debounce_1.debounce;
+//# sourceMappingURL=debounce.js.map
 
 /***/ }),
 /* 459 */
@@ -44179,9 +44308,9 @@ Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var distinct_1 = __webpack_require__(584);
-Observable_1.Observable.prototype.distinct = distinct_1.distinct;
-//# sourceMappingURL=distinct.js.map
+var defaultIfEmpty_1 = __webpack_require__(584);
+Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmpty;
+//# sourceMappingURL=defaultIfEmpty.js.map
 
 /***/ }),
 /* 460 */
@@ -44190,9 +44319,9 @@ Observable_1.Observable.prototype.distinct = distinct_1.distinct;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var distinctUntilKeyChanged_1 = __webpack_require__(585);
-Observable_1.Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChanged_1.distinctUntilKeyChanged;
-//# sourceMappingURL=distinctUntilKeyChanged.js.map
+var delay_1 = __webpack_require__(585);
+Observable_1.Observable.prototype.delay = delay_1.delay;
+//# sourceMappingURL=delay.js.map
 
 /***/ }),
 /* 461 */
@@ -44201,10 +44330,9 @@ Observable_1.Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChan
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var do_1 = __webpack_require__(586);
-Observable_1.Observable.prototype.do = do_1._do;
-Observable_1.Observable.prototype._do = do_1._do;
-//# sourceMappingURL=do.js.map
+var delayWhen_1 = __webpack_require__(586);
+Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
+//# sourceMappingURL=delayWhen.js.map
 
 /***/ }),
 /* 462 */
@@ -44213,9 +44341,9 @@ Observable_1.Observable.prototype._do = do_1._do;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var elementAt_1 = __webpack_require__(587);
-Observable_1.Observable.prototype.elementAt = elementAt_1.elementAt;
-//# sourceMappingURL=elementAt.js.map
+var dematerialize_1 = __webpack_require__(587);
+Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
+//# sourceMappingURL=dematerialize.js.map
 
 /***/ }),
 /* 463 */
@@ -44224,9 +44352,9 @@ Observable_1.Observable.prototype.elementAt = elementAt_1.elementAt;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var every_1 = __webpack_require__(682);
-Observable_1.Observable.prototype.every = every_1.every;
-//# sourceMappingURL=every.js.map
+var distinct_1 = __webpack_require__(588);
+Observable_1.Observable.prototype.distinct = distinct_1.distinct;
+//# sourceMappingURL=distinct.js.map
 
 /***/ }),
 /* 464 */
@@ -44235,9 +44363,9 @@ Observable_1.Observable.prototype.every = every_1.every;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var exhaust_1 = __webpack_require__(588);
-Observable_1.Observable.prototype.exhaust = exhaust_1.exhaust;
-//# sourceMappingURL=exhaust.js.map
+var distinctUntilKeyChanged_1 = __webpack_require__(589);
+Observable_1.Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChanged_1.distinctUntilKeyChanged;
+//# sourceMappingURL=distinctUntilKeyChanged.js.map
 
 /***/ }),
 /* 465 */
@@ -44246,9 +44374,10 @@ Observable_1.Observable.prototype.exhaust = exhaust_1.exhaust;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var exhaustMap_1 = __webpack_require__(589);
-Observable_1.Observable.prototype.exhaustMap = exhaustMap_1.exhaustMap;
-//# sourceMappingURL=exhaustMap.js.map
+var do_1 = __webpack_require__(590);
+Observable_1.Observable.prototype.do = do_1._do;
+Observable_1.Observable.prototype._do = do_1._do;
+//# sourceMappingURL=do.js.map
 
 /***/ }),
 /* 466 */
@@ -44257,9 +44386,9 @@ Observable_1.Observable.prototype.exhaustMap = exhaustMap_1.exhaustMap;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var expand_1 = __webpack_require__(590);
-Observable_1.Observable.prototype.expand = expand_1.expand;
-//# sourceMappingURL=expand.js.map
+var elementAt_1 = __webpack_require__(591);
+Observable_1.Observable.prototype.elementAt = elementAt_1.elementAt;
+//# sourceMappingURL=elementAt.js.map
 
 /***/ }),
 /* 467 */
@@ -44268,13 +44397,57 @@ Observable_1.Observable.prototype.expand = expand_1.expand;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var finally_1 = __webpack_require__(591);
+var every_1 = __webpack_require__(688);
+Observable_1.Observable.prototype.every = every_1.every;
+//# sourceMappingURL=every.js.map
+
+/***/ }),
+/* 468 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var exhaust_1 = __webpack_require__(592);
+Observable_1.Observable.prototype.exhaust = exhaust_1.exhaust;
+//# sourceMappingURL=exhaust.js.map
+
+/***/ }),
+/* 469 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var exhaustMap_1 = __webpack_require__(593);
+Observable_1.Observable.prototype.exhaustMap = exhaustMap_1.exhaustMap;
+//# sourceMappingURL=exhaustMap.js.map
+
+/***/ }),
+/* 470 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var expand_1 = __webpack_require__(594);
+Observable_1.Observable.prototype.expand = expand_1.expand;
+//# sourceMappingURL=expand.js.map
+
+/***/ }),
+/* 471 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var finally_1 = __webpack_require__(595);
 Observable_1.Observable.prototype.finally = finally_1._finally;
 Observable_1.Observable.prototype._finally = finally_1._finally;
 //# sourceMappingURL=finally.js.map
 
 /***/ }),
-/* 468 */
+/* 472 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44285,59 +44458,15 @@ Observable_1.Observable.prototype.find = find_1.find;
 //# sourceMappingURL=find.js.map
 
 /***/ }),
-/* 469 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var findIndex_1 = __webpack_require__(592);
-Observable_1.Observable.prototype.findIndex = findIndex_1.findIndex;
-//# sourceMappingURL=findIndex.js.map
-
-/***/ }),
-/* 470 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var first_1 = __webpack_require__(683);
-Observable_1.Observable.prototype.first = first_1.first;
-//# sourceMappingURL=first.js.map
-
-/***/ }),
-/* 471 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var groupBy_1 = __webpack_require__(593);
-Observable_1.Observable.prototype.groupBy = groupBy_1.groupBy;
-//# sourceMappingURL=groupBy.js.map
-
-/***/ }),
-/* 472 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var ignoreElements_1 = __webpack_require__(594);
-Observable_1.Observable.prototype.ignoreElements = ignoreElements_1.ignoreElements;
-//# sourceMappingURL=ignoreElements.js.map
-
-/***/ }),
 /* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var isEmpty_1 = __webpack_require__(595);
-Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
-//# sourceMappingURL=isEmpty.js.map
+var findIndex_1 = __webpack_require__(596);
+Observable_1.Observable.prototype.findIndex = findIndex_1.findIndex;
+//# sourceMappingURL=findIndex.js.map
 
 /***/ }),
 /* 474 */
@@ -44346,9 +44475,9 @@ Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var last_1 = __webpack_require__(689);
-Observable_1.Observable.prototype.last = last_1.last;
-//# sourceMappingURL=last.js.map
+var first_1 = __webpack_require__(689);
+Observable_1.Observable.prototype.first = first_1.first;
+//# sourceMappingURL=first.js.map
 
 /***/ }),
 /* 475 */
@@ -44357,10 +44486,9 @@ Observable_1.Observable.prototype.last = last_1.last;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var let_1 = __webpack_require__(596);
-Observable_1.Observable.prototype.let = let_1.letProto;
-Observable_1.Observable.prototype.letBind = let_1.letProto;
-//# sourceMappingURL=let.js.map
+var groupBy_1 = __webpack_require__(597);
+Observable_1.Observable.prototype.groupBy = groupBy_1.groupBy;
+//# sourceMappingURL=groupBy.js.map
 
 /***/ }),
 /* 476 */
@@ -44369,9 +44497,9 @@ Observable_1.Observable.prototype.letBind = let_1.letProto;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var mapTo_1 = __webpack_require__(597);
-Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
-//# sourceMappingURL=mapTo.js.map
+var ignoreElements_1 = __webpack_require__(598);
+Observable_1.Observable.prototype.ignoreElements = ignoreElements_1.ignoreElements;
+//# sourceMappingURL=ignoreElements.js.map
 
 /***/ }),
 /* 477 */
@@ -44380,9 +44508,9 @@ Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var materialize_1 = __webpack_require__(598);
-Observable_1.Observable.prototype.materialize = materialize_1.materialize;
-//# sourceMappingURL=materialize.js.map
+var isEmpty_1 = __webpack_require__(599);
+Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
+//# sourceMappingURL=isEmpty.js.map
 
 /***/ }),
 /* 478 */
@@ -44391,12 +44519,57 @@ Observable_1.Observable.prototype.materialize = materialize_1.materialize;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var max_1 = __webpack_require__(599);
+var last_1 = __webpack_require__(695);
+Observable_1.Observable.prototype.last = last_1.last;
+//# sourceMappingURL=last.js.map
+
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var let_1 = __webpack_require__(600);
+Observable_1.Observable.prototype.let = let_1.letProto;
+Observable_1.Observable.prototype.letBind = let_1.letProto;
+//# sourceMappingURL=let.js.map
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var mapTo_1 = __webpack_require__(601);
+Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
+//# sourceMappingURL=mapTo.js.map
+
+/***/ }),
+/* 481 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var materialize_1 = __webpack_require__(602);
+Observable_1.Observable.prototype.materialize = materialize_1.materialize;
+//# sourceMappingURL=materialize.js.map
+
+/***/ }),
+/* 482 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var max_1 = __webpack_require__(603);
 Observable_1.Observable.prototype.max = max_1.max;
 //# sourceMappingURL=max.js.map
 
 /***/ }),
-/* 479 */
+/* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44407,7 +44580,7 @@ Observable_1.Observable.prototype.merge = merge_1.merge;
 //# sourceMappingURL=merge.js.map
 
 /***/ }),
-/* 480 */
+/* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44418,7 +44591,7 @@ Observable_1.Observable.prototype.mergeAll = mergeAll_1.mergeAll;
 //# sourceMappingURL=mergeAll.js.map
 
 /***/ }),
-/* 481 */
+/* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44430,29 +44603,29 @@ Observable_1.Observable.prototype.mergeMapTo = mergeMapTo_1.mergeMapTo;
 //# sourceMappingURL=mergeMapTo.js.map
 
 /***/ }),
-/* 482 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var mergeScan_1 = __webpack_require__(600);
+var mergeScan_1 = __webpack_require__(604);
 Observable_1.Observable.prototype.mergeScan = mergeScan_1.mergeScan;
 //# sourceMappingURL=mergeScan.js.map
 
 /***/ }),
-/* 483 */
+/* 487 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var min_1 = __webpack_require__(601);
+var min_1 = __webpack_require__(605);
 Observable_1.Observable.prototype.min = min_1.min;
 //# sourceMappingURL=min.js.map
 
 /***/ }),
-/* 484 */
+/* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44463,7 +44636,7 @@ Observable_1.Observable.prototype.multicast = multicast_1.multicast;
 //# sourceMappingURL=multicast.js.map
 
 /***/ }),
-/* 485 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44474,7 +44647,7 @@ Observable_1.Observable.prototype.observeOn = observeOn_1.observeOn;
 //# sourceMappingURL=observeOn.js.map
 
 /***/ }),
-/* 486 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44485,59 +44658,15 @@ Observable_1.Observable.prototype.onErrorResumeNext = onErrorResumeNext_1.onErro
 //# sourceMappingURL=onErrorResumeNext.js.map
 
 /***/ }),
-/* 487 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var pairwise_1 = __webpack_require__(602);
-Observable_1.Observable.prototype.pairwise = pairwise_1.pairwise;
-//# sourceMappingURL=pairwise.js.map
-
-/***/ }),
-/* 488 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var partition_1 = __webpack_require__(603);
-Observable_1.Observable.prototype.partition = partition_1.partition;
-//# sourceMappingURL=partition.js.map
-
-/***/ }),
-/* 489 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var pluck_1 = __webpack_require__(604);
-Observable_1.Observable.prototype.pluck = pluck_1.pluck;
-//# sourceMappingURL=pluck.js.map
-
-/***/ }),
-/* 490 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var publish_1 = __webpack_require__(605);
-Observable_1.Observable.prototype.publish = publish_1.publish;
-//# sourceMappingURL=publish.js.map
-
-/***/ }),
 /* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var publishBehavior_1 = __webpack_require__(606);
-Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBehavior;
-//# sourceMappingURL=publishBehavior.js.map
+var pairwise_1 = __webpack_require__(606);
+Observable_1.Observable.prototype.pairwise = pairwise_1.pairwise;
+//# sourceMappingURL=pairwise.js.map
 
 /***/ }),
 /* 492 */
@@ -44546,9 +44675,9 @@ Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBeh
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var publishLast_1 = __webpack_require__(607);
-Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
-//# sourceMappingURL=publishLast.js.map
+var partition_1 = __webpack_require__(607);
+Observable_1.Observable.prototype.partition = partition_1.partition;
+//# sourceMappingURL=partition.js.map
 
 /***/ }),
 /* 493 */
@@ -44557,12 +44686,56 @@ Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var publishReplay_1 = __webpack_require__(608);
+var pluck_1 = __webpack_require__(608);
+Observable_1.Observable.prototype.pluck = pluck_1.pluck;
+//# sourceMappingURL=pluck.js.map
+
+/***/ }),
+/* 494 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var publish_1 = __webpack_require__(609);
+Observable_1.Observable.prototype.publish = publish_1.publish;
+//# sourceMappingURL=publish.js.map
+
+/***/ }),
+/* 495 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var publishBehavior_1 = __webpack_require__(610);
+Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBehavior;
+//# sourceMappingURL=publishBehavior.js.map
+
+/***/ }),
+/* 496 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var publishLast_1 = __webpack_require__(611);
+Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
+//# sourceMappingURL=publishLast.js.map
+
+/***/ }),
+/* 497 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var publishReplay_1 = __webpack_require__(612);
 Observable_1.Observable.prototype.publishReplay = publishReplay_1.publishReplay;
 //# sourceMappingURL=publishReplay.js.map
 
 /***/ }),
-/* 494 */
+/* 498 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44573,7 +44746,7 @@ Observable_1.Observable.prototype.race = race_1.race;
 //# sourceMappingURL=race.js.map
 
 /***/ }),
-/* 495 */
+/* 499 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44584,59 +44757,15 @@ Observable_1.Observable.prototype.reduce = reduce_1.reduce;
 //# sourceMappingURL=reduce.js.map
 
 /***/ }),
-/* 496 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var repeat_1 = __webpack_require__(609);
-Observable_1.Observable.prototype.repeat = repeat_1.repeat;
-//# sourceMappingURL=repeat.js.map
-
-/***/ }),
-/* 497 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var repeatWhen_1 = __webpack_require__(610);
-Observable_1.Observable.prototype.repeatWhen = repeatWhen_1.repeatWhen;
-//# sourceMappingURL=repeatWhen.js.map
-
-/***/ }),
-/* 498 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var retry_1 = __webpack_require__(611);
-Observable_1.Observable.prototype.retry = retry_1.retry;
-//# sourceMappingURL=retry.js.map
-
-/***/ }),
-/* 499 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var retryWhen_1 = __webpack_require__(612);
-Observable_1.Observable.prototype.retryWhen = retryWhen_1.retryWhen;
-//# sourceMappingURL=retryWhen.js.map
-
-/***/ }),
 /* 500 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var sample_1 = __webpack_require__(613);
-Observable_1.Observable.prototype.sample = sample_1.sample;
-//# sourceMappingURL=sample.js.map
+var repeat_1 = __webpack_require__(613);
+Observable_1.Observable.prototype.repeat = repeat_1.repeat;
+//# sourceMappingURL=repeat.js.map
 
 /***/ }),
 /* 501 */
@@ -44645,9 +44774,9 @@ Observable_1.Observable.prototype.sample = sample_1.sample;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var sampleTime_1 = __webpack_require__(614);
-Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
-//# sourceMappingURL=sampleTime.js.map
+var repeatWhen_1 = __webpack_require__(614);
+Observable_1.Observable.prototype.repeatWhen = repeatWhen_1.repeatWhen;
+//# sourceMappingURL=repeatWhen.js.map
 
 /***/ }),
 /* 502 */
@@ -44656,9 +44785,9 @@ Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var scan_1 = __webpack_require__(615);
-Observable_1.Observable.prototype.scan = scan_1.scan;
-//# sourceMappingURL=scan.js.map
+var retry_1 = __webpack_require__(615);
+Observable_1.Observable.prototype.retry = retry_1.retry;
+//# sourceMappingURL=retry.js.map
 
 /***/ }),
 /* 503 */
@@ -44667,9 +44796,9 @@ Observable_1.Observable.prototype.scan = scan_1.scan;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var sequenceEqual_1 = __webpack_require__(616);
-Observable_1.Observable.prototype.sequenceEqual = sequenceEqual_1.sequenceEqual;
-//# sourceMappingURL=sequenceEqual.js.map
+var retryWhen_1 = __webpack_require__(616);
+Observable_1.Observable.prototype.retryWhen = retryWhen_1.retryWhen;
+//# sourceMappingURL=retryWhen.js.map
 
 /***/ }),
 /* 504 */
@@ -44678,9 +44807,9 @@ Observable_1.Observable.prototype.sequenceEqual = sequenceEqual_1.sequenceEqual;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var share_1 = __webpack_require__(617);
-Observable_1.Observable.prototype.share = share_1.share;
-//# sourceMappingURL=share.js.map
+var sample_1 = __webpack_require__(617);
+Observable_1.Observable.prototype.sample = sample_1.sample;
+//# sourceMappingURL=sample.js.map
 
 /***/ }),
 /* 505 */
@@ -44689,9 +44818,9 @@ Observable_1.Observable.prototype.share = share_1.share;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var single_1 = __webpack_require__(618);
-Observable_1.Observable.prototype.single = single_1.single;
-//# sourceMappingURL=single.js.map
+var sampleTime_1 = __webpack_require__(618);
+Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
+//# sourceMappingURL=sampleTime.js.map
 
 /***/ }),
 /* 506 */
@@ -44700,9 +44829,9 @@ Observable_1.Observable.prototype.single = single_1.single;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var skip_1 = __webpack_require__(619);
-Observable_1.Observable.prototype.skip = skip_1.skip;
-//# sourceMappingURL=skip.js.map
+var scan_1 = __webpack_require__(619);
+Observable_1.Observable.prototype.scan = scan_1.scan;
+//# sourceMappingURL=scan.js.map
 
 /***/ }),
 /* 507 */
@@ -44711,9 +44840,9 @@ Observable_1.Observable.prototype.skip = skip_1.skip;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var skipUntil_1 = __webpack_require__(620);
-Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
-//# sourceMappingURL=skipUntil.js.map
+var sequenceEqual_1 = __webpack_require__(620);
+Observable_1.Observable.prototype.sequenceEqual = sequenceEqual_1.sequenceEqual;
+//# sourceMappingURL=sequenceEqual.js.map
 
 /***/ }),
 /* 508 */
@@ -44722,9 +44851,9 @@ Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var skipWhile_1 = __webpack_require__(621);
-Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
-//# sourceMappingURL=skipWhile.js.map
+var share_1 = __webpack_require__(621);
+Observable_1.Observable.prototype.share = share_1.share;
+//# sourceMappingURL=share.js.map
 
 /***/ }),
 /* 509 */
@@ -44733,9 +44862,9 @@ Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var startWith_1 = __webpack_require__(622);
-Observable_1.Observable.prototype.startWith = startWith_1.startWith;
-//# sourceMappingURL=startWith.js.map
+var single_1 = __webpack_require__(622);
+Observable_1.Observable.prototype.single = single_1.single;
+//# sourceMappingURL=single.js.map
 
 /***/ }),
 /* 510 */
@@ -44744,9 +44873,9 @@ Observable_1.Observable.prototype.startWith = startWith_1.startWith;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var subscribeOn_1 = __webpack_require__(623);
-Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
-//# sourceMappingURL=subscribeOn.js.map
+var skip_1 = __webpack_require__(623);
+Observable_1.Observable.prototype.skip = skip_1.skip;
+//# sourceMappingURL=skip.js.map
 
 /***/ }),
 /* 511 */
@@ -44755,10 +44884,9 @@ Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var switch_1 = __webpack_require__(624);
-Observable_1.Observable.prototype.switch = switch_1._switch;
-Observable_1.Observable.prototype._switch = switch_1._switch;
-//# sourceMappingURL=switch.js.map
+var skipUntil_1 = __webpack_require__(624);
+Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
+//# sourceMappingURL=skipUntil.js.map
 
 /***/ }),
 /* 512 */
@@ -44767,9 +44895,9 @@ Observable_1.Observable.prototype._switch = switch_1._switch;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var switchMapTo_1 = __webpack_require__(626);
-Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
-//# sourceMappingURL=switchMapTo.js.map
+var skipWhile_1 = __webpack_require__(625);
+Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
+//# sourceMappingURL=skipWhile.js.map
 
 /***/ }),
 /* 513 */
@@ -44778,9 +44906,9 @@ Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var take_1 = __webpack_require__(627);
-Observable_1.Observable.prototype.take = take_1.take;
-//# sourceMappingURL=take.js.map
+var startWith_1 = __webpack_require__(626);
+Observable_1.Observable.prototype.startWith = startWith_1.startWith;
+//# sourceMappingURL=startWith.js.map
 
 /***/ }),
 /* 514 */
@@ -44789,9 +44917,9 @@ Observable_1.Observable.prototype.take = take_1.take;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var takeLast_1 = __webpack_require__(628);
-Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
-//# sourceMappingURL=takeLast.js.map
+var subscribeOn_1 = __webpack_require__(627);
+Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
+//# sourceMappingURL=subscribeOn.js.map
 
 /***/ }),
 /* 515 */
@@ -44800,9 +44928,10 @@ Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var takeUntil_1 = __webpack_require__(629);
-Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
-//# sourceMappingURL=takeUntil.js.map
+var switch_1 = __webpack_require__(628);
+Observable_1.Observable.prototype.switch = switch_1._switch;
+Observable_1.Observable.prototype._switch = switch_1._switch;
+//# sourceMappingURL=switch.js.map
 
 /***/ }),
 /* 516 */
@@ -44811,9 +44940,9 @@ Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var takeWhile_1 = __webpack_require__(630);
-Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
-//# sourceMappingURL=takeWhile.js.map
+var switchMapTo_1 = __webpack_require__(630);
+Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
+//# sourceMappingURL=switchMapTo.js.map
 
 /***/ }),
 /* 517 */
@@ -44822,9 +44951,9 @@ Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var throttle_1 = __webpack_require__(631);
-Observable_1.Observable.prototype.throttle = throttle_1.throttle;
-//# sourceMappingURL=throttle.js.map
+var take_1 = __webpack_require__(631);
+Observable_1.Observable.prototype.take = take_1.take;
+//# sourceMappingURL=take.js.map
 
 /***/ }),
 /* 518 */
@@ -44833,12 +44962,56 @@ Observable_1.Observable.prototype.throttle = throttle_1.throttle;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var throttleTime_1 = __webpack_require__(632);
+var takeLast_1 = __webpack_require__(632);
+Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
+//# sourceMappingURL=takeLast.js.map
+
+/***/ }),
+/* 519 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var takeUntil_1 = __webpack_require__(633);
+Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
+//# sourceMappingURL=takeUntil.js.map
+
+/***/ }),
+/* 520 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var takeWhile_1 = __webpack_require__(634);
+Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
+//# sourceMappingURL=takeWhile.js.map
+
+/***/ }),
+/* 521 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var throttle_1 = __webpack_require__(635);
+Observable_1.Observable.prototype.throttle = throttle_1.throttle;
+//# sourceMappingURL=throttle.js.map
+
+/***/ }),
+/* 522 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var throttleTime_1 = __webpack_require__(636);
 Observable_1.Observable.prototype.throttleTime = throttleTime_1.throttleTime;
 //# sourceMappingURL=throttleTime.js.map
 
 /***/ }),
-/* 519 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44849,29 +45022,29 @@ Observable_1.Observable.prototype.timeInterval = timeInterval_1.timeInterval;
 //# sourceMappingURL=timeInterval.js.map
 
 /***/ }),
-/* 520 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var timeout_1 = __webpack_require__(633);
+var timeout_1 = __webpack_require__(637);
 Observable_1.Observable.prototype.timeout = timeout_1.timeout;
 //# sourceMappingURL=timeout.js.map
 
 /***/ }),
-/* 521 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var timeoutWith_1 = __webpack_require__(634);
+var timeoutWith_1 = __webpack_require__(638);
 Observable_1.Observable.prototype.timeoutWith = timeoutWith_1.timeoutWith;
 //# sourceMappingURL=timeoutWith.js.map
 
 /***/ }),
-/* 522 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44882,59 +45055,15 @@ Observable_1.Observable.prototype.timestamp = timestamp_1.timestamp;
 //# sourceMappingURL=timestamp.js.map
 
 /***/ }),
-/* 523 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var window_1 = __webpack_require__(636);
-Observable_1.Observable.prototype.window = window_1.window;
-//# sourceMappingURL=window.js.map
-
-/***/ }),
-/* 524 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var windowCount_1 = __webpack_require__(637);
-Observable_1.Observable.prototype.windowCount = windowCount_1.windowCount;
-//# sourceMappingURL=windowCount.js.map
-
-/***/ }),
-/* 525 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var windowTime_1 = __webpack_require__(638);
-Observable_1.Observable.prototype.windowTime = windowTime_1.windowTime;
-//# sourceMappingURL=windowTime.js.map
-
-/***/ }),
-/* 526 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var windowToggle_1 = __webpack_require__(639);
-Observable_1.Observable.prototype.windowToggle = windowToggle_1.windowToggle;
-//# sourceMappingURL=windowToggle.js.map
-
-/***/ }),
 /* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var windowWhen_1 = __webpack_require__(640);
-Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
-//# sourceMappingURL=windowWhen.js.map
+var window_1 = __webpack_require__(640);
+Observable_1.Observable.prototype.window = window_1.window;
+//# sourceMappingURL=window.js.map
 
 /***/ }),
 /* 528 */
@@ -44943,12 +45072,56 @@ Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var withLatestFrom_1 = __webpack_require__(641);
+var windowCount_1 = __webpack_require__(641);
+Observable_1.Observable.prototype.windowCount = windowCount_1.windowCount;
+//# sourceMappingURL=windowCount.js.map
+
+/***/ }),
+/* 529 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var windowTime_1 = __webpack_require__(642);
+Observable_1.Observable.prototype.windowTime = windowTime_1.windowTime;
+//# sourceMappingURL=windowTime.js.map
+
+/***/ }),
+/* 530 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var windowToggle_1 = __webpack_require__(643);
+Observable_1.Observable.prototype.windowToggle = windowToggle_1.windowToggle;
+//# sourceMappingURL=windowToggle.js.map
+
+/***/ }),
+/* 531 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var windowWhen_1 = __webpack_require__(644);
+Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
+//# sourceMappingURL=windowWhen.js.map
+
+/***/ }),
+/* 532 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var withLatestFrom_1 = __webpack_require__(645);
 Observable_1.Observable.prototype.withLatestFrom = withLatestFrom_1.withLatestFrom;
 //# sourceMappingURL=withLatestFrom.js.map
 
 /***/ }),
-/* 529 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44959,18 +45132,18 @@ Observable_1.Observable.prototype.zip = zip_1.zipProto;
 //# sourceMappingURL=zip.js.map
 
 /***/ }),
-/* 530 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var zipAll_1 = __webpack_require__(642);
+var zipAll_1 = __webpack_require__(646);
 Observable_1.Observable.prototype.zipAll = zipAll_1.zipAll;
 //# sourceMappingURL=zipAll.js.map
 
 /***/ }),
-/* 531 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45244,7 +45417,7 @@ function dispatchError(arg) {
 //# sourceMappingURL=BoundCallbackObservable.js.map
 
 /***/ }),
-/* 532 */
+/* 536 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45513,7 +45686,7 @@ function dispatchError(arg) {
 //# sourceMappingURL=BoundNodeCallbackObservable.js.map
 
 /***/ }),
-/* 533 */
+/* 537 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45618,7 +45791,7 @@ var DeferSubscriber = (function (_super) {
 //# sourceMappingURL=DeferObservable.js.map
 
 /***/ }),
-/* 534 */
+/* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45706,7 +45879,7 @@ exports.ErrorObservable = ErrorObservable;
 //# sourceMappingURL=ErrorObservable.js.map
 
 /***/ }),
-/* 535 */
+/* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45824,7 +45997,7 @@ var ForkJoinSubscriber = (function (_super) {
 //# sourceMappingURL=ForkJoinObservable.js.map
 
 /***/ }),
-/* 536 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45970,7 +46143,7 @@ exports.FromEventObservable = FromEventObservable;
 //# sourceMappingURL=FromEventObservable.js.map
 
 /***/ }),
-/* 537 */
+/* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46089,7 +46262,7 @@ exports.FromEventPatternObservable = FromEventPatternObservable;
 //# sourceMappingURL=FromEventPatternObservable.js.map
 
 /***/ }),
-/* 538 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46230,7 +46403,7 @@ exports.GenerateObservable = GenerateObservable;
 //# sourceMappingURL=GenerateObservable.js.map
 
 /***/ }),
-/* 539 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46297,7 +46470,7 @@ var IfSubscriber = (function (_super) {
 //# sourceMappingURL=IfObservable.js.map
 
 /***/ }),
-/* 540 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46391,7 +46564,7 @@ exports.IntervalObservable = IntervalObservable;
 //# sourceMappingURL=IntervalObservable.js.map
 
 /***/ }),
-/* 541 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46456,7 +46629,7 @@ exports.NeverObservable = NeverObservable;
 //# sourceMappingURL=NeverObservable.js.map
 
 /***/ }),
-/* 542 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46547,7 +46720,7 @@ exports.PairsObservable = PairsObservable;
 //# sourceMappingURL=PairsObservable.js.map
 
 /***/ }),
-/* 543 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46649,7 +46822,7 @@ exports.RangeObservable = RangeObservable;
 //# sourceMappingURL=RangeObservable.js.map
 
 /***/ }),
-/* 544 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46706,7 +46879,7 @@ exports.SubscribeOnObservable = SubscribeOnObservable;
 //# sourceMappingURL=SubscribeOnObservable.js.map
 
 /***/ }),
-/* 545 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46773,27 +46946,27 @@ var UsingSubscriber = (function (_super) {
 //# sourceMappingURL=UsingObservable.js.map
 
 /***/ }),
-/* 546 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var BoundCallbackObservable_1 = __webpack_require__(531);
+var BoundCallbackObservable_1 = __webpack_require__(535);
 exports.bindCallback = BoundCallbackObservable_1.BoundCallbackObservable.create;
 //# sourceMappingURL=bindCallback.js.map
 
 /***/ }),
-/* 547 */
+/* 551 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var BoundNodeCallbackObservable_1 = __webpack_require__(532);
+var BoundNodeCallbackObservable_1 = __webpack_require__(536);
 exports.bindNodeCallback = BoundNodeCallbackObservable_1.BoundNodeCallbackObservable.create;
 //# sourceMappingURL=bindNodeCallback.js.map
 
 /***/ }),
-/* 548 */
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46935,7 +47108,7 @@ exports.combineLatest = combineLatest;
 //# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
-/* 549 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46945,17 +47118,17 @@ exports.concat = concat_1.concatStatic;
 //# sourceMappingURL=concat.js.map
 
 /***/ }),
-/* 550 */
+/* 554 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var DeferObservable_1 = __webpack_require__(533);
+var DeferObservable_1 = __webpack_require__(537);
 exports.defer = DeferObservable_1.DeferObservable.create;
 //# sourceMappingURL=defer.js.map
 
 /***/ }),
-/* 551 */
+/* 555 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46973,7 +47146,7 @@ var root_1 = __webpack_require__(23);
 var ReplaySubject_1 = __webpack_require__(109);
 var tryCatch_1 = __webpack_require__(14);
 var errorObject_1 = __webpack_require__(13);
-var assign_1 = __webpack_require__(660);
+var assign_1 = __webpack_require__(664);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -47209,7 +47382,7 @@ exports.WebSocketSubject = WebSocketSubject;
 //# sourceMappingURL=WebSocketSubject.js.map
 
 /***/ }),
-/* 552 */
+/* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47219,17 +47392,17 @@ exports.ajax = AjaxObservable_1.AjaxObservable.create;
 //# sourceMappingURL=ajax.js.map
 
 /***/ }),
-/* 553 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var WebSocketSubject_1 = __webpack_require__(551);
+var WebSocketSubject_1 = __webpack_require__(555);
 exports.webSocket = WebSocketSubject_1.WebSocketSubject.create;
 //# sourceMappingURL=webSocket.js.map
 
 /***/ }),
-/* 554 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47239,57 +47412,57 @@ exports.empty = EmptyObservable_1.EmptyObservable.create;
 //# sourceMappingURL=empty.js.map
 
 /***/ }),
-/* 555 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var ForkJoinObservable_1 = __webpack_require__(535);
-exports.forkJoin = ForkJoinObservable_1.ForkJoinObservable.create;
-//# sourceMappingURL=forkJoin.js.map
-
-/***/ }),
-/* 556 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var FromEventObservable_1 = __webpack_require__(536);
-exports.fromEvent = FromEventObservable_1.FromEventObservable.create;
-//# sourceMappingURL=fromEvent.js.map
-
-/***/ }),
-/* 557 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var FromEventPatternObservable_1 = __webpack_require__(537);
-exports.fromEventPattern = FromEventPatternObservable_1.FromEventPatternObservable.create;
-//# sourceMappingURL=fromEventPattern.js.map
-
-/***/ }),
-/* 558 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var IfObservable_1 = __webpack_require__(539);
-exports._if = IfObservable_1.IfObservable.create;
-//# sourceMappingURL=if.js.map
-
-/***/ }),
 /* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var IntervalObservable_1 = __webpack_require__(540);
+var ForkJoinObservable_1 = __webpack_require__(539);
+exports.forkJoin = ForkJoinObservable_1.ForkJoinObservable.create;
+//# sourceMappingURL=forkJoin.js.map
+
+/***/ }),
+/* 560 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var FromEventObservable_1 = __webpack_require__(540);
+exports.fromEvent = FromEventObservable_1.FromEventObservable.create;
+//# sourceMappingURL=fromEvent.js.map
+
+/***/ }),
+/* 561 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var FromEventPatternObservable_1 = __webpack_require__(541);
+exports.fromEventPattern = FromEventPatternObservable_1.FromEventPatternObservable.create;
+//# sourceMappingURL=fromEventPattern.js.map
+
+/***/ }),
+/* 562 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var IfObservable_1 = __webpack_require__(543);
+exports._if = IfObservable_1.IfObservable.create;
+//# sourceMappingURL=if.js.map
+
+/***/ }),
+/* 563 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var IntervalObservable_1 = __webpack_require__(544);
 exports.interval = IntervalObservable_1.IntervalObservable.create;
 //# sourceMappingURL=interval.js.map
 
 /***/ }),
-/* 560 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47299,47 +47472,47 @@ exports.merge = merge_1.mergeStatic;
 //# sourceMappingURL=merge.js.map
 
 /***/ }),
-/* 561 */
+/* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var NeverObservable_1 = __webpack_require__(541);
+var NeverObservable_1 = __webpack_require__(545);
 exports.never = NeverObservable_1.NeverObservable.create;
 //# sourceMappingURL=never.js.map
 
 /***/ }),
-/* 562 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var PairsObservable_1 = __webpack_require__(542);
+var PairsObservable_1 = __webpack_require__(546);
 exports.pairs = PairsObservable_1.PairsObservable.create;
 //# sourceMappingURL=pairs.js.map
 
 /***/ }),
-/* 563 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var RangeObservable_1 = __webpack_require__(543);
+var RangeObservable_1 = __webpack_require__(547);
 exports.range = RangeObservable_1.RangeObservable.create;
 //# sourceMappingURL=range.js.map
 
 /***/ }),
-/* 564 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ErrorObservable_1 = __webpack_require__(534);
+var ErrorObservable_1 = __webpack_require__(538);
 exports._throw = ErrorObservable_1.ErrorObservable.create;
 //# sourceMappingURL=throw.js.map
 
 /***/ }),
-/* 565 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47349,17 +47522,17 @@ exports.timer = TimerObservable_1.TimerObservable.create;
 //# sourceMappingURL=timer.js.map
 
 /***/ }),
-/* 566 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var UsingObservable_1 = __webpack_require__(545);
+var UsingObservable_1 = __webpack_require__(549);
 exports.using = UsingObservable_1.UsingObservable.create;
 //# sourceMappingURL=using.js.map
 
 /***/ }),
-/* 567 */
+/* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47369,7 +47542,7 @@ exports.zip = zip_1.zipStatic;
 //# sourceMappingURL=zip.js.map
 
 /***/ }),
-/* 568 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47485,7 +47658,7 @@ var AuditSubscriber = (function (_super) {
 //# sourceMappingURL=audit.js.map
 
 /***/ }),
-/* 569 */
+/* 573 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47595,7 +47768,7 @@ function dispatchNext(subscriber) {
 //# sourceMappingURL=auditTime.js.map
 
 /***/ }),
-/* 570 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47677,7 +47850,7 @@ var BufferSubscriber = (function (_super) {
 //# sourceMappingURL=buffer.js.map
 
 /***/ }),
-/* 571 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47790,7 +47963,7 @@ var BufferCountSubscriber = (function (_super) {
 //# sourceMappingURL=bufferCount.js.map
 
 /***/ }),
-/* 572 */
+/* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47995,7 +48168,7 @@ function dispatchBufferClose(arg) {
 //# sourceMappingURL=bufferTime.js.map
 
 /***/ }),
-/* 573 */
+/* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48153,7 +48326,7 @@ var BufferToggleSubscriber = (function (_super) {
 //# sourceMappingURL=bufferToggle.js.map
 
 /***/ }),
-/* 574 */
+/* 578 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48281,7 +48454,7 @@ var BufferWhenSubscriber = (function (_super) {
 //# sourceMappingURL=bufferWhen.js.map
 
 /***/ }),
-/* 575 */
+/* 579 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48334,7 +48507,7 @@ exports.combineAll = combineAll;
 //# sourceMappingURL=combineAll.js.map
 
 /***/ }),
-/* 576 */
+/* 580 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48404,7 +48577,7 @@ exports.concatMapTo = concatMapTo;
 //# sourceMappingURL=concatMapTo.js.map
 
 /***/ }),
-/* 577 */
+/* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48521,7 +48694,7 @@ var CountSubscriber = (function (_super) {
 //# sourceMappingURL=count.js.map
 
 /***/ }),
-/* 578 */
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48654,7 +48827,7 @@ var DebounceSubscriber = (function (_super) {
 //# sourceMappingURL=debounce.js.map
 
 /***/ }),
-/* 579 */
+/* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48776,7 +48949,7 @@ function dispatchNext(subscriber) {
 //# sourceMappingURL=debounceTime.js.map
 
 /***/ }),
-/* 580 */
+/* 584 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48859,7 +49032,7 @@ var DefaultIfEmptySubscriber = (function (_super) {
 //# sourceMappingURL=defaultIfEmpty.js.map
 
 /***/ }),
-/* 581 */
+/* 585 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49000,7 +49173,7 @@ var DelayMessage = (function () {
 //# sourceMappingURL=delay.js.map
 
 /***/ }),
-/* 582 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49196,7 +49369,7 @@ var SubscriptionDelaySubscriber = (function (_super) {
 //# sourceMappingURL=delayWhen.js.map
 
 /***/ }),
-/* 583 */
+/* 587 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49277,7 +49450,7 @@ var DeMaterializeSubscriber = (function (_super) {
 //# sourceMappingURL=dematerialize.js.map
 
 /***/ }),
-/* 584 */
+/* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49289,7 +49462,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-var Set_1 = __webpack_require__(659);
+var Set_1 = __webpack_require__(663);
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from previous items.
  *
@@ -49403,7 +49576,7 @@ exports.DistinctSubscriber = DistinctSubscriber;
 //# sourceMappingURL=distinct.js.map
 
 /***/ }),
-/* 585 */
+/* 589 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49479,7 +49652,7 @@ exports.distinctUntilKeyChanged = distinctUntilKeyChanged;
 //# sourceMappingURL=distinctUntilKeyChanged.js.map
 
 /***/ }),
-/* 586 */
+/* 590 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49598,7 +49771,7 @@ var DoSubscriber = (function (_super) {
 //# sourceMappingURL=do.js.map
 
 /***/ }),
-/* 587 */
+/* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49704,7 +49877,7 @@ var ElementAtSubscriber = (function (_super) {
 //# sourceMappingURL=elementAt.js.map
 
 /***/ }),
-/* 588 */
+/* 592 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49799,7 +49972,7 @@ var SwitchFirstSubscriber = (function (_super) {
 //# sourceMappingURL=exhaust.js.map
 
 /***/ }),
-/* 589 */
+/* 593 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49943,7 +50116,7 @@ var SwitchFirstMapSubscriber = (function (_super) {
 //# sourceMappingURL=exhaustMap.js.map
 
 /***/ }),
-/* 590 */
+/* 594 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50100,7 +50273,7 @@ exports.ExpandSubscriber = ExpandSubscriber;
 //# sourceMappingURL=expand.js.map
 
 /***/ }),
-/* 591 */
+/* 595 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50149,7 +50322,7 @@ var FinallySubscriber = (function (_super) {
 //# sourceMappingURL=finally.js.map
 
 /***/ }),
-/* 592 */
+/* 596 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50196,7 +50369,7 @@ exports.findIndex = findIndex;
 //# sourceMappingURL=findIndex.js.map
 
 /***/ }),
-/* 593 */
+/* 597 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50210,8 +50383,8 @@ var Subscriber_1 = __webpack_require__(4);
 var Subscription_1 = __webpack_require__(12);
 var Observable_1 = __webpack_require__(0);
 var Subject_1 = __webpack_require__(10);
-var Map_1 = __webpack_require__(657);
-var FastMap_1 = __webpack_require__(655);
+var Map_1 = __webpack_require__(661);
+var FastMap_1 = __webpack_require__(659);
 /* tslint:enable:max-line-length */
 /**
  * Groups the items emitted by an Observable according to a specified criterion,
@@ -50437,7 +50610,7 @@ var InnerRefCountSubscription = (function (_super) {
 //# sourceMappingURL=groupBy.js.map
 
 /***/ }),
-/* 594 */
+/* 598 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50490,7 +50663,7 @@ var IgnoreElementsSubscriber = (function (_super) {
 //# sourceMappingURL=ignoreElements.js.map
 
 /***/ }),
-/* 595 */
+/* 599 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50548,7 +50721,7 @@ var IsEmptySubscriber = (function (_super) {
 //# sourceMappingURL=isEmpty.js.map
 
 /***/ }),
-/* 596 */
+/* 600 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50566,7 +50739,7 @@ exports.letProto = letProto;
 //# sourceMappingURL=let.js.map
 
 /***/ }),
-/* 597 */
+/* 601 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50635,7 +50808,7 @@ var MapToSubscriber = (function (_super) {
 //# sourceMappingURL=mapTo.js.map
 
 /***/ }),
-/* 598 */
+/* 602 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50731,7 +50904,7 @@ var MaterializeSubscriber = (function (_super) {
 //# sourceMappingURL=materialize.js.map
 
 /***/ }),
-/* 599 */
+/* 603 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50778,7 +50951,7 @@ exports.max = max;
 //# sourceMappingURL=max.js.map
 
 /***/ }),
-/* 600 */
+/* 604 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50913,7 +51086,7 @@ exports.MergeScanSubscriber = MergeScanSubscriber;
 //# sourceMappingURL=mergeScan.js.map
 
 /***/ }),
-/* 601 */
+/* 605 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50960,7 +51133,7 @@ exports.min = min;
 //# sourceMappingURL=min.js.map
 
 /***/ }),
-/* 602 */
+/* 606 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51043,12 +51216,12 @@ var PairwiseSubscriber = (function (_super) {
 //# sourceMappingURL=pairwise.js.map
 
 /***/ }),
-/* 603 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var not_1 = __webpack_require__(661);
+var not_1 = __webpack_require__(665);
 var filter_1 = __webpack_require__(304);
 /**
  * Splits the source Observable into two, one with values that satisfy a
@@ -51101,7 +51274,7 @@ exports.partition = partition;
 //# sourceMappingURL=partition.js.map
 
 /***/ }),
-/* 604 */
+/* 608 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51164,7 +51337,7 @@ function plucker(props, length) {
 //# sourceMappingURL=pluck.js.map
 
 /***/ }),
-/* 605 */
+/* 609 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51193,7 +51366,7 @@ exports.publish = publish;
 //# sourceMappingURL=publish.js.map
 
 /***/ }),
-/* 606 */
+/* 610 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51213,7 +51386,7 @@ exports.publishBehavior = publishBehavior;
 //# sourceMappingURL=publishBehavior.js.map
 
 /***/ }),
-/* 607 */
+/* 611 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51232,7 +51405,7 @@ exports.publishLast = publishLast;
 //# sourceMappingURL=publishLast.js.map
 
 /***/ }),
-/* 608 */
+/* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51256,7 +51429,7 @@ exports.publishReplay = publishReplay;
 //# sourceMappingURL=publishReplay.js.map
 
 /***/ }),
-/* 609 */
+/* 613 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51332,7 +51505,7 @@ var RepeatSubscriber = (function (_super) {
 //# sourceMappingURL=repeat.js.map
 
 /***/ }),
-/* 610 */
+/* 614 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51446,7 +51619,7 @@ var RepeatWhenSubscriber = (function (_super) {
 //# sourceMappingURL=repeatWhen.js.map
 
 /***/ }),
-/* 611 */
+/* 615 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51517,7 +51690,7 @@ var RetrySubscriber = (function (_super) {
 //# sourceMappingURL=retry.js.map
 
 /***/ }),
-/* 612 */
+/* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51624,7 +51797,7 @@ var RetryWhenSubscriber = (function (_super) {
 //# sourceMappingURL=retryWhen.js.map
 
 /***/ }),
-/* 613 */
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51718,7 +51891,7 @@ var SampleSubscriber = (function (_super) {
 //# sourceMappingURL=sample.js.map
 
 /***/ }),
-/* 614 */
+/* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51815,7 +51988,7 @@ function dispatchNotification(state) {
 //# sourceMappingURL=sampleTime.js.map
 
 /***/ }),
-/* 615 */
+/* 619 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51940,7 +52113,7 @@ var ScanSubscriber = (function (_super) {
 //# sourceMappingURL=scan.js.map
 
 /***/ }),
-/* 616 */
+/* 620 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52110,7 +52283,7 @@ var SequenceEqualCompareToSubscriber = (function (_super) {
 //# sourceMappingURL=sequenceEqual.js.map
 
 /***/ }),
-/* 617 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52140,7 +52313,7 @@ exports.share = share;
 //# sourceMappingURL=share.js.map
 
 /***/ }),
-/* 618 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52239,7 +52412,7 @@ var SingleSubscriber = (function (_super) {
 //# sourceMappingURL=single.js.map
 
 /***/ }),
-/* 619 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52296,7 +52469,7 @@ var SkipSubscriber = (function (_super) {
 //# sourceMappingURL=skip.js.map
 
 /***/ }),
-/* 620 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52373,7 +52546,7 @@ var SkipUntilSubscriber = (function (_super) {
 //# sourceMappingURL=skipUntil.js.map
 
 /***/ }),
-/* 621 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52445,13 +52618,13 @@ var SkipWhileSubscriber = (function (_super) {
 //# sourceMappingURL=skipWhile.js.map
 
 /***/ }),
-/* 622 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var ArrayObservable_1 = __webpack_require__(31);
-var ScalarObservable_1 = __webpack_require__(678);
+var ScalarObservable_1 = __webpack_require__(684);
 var EmptyObservable_1 = __webpack_require__(38);
 var concat_1 = __webpack_require__(113);
 var isScheduler_1 = __webpack_require__(27);
@@ -52497,12 +52670,12 @@ exports.startWith = startWith;
 //# sourceMappingURL=startWith.js.map
 
 /***/ }),
-/* 623 */
+/* 627 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var SubscribeOnObservable_1 = __webpack_require__(544);
+var SubscribeOnObservable_1 = __webpack_require__(548);
 /**
  * Asynchronously subscribes Observers to this Observable on the specified IScheduler.
  *
@@ -52532,7 +52705,7 @@ var SubscribeOnOperator = (function () {
 //# sourceMappingURL=subscribeOn.js.map
 
 /***/ }),
-/* 624 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52646,7 +52819,7 @@ var SwitchSubscriber = (function (_super) {
 //# sourceMappingURL=switch.js.map
 
 /***/ }),
-/* 625 */
+/* 629 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52792,7 +52965,7 @@ var SwitchMapSubscriber = (function (_super) {
 //# sourceMappingURL=switchMap.js.map
 
 /***/ }),
-/* 626 */
+/* 630 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52923,7 +53096,7 @@ var SwitchMapToSubscriber = (function (_super) {
 //# sourceMappingURL=switchMapTo.js.map
 
 /***/ }),
-/* 627 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53018,7 +53191,7 @@ var TakeSubscriber = (function (_super) {
 //# sourceMappingURL=take.js.map
 
 /***/ }),
-/* 628 */
+/* 632 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53131,7 +53304,7 @@ var TakeLastSubscriber = (function (_super) {
 //# sourceMappingURL=takeLast.js.map
 
 /***/ }),
-/* 629 */
+/* 633 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53212,7 +53385,7 @@ var TakeUntilSubscriber = (function (_super) {
 //# sourceMappingURL=takeUntil.js.map
 
 /***/ }),
-/* 630 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53310,7 +53483,7 @@ var TakeWhileSubscriber = (function (_super) {
 //# sourceMappingURL=takeWhile.js.map
 
 /***/ }),
-/* 631 */
+/* 635 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53424,7 +53597,7 @@ var ThrottleSubscriber = (function (_super) {
 //# sourceMappingURL=throttle.js.map
 
 /***/ }),
-/* 632 */
+/* 636 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53525,7 +53698,7 @@ function dispatchNext(arg) {
 //# sourceMappingURL=throttleTime.js.map
 
 /***/ }),
-/* 633 */
+/* 637 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53632,7 +53805,7 @@ var TimeoutSubscriber = (function (_super) {
 //# sourceMappingURL=timeout.js.map
 
 /***/ }),
-/* 634 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53749,7 +53922,7 @@ var TimeoutWithSubscriber = (function (_super) {
 //# sourceMappingURL=timeoutWith.js.map
 
 /***/ }),
-/* 635 */
+/* 639 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53800,7 +53973,7 @@ var ToArraySubscriber = (function (_super) {
 //# sourceMappingURL=toArray.js.map
 
 /***/ }),
-/* 636 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53916,7 +54089,7 @@ var WindowSubscriber = (function (_super) {
 //# sourceMappingURL=window.js.map
 
 /***/ }),
-/* 637 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54053,7 +54226,7 @@ var WindowCountSubscriber = (function (_super) {
 //# sourceMappingURL=windowCount.js.map
 
 /***/ }),
-/* 638 */
+/* 642 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54220,7 +54393,7 @@ function dispatchWindowClose(state) {
 //# sourceMappingURL=windowTime.js.map
 
 /***/ }),
-/* 639 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54406,7 +54579,7 @@ var WindowToggleSubscriber = (function (_super) {
 //# sourceMappingURL=windowToggle.js.map
 
 /***/ }),
-/* 640 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54539,7 +54712,7 @@ var WindowSubscriber = (function (_super) {
 //# sourceMappingURL=windowWhen.js.map
 
 /***/ }),
-/* 641 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54675,7 +54848,7 @@ var WithLatestFromSubscriber = (function (_super) {
 //# sourceMappingURL=withLatestFrom.js.map
 
 /***/ }),
-/* 642 */
+/* 646 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54694,7 +54867,7 @@ exports.zipAll = zipAll;
 //# sourceMappingURL=zipAll.js.map
 
 /***/ }),
-/* 643 */
+/* 647 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54744,7 +54917,7 @@ exports.Action = Action;
 //# sourceMappingURL=Action.js.map
 
 /***/ }),
-/* 644 */
+/* 648 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54755,7 +54928,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var AsyncAction_1 = __webpack_require__(48);
-var AnimationFrame_1 = __webpack_require__(654);
+var AnimationFrame_1 = __webpack_require__(658);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -54805,7 +54978,7 @@ exports.AnimationFrameAction = AnimationFrameAction;
 //# sourceMappingURL=AnimationFrameAction.js.map
 
 /***/ }),
-/* 645 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54848,7 +55021,7 @@ exports.AnimationFrameScheduler = AnimationFrameScheduler;
 //# sourceMappingURL=AnimationFrameScheduler.js.map
 
 /***/ }),
-/* 646 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54858,7 +55031,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Immediate_1 = __webpack_require__(656);
+var Immediate_1 = __webpack_require__(660);
 var AsyncAction_1 = __webpack_require__(48);
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -54909,7 +55082,7 @@ exports.AsapAction = AsapAction;
 //# sourceMappingURL=AsapAction.js.map
 
 /***/ }),
-/* 647 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54952,7 +55125,7 @@ exports.AsapScheduler = AsapScheduler;
 //# sourceMappingURL=AsapScheduler.js.map
 
 /***/ }),
-/* 648 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55007,7 +55180,7 @@ exports.QueueAction = QueueAction;
 //# sourceMappingURL=QueueAction.js.map
 
 /***/ }),
-/* 649 */
+/* 653 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55029,13 +55202,13 @@ exports.QueueScheduler = QueueScheduler;
 //# sourceMappingURL=QueueScheduler.js.map
 
 /***/ }),
-/* 650 */
+/* 654 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var AnimationFrameAction_1 = __webpack_require__(644);
-var AnimationFrameScheduler_1 = __webpack_require__(645);
+var AnimationFrameAction_1 = __webpack_require__(648);
+var AnimationFrameScheduler_1 = __webpack_require__(649);
 /**
  *
  * Animation Frame Scheduler
@@ -55070,7 +55243,7 @@ exports.animationFrame = new AnimationFrameScheduler_1.AnimationFrameScheduler(A
 //# sourceMappingURL=animationFrame.js.map
 
 /***/ }),
-/* 651 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55122,7 +55295,7 @@ applyMixins_1.applyMixins(ColdObservable, [SubscriptionLoggable_1.SubscriptionLo
 //# sourceMappingURL=ColdObservable.js.map
 
 /***/ }),
-/* 652 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55176,7 +55349,7 @@ applyMixins_1.applyMixins(HotObservable, [SubscriptionLoggable_1.SubscriptionLog
 //# sourceMappingURL=HotObservable.js.map
 
 /***/ }),
-/* 653 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55188,8 +55361,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Observable_1 = __webpack_require__(0);
 var Notification_1 = __webpack_require__(66);
-var ColdObservable_1 = __webpack_require__(651);
-var HotObservable_1 = __webpack_require__(652);
+var ColdObservable_1 = __webpack_require__(655);
+var HotObservable_1 = __webpack_require__(656);
 var SubscriptionLog_1 = __webpack_require__(292);
 var VirtualTimeScheduler_1 = __webpack_require__(289);
 var defaultMaxFrame = 750;
@@ -55405,7 +55578,7 @@ exports.TestScheduler = TestScheduler;
 //# sourceMappingURL=TestScheduler.js.map
 
 /***/ }),
-/* 654 */
+/* 658 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55445,7 +55618,7 @@ exports.AnimationFrame = new RequestAnimationFrameDefinition(root_1.root);
 //# sourceMappingURL=AnimationFrame.js.map
 
 /***/ }),
-/* 655 */
+/* 659 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55482,7 +55655,7 @@ exports.FastMap = FastMap;
 //# sourceMappingURL=FastMap.js.map
 
 /***/ }),
-/* 656 */
+/* 660 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55698,18 +55871,18 @@ exports.Immediate = new ImmediateDefinition(root_1.root);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(306).clearImmediate, __webpack_require__(306).setImmediate))
 
 /***/ }),
-/* 657 */
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var root_1 = __webpack_require__(23);
-var MapPolyfill_1 = __webpack_require__(658);
+var MapPolyfill_1 = __webpack_require__(662);
 exports.Map = root_1.root.Map || (function () { return MapPolyfill_1.MapPolyfill; })();
 //# sourceMappingURL=Map.js.map
 
 /***/ }),
-/* 658 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55762,7 +55935,7 @@ exports.MapPolyfill = MapPolyfill;
 //# sourceMappingURL=MapPolyfill.js.map
 
 /***/ }),
-/* 659 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55801,7 +55974,7 @@ exports.Set = root_1.root.Set || minimalSetImpl();
 //# sourceMappingURL=Set.js.map
 
 /***/ }),
-/* 660 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55833,7 +56006,7 @@ exports.assign = getAssign(root_1.root);
 //# sourceMappingURL=assign.js.map
 
 /***/ }),
-/* 661 */
+/* 665 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55850,7 +56023,7 @@ exports.not = not;
 //# sourceMappingURL=not.js.map
 
 /***/ }),
-/* 662 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55863,21 +56036,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 663 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__(352);
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-/* 664 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55891,7 +56050,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 665 */
+/* 668 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55905,7 +56064,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 666 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55919,7 +56078,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 667 */
+/* 670 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55933,7 +56092,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 668 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55947,7 +56106,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 669 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55961,7 +56120,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 670 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55975,7 +56134,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 671 */
+/* 674 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -55989,7 +56148,49 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 672 */
+/* 675 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__(361);
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+/* 676 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__(362);
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+/* 677 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__(363);
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+/* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*eslint-env browser*/
@@ -56033,7 +56234,7 @@ var colors = {
 };
 ansiHTML.setColors(colors);
 
-var Entities = __webpack_require__(361).AllHtmlEntities;
+var Entities = __webpack_require__(364).AllHtmlEntities;
 var entities = new Entities();
 
 exports.showProblems =
@@ -56074,7 +56275,7 @@ function problemType (type) {
 
 
 /***/ }),
-/* 673 */
+/* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -56212,115 +56413,115 @@ module.exports = function(hash, moduleMap, options) {
 
 
 /***/ }),
-/* 674 */
+/* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(122);
 
 /***/ }),
-/* 675 */
+/* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(187);
 
 /***/ }),
-/* 676 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(190);
 
 /***/ }),
-/* 677 */
+/* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(29);
 
 /***/ }),
-/* 678 */
+/* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(315);
 
 /***/ }),
-/* 679 */
+/* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(317);
 
 /***/ }),
-/* 680 */
+/* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(318);
 
 /***/ }),
-/* 681 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(319);
 
 /***/ }),
-/* 682 */
+/* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(320);
 
 /***/ }),
-/* 683 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(321);
 
 /***/ }),
-/* 684 */
+/* 690 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(333);
 
 /***/ }),
-/* 685 */
+/* 691 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(335);
 
 /***/ }),
-/* 686 */
+/* 692 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(47);
 
 /***/ }),
-/* 687 */
+/* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(554);
 
 /***/ }),
-/* 688 */
+/* 694 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(556);
 
 /***/ }),
-/* 689 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(559);
 
 /***/ }),
-/* 690 */
+/* 696 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(562);
 
 /***/ }),
-/* 691 */
+/* 697 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(84);
 
 /***/ }),
-/* 692 */
+/* 698 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(310);

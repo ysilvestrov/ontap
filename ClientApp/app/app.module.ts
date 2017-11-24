@@ -19,6 +19,7 @@ import { PubAdminsComponent } from "./components/pubadmins/pubadmins.component";
 import { BreweryAdminsComponent } from "./components/breweryadmins/breweryadmins.component";
 import { HomeComponent } from "./components/home/home.component";
 import { SelectorComponent } from "./components/selector/selector.component";
+import { PrintComponent } from "./components/print/print.component";
 import { TooltipContainerComponent, TooltipDirective, TooltipModule, Ng2BootstrapModule, AlertModule  } from "ng2-bootstrap/ng2-bootstrap";
 import { LocaleModule, LocalizationModule, LocaleService, LocalizationService } from 'angular2localization';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
@@ -101,6 +102,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         UsersComponent,
         SelectorComponent,
         LocaleComponent,
+        PrintComponent,
         SortByTap,
     ],
     imports: [

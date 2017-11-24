@@ -20,6 +20,8 @@ namespace Ontap.Models
         public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }
         public ICollection<PubAdmin> Admins { get; set; }
         public string Image { get; set; }
+        public string TaplistHeaderImage { get; set; }
+        public string TaplistFooterImage { get; set; }
         public string FacebookUrl { get; set; }
         public string VkontakteUrl { get; set; }
         public string WebsiteUrl { get; set; }

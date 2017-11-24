@@ -7,11 +7,13 @@ import {BeerService} from "../beers/beers.service";
 import {ServeService} from "./serves.service";
 import {AppComponent, AppService, Options} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { PrintComponent } from "../print/print.component";
 
 @ng.Component({
     selector: 'serves',
     providers: [ServeService, EPubService, BeerService],
-  template: require('./serves.component.html')
+    templateUrl: './serves.component.html',
+    styleUrls: ['./serves.component.css']
 })
 export class ServesComponent extends  AppComponent<IServe, ServeService> {
     public serves: IServe[];
@@ -25,6 +27,10 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
         super(elmService, locale, localization);
         this.getPubs();
         this.getBeers();
+        if (this.elements) {
+            this.onElementsLoad();
+        }
+        this.onLoad.subscribe((s: any, elements: any) => { this.onElementsLoad() });
     }
 
     public startAdd() {
@@ -50,8 +56,15 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
                 this.pubs = pubs;
                 this.selectingPubs = new List(this.pubs).OrderBy(p => p.name).Select(p => new Options(p.id, p.name))
                     .ToArray();
+                this.onElementsLoad();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    onElementsLoad() {
+        if (this.selectingPubs.length > 0) {
+            this.setPub(this.selectingPubs[0].label);
+        }
     }
 
     getBeers() {
