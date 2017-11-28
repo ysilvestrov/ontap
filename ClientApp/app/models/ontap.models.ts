@@ -10,6 +10,7 @@ export interface IBeer {
     alcohol: number;
     gravity: number;
     ibu: number;
+    bjcpStyle: string;
     image: string;
 }
 export interface IBrewery {
@@ -80,30 +81,16 @@ export class Pub implements IPub {
     parserOptions: string;
     tapNumber: number;
 
-    constructor(pub: IPub) {
-        this.id = pub.id;
-        this.name = pub.name;
-        this.address = pub.address;
-        this.city = pub.city;
-        this.serves = pub.serves;
-        this.image = pub.image;
-        this.taplistHeaderImage = pub.taplistHeaderImage;
-        this.taplistFooterImage = pub.taplistFooterImage;
-        this.facebookUrl = pub.facebookUrl;
-        this.vkontakteUrl = pub.vkontakteUrl;
-        this.websiteUrl = pub.websiteUrl;
-        this.bookingUrl = pub.bookingUrl;
-        this.parserOptions = pub.parserOptions;
-        this.tapNumber = pub.tapNumber;
-    }    
+    public constructor(init?: Partial<IPub>) {
+        Object.assign(this, init);
+    }
 }
 export class City implements ICity {
     id: string;
     name: string;
 
-    constructor(city: ICity) {
-        this.id = city.id;
-        this.name = city.name;
+    public constructor(init?: Partial<ICity>) {
+        Object.assign(this, init);
     }
 
 }
@@ -116,14 +103,11 @@ export class Beer implements IBeer {
     alcohol: number;
     gravity: number;
     ibu: number;
+    bjcpStyle: string;
     image: string;
 
-    constructor(beer: IBeer) {
-        for (let key in beer) {
-            if (beer.hasOwnProperty(key)) {
-                this[key] = beer[key];
-            }
-        }
+    public constructor(init?: Partial<IBeer>) {
+        Object.assign(this, init);
     }
 }
 export class Serve implements IServe {
@@ -135,44 +119,23 @@ export class Serve implements IServe {
     volume: number;
     updated: Date;
 
-    constructor(serve: IServe) {
-        this.id = serve.id;
-        this.served = serve.served;
-        this.servedIn = serve.servedIn;
-        this.price = serve.price;
-        this.tap = serve.tap;
-        this.volume = serve.volume;
-        this.updated = serve.updated;
+    public constructor(init?: Partial<IServe>) {
+        Object.assign(this, init);
     }
 
 }
 export class Brewery implements IBrewery {
-    constructor(brewery: IBrewery) {
-        this.id = brewery.id;
-        this.name = brewery.name;
-        this.address = brewery.address;
-        this.country = brewery.country;
-        this.image = brewery.image;
-    }
-
     id: string;
     name: string;
     address: string;
     country: ICountry;
     image: string;
+
+    public constructor(init?: Partial<IBrewery>) {
+        Object.assign(this, init);
+    }
 }
 export class User implements IUser {
-    constructor(user :IUser) {
-        this.id = user.id;
-        this.name = user.name;
-        this.password = user.password;
-        this.isAdmin = user.isAdmin;
-        this.canAdminPub = user.canAdminPub;
-        this.canAdminBrewery = user.canAdminBrewery;
-        this.pubs = user.pubs;
-        this.breweries = user.breweries;
-    }
-
     id: string;
     name: string;
     password: string;
@@ -181,6 +144,10 @@ export class User implements IUser {
     canAdminBrewery: boolean;
     pubs: IPub[];
     breweries: IBrewery[];
+
+    public constructor(init?: Partial<IUser>) {
+        Object.assign(this, init);
+    }
 }
 export class AccessToken {
     constructor(at: AccessToken) {
@@ -199,14 +166,13 @@ export interface IPubAdmin {
     user: IUser;
 }
 export class PubAdmin implements IPubAdmin {
-    constructor(pa:IPubAdmin) {
-        this.id = pa.id;
-        this.pub = pa.pub;
-        this.user = pa.user;
-    }
     id: number;
     pub: IPub;
     user: IUser;
+
+    public constructor(init?: Partial<IPubAdmin>) {
+        Object.assign(this, init);
+    }
 }
 export interface IBreweryAdmin {
     id: number;
@@ -214,12 +180,11 @@ export interface IBreweryAdmin {
     user: IUser;
 }
 export class BreweryAdmin implements IBreweryAdmin {
-    constructor(pa: IBreweryAdmin) {
-        this.id = pa.id;
-        this.brewery = pa.brewery;
-        this.user = pa.user;
-    }
     id: number;
     brewery: IBrewery;
     user: IUser;
+
+    public constructor(init?: Partial<IBreweryAdmin>) {
+        Object.assign(this, init);
+    }
 }

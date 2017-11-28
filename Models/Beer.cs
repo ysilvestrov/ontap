@@ -33,13 +33,14 @@ namespace Ontap.Models
         public decimal Gravity { get; set; }
         public decimal Ibu { get; set; }
         public Classification Kind { get; set; } = Classification.Lager;
+        public string BjcpStyle { get; set; } = "";
         public string Description { get; set; }
 
         [NotMapped]
         public string[] Labels
         {
-            get { return (_labels ?? "").Split('|'); }
-            set { _labels = string.Join("|", value); }
+            get => (_labels ?? "").Split('|');
+            set => _labels = string.Join("|", value);
         }
 
         public string _labels { get; set; }

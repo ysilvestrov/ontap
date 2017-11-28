@@ -4,7 +4,8 @@ import { FormsModule }   from '@angular/forms';
 import { List } from "../../modules/linq";
 import {IBeer, Beer, IBrewery} from "../../models/ontap.models";
 import {BeerService} from "./beers.service";
-import {BreweryService} from "../breweries/breweries.service";
+import { BreweryService } from "../breweries/breweries.service";
+import { BjcpStyle, BjcpService} from "../../services/bjcp.service";
 import { AppComponent, AppService, Options, LabeledCloudinaryUploader} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from "angular2localization";
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
@@ -13,7 +14,7 @@ import { Ng2BootstrapModule, AlertModule } from "ng2-bootstrap/ng2-bootstrap";
 
 @ng.Component({
     selector: 'beers',
-    providers: [BeerService, BreweryService],
+    providers: [BeerService, BreweryService, BjcpService],
     templateUrl: './beers.component.html',
     styleUrls: ['./beers.component.css']
 
@@ -24,13 +25,16 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
     public allBeers: IBeer[];
     public brewery: IBrewery;
     public selectingBreweries: Options[];
+    public styles: {[code:string]:BjcpStyle};
+    public selectingStyles: Options[];
 
-    constructor(elmService: BeerService, private breweryService: BreweryService, public locale: LocaleService, public localization: LocalizationService) {
+    constructor(elmService: BeerService, private breweryService: BreweryService, private bjcpService: BjcpService, public locale: LocaleService, public localization: LocalizationService) {
         super(elmService, locale, localization, [new LabeledCloudinaryUploader(new CloudinaryOptions({
             cloudName: 'ontap-in-ua',
             uploadPreset: 'ontapInUa_pubs'
         }))]);
         this.getBreweries();
+        this.getStyles();
         if (this.elements) {
             this.onElementsLoad(this.elements);
         }
@@ -49,11 +53,11 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
             .First();
         this.elements = (id === "") ?
             new List(this.allBeers)
-                .OrderBy((beer: IBeer) => beer.brewery.name)
+                .OrderBy((beer: IBeer) => beer.brewery.name + " " + beer.name)
                 .ToArray() :
             new List(this.allBeers)
                 .Where((beer) => beer.brewery.name === this.brewery.name)
-                .OrderBy((beer: IBeer) => beer.brewery.name)
+                .OrderBy((beer: IBeer) => beer.name)
                 .ToArray();
     }
 
@@ -74,6 +78,16 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
                 this.breweries = new List(breweries).OrderBy((_: IBrewery) => _.name).ToArray();
                 this.selectingBreweries = new List(this.breweries).OrderBy(b => b.name).Select(b => new Options(b.id, b.name))
                     .ToArray();
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getStyles() {
+        this.bjcpService.get()
+            .subscribe(
+            styles => {
+                this.styles = new List(styles).OrderBy((_: BjcpStyle) => _.style).ToDictionary((_: BjcpStyle) => _.code, (_: BjcpStyle) => _.style);
+                this.selectingStyles = new List(styles).OrderBy((_: BjcpStyle) => _.style).Select(s => new Options(s.code, s.style)).ToArray();
             },
             error => this.errorMessage = <any>error);
     }

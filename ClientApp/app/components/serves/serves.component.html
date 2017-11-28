@@ -176,7 +176,10 @@
             <ng-container *ngFor="let serve of pub.serves | sortByTap; let isOdd = odd; let isEven = even">
                 <tr style='height: 20px;'>
                     <td [ngClass]="{'s3':isEven,'s8':isOdd}" dir="ltr" rowspan="2">{{ serve.tap }}</td>
-                    <td [ngClass]="{'s4':isEven,'s9':isOdd}" dir="ltr">{{ serve.served.brewery.name }} — {{ serve.served.name }}</td>
+                    <td [ngClass]="{'s4':isEven,'s9':isOdd}" dir="ltr">
+                        {{ serve.served.brewery.name }} — {{ serve.served.name }}
+                        <span *ngIf="serve.served.bjcpStyle">({{styles[serve.served.bjcpStyle]}})</span>
+                    </td>
                     <td [ngClass]="{'s5':isEven,'s10':isOdd}" dir="ltr" rowspan="2">{{serve.served.alcohol}}</td>
                     <td [ngClass]="{'s5':isEven,'s10':isOdd}" dir="ltr" rowspan="2">{{serve.served.gravity}}</td>
                     <td [ngClass]="{'s5':isEven,'s10':isOdd}" dir="ltr" rowspan="2">{{serve.served.ibu}}</td>

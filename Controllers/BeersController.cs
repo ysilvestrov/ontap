@@ -69,6 +69,7 @@ namespace Ontap.Controllers
             current.Alcohol = beer.Alcohol;
             current.Gravity = beer.Gravity;
             current.Ibu = beer.Ibu;
+            current.BjcpStyle = beer.BjcpStyle;
             await _context.SaveChangesAsync();
             return current;
         }

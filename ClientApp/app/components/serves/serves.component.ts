@@ -4,14 +4,15 @@ import { List } from "../../modules/linq";
 import {IPub, IBeer, IServe, Serve} from "../../models/ontap.models";
 import {EPubService} from "../epubs/epubs.service";
 import {BeerService} from "../beers/beers.service";
-import {ServeService} from "./serves.service";
+import { ServeService } from "./serves.service";
+import { BjcpStyle, BjcpService } from "../../services/bjcp.service";
 import {AppComponent, AppService, Options} from "../../modules/appComponent";
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 import { PrintComponent } from "../print/print.component";
 
 @ng.Component({
     selector: 'serves',
-    providers: [ServeService, EPubService, BeerService],
+    providers: [ServeService, EPubService, BeerService, BjcpService],
     templateUrl: './serves.component.html',
     styleUrls: ['./serves.component.css']
 })
@@ -20,13 +21,16 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
     public pubs: IPub[];
     public beers: IBeer[];
     public pub: IPub;
+    public styles: { [code: string]: BjcpStyle };
     public selectingPubs: Options[];
     public selectingBeers: Options[];
 
-    constructor(elmService: ServeService, private pubService: EPubService, private beerService: BeerService, public locale: LocaleService, public localization: LocalizationService) {
+    constructor(elmService: ServeService, private pubService: EPubService, private beerService: BeerService,
+        private bjcpService: BjcpService, public locale: LocaleService, public localization: LocalizationService) {
         super(elmService, locale, localization);
         this.getPubs();
         this.getBeers();
+        this.getStyles();
         if (this.elements) {
             this.onElementsLoad();
         }
@@ -59,6 +63,15 @@ export class ServesComponent extends  AppComponent<IServe, ServeService> {
                 this.onElementsLoad();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    getStyles() {
+        this.bjcpService.get()
+            .subscribe(
+                styles => {
+                    this.styles = new List(styles).OrderBy((_: BjcpStyle) => _.style).ToDictionary((_: BjcpStyle) => _.code, (_: BjcpStyle) => _.style);
+                },
+                error => this.errorMessage = <any>error);
     }
 
     onElementsLoad() {
