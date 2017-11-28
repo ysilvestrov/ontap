@@ -24,11 +24,4 @@ export class BreweryService extends AppService<IBrewery> {
     new(source: IBrewery): IBrewery {
         return new Brewery(source);
     }
-
-    copy(source: IBrewery, dest: IBrewery) {
-        dest.name = source.name;
-        dest.address = source.address;
-        dest.country = source.country;
-        dest.image = source.image;
-    }
 }

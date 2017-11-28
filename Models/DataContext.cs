@@ -18,6 +18,7 @@ namespace Ontap.Models
         DbSet<PubAdmin> PubAdmins { get; set; }
         DbSet<BreweryAdmin> BreweryAdmins { get; set; }
         DbSet<BrewerySubstitution> BrewerySubstitutions { get; set; }
+        DbSet<BeerSubstitution> BeerSubstitutions { get; set; }
     }
 
     public class DataContext : DbContext, IDataContext
@@ -53,6 +54,10 @@ namespace Ontap.Models
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<BrewerySubstitution>()
                 .HasOne(ba => ba.Brewery)
+                .WithMany(b => b.Substitutions)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerSubstitution>()
+                .HasOne(ba => ba.Beer)
                 .WithMany(b => b.Substitutions)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<PubAdmin>()
@@ -452,5 +457,6 @@ namespace Ontap.Models
         public DbSet<PubAdmin> PubAdmins { get; set; }
         public DbSet<BreweryAdmin> BreweryAdmins { get; set; }
         public DbSet<BrewerySubstitution> BrewerySubstitutions { get; set; }
+        public DbSet<BeerSubstitution> BeerSubstitutions { get; set; }
     }
 }

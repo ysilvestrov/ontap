@@ -18,17 +18,14 @@
         <div class="col-md-3"><h4><strong>Название</strong></h4></div>
         <div class="col-md-2"><h4><strong>Страна</strong></h4></div>
         <div class="col-md-5"><h4><strong>Адрес</strong></h4></div>
-        <div class="col-md-2"><h4><strong>Действия</strong></h4></div>
+        <div class="col-md-2"></div>
     </div>
     <div class="row-wrapper" *ngFor="let brewery of elements">
-        <div class="row" *ngIf="!editing || (editing.id != brewery.id)">
+        <div class="row" *ngIf="!editing || (editing.id != brewery.id)" (click)="edit(brewery.id)">
             <div class="col-md-3" title="{{brewery.id}}">{{ brewery.name }}</div>
             <div class="col-md-2">{{ brewery.country.name }}</div>
             <div class="col-md-5">{{ brewery.address }}</div>
             <div class="col-md-2">
-                <button (click)="edit(brewery.id)" type="button" class="btn btn-default" aria-label="Edit">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                </button>
                 <span class="badge" *ngIf="breweryCounts[brewery.id]">{{ breweryCounts[brewery.id] }} <i class="fa fa-beer" aria-hidden="true"></i></span>
             </div>
         </div>
@@ -66,7 +63,7 @@
             </div>
             <div class="row edit2">
                 <div class="col-md-1">
-                    <cl-image public-id="{{editing.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="Sample image" title="Sample image title"></cl-image>
+                    <cl-image public-id="{{editing.image}}" cloud-name="ontap-in-ua" height="20" dpr="auto" format="png" quality="100" alt="" title=""></cl-image>
                 </div>
                 <div class="col-md-4">
                     <input type="file" ng2FileSelect [uploader]="uploaders[0]" />

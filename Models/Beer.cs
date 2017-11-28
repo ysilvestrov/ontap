@@ -52,5 +52,8 @@ namespace Ontap.Models
         public virtual Brewery Brewery { get; set; }
         public string Image { get; set; }
         public Serve ServeKind { get; set; }
+        [IgnoreDataMember]
+        [JsonIgnore]
+        public ICollection<BeerSubstitution> Substitutions { get; set; }
     }
 }

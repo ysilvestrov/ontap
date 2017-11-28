@@ -32,14 +32,7 @@ namespace Ontap.Controllers
         [HttpGet]
         public IEnumerable<Beer> Get() => Beers.ToArray();
 
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST api/values
+        // POST api/beers
         [HttpPost]
         public async Task<Beer> Post([FromBody] Beer beer)
         {
@@ -55,7 +48,7 @@ namespace Ontap.Controllers
             return beer;
         }
 
-        // PUT api/cities/Kharkiv
+        // PUT api/beers/VarvarPilsner
         [HttpPut("{id}")]
         public async Task<Beer> Put(string id, [FromBody]Beer beer)
         {
@@ -74,13 +67,26 @@ namespace Ontap.Controllers
             return current;
         }
 
+        // DELETE api/beers/5
         [HttpDelete("{id}")]
         [Authorize(Policy = "AdminUser")]
-        public async Task<Beer> Delete(string id)
+        public async Task<Beer> Delete(string id, [FromQuery] string replacementId)
         {
             if (Beers.All(c => c.Id != id))
-                throw new KeyNotFoundException($"No record with id {id}");
-            var current = Beers.First(c => c.Id == id);
+                throw new KeyNotFoundException($"No beer with id {id}");
+            var current = _context.Beers.First(c => c.Id == id);
+            if (!string.IsNullOrWhiteSpace(replacementId) && Beers.Any(c => c.Id == replacementId))
+            {
+                var replacement = _context.Beers.First(b => b.Id == replacementId);
+                _context.BeerSubstitutions.Add(new BeerSubstitution { Beer = replacement, Name = current.Name });
+                var serves = _context.BeerServedInPubs.Where(b => b.Served.Id == id);
+                foreach (var serve in serves)
+                {
+                    serve.Served = replacement;
+                }
+            }
+            else if (_context.BeerServedInPubs.Any(b => b.Served.Id == id))
+                throw new AlreadyExistsException("Cannot delete brewery with serves");
             _context.Beers.Remove(current);
             await _context.SaveChangesAsync();
             return current;

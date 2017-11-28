@@ -42,7 +42,9 @@
             <div class="col-md-3" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ beer.description }}</div>
             <div class="col-md-1">{{ beer.alcohol }}</div>
             <div class="col-md-1">{{ beer.gravity }}</div>
-            <div class="col-md-1">{{ beer.ibu }}</div>
+            <div class="col-md-1">{{ beer.ibu }}
+                <span class="badge" *ngIf="servesCounts[beer.id]">{{ servesCounts[beer.id] }}</span>
+            </div>
         </div>
         <div *ngIf="editing && (editing.id == beer.id)">
             <div class="row">
@@ -96,7 +98,7 @@
                         <span class="fa fa-floppy-o fa-lg" aria-hidden="true" *ngIf="!isSaving(editing.id)"></span>
                         <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isSaving(editing.id)"></span>    
                     </button>
-                    <button (click)="delete()" type="button" class="btn btn-default" aria-label="Delete">
+                    <button (click)="startDelete()" type="button" class="btn btn-default" aria-label="Delete">
                         <span class="fa fa-trash-o fa-lg" aria-hidden="true" *ngIf="!isDeleting(editing.id)"></span>
                         <span class="fa fa-spinner fa-pulse" aria-hidden="true" *ngIf="isDeleting(editing.id)"></span>  
                     </button>

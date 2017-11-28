@@ -33,7 +33,9 @@ namespace Ontap.Util
 
         public ICollection<BeerServedInPubs> Parse(Pub pub, 
             IEnumerable<Beer> enumBeers, IEnumerable<Brewery> enumBreweries, 
-            Dictionary<string, object> options, Country country, bool force = false, IDictionary<string, Brewery> substitutions = null)
+            Dictionary<string, object> options, Country country, bool force = false, 
+            IDictionary<string, Brewery> substitutions = null,
+            IDictionary<string, Beer> beerSubstitutions = null)
         {
             var result = new List<BeerServedInPubs>();
             var beers = new List<Beer>(enumBeers);
@@ -72,10 +74,9 @@ namespace Ontap.Util
                 ApplicationName = ApplicationName,
             });
 
-            decimal volume, targetVolume, priceMultiplicator;
-            options["volume"].TryParse(out volume, 1);
-            options["targetVolume"].TryParse(out targetVolume, 0.5M);
-            options["priceMultiplicator"].TryParse(out priceMultiplicator, 1);
+            options["volume"].TryParse(out decimal volume, 1);
+            options["targetVolume"].TryParse(out var targetVolume, 0.5M);
+            options["priceMultiplicator"].TryParse(out decimal priceMultiplicator, 1);
                 
             var columns =
                 options["columns"].ToString().ToLowerInvariant()
@@ -105,14 +106,17 @@ namespace Ontap.Util
                 return result;
 
 
-            result.AddRange(GetValue(values, pub, country, columns, targetVolume, priceMultiplicator, volume, beers, breweries, substitutions, time.HasValue && lastUpdated < time ? time.Value : lastUpdated));
+            result.AddRange(GetValue(values, pub, country, columns, targetVolume, priceMultiplicator, volume, beers,
+                breweries, substitutions, beerSubstitutions, time.HasValue && lastUpdated < time ? time.Value : lastUpdated));
 
 
             return result;
         }
 
-        private static IList<BeerServedInPubs> GetValue(IList<IList<object>> values, Pub pub, Country country, Dictionary<string, int> columns, decimal targetVolume,
-            decimal priceMultiplicator, decimal volume, List<Beer> beers, List<Brewery> breweries, IDictionary<string, Brewery> substitutions, DateTime updateTime)
+        private static IList<BeerServedInPubs> GetValue(IList<IList<object>> values, Pub pub, Country country,
+            Dictionary<string, int> columns, decimal targetVolume, decimal priceMultiplicator, decimal volume,
+            List<Beer> beers, List<Brewery> breweries, IDictionary<string, Brewery> substitutions,
+            IDictionary<string, Beer> beerSubstitutions, DateTime updateTime)
         {
             var result = new List<BeerServedInPubs>();
 
@@ -146,20 +150,40 @@ namespace Ontap.Util
                     if (!string.Equals(beerName, string.Empty, StringComparison.Ordinal)
                         && !string.Equals(breweryName, string.Empty, StringComparison.Ordinal))
                     {
-                        var soundexBeerName = beerName.MakeSoundexKey();
-                        var soundexBreweryName = breweryName.MakeSoundexKey();
-                        var soundexBeerAndBreweryName = $"{beerName} {breweryName}".MakeSoundexKey();
-                        var soundexBreweryAndBeerName = $"{breweryName} {beerName}".MakeSoundexKey();
-                        var beer = beers.FirstOrDefault(b => b.Name == beerName && b.Brewery?.Name == breweryName) ??
-                                   beers.FirstOrDefault(
+                        //check if the beer and brewery matches exactly
+                        var beer = beers.FirstOrDefault(b => b.Name == beerName && b.Brewery?.Name == breweryName);
+                        //check if beer should be substituted but the brewery is OK
+                        if (beer == null && beerSubstitutions != null && beerSubstitutions.ContainsKey(beerName) && beerSubstitutions[beerName].Brewery.Name == breweryName)
+                        {
+                            beer = beerSubstitutions[beerName];
+                        }
+                        //check if beer should be substituted and the brewery too
+                        if (beer == null && 
+                            beerSubstitutions != null && beerSubstitutions.ContainsKey(beerName) &&
+                            substitutions != null && substitutions.ContainsKey(breweryName) &&
+                            beerSubstitutions[beerName].Brewery.Id == substitutions[breweryName].Id)
+                        {
+                            beer = beerSubstitutions[beerName];
+                        }
+                        var soundexBreweryName = "";
+                        //try to check by soundex
+                        if (beer == null)
+                        {
+                            var soundexBeerName = beerName.MakeSoundexKey();
+                            soundexBreweryName = breweryName.MakeSoundexKey();
+                            var soundexBeerAndBreweryName = $"{beerName} {breweryName}".MakeSoundexKey();
+                            var soundexBreweryAndBeerName = $"{breweryName} {beerName}".MakeSoundexKey();
+                            beer = beers.FirstOrDefault(
                                        b =>
                                            (b.Name.MakeSoundexKey() == soundexBeerName ||
                                             b.Name.MakeSoundexKey() == soundexBeerAndBreweryName ||
                                             b.Name.MakeSoundexKey() == soundexBreweryAndBeerName ||
-                                            $"{b.Brewery?.Name} {b.Name}".MakeSoundexKey() == soundexBreweryAndBeerName ||
+                                            $"{b.Brewery?.Name} {b.Name}".MakeSoundexKey() ==
+                                            soundexBreweryAndBeerName ||
                                             $"{b.Brewery?.Name} {b.Name}".MakeSoundexKey() == soundexBeerName)
                                            &&
                                            b.Brewery?.Name.MakeSoundexKey() == soundexBreweryName);
+                        }
                         if (beer == null)
                         {
                             var brewery = breweries.FirstOrDefault(b => b.Name == breweryName)
