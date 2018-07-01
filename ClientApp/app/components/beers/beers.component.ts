@@ -2,7 +2,7 @@ import * as ng from '@angular/core';
 import { Http } from '@angular/http';
 import { FormsModule }   from '@angular/forms';
 import { List } from "../../modules/linq";
-import {IBeer, Beer, IBrewery, IServe} from "../../models/ontap.models";
+import { IBeer, Beer, IBrewery, IBeerServedInPub} from "../../models/ontap.models";
 import {BeerService} from "./beers.service";
 import { BreweryService } from "../breweries/breweries.service";
 import { ServeService } from "../serves/serves.service";
@@ -110,10 +110,10 @@ export class BeersComponent extends AppComponent<IBeer, BeerService> {
                 serves => {
                     //this.serves = serves;
                     this.servesCounts = new List(serves)
-                        .Aggregate((ac, s: IServe) => {
-                            ac[s.served.id]
-                                ? ac[s.served.id] += 1
-                                : ac[s.served.id] = 1;
+                        .Aggregate((ac, s: IBeerServedInPub) => {
+                            ac[s.beer.id]
+                                ? ac[s.beer.id] += 1
+                                : ac[s.beer.id] = 1;
                             return ac;
                         }, {});
                     //this.get();

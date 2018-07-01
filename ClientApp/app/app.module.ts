@@ -10,13 +10,13 @@ import { PubComponent } from "./components/pub/pub.component";
 import { CitiesComponent } from "./components/cities/cities.component";
 import { BeersComponent } from "./components/beers/beers.component";
 import { EPubsComponent } from "./components/epubs/epubs.component";
-import { ServesComponent } from "./components/serves/serves.component";
 import { BreweriesComponent } from "./components/breweries/breweries.component";
 import { UsersComponent } from "./components/users/users.component";
 import { LoginComponent } from "./components/login/login.component";
 import { LocaleComponent } from "./components/locale/locale.component";
 import { PubAdminsComponent } from "./components/pubadmins/pubadmins.component";
 import { BreweryAdminsComponent } from "./components/breweryadmins/breweryadmins.component";
+import { TapsComponent } from "./components/taps/taps.component";
 import { HomeComponent } from "./components/home/home.component";
 import { SelectorComponent } from "./components/selector/selector.component";
 import { PrintComponent } from "./components/print/print.component";
@@ -95,11 +95,11 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         EPubsComponent,
         PubsComponent,
         PubComponent,
-        ServesComponent,
         LoginComponent,
         PubAdminsComponent,
         BreweryAdminsComponent,
         UsersComponent,
+        TapsComponent,
         SelectorComponent,
         LocaleComponent,
         PrintComponent,
@@ -124,8 +124,8 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
             { path: "cities", component: CitiesComponent },
             { path: "epubs", component: EPubsComponent },
             { path: "pubs", component: PubsComponent },
+            { path: "taps", component: TapsComponent },
             { path: "pub/:id", component: PubComponent },
-            { path: "serves", component: ServesComponent },
             { path: "users", component: UsersComponent },
             { path: "pub-admins", component: PubAdminsComponent },
             { path: "brewery-admins", component: BreweryAdminsComponent },

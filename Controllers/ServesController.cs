@@ -15,6 +15,16 @@ using Ontap.Models;
 
 namespace Ontap.Controllers
 {
+    public class BeerServedInPubs
+    {
+        public Pub Pub { get; set; }
+        public decimal Volume { get; set; }
+        public DateTime Updated { get; set; }
+        public string Tap { get; set; }
+        public decimal Price { get; set; }
+        public Beer Beer { get; set; }
+    }
+
     [Route("api/[controller]")]
     [Authorize(Policy = "BreweryOrPubAdminUser")]
     public class ServesController : Controller
@@ -34,21 +44,35 @@ namespace Ontap.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IEnumerable<BeerServedInPubs> Serves => _context.BeerServedInPubs
-            .Include(s => s.Served)
-            .ThenInclude(b => b.Brewery)
-            .ThenInclude(b => b.Admins)
-            .ThenInclude(a => a.User)
-            .Include(s => s.ServedIn)
-            .ThenInclude(p => p.Admins)
-            .ThenInclude(a => a.User)
-            .ToArray();
-
 
         // GET: api/serves
         [HttpGet]
-        public IEnumerable<BeerServedInPubs> Get() => Serves as BeerServedInPubs[] ?? Serves.ToArray();
+        public IEnumerable<BeerServedInPubs> Get()
+        {
+            var serves = _context.BeerPrices
+                .Where(s => s.ValidTo == null)
+                .Include(s => s.Beer)
+                .ThenInclude(b => b.Brewery)
+                .ThenInclude(b => b.Admins)
+                .ThenInclude(a => a.User)
+                .Include(s => s.Pub)
+                .ThenInclude(p => p.Admins)
+                .ThenInclude(a => a.User)
+                .Join(_context.BeerKegsOnTap.Where(bk => bk.DeinstallTime == null), price => new {beerId = price.Beer.Id, pubId = price.Pub.Id},
+                    tap => new {beerId = tap.Keg.Beer.Id, pubId = tap.Tap.Pub.Id}, (price, tap) => new BeerServedInPubs
+                    {
+                        Beer = price.Beer,
+                        Pub = price.Pub,
+                        Price = price.Price,
+                        Volume = price.Volume,
+                        Updated = price.Updated,
+                        Tap = tap.Tap.Number
+                    });
+            
+            return serves.ToArray();
+        }
 
+        /*
         // POST api/serves
         /// <exception cref="AlreadyExistsException">Record for the same beer and pub already exists</exception>
         [HttpPost]
@@ -108,5 +132,6 @@ namespace Ontap.Controllers
             await _context.SaveChangesAsync();
             return current;
         }
+        */
     }
 }

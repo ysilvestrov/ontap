@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using System.Security.Claims;
@@ -17,7 +18,7 @@ using Ontap.Util;
 
 namespace Ontap.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/pubs")]
     public class PubsController : Controller
     {
         private readonly DataContext _context;
@@ -37,8 +38,8 @@ namespace Ontap.Controllers
 
         private IEnumerable<Pub> Pubs => _context.Pubs
             .Include(p => p.City)
-            .Include(p => p.BeerServedInPubs)
-            .ThenInclude(s => s.Served)
+            .Include(p => p.BeerPrices)
+            .ThenInclude(s => s.Beer)
             .ThenInclude(b => b.Brewery)
             .ThenInclude(b => b.Country)
             .OrderBy(p => p.Name)
@@ -47,25 +48,11 @@ namespace Ontap.Controllers
 
         // GET: api/pubs
         [HttpGet]
-        public IEnumerable<Pub> Get()
-        {
-            var pubs = Pubs;
-            var enumerable = pubs as Pub[] ?? pubs.ToArray();
-            foreach (var pub in enumerable)
-            {
-                pub.BeerServedInPubs.ToArray();
-            }
-            return enumerable;
-        }
+        public IEnumerable<Pub> Get() => Pubs;
 
         // GET: api/pubs/id
         [HttpGet("{id}")]
-        public Pub Get(string id)
-        {
-            var pub = Pubs.First(p => p.Id == id);
-            pub.BeerServedInPubs.ToArray();
-            return pub;
-        }
+        public Pub Get(string id) => Pubs.First(p => p.Id == id);
 
         // POST api/pubs
         /// <summary>
@@ -100,31 +87,97 @@ namespace Ontap.Controllers
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
             }
+            var result = new StringBuilder();
+            ParsePubData(pub, result);
+            await _context.SaveChangesAsync();
+            return result.ToString();
+        }
+
+        private void ParsePubData(Pub pub, StringBuilder sb)
+        {
             var options = JsonConvert.DeserializeObject<Dictionary<string, object>>(pub.ParserOptions);
             var parser = new GoogleSheetParser();
             var serves = parser
                 .Parse(pub, _context.Beers, _context.Breweries, options,
-                    _context.Countries.First(c => c.Id == "UA"), force: true, substitutions: _context.BrewerySubstitutions.ToDictionary(s => s.Name, s=> s.Brewery))
-                .Where(s => s.Served?.Brewery != null).ToArray();
-            string result = "";
-            if (serves.Length <= 0) return result;
+                    _context.Countries.First(c => c.Id == "UA"), force: true,
+                    substitutions: _context.BrewerySubstitutions.ToDictionary(s => s.Name, s => s.Brewery))
+                .Where(s => s.Beer?.Brewery != null).ToArray();
+            if (serves.Length > 0)
             {
-                var beers = serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id));
+                //save all the beers
+                var beers = serves.Select(s => s.Beer).Where(b => _context.Beers.All(_ => _.Id != b.Id));
                 _context.Beers.AddRange(beers);
+                //save all the breweries
                 _context.Breweries.AddRange(
-                    serves.Select(s => s.Served.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
-                _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == id));
+                    serves.Select(s => s.Beer.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
+                //update beer price and kegs
+                //remove discontinued beers
+                var discontinuedBeerPrices = _context.BeerPrices.Where(bp => bp.Pub.Id == pub.Id && bp.ValidTo == null)
+                    .Where(bp => serves.All(s => s.Beer.Id != bp.Beer.Id));
+                foreach (var beer in discontinuedBeerPrices)
+                {
+                    _context.BeerPrices.First(bp => bp.Id == beer.Id).ValidTo = DateTime.UtcNow;
+                }
+                var discontinuedBeerKegs = _context.BeerKegsOnTap.Where(bk => bk.Tap.Pub.Id == pub.Id && bk.DeinstallTime == null)
+                    .Where(bk => serves.All(s => s.Beer.Id != bk.Keg.Beer.Id));
+                foreach (var beer in discontinuedBeerKegs)
+                {
+                    _context.BeerKegsOnTap.First(bp => bp.Id == beer.Id).DeinstallTime = DateTime.UtcNow;
+                }
+                //update beers
                 foreach (var serve in serves)
                 {
-                    serve.Served = _context.Beers.FirstOrDefault(_ => _.Id == serve.Served.Id) ?? serve.Served;
+                    serve.Beer = _context.Beers.FirstOrDefault(_ => _.Id == serve.Beer.Id) ?? serve.Beer;
                 }
-                _context.BeerServedInPubs.AddRange(serves);
-                await _context.SaveChangesAsync();
-                result = string.Join("\r\n",
+                //add new prices
+                var newBeerPrices = serves
+                    .Where(s => !_context.BeerPrices.Any(bp =>
+                        bp.Pub.Id == pub.Id && bp.ValidTo == null && bp.Beer.Id == s.Beer.Id)).Select(s => new BeerPrice
+                    {
+                        Beer = s.Beer,
+                        Pub = pub,
+                        Price = s.Price,
+                        Updated = DateTime.UtcNow,
+                        ValidFrom = DateTime.UtcNow,
+                        Volume = s.Volume
+                    });
+                _context.BeerPrices.AddRange(newBeerPrices);
+                //add new kegs
+                var newBeerServes = serves
+                    .Where(s => !_context.BeerKegsOnTap.Any(bp =>
+                        bp.Tap.Pub.Id == pub.Id && bp.DeinstallTime == null && bp.Keg.Beer.Id == s.Beer.Id)).ToArray();
+                foreach (var serve in newBeerServes)
+                {
+                    var keg = new Keg
+                    {
+                        Volume = 30,
+                        EmptyWeight = 5,
+                        ExternalId = $"{serve.Pub.Id}_{serve.Beer.Id}_{DateTime.UtcNow.Ticks}",
+                        IsReturnable = false
+                    };
+                    var beerKeg = new BeerKeg
+                    {
+                        ArrivalDate = DateTime.UtcNow,
+                        Beer = serve.Beer,
+                        Buyer = serve.Pub,
+                        Keg = keg,
+                        InstallationDate = DateTime.UtcNow
+                    };
+                    var tap = _context.Taps.FirstOrDefault(t => t.Pub.Id == serve.Pub.Id && t.Number == serve.Tap.ToString());
+                    if (tap == null)
+                    {
+                        tap = new Tap {Pub = serve.Pub, Number = serve.Tap.ToString()};
+                        _context.Taps.Add(tap);
+                    }
+                    var kegOnTap = new BeerKegOnTap {InstallTime = DateTime.UtcNow, Keg = beerKeg, Tap = tap};
+                    _context.Kegs.Add(keg);
+                    _context.BeerKegs.Add(beerKeg);
+                    _context.BeerKegsOnTap.Add(kegOnTap);
+                }
+                sb.AppendLine(string.Join("\r\n",
                     serves.Select(
-                        s => $"{s.Tap}: {s.Served.Brewery.Name} - {s.Served.Name}, {s.Volume}l for {s.Price} UAH"));
+                        s => $"{s.Tap}: {s.Beer.Brewery.Name} - {s.Pub.Name}, {s.Volume}l for {s.Price} UAH")));
             }
-            return result;
         }
 
         // PATCH api/pubs
@@ -136,33 +189,10 @@ namespace Ontap.Controllers
         [Authorize(Policy = "AdminUser")]
         public async Task<string> Run()
         {
-            var parser = new GoogleSheetParser();
             var result = new StringBuilder();
             foreach (var pub in Pubs.Where(p => !string.IsNullOrWhiteSpace(p.ParserOptions)))
             {
-                var options = JsonConvert.DeserializeObject<Dictionary<string, object>>(pub.ParserOptions);
-                var serves = parser
-                    .Parse(pub, _context.Beers, _context.Breweries, options,
-                        _context.Countries.First(c => c.Id == "UA"), force: false, substitutions: _context.BrewerySubstitutions.ToDictionary(s => s.Name, s => s.Brewery))
-                    .Where(s => s.Served?.Brewery != null).ToArray();
-
-                if (serves.Length == 0) continue;
-
-                var beers = serves.Select(s => s.Served).Where(b => _context.Beers.All(_ => _.Id != b.Id));
-                _context.Beers.AddRange(beers);
-                _context.Breweries.AddRange(
-                    serves.Select(s => s.Served.Brewery).Where(b => _context.Breweries.All(_ => _.Id != b.Id)));
-                _context.BeerServedInPubs.RemoveRange(_context.BeerServedInPubs.Where(s => s.ServedIn.Id == pub.Id));
-                foreach (var serve in serves)
-                {
-                    serve.Served = _context.Beers.FirstOrDefault(_ => _.Id == serve.Served.Id) ?? serve.Served;
-                }
-                _context.BeerServedInPubs.AddRange(serves);
-                foreach (var s in serves)
-                {
-                    result.AppendLine(
-                        $"{pub.Name} #{s.Tap}: {s.Served.Brewery.Name} - {s.Served.Name}, {s.Volume}l for {s.Price} UAH");
-                }
+                ParsePubData(pub, result);
             }
             await _context.SaveChangesAsync();
             return result.ToString();

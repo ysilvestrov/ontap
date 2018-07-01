@@ -12,6 +12,15 @@ using Ontap.Models;
 
 namespace Ontap.Util
 {
+    public class BeerPriceInPubs
+    {
+        public Pub Pub { get; set; }
+        public decimal Volume { get; set; }
+        public DateTime Updated { get; set; }
+        public int Tap { get; set; }
+        public decimal Price { get; set; }
+        public Beer Beer { get; set; }
+    }
     public class GoogleSheetParser
     {
         public static byte[] ReadFully(Stream input)
@@ -31,13 +40,13 @@ namespace Ontap.Util
         static readonly string[] Scopes = {SheetsService.Scope.SpreadsheetsReadonly, DriveService.Scope.DriveReadonly};
         static string ApplicationName = "ontap.in.ua";
 
-        public ICollection<BeerServedInPubs> Parse(Pub pub, 
+        public ICollection<BeerPriceInPubs> Parse(Pub pub, 
             IEnumerable<Beer> enumBeers, IEnumerable<Brewery> enumBreweries, 
             Dictionary<string, object> options, Country country, bool force = false, 
             IDictionary<string, Brewery> substitutions = null,
             IDictionary<string, Beer> beerSubstitutions = null)
         {
-            var result = new List<BeerServedInPubs>();
+            var result = new List<BeerPriceInPubs>();
             var beers = new List<Beer>(enumBeers);
             var breweries = new List<Brewery>(enumBreweries);
 
@@ -96,7 +105,7 @@ namespace Ontap.Util
             driveRequest.Fields = "createdTime,modifiedTime";
 
             var time = driveRequest.Execute().ModifiedTime;
-            var lastUpdated = pub.BeerServedInPubs.Count > 0 ? pub.BeerServedInPubs.Max(b => b.Updated) : DateTime.MinValue;
+            var lastUpdated = pub.BeerPrices.Count > 0 ? pub.BeerPrices.Max(b => b.Updated) : DateTime.MinValue;
 
             if (time <= lastUpdated && !force)
                 return result;
@@ -113,18 +122,18 @@ namespace Ontap.Util
             return result;
         }
 
-        private static IList<BeerServedInPubs> GetValue(IList<IList<object>> values, Pub pub, Country country,
+        private static IList<BeerPriceInPubs> GetValue(IList<IList<object>> values, Pub pub, Country country,
             Dictionary<string, int> columns, decimal targetVolume, decimal priceMultiplicator, decimal volume,
             List<Beer> beers, List<Brewery> breweries, IDictionary<string, Brewery> substitutions,
             IDictionary<string, Beer> beerSubstitutions, DateTime updateTime)
         {
-            var result = new List<BeerServedInPubs>();
+            var result = new List<BeerPriceInPubs>();
 
             foreach (var row in values)
             {
-                var serve = new BeerServedInPubs
+                var serve = new BeerPriceInPubs
                 {
-                    ServedIn = pub,
+                    Pub = pub,
                     Volume = targetVolume,
                     Updated = updateTime.ToUniversalTime(),
                 };
@@ -242,7 +251,7 @@ namespace Ontap.Util
                                 beer.Description = row[columns["description"]].ToString();
                             }
                         }
-                        serve.Served = beer;
+                        serve.Beer = beer;
                     }
                 }
                 result.Add(serve);

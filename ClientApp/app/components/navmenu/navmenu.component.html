@@ -35,8 +35,8 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)">
-                    <a [routerLink]="['/serves']">
-                        <span class='glyphicon glyphicon-euro'></span> Цены
+                    <a [routerLink]="['/taps']">
+                        <span class='fa fa-level-down fa-fw'></span>&nbsp; Краны
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)">

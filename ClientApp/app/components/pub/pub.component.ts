@@ -4,7 +4,7 @@ import { TimerObservable } from "rxjs/observable/TimerObservable";
 import 'rxjs/add/operator/switchMap';
 import { Http } from '@angular/http';
 import { List } from "../../modules/linq";
-import {IPub, ICity, Pub, IServe} from "../../models/ontap.models";
+import {IPub, ICity, Pub} from "../../models/ontap.models";
 import {EPubService} from "../epubs/epubs.service";
 import {CityService} from "../cities/cities.service";
 import {AppComponent, AppService} from "../../modules/appComponent";

@@ -1,26 +1,28 @@
 ﻿import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { IPub, Pub, City } from "../../models/ontap.models";
+import { IPubServe, PubServe, City } from "../../models/ontap.models";
 import { AppService } from "../../modules/appComponent";
 import { Observable } from 'rxjs/Observable';
 import Loginservice = require("../login/login.service");
 
 @Injectable()
-export class EPubService extends AppService<IPub> {
+export class PubService extends AppService<IPubServe> {
     constructor(http: Http, loginService: Loginservice.LoginService) {
         super(http, loginService);
-        this.serverUrl = "api/pubs";
+        this.serverUrl = "api/pubserves";
     }
 
-    default(): IPub {
-        return new Pub({
+    default(): IPubServe {
+        return new PubServe({
             id: 'id',
             name: 'name',
             address: 'address',
             image: '',
             taplistHeaderImage: '',
             taplistFooterImage: '',
-            city: new City({ id: 'kyiv', name: 'Kyiv' }),          
+            city: new City({ id: 'kyiv', name: 'Kyiv' }),
+            serves: [],
+            lastUpdated: new Date(),
             facebookUrl: '',
             vkontakteUrl: '',
             websiteUrl: '',
@@ -30,14 +32,15 @@ export class EPubService extends AppService<IPub> {
         });
     }
 
-    new(source: IPub): IPub {
-        return new Pub(source);
+    new(source: IPubServe): IPubServe {
+        return new PubServe(source);
     }
 
-    copy(source:IPub, dest: IPub) {
+    copy(source: IPubServe, dest: IPubServe) {
         dest.name = source.name;
         dest.city = source.city;
         dest.address = source.address;
+        dest.serves = source.serves;
         dest.image = source.image;
         dest.taplistHeaderImage = source.taplistHeaderImage;
         dest.taplistFooterImage = source.taplistFooterImage;

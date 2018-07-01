@@ -20,7 +20,7 @@ namespace Ontap.Controllers
     {
         public class TaplistItem
         {
-            public int tapNumber;
+            public string tapNumber;
             public string beerName;
             public string breweryName;
             public string beerColor;
@@ -39,26 +39,40 @@ namespace Ontap.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IEnumerable<BeerServedInPubs> Serves => _context.BeerServedInPubs
-            .Include(s => s.Served)
+        public IEnumerable<BeerServedInPubs> Serves => _context.BeerPrices
+            .Where(s => s.ValidTo == null)
+            .Include(s => s.Beer)
             .ThenInclude(b => b.Brewery)
-            .Include(s => s.Served.Brewery.Country)
-            .Include(s => s.ServedIn);
+            .ThenInclude(b => b.Admins)
+            .ThenInclude(a => a.User)
+            .Include(s => s.Pub)
+            .ThenInclude(p => p.Admins)
+            .ThenInclude(a => a.User)
+            .Join(_context.BeerKegsOnTap.Where(bk => bk.DeinstallTime == null), price => new { beerId = price.Beer.Id, pubId = price.Pub.Id },
+                tap => new { beerId = tap.Keg.Beer.Id, pubId = tap.Tap.Pub.Id }, (price, tap) => new BeerServedInPubs
+                {
+                    Beer = price.Beer,
+                    Pub = price.Pub,
+                    Price = price.Price,
+                    Volume = price.Volume,
+                    Updated = price.Updated,
+                    Tap = tap.Tap.Number
+                }).ToArray();
 
         // GET: api/taplist
         [HttpGet("{id}")]
         public IEnumerable<TaplistItem> Get(string id)
         {
-            return Serves.Where(s => s.ServedIn.Id == id).OrderBy(s => s.Tap).
+            return Serves.Where(s => s.Pub.Id == id).OrderBy(s => s.Tap).
                 Select(s => new TaplistItem
             {
                 tapNumber = s.Tap,
-                beerName = s.Served.Name,
-                breweryName = s.Served.Brewery.Name,
-                abv = s.Served.Alcohol,
-                bitterness = s.Served.Ibu,
-                gravity = s.Served.Gravity,
-                beerColor = getBeerColor(s.Served),
+                beerName = s.Beer.Name,
+                breweryName = s.Beer.Brewery.Name,
+                abv = s.Beer.Alcohol,
+                bitterness = s.Beer.Ibu,
+                gravity = s.Beer.Gravity,
+                beerColor = getBeerColor(s.Beer),
                 prices = new Dictionary<string, decimal> { {s.Volume.ToString("0.##"), s.Price} }
             });
         }

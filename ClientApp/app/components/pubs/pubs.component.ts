@@ -3,8 +3,8 @@ import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
 import { Http } from '@angular/http';
 import { List } from "../../modules/linq";
-import {IPub, ICity, Pub, IServe} from "../../models/ontap.models";
-import {EPubService} from "../epubs/epubs.service";
+import {IPub, ICity, Pub} from "../../models/ontap.models";
+import {PubService} from "../pubs/pubs.service";
 import {CityService} from "../cities/cities.service";
 import {AppComponent, AppService} from "../../modules/appComponent";
 import {SortByTap} from "../app/sortbytap.pipe";
@@ -13,15 +13,19 @@ import * as moment from 'moment';
 import { LocaleService, LocalizationService } from 'angular2localization';
 import { CloudinaryOptions } from 'ng2-cloudinary';
 import { Router, ActivatedRoute } from '@angular/router';
+import Ontapmodels = require("../../models/ontap.models");
+import IPubServe = Ontapmodels.IPubServe;
+import Epubsservice = require("../epubs/epubs.service");
+import EPubService = Epubsservice.EPubService;
 
 @Component({
     selector: 'pubs',
-    providers: [EPubService],
+    providers: [PubService],
     styles: [require('./pubs.component.css')],
   template: require('./pubs.component.html')
 })
-export class PubsComponent extends AppComponent<IPub, EPubService> implements OnInit, OnDestroy {
-    public allPubs: IPub[];
+export class PubsComponent extends AppComponent<IPubServe, PubService> implements OnInit, OnDestroy {
+    public allPubs: IPubServe[];
     public cities: ICity[];
     public city: ICity;
     public pubUpdates: {};
@@ -36,7 +40,7 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
         autoUpload: true
     });
 
-    constructor(elmService: EPubService, public locale: LocaleService, public localization: LocalizationService,
+    constructor(elmService: PubService, public locale: LocaleService, public localization: LocalizationService,
         private route: ActivatedRoute,
         private router: Router) {
         super(elmService, locale, localization);
@@ -56,7 +60,7 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
         if (this.elements) {
             this.onElementsLoad(this.elements);
         }
-        this.onLoad.subscribe((s: PubsComponent, elements: IPub[]) => { this.onElementsLoad(elements) });
+        this.onLoad.subscribe((s: PubsComponent, elements: IPubServe[]) => { this.onElementsLoad(elements) });
         moment.locale(this.locale.getCurrentLanguage());
 
         this.isBrowser = typeof (document) != "undefined";
@@ -88,7 +92,7 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
         }
     }
 
-    onElementsLoad(elements:IPub[]) {
+    onElementsLoad(elements:IPubServe[]) {
         this.allPubs = elements;
         this.city = null;
         var pubCities = new List(this.allPubs)
@@ -102,7 +106,7 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
     }
 
    public recalcDates() {
-       var allDates = new List(this.allPubs).Select(p => [p.id, new List(p.serves).Select(s => s.updated).Max()]);
+       var allDates = new List(this.allPubs).Select(p => [p.id, p.lastUpdated]);
        var selectedDates = allDates.Where(t => typeof (t[1]) != "undefined" && t[1] && moment(t[1]).diff(moment().subtract(1, "year")) > 0);
        this.pubUpdates = selectedDates.ToDictionary(t => t[0], t => moment.utc(t[1]).local().calendar());          
    }
@@ -113,11 +117,11 @@ export class PubsComponent extends AppComponent<IPub, EPubService> implements On
             .First();
         this.elements = (name === "") ? 
             new List(this.allPubs)
-                .OrderByDescending((pub: IPub) => pub.serves.length)
+                .OrderByDescending((pub: IPubServe) => pub.serves.length)
                 .ToArray() :
             new List(this.allPubs)
                 .Where((pub) => pub.city.name === this.city.name)
-                .OrderByDescending((pub:IPub) => pub.serves.length)
+                .OrderByDescending((pub: IPubServe) => pub.serves.length)
                 .ToArray();
     }
 }

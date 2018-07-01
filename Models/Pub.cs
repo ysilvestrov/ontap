@@ -9,15 +9,14 @@ using Newtonsoft.Json;
 
 namespace Ontap.Models
 {
+
     public class Pub
     {
         public string Id { get; set; }
         [Required]
         public string Name { get; set; }
         public string Address { get; set; }
-        public virtual City City { get; set; }
-        [JsonProperty("serves")]
-        public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }
+        public City City { get; set; }
         public ICollection<PubAdmin> Admins { get; set; }
         public string Image { get; set; }
         public string TaplistHeaderImage { get; set; }
@@ -28,5 +27,8 @@ namespace Ontap.Models
         public string BookingUrl { get; set; }
         public string ParserOptions { get; set; }
         public int TapNumber { get; set; } = 0;
+        public IList<Tap> Taps { get; set; }
+        public IList<BeerPrice> BeerPrices { get; set; }
+        public IList<BeerKeg> BeerKegsBought { get; set; }
     }
 }

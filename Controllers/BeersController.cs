@@ -79,13 +79,18 @@ namespace Ontap.Controllers
             {
                 var replacement = _context.Beers.First(b => b.Id == replacementId);
                 _context.BeerSubstitutions.Add(new BeerSubstitution { Beer = replacement, Name = current.Name });
-                var serves = _context.BeerServedInPubs.Where(b => b.Served.Id == id);
-                foreach (var serve in serves)
+                var kegs = _context.BeerKegs.Where(b => b.Beer.Id == id);
+                foreach (var keg in kegs)
                 {
-                    serve.Served = replacement;
+                    keg.Beer = replacement;
+                }
+                var prices = _context.BeerPrices.Where(b => b.Beer.Id == id);
+                foreach (var price in prices)
+                {
+                    price.Beer = replacement;
                 }
             }
-            else if (_context.BeerServedInPubs.Any(b => b.Served.Id == id))
+            else if (_context.BeerKegs.Any(b => b.Beer.Id == id) || _context.BeerPrices.Any(b => b.Beer.Id == id))
                 throw new AlreadyExistsException("Cannot delete brewery with serves");
             _context.Beers.Remove(current);
             await _context.SaveChangesAsync();

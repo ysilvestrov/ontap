@@ -13,10 +13,15 @@ namespace Ontap.Auth
                     context => context.User.HasClaim(c => c.Type == "UserType" && userTypes.Contains(c.Value)));
         }
 
-        public static bool HasRights(this User user, BeerServedInPubs serve) => 
+        public static bool HasRights(this User user, BeerPrice price) => 
             user.IsAdmin ||
-            user.CanAdminBrewery && serve.Served.Brewery.Admins.Any(u => u.User.Id == user.Id) ||
-            user.CanAdminPub && serve.ServedIn.Admins.Any(u => u.User.Id == user.Id);
+            user.CanAdminBrewery && price.Beer.Brewery.Admins.Any(u => u.User.Id == user.Id) ||
+            user.CanAdminPub && price.Pub.Admins.Any(u => u.User.Id == user.Id);
+
+        public static bool HasRights(this User user, BeerKegOnTap keg) => 
+            user.IsAdmin ||
+            user.CanAdminBrewery && keg.Keg.Beer.Brewery.Admins.Any(u => u.User.Id == user.Id) ||
+            user.CanAdminPub && keg.Tap.Pub.Admins.Any(u => u.User.Id == user.Id);
 
         public static bool HasRights(this User user, Brewery brewery) => 
             user.IsAdmin ||

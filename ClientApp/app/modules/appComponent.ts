@@ -240,52 +240,71 @@ export class AppComponent<TInterface extends IElement, TService extends AppServi
     }
 }
 
+ @Injectable()
+ export abstract class RoAppService<TInteface> {
+     constructor(protected http: Http, protected loginService: LoginService) {
+         //console.log("Login service instantiated: " + loginService);
+     }
+
+     protected serverUrl; // URL to web API
+
+     protected  extractData(res: Response) {
+         let body = res.json();
+         return body || [];
+     }
+
+     protected handleError(error: any) {
+         // In a real world app, we might use a remote logging infrastructure
+         // We'd also dig deeper into the error to get a better message
+         let errMsg = (error.message)
+             ? error.message
+             : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+         console.error(errMsg); // log to console instead
+         return Observable.throw(errMsg);
+     }
+
+     protected get options(): RequestOptions {
+         let headers = new Headers({ 'Content-Type': 'application/json' });
+         if (this.loginService.accessToken) {
+             headers.append('Authorization', `Bearer ${this.loginService.accessToken.accessToken}`);
+         }
+         return new RequestOptions({ headers: headers });
+     }
+
+     get(): Observable<TInteface[]> {
+         return this.http.get(this.serverUrl, this.options)
+             .map(this.extractData)
+             .catch(this.handleError);
+     }
+
+     getOne(id: any): Observable<TInteface> {
+         return this.http.get(this.serverUrl + "/" + id, this.options)
+             .map(this.extractData)
+             .catch(this.handleError);
+     }
+ }
+
 @Injectable()
-export abstract class AppService<TInteface extends IElement> {
-    constructor(protected http: Http, private loginService: LoginService) {
-        console.log("Login service instantiated: "+loginService);
+export abstract class AppService<TInterface extends IElement> extends RoAppService<TInterface> {
+    constructor(protected http: Http, protected loginService: LoginService) {
+        super(http, loginService);
     }
 
-    protected serverUrl; // URL to web API
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || [];
-    }
-
-    protected handleError(error: any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        let errMsg = (error.message)
-            ? error.message
-            : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
-    }
-
-    protected get options(): RequestOptions {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        if (this.loginService.accessToken) {
-            headers.append('Authorization', `Bearer ${this.loginService.accessToken.accessToken}`);
-        }
-        return new RequestOptions({ headers: headers });
-    }
-
-    add(pub: TInteface): Observable<TInteface> {
+    add(pub: TInterface): Observable<TInterface> {
         let body = JSON.stringify(pub);
         return this.http.post(this.serverUrl, body, this.options)
             .map(this.extractData, this)
             .catch(this.handleError);
     }
 
-    change(element: TInteface): Observable<TInteface> {
+    change(element: TInterface): Observable<TInterface> {
         let body = JSON.stringify(element);
         return this.http.put(this.serverUrl + "/" + element.id, body, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    delete(element: TInteface, replacement: any): Observable<TInteface> {
+    delete(element: TInterface, replacement: any): Observable<TInterface> {
         var query = this.serverUrl + "/" + element.id;
         let options = this.options;
         if (replacement) {
@@ -298,27 +317,14 @@ export abstract class AppService<TInteface extends IElement> {
             .catch(this.handleError);
     }
 
-    get(): Observable<TInteface[]> {
-        return this.http.get(this.serverUrl, this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-    getOne(id:any): Observable<TInteface> {
-        return this.http.get(this.serverUrl + "/" + id, this.options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
-
-
-
-    abstract new(element: TInteface): TInteface;
-    copy(source: TInteface, destination: TInteface): void {
+    abstract new(element: TInterface): TInterface;
+    copy(source: TInterface, destination: TInterface): void {
         for (let key in source) {
             if (source.hasOwnProperty(key)) {
                 destination[key] = source[key];
             }
         }
     }
-    abstract default(): TInteface;
+    abstract default(): TInterface;
 }
+

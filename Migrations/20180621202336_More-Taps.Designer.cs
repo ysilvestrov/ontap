@@ -8,9 +8,10 @@ using Ontap.Models;
 namespace Ontap.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180621202336_More-Taps")]
+    partial class MoreTaps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -348,7 +349,7 @@ namespace Ontap.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Fitting");
+                    b.Property<char>("Fitting");
 
                     b.Property<bool>("HasHopinator");
 

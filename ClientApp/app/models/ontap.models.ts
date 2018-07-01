@@ -26,7 +26,6 @@ export interface IPub {
     name: string;
     address: string;
     city: ICity;
-    serves: IServe[];
     image: string;
     taplistHeaderImage: string;
     taplistFooterImage: string;
@@ -38,6 +37,11 @@ export interface IPub {
     tapNumber: number;
 }
 
+export interface IPubServe extends IPub {
+    serves: IServe[];
+    lastUpdated: Date;
+}
+
 export interface ICity {
     id: string;
     name: string;
@@ -46,14 +50,16 @@ export interface ICountry {
     id: string;
     name: string;
 }
-export interface IServe {
-    id: number;
-    served: IBeer;
-    servedIn: IPub;
+
+export interface IPrice {
     price: number;
-    tap: number;
     volume: number;
-    updated: Date;
+}
+
+export interface IServe {
+    tap: string;
+    beer: IBeer;
+    prices: IPrice[];
 }
 export interface IUser {
     id: string;
@@ -73,7 +79,6 @@ export class Pub implements IPub {
     taplistHeaderImage: string;
     taplistFooterImage: string;
     city: ICity;
-    serves: IServe[];
     facebookUrl: string;
     vkontakteUrl: string;
     websiteUrl: string;
@@ -82,6 +87,28 @@ export class Pub implements IPub {
     tapNumber: number;
 
     public constructor(init?: Partial<IPub>) {
+        Object.assign(this, init);
+    }
+}
+
+export class PubServe implements IPubServe {
+    id: string;
+    name: string;
+    address: string;
+    image: string;
+    taplistHeaderImage: string;
+    taplistFooterImage: string;
+    city: ICity;
+    serves: IServe[];
+    lastUpdated: Date;
+    facebookUrl: string;
+    vkontakteUrl: string;
+    websiteUrl: string;
+    bookingUrl: string;
+    parserOptions: string;
+    tapNumber: number;
+
+    public constructor(init?: Partial<IPubServe>) {
         Object.assign(this, init);
     }
 }
@@ -111,18 +138,21 @@ export class Beer implements IBeer {
     }
 }
 export class Serve implements IServe {
-    id: number;
-    served: IBeer;
-    servedIn: IPub;
-    price: number;
-    tap: number;
-    volume: number;
-    updated: Date;
+    beer: IBeer;
+    prices: IPrice[];
+    tap: string;
 
     public constructor(init?: Partial<IServe>) {
         Object.assign(this, init);
     }
+}
 
+export class Price implements IPrice {
+    price: number;
+    volume: number;
+    public constructor(init?: Partial<IPrice>) {
+        Object.assign(this, init);
+    }
 }
 export class Brewery implements IBrewery {
     id: string;
@@ -187,4 +217,156 @@ export class BreweryAdmin implements IBreweryAdmin {
     public constructor(init?: Partial<IBreweryAdmin>) {
         Object.assign(this, init);
     }
+}
+
+export interface IBeerKegWeight {
+    id: number;
+    keg: IBeerKeg;
+    date: Date;
+    weight: number;
+}
+
+export class BeerKegWeight implements IBeerKegWeight {
+    id: number;
+    keg: IBeerKeg;
+    date: Date;
+    weight: number;
+
+    public constructor(init?: Partial<IBeerKegWeight>) {
+        Object.assign(this, init);
+    }   
+}
+
+export interface ITap {
+    id: number;
+    pub: IPub;
+    number: string;
+    hasHopinator: boolean;
+    fitting: string;
+    nitrogenPercentage: number;
+    status: string;
+    beerKegsOnTap: IBeerKegOnTap[];
+}
+
+export class Tap implements ITap {
+    id: number;
+    pub: IPub;
+    number: string;
+    hasHopinator: boolean;
+    fitting: string;
+    nitrogenPercentage: number;
+    status: string;
+    beerKegsOnTap: IBeerKegOnTap[];
+
+    public constructor(init?: Partial<ITap>) {
+        Object.assign(this, init);
+    }   
+}
+
+export enum TapStatus {
+    Working = 2,
+    Problem = 1,
+    Free = 0
+}
+
+export interface IBeerKegOnTap {
+    id: number;
+    keg: BeerKeg;
+    tap: ITap;
+    priority: number;
+    installTime: Date;
+    deinstallTime: Date;
+}
+
+class BeerKegOnTap implements IBeerKegOnTap {
+    id: number;
+    keg: BeerKeg;
+    tap: any;
+    priority: number;
+    installTime: Date;
+    deinstallTime: Date;
+
+    public constructor(init?: Partial<IBeerKegOnTap>) {
+        Object.assign(this, init);
+    }   
+}
+
+interface IBeerKeg {
+    id: number;
+    keg: IKeg;
+    beer: IBeer;
+    owner: IBrewery;
+    buyer: IPub;
+    status: string;
+    brewingDate: Date;
+    arrivalDate: Date;
+    installationDate: Date;
+    deinstallationDate: Date;
+    bestBeforeDate: Date;
+    weights: IBeerKegWeight[];
+    beerKegsOnTap: IBeerKegOnTap[];
+}
+
+export class BeerKeg implements IBeerKeg {
+    id: number;
+    keg: IKeg;
+    beer: IBeer;
+    owner: IBrewery;
+    buyer: IPub;
+    status: string;
+    brewingDate: Date;
+    arrivalDate: Date;
+    installationDate: Date;
+    deinstallationDate: Date;
+    bestBeforeDate: Date;
+    weights: IBeerKegWeight[];
+    beerKegsOnTap: IBeerKegOnTap[];
+
+    public constructor(init?: Partial<IBeerKeg>) {
+        Object.assign(this, init);
+    }   
+}
+
+export interface IKeg {
+    id: number;
+    externalId: string;
+    fitting: string;
+    volume: number;
+    isReturnable: boolean;
+    material: string;
+    emptyWeight: number;
+    beerKegs: IBeerKeg[];    
+}
+
+export class Keg implements IKeg {
+    id: number;
+    externalId: string;
+    fitting: string;
+    volume: number;
+    isReturnable: boolean;
+    material: string;
+    emptyWeight: number;
+    beerKegs: IBeerKeg[];
+
+    public constructor(init?: Partial<IKeg>) {
+        Object.assign(this, init);
+    }
+}
+
+export interface IBeerServedInPub {
+    pub: IPub;
+    volume: number;
+    updated: Date;
+    tap: string;
+    price: number;
+    beer: IBeer;
+}
+
+export class BeerServedInPub implements IBeerServedInPub {
+    pub: IPub;
+    volume: number;
+    updated: Date;
+    tap: string;
+    price: number;
+    beer: IBeer;
 }

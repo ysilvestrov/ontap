@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace Ontap.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public Country Country { get; set; }
+        [DefaultValue(true)]
+        public bool HasOwnBeers { get; set; }
         [IgnoreDataMember]
         [JsonIgnore]
         public virtual IList<Beer> Beers { get; set; }
@@ -21,5 +24,7 @@ namespace Ontap.Models
         [IgnoreDataMember]
         [JsonIgnore]
         public ICollection<BrewerySubstitution> Substitutions { get; set; }
+
+        public IList<BeerKeg> BeerKegsOwned { get; set; }
     }
 }

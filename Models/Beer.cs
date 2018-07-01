@@ -47,7 +47,11 @@ namespace Ontap.Models
 
         [IgnoreDataMember]
         [JsonIgnore]
-        public virtual IList<BeerServedInPubs> BeerServedInPubs { get; set; }
+        public virtual IList<BeerPrice> BeerPrices { get; set; }
+
+        [IgnoreDataMember]
+        [JsonIgnore]
+        public virtual IList<BeerKeg> BeerKegs { get; set; }
 
         public virtual Brewery Brewery { get; set; }
         public string Image { get; set; }

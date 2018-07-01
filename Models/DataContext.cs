@@ -11,7 +11,7 @@ namespace Ontap.Models
         DbSet<Pub> Pubs { get; set; }
         DbSet<Beer> Beers { get; set; }
         DbSet<City> Cities { get; set; }
-        DbSet<BeerServedInPubs> BeerServedInPubs { get; set; }
+        DbSet<BeerPrice> BeerPrices { get; set; }
         DbSet<Brewery> Breweries { get; set; }
         DbSet<Country> Countries { get; set; }
         DbSet<User> Users { get; set; }
@@ -19,6 +19,11 @@ namespace Ontap.Models
         DbSet<BreweryAdmin> BreweryAdmins { get; set; }
         DbSet<BrewerySubstitution> BrewerySubstitutions { get; set; }
         DbSet<BeerSubstitution> BeerSubstitutions { get; set; }
+        DbSet<BeerKeg> BeerKegs { get; set; }
+        DbSet<BeerKegOnTap> BeerKegsOnTap { get; set; }
+        DbSet<BeerKegWeight> BeerKegWeights { get; set; }
+        DbSet<Tap> Taps { get; set; }
+        DbSet<Keg> Kegs { get; set; }
     }
 
     public class DataContext : DbContext, IDataContext
@@ -30,20 +35,11 @@ namespace Ontap.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BeerServedInPubs>()
-                .HasOne(p => p.Served)
-                .WithMany(b => b.BeerServedInPubs)
+            modelBuilder.Entity<Tap>()
+                .HasOne(t => t.Pub)
+                .WithMany(t => t.Taps)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<BeerServedInPubs>()
-                .HasOne(p => p.ServedIn)
-                .WithMany(b => b.BeerServedInPubs)
-                .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<BeerServedInPubs>()
-                .Property(s => s.Tap)
-                .HasDefaultValue(1);
-            modelBuilder.Entity<BeerServedInPubs>()
-                .Property(s => s.Volume)
-                .HasDefaultValue(0.5m);
             modelBuilder.Entity<BreweryAdmin>()
                 .HasOne(ba => ba.User)
                 .WithMany(u => u.BreweryAdmins)
@@ -68,10 +64,52 @@ namespace Ontap.Models
                 .HasOne(ba => ba.Pub)
                 .WithMany(b => b.Admins)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerKeg>()
+                .HasOne(bk => bk.Beer)
+                .WithMany(b => b.BeerKegs)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerKeg>()
+                .HasOne(bk => bk.Buyer)
+                .WithMany(b => b.BeerKegsBought)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerKeg>()
+                .HasOne(bk => bk.Owner)
+                .WithMany(b => b.BeerKegsOwned)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerKeg>()
+                .HasOne(bk => bk.Keg)
+                .WithMany(b => b.BeerKegs)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerKegOnTap>()
+                .HasOne(bk => bk.Keg)
+                .WithMany(b => b.BeerKegsOnTap)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerKegOnTap>()
+                .HasOne(bk => bk.Tap)
+                .WithMany(b => b.BeerKegsOnTap)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerKegWeight>()
+                .HasOne(bk => bk.Keg)
+                .WithMany(b => b.Weights)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerPrice>()
+                .HasOne(bk => bk.Beer)
+                .WithMany(b => b.BeerPrices)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BeerPrice>()
+                .HasOne(bk => bk.Pub)
+                .WithMany(b => b.BeerPrices)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Beer>()
                 .Property(b => b.ServeKind)
                 .HasDefaultValue(Beer.Serve.OnTap);
-
         }
 
         public void EnsureSeedData(IConfigurationRoot configuration)
@@ -162,12 +200,6 @@ namespace Ontap.Models
                     //Serves = new List<Beer>{AbbeyDubbelBeer, MildAleBeer}
                 };
 
-                BeerServedInPubs.RemoveRange(
-                    BeerServedInPubs.Where(s =>
-                            s.ServedIn.Id == mohnatyyHmilPub.Id || s.ServedIn.Id == redDoorPub.Id ||
-                            s.Served.Id == abbeyDubbelBeer.Id || s.Served.Id == sanDiegoApaBeer.Id ||
-                            s.Served.Id == mildAleBeer.Id
-                    ));
                 Pubs.RemoveRange(Pubs.Where(p => p.Id == mohnatyyHmilPub.Id || p.Id == redDoorPub.Id));
                 Beers.RemoveRange(
                     Beers.Where(b => b.Id == abbeyDubbelBeer.Id || b.Id == sanDiegoApaBeer.Id || b.Id == mildAleBeer.Id));
@@ -181,15 +213,6 @@ namespace Ontap.Models
                 Pubs.AddRange(mohnatyyHmilPub, redDoorPub);
                 SaveChanges();
 
-                BeerServedInPubs.AddRange(
-                    new BeerServedInPubs {Served = abbeyDubbelBeer, ServedIn = mohnatyyHmilPub, Price = 40},
-                    new BeerServedInPubs {Served = mildAleBeer, ServedIn = mohnatyyHmilPub, Price = 40},
-                    new BeerServedInPubs {Served = abbeyDubbelBeer, ServedIn = redDoorPub, Price = 50},
-                    new BeerServedInPubs {Served = mildAleBeer, ServedIn = redDoorPub, Price = 45},
-                    new BeerServedInPubs {Served = sanDiegoApaBeer, ServedIn = redDoorPub, Price = 50}
-                );
-
-                SaveChanges();
             }
             if (Countries.Count() == 1)
             {
@@ -445,12 +468,30 @@ namespace Ontap.Models
                     );
                 SaveChanges();
             }
+            if (!Taps.Any())
+            {
+                foreach (var pub in Pubs)
+                {
+                    for (int i = 0; i < pub.TapNumber; i++)
+                    {
+                        var tap = new Tap
+                        {
+                            Number = i.ToString(),
+                            Status = TapStatus.Free,
+                            NitrogenPercentage = 0,
+                            Pub = Pubs.First(p => p.Id == pub.Id)
+                        };
+                        Taps.Add(tap);
+                    }
+                }
+                SaveChanges();
+            }
         }
 
         public DbSet<Pub> Pubs { get; set; }
         public DbSet<Beer> Beers { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<BeerServedInPubs> BeerServedInPubs { get; set; }
+        public DbSet<BeerPrice> BeerPrices { get; set; }      
         public DbSet<Brewery> Breweries { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<User> Users { get; set; }
@@ -458,5 +499,10 @@ namespace Ontap.Models
         public DbSet<BreweryAdmin> BreweryAdmins { get; set; }
         public DbSet<BrewerySubstitution> BrewerySubstitutions { get; set; }
         public DbSet<BeerSubstitution> BeerSubstitutions { get; set; }
+        public DbSet<BeerKeg> BeerKegs { get; set; }
+        public DbSet<BeerKegOnTap> BeerKegsOnTap { get; set; }
+        public DbSet<BeerKegWeight> BeerKegWeights { get; set; }
+        public DbSet<Tap> Taps { get; set; }
+        public DbSet<Keg> Kegs { get; set; }
     }
 }
