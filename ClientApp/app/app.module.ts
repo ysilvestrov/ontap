@@ -17,6 +17,7 @@ import { LocaleComponent } from "./components/locale/locale.component";
 import { PubAdminsComponent } from "./components/pubadmins/pubadmins.component";
 import { BreweryAdminsComponent } from "./components/breweryadmins/breweryadmins.component";
 import { TapsComponent } from "./components/taps/taps.component";
+import { PricesComponent } from "./components/prices/prices.component";
 import { HomeComponent } from "./components/home/home.component";
 import { SelectorComponent } from "./components/selector/selector.component";
 import { PrintComponent } from "./components/print/print.component";
@@ -100,6 +101,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         BreweryAdminsComponent,
         UsersComponent,
         TapsComponent,
+        PricesComponent,
         SelectorComponent,
         LocaleComponent,
         PrintComponent,
@@ -125,6 +127,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
             { path: "epubs", component: EPubsComponent },
             { path: "pubs", component: PubsComponent },
             { path: "taps", component: TapsComponent },
+            { path: "prices", component: PricesComponent },
             { path: "pub/:id", component: PubComponent },
             { path: "users", component: UsersComponent },
             { path: "pub-admins", component: PubAdminsComponent },

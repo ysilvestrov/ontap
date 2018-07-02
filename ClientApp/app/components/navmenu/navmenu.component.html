@@ -35,6 +35,11 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)">
+                    <a [routerLink]="['/prices']">
+                        <span class='fa fa-eur fa-fw'></span>&nbsp; Цены
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)">
                     <a [routerLink]="['/taps']">
                         <span class='fa fa-level-down fa-fw'></span>&nbsp; Краны
                     </a>

@@ -370,3 +370,29 @@ export class BeerServedInPub implements IBeerServedInPub {
     price: number;
     beer: IBeer;
 }
+
+export interface IBeerPrice {
+    id: number;
+    beer: IBeer;
+    pub: IPub;
+    price: number;
+    volume: number;
+    validFrom: Date;
+    validTo: Date;
+    updated: Date;
+}
+
+export class BeerPrice implements IBeerPrice {
+    id: number;
+    beer: IBeer;
+    pub: IPub;
+    price: number;
+    volume: number;
+    validFrom: Date;
+    validTo: Date;
+    updated: Date;
+
+    public constructor(init?: Partial<IBeerPrice>) {
+        Object.assign(this, init);
+    }
+}

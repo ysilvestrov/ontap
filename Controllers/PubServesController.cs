@@ -102,6 +102,7 @@ namespace Ontap.Controllers
             .ThenInclude(b => b.Brewery)
             .ThenInclude(b => b.Country)
             .OrderBy(p => p.Name)
+            .AsNoTracking()
             .Select(p => new PubServe(p))
             .ToArray();
 
