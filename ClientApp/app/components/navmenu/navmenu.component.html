@@ -44,6 +44,11 @@
                         <span class='fa fa-level-down fa-fw'></span>&nbsp; Краны
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)">
+                    <a [routerLink]="['/kegs']">
+                        <span class='fa fa-cubes fa-fw'></span>&nbsp; Кеги
+                    </a>
+                </li>
                 <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)">
                     <a [routerLink]="['/breweries']">
                         <span class='glyphicon glyphicon-star'></span> Пивоварни

@@ -18,7 +18,7 @@ export class TapService extends AppService<ITap> {
             fitting: "A",
             hasHopinator: false,
             nitrogenPercentage: 0,
-            status: "Free"          
+            status: 1         
         });
     }
 

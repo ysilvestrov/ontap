@@ -13,11 +13,12 @@ namespace Ontap.Models
         public Brewery Owner { get; set; }
         public Pub Buyer { get; set; }
         public KegStatus Status { get; set; }
-        public DateTime BrewingDate { get; set; }
-        public DateTime ArrivalDate { get; set; }
-        public DateTime InstallationDate { get; set; }
-        public DateTime DeinstallationDate { get; set; }
-        public DateTime BestBeforeDate { get; set; }
+        public DateTime? BrewingDate { get; set; }
+        public DateTime? PackageDate { get; set; }
+        public DateTime? ArrivalDate { get; set; }
+        public DateTime? InstallationDate { get; set; }
+        public DateTime? DeinstallationDate { get; set; }
+        public DateTime? BestBeforeDate { get; set; }
         public IList<BeerKegWeight> Weights { get; set; }
         public IList<BeerKegOnTap> BeerKegsOnTap { get; set; }
     }

@@ -158,6 +158,7 @@ namespace Ontap.Controllers
                     var beerKeg = new BeerKeg
                     {
                         ArrivalDate = DateTime.UtcNow,
+                        PackageDate = DateTime.UtcNow.AddDays(-1),
                         Beer = serve.Beer,
                         Buyer = serve.Pub,
                         Keg = keg,

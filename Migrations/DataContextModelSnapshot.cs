@@ -59,25 +59,27 @@ namespace Ontap.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("ArrivalDate");
+                    b.Property<DateTime?>("ArrivalDate");
 
                     b.Property<string>("BeerId")
                         .IsRequired();
 
-                    b.Property<DateTime>("BestBeforeDate");
+                    b.Property<DateTime?>("BestBeforeDate");
 
-                    b.Property<DateTime>("BrewingDate");
+                    b.Property<DateTime?>("BrewingDate");
 
                     b.Property<string>("BuyerId");
 
-                    b.Property<DateTime>("DeinstallationDate");
+                    b.Property<DateTime?>("DeinstallationDate");
 
-                    b.Property<DateTime>("InstallationDate");
+                    b.Property<DateTime?>("InstallationDate");
 
                     b.Property<int?>("KegId")
                         .IsRequired();
 
                     b.Property<string>("OwnerId");
+
+                    b.Property<DateTime?>("PackageDate");
 
                     b.Property<int>("Status");
 
@@ -275,7 +277,7 @@ namespace Ontap.Migrations
 
                     b.Property<string>("ExternalId");
 
-                    b.Property<char>("Fitting");
+                    b.Property<string>("Fitting");
 
                     b.Property<bool>("IsReturnable");
 

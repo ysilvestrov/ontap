@@ -7,10 +7,11 @@ namespace Ontap.Models
 {
     public enum KegStatus
     {
-        Waiting,
-        OnTap,
-        Empty,
-        Problematic
+        Waiting = 0,
+        OnTap = 1,
+        Empty = 2,
+        Problematic = 4,
+        Inactive = 8
     }
 
     public class Keg
@@ -18,7 +19,7 @@ namespace Ontap.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string ExternalId { get; set; }
-        public char Fitting { get; set; }
+        public string Fitting { get; set; }
         public decimal Volume { get; set; }
         public bool IsReturnable { get; set; }
         public string Material { get; set; }

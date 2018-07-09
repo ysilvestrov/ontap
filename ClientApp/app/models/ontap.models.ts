@@ -244,7 +244,7 @@ export interface ITap {
     hasHopinator: boolean;
     fitting: string;
     nitrogenPercentage: number;
-    status: string;
+    status: number;
     beerKegsOnTap: IBeerKegOnTap[];
 }
 
@@ -255,7 +255,7 @@ export class Tap implements ITap {
     hasHopinator: boolean;
     fitting: string;
     nitrogenPercentage: number;
-    status: string;
+    status: number;
     beerKegsOnTap: IBeerKegOnTap[];
 
     public constructor(init?: Partial<ITap>) {
@@ -291,34 +291,44 @@ class BeerKegOnTap implements IBeerKegOnTap {
     }   
 }
 
-interface IBeerKeg {
+export enum KegStatus {
+    Waiting = 0,
+    OnTap = 1,
+    Empty = 2,
+    Problematic = 4,
+    Inactive = 8
+}
+
+export interface IBeerKeg {
     id: number;
     keg: IKeg;
     beer: IBeer;
     owner: IBrewery;
     buyer: IPub;
-    status: string;
+    status: KegStatus;
     brewingDate: Date;
     arrivalDate: Date;
     installationDate: Date;
     deinstallationDate: Date;
     bestBeforeDate: Date;
+    packageDate: Date;
     weights: IBeerKegWeight[];
     beerKegsOnTap: IBeerKegOnTap[];
 }
 
-export class BeerKeg implements IBeerKeg {
+export class BeerKeg implements IBeerKeg {    
     id: number;
     keg: IKeg;
     beer: IBeer;
     owner: IBrewery;
     buyer: IPub;
-    status: string;
+    status: KegStatus;
     brewingDate: Date;
     arrivalDate: Date;
     installationDate: Date;
     deinstallationDate: Date;
     bestBeforeDate: Date;
+    packageDate: Date;
     weights: IBeerKegWeight[];
     beerKegsOnTap: IBeerKegOnTap[];
 
