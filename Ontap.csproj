@@ -53,6 +53,9 @@
     <Folder Include="Translit\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClientApp\app\components\beerkegs\beerkegs.service.ts" />
+  </ItemGroup>
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\services\bjcp.service.ts" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">

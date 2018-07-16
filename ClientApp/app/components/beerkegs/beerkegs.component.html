@@ -1,0 +1,252 @@
+﻿<h1>Редактировать краны в пабах</h1>
+
+<p>На этой странице можно редактировать какое пиво в какой кег налито.</p>
+
+<p *ngIf="!elements">
+    <em>Loading...</em>
+</p>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+</div>
+
+
+<!--
+id: number;
+keg: IKeg;
+beer: IBeer;
+owner: IBrewery;
+buyer: IPub;
+status: KegStatus;
+brewingDate: Date;
+arrivalDate: Date;
+installationDate: Date;
+deinstallationDate: Date;
+bestBeforeDate: Date;
+packageDate: Date;         
+-->
+<table class='table' *ngIf="elements">
+    <thead>
+        <tr>
+            <th class="col-md-2">Кег</th>
+            <th class="col-md-2">Пиво</th>
+            <th class="col-md-2">Владелец</th>
+            <th class="col-md-2">Покупатель</th>
+            <th class="col-md-1">Статус</th>
+            <th class="col-md-1">Даты</th>
+            <th class="col-md-2">Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let keg of elements">
+            <td>
+                <span *ngIf="!editing || (editing.id != keg.id)">
+                    {{ keg.keg.externalId }}
+                </span>
+                <span *ngIf="editing && (editing.id == keg.id)">
+                    <select class="form-control" [(ngModel)]="editing.keg.id" (change)="onEditChangeKeg($event.target.value)">
+                        <option *ngFor="let keg of kegs" [value]="keg.id">{{keg.externalId}}</option>
+                    </select>
+                </span>
+            </td>
+            <td>
+                <span *ngIf="!editing || (editing.id != keg.id)">
+                    {{ keg.beer.name }}
+                </span>
+                <span *ngIf="editing && (editing.id == keg.id)">
+                    <select class="form-control" [(ngModel)]="editing.beer.id" (change)="onEditChangeBeer($event.target.value)">
+                        <option *ngFor="let beer of beers" [value]="beer.id">{{beer.brewery.name}}-{{beer.name}}</option>
+                    </select>
+                </span>
+            </td>
+            <td>
+                <span *ngIf="!editing || (editing.id != keg.id)">
+                    {{ keg.owner.name }}
+                </span>
+                <span *ngIf="editing && (editing.id == keg.id)">
+                    <select class="form-control" [(ngModel)]="editing.owner.id" (change)="onEditChangeOwner($event.target.value)">
+                        <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
+                    </select>
+                </span>
+            </td>
+            <td>
+                <span *ngIf="!editing || (editing.id != keg.id)">
+                    {{ keg.buyer.name }}
+                </span>
+                <span *ngIf="editing && (editing.id == keg.id)">
+                    <select class="form-control" [(ngModel)]="editing.buyer.id" (change)="onEditChangeBuyer($event.target.value)">
+                        <option *ngFor="let pub of pubs" [value]="pub.id">{{pub.name}}</option>
+                    </select>
+                </span>
+            </td>
+            <!--Waiting = 0,
+            OnTap = 1,
+            Empty = 2,
+            Problematic = 4,
+            Inactive = 8-->            
+            <td>
+                <span *ngIf="!editing || (editing.id != keg.id)">
+                    <i class="fa fa-pause" aria-hidden="true" title="Waiting" *ngIf="keg.status == KegStatus.Waiting"></i>
+                    <i class="fa fa-check" aria-hidden="true" title="OnTap" *ngIf="keg.status == KegStatus.OnTap"></i>
+                    <i class="fa fa-battery-empty" aria-hidden="true" title="Empty" *ngIf="keg.status == KegStatus.Empty"></i>
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true" title="Problematic" *ngIf="keg.status == KegStatus.Problematic"></i>
+                    <i class="fa fa-trash" aria-hidden="true" title="Inactive" *ngIf="keg.status == KegStatus.Inactive"></i>
+                </span>
+                <span *ngIf="editing && (editing.id == keg.id)">
+                    <select class="form-control" [(ngModel)]="editing.status" data-show-icon="true">
+                        <option [value]="KegStatus.Waiting">&#9208;</option>
+                        <option [value]="KegStatus.OnTap" >&#10003;</option>
+                        <option [value]="KegStatus.Empty">🔋</option>
+                        <option [value]="KegStatus.Problematic">&#9888;</option>
+                        <option [value]="KegStatus.Inactive">🗑</option>
+                    </select>
+                </span>
+            </td>
+            <!--Example of calendar
+            Example of calendar-check-o
+            Example of calendar-minus-o
+            Example of calendar-o
+            Example of calendar-plus-o
+            Example of calendar-times-o-->
+            <!--brewingDate: Date;
+            packageDate: Date;
+            arrivalDate: Date;
+            installationDate: Date;
+            deinstallationDate: Date;
+            bestBeforeDate: Date;-->
+            <td>
+                <div *ngIf="!editing || (editing.id != keg.id)">
+                    <div *ngIf="keg.brewingDate">
+                        <i class="fa fa-calendar" aria-hidden="true" title="Brewing Date"></i>&nbsp;{{keg.brewingDate | date:'y&#x2011;MM&#x2011;dd'}}
+                    </div>
+                    <div *ngIf="keg.packageDate">
+                        <i class="fa fa-calendar-o" aria-hidden="true" title="Package Date"></i>&nbsp;{{keg.packageDate | date:'y&#x2011;MM&#x2011;dd'}}
+                    </div>
+                    <div *ngIf="keg.arrivalDate">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true" title="Arrival Date"></i>&nbsp;{{keg.arrivalDate | date:'y&#x2011;MM&#x2011;dd'}}
+                    </div>
+                    <div *ngIf="keg.installationDate">
+                        <i class="fa fa-calendar-plus-o" aria-hidden="true" title="Installation Date"></i>&nbsp;{{keg.installationDate | date:'y&#x2011;MM&#x2011;dd'}}
+                    </div>
+                    <div *ngIf="keg.deinstallationDate">
+                        <i class="fa fa-calendar-minus-o" aria-hidden="true" title="Deinstallation Date"></i>&nbsp;{{keg.deinstallationDate | date:'y&#x2011;MM&#x2011;dd'}}
+                    </div>
+                    <div *ngIf="keg.bestBeforeDate">
+                        <i class="fa fa-calendar-times-o" aria-hidden="true" title="Best Before Date"></i>&nbsp;{{keg.bestBeforeDate | date:'y&#x2011;MM&#x2011;dd'}}
+                    </div>
+                </div>
+                <div *ngIf="editing && (editing.id == keg.id)">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="editing-brewingDate"><i class="fa fa-calendar" aria-hidden="true" title="Brewing Date"></i></span>
+                        <input type="date" [(ngModel)]="editing.brewingDate" class="form-control" aria-describedby="editing-brewingDate">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="editing-packageDate"><i class="fa fa-calendar-o" aria-hidden="true" title="Package Date"></i></span>
+                        <input type="date" [(ngModel)]="editing.packageDate" class="form-control" aria-describedby="editing-packageDate">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="editing-arrivalDate"><i class="fa fa-calendar-check-o" aria-hidden="true" title="Arrival Date"></i></span>
+                        <input type="date" [(ngModel)]="editing.arrivalDate" class="form-control" aria-describedby="editing-arrivalDate">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="editing-installationDate"><i class="fa fa-calendar-plus-o" aria-hidden="true" title="Installation Date"></i></span>
+                        <input type="date" [(ngModel)]="editing.installationDate" class="form-control" aria-describedby="editing-installationDate">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="editing-deinstallationDate"><i class="fa fa-calendar-minus-o" aria-hidden="true" title="Deinstallation Date"></i></span>
+                        <input type="date" [(ngModel)]="editing.deinstallationDate" class="form-control" aria-describedby="editing-deinstallationDate">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="editing-bestBeforeDate"><i class="fa fa-calendar-times-o" aria-hidden="true" title="Best Before Date"></i></span>
+                        <input type="date" [(ngModel)]="editing.bestBeforeDate" class="form-control" aria-describedby="editing-bestBeforeDate">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span *ngIf="!editing || (editing.id != keg.id)">
+                    <button (click)="edit(keg.id)" type="button" class="btn btn-default" aria-label="Edit">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </button>
+                </span>
+                <span *ngIf="editing && (editing.id == keg.id)">
+                    <button (click)="save()" type="button" class="btn btn-primary" aria-label="Save">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    </button>
+                    <button (click)="delete()" type="button" class="btn btn-default" aria-label="Cancel">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                    <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </span>
+            </td>
+        </tr>
+    <tr *ngIf="adding">
+        <td>
+            <select class="form-control" [(ngModel)]="adding.keg.id" (change)="onAddChangeKeg($event.target.value)">
+                <option *ngFor="let keg of kegs" [value]="keg.id">{{keg.externalId}}</option>
+            </select>
+        </td>
+        <td>
+            <select class="form-control" [(ngModel)]="adding.beer.id" (change)="onAddChangeBeer($event.target.value)">
+                <option *ngFor="let beer of beers" [value]="beer.id">{{beer.brewery.name}}-{{beer.name}}</option>
+            </select>
+        </td>
+        <td>
+            <select class="form-control" [(ngModel)]="adding.owner.id" (change)="onAddChangeOwner($event.target.value)">
+                <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
+            </select>
+        </td>
+        <td>
+            <select class="form-control" [(ngModel)]="adding.buyer.id" (change)="onAddChangeBuyer($event.target.value)">
+                <option *ngFor="let pub of pubs" [value]="pub.id">{{pub.name}}</option>
+            </select>
+        </td>
+        <td>
+            <select class="form-control" [(ngModel)]="adding.status" data-show-icon="true">
+                <option [value]="KegStatus.Waiting">&#9208;</option>
+                <option [value]="KegStatus.OnTap" >&#10003;</option>
+                <option [value]="KegStatus.Empty">🔋</option>
+                <option [value]="KegStatus.Problematic">&#9888;</option>
+                <option [value]="KegStatus.Inactive">🗑</option>
+            </select>
+        </td>
+        <td>
+            <div class="input-group">
+                <span class="input-group-addon" id="adding-brewingDate"><i class="fa fa-calendar" aria-hidden="true" title="Brewing Date"></i></span>
+                <input type="date" [(ngModel)]="adding.brewingDate" class="form-control" aria-describedby="adding-brewingDate">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="adding-packageDate"><i class="fa fa-calendar-o" aria-hidden="true" title="Package Date"></i></span>
+                <input type="date" [(ngModel)]="adding.packageDate" class="form-control" aria-describedby="adding-packageDate">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="adding-arrivalDate"><i class="fa fa-calendar-check-o" aria-hidden="true" title="Arrival Date"></i></span>
+                <input type="date" [(ngModel)]="adding.arrivalDate" class="form-control" aria-describedby="adding-arrivalDate">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="adding-installationDate"><i class="fa fa-calendar-plus-o" aria-hidden="true" title="Installation Date"></i></span>
+                <input type="date" [(ngModel)]="adding.installationDate" class="form-control" aria-describedby="adding-installationDate">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="adding-deinstallationDate"><i class="fa fa-calendar-minus-o" aria-hidden="true" title="Deinstallation Date"></i></span>
+                <input type="date" [(ngModel)]="adding.deinstallationDate" class="form-control" aria-describedby="adding-deinstallationDate">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="adding-bestBeforeDate"><i class="fa fa-calendar-times-o" aria-hidden="true" title="Best Before Date"></i></span>
+                <input type="date" [(ngModel)]="adding.bestBeforeDate" class="form-control" aria-describedby="adding-bestBeforeDate">
+            </div>
+        </td>
+        <td>
+            <button (click)="add()" type="button" class="btn btn-primary" aria-label="Add">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+            </button>
+            <button (click)="cancelEdit()" type="button" class="btn btn-default" aria-label="Cancel">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="startAdd()" type="button" class="btn btn-default" aria-label="Add">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+</button>
