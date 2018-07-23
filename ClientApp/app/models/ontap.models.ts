@@ -278,7 +278,7 @@ export interface IBeerKegOnTap {
     deinstallTime: Date;
 }
 
-class BeerKegOnTap implements IBeerKegOnTap {
+export class BeerKegOnTap implements IBeerKegOnTap {
     id: number;
     keg: BeerKeg;
     tap: any;

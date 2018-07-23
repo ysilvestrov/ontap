@@ -54,6 +54,11 @@
                         <span class='fa fa-battery fa-fw'></span>&nbsp; Пиво в кегах
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)">
+                    <a [routerLink]="['/beerkegsontap']">
+                        <span class='fa fa-podcast fa-fw'></span>&nbsp; Кеги на кранах
+                    </a>
+                </li>
                 <li [routerLinkActive]="['link-active']" *ngIf="loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)">
                     <a [routerLink]="['/breweries']">
                         <span class='glyphicon glyphicon-star'></span> Пивоварни

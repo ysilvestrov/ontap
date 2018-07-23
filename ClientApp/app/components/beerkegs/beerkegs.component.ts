@@ -118,7 +118,7 @@ export class BeerKegsComponent extends  AppComponent<IBeerKeg, BeerKegService> {
         this.onChangeKeg(this.adding, id);
     }
 
-    onChangeKeg(obj: IBeerKeg, id:string) {
-        obj.beer = new List(this.beers).Where(c => c.id === id).First();
+    onChangeKeg(obj: IBeerKeg, id:number) {
+        obj.keg = new List(this.kegs).Where(c => c.id === id).First();
     }
 }
