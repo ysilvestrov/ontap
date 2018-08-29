@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "79baaa39a8a35c29c45a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0b799d438cf0328cf69d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(711)(__webpack_require__.s = 711);
+/******/ 	return hotCreateRequire(714)(__webpack_require__.s = 714);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2521,7 +2521,7 @@ module.exports = (__webpack_require__(3))(0);
                 module && module.exports) {
             try {
                 oldLocale = globalLocale._abbr;
-                __webpack_require__(398)("./" + name);
+                __webpack_require__(401)("./" + name);
                 // because defineLocale currently also sets the global locale, we
                 // want to undo that for lazy loaded locales
                 locale_locales__getSetGlobalLocale(oldLocale);
@@ -5012,11 +5012,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var Linq = __webpack_require__(20);
-var http_1 = __webpack_require__(11);
+var Linq = __webpack_require__(19);
+var http_1 = __webpack_require__(10);
 var Observable_1 = __webpack_require__(0);
 __webpack_require__(60);
-var StronglyTypedEvents_1 = __webpack_require__(362);
+var StronglyTypedEvents_1 = __webpack_require__(364);
 var login_service_1 = __webpack_require__(9);
 var angular2localization_1 = __webpack_require__(8);
 var ng2_cloudinary_1 = __webpack_require__(29);
@@ -5363,18 +5363,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Locale", function() { return __WEBPACK_IMPORTED_MODULE_2__src_services_locale__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_services_Intl_support__ = __webpack_require__(35);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IntlSupport", function() { return __WEBPACK_IMPORTED_MODULE_3__src_services_Intl_support__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__src_services_locale_parser__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__src_services_locale_parser__ = __webpack_require__(130);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LocaleParser", function() { return __WEBPACK_IMPORTED_MODULE_4__src_services_locale_parser__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NumberCode", function() { return __WEBPACK_IMPORTED_MODULE_4__src_services_locale_parser__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__src_pipes_translate_pipe__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__src_pipes_translate_pipe__ = __webpack_require__(129);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "TranslatePipe", function() { return __WEBPACK_IMPORTED_MODULE_5__src_pipes_translate_pipe__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__src_pipes_locale_date_pipe__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__src_pipes_locale_date_pipe__ = __webpack_require__(127);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LocaleDatePipe", function() { return __WEBPACK_IMPORTED_MODULE_6__src_pipes_locale_date_pipe__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__src_pipes_locale_number_pipe__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__src_pipes_locale_number_pipe__ = __webpack_require__(128);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LocaleDecimalPipe", function() { return __WEBPACK_IMPORTED_MODULE_7__src_pipes_locale_number_pipe__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LocalePercentPipe", function() { return __WEBPACK_IMPORTED_MODULE_7__src_pipes_locale_number_pipe__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LocaleCurrencyPipe", function() { return __WEBPACK_IMPORTED_MODULE_7__src_pipes_locale_number_pipe__["c"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__src_directives_locale_number_validator_directive__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__src_directives_locale_number_validator_directive__ = __webpack_require__(126);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "LocaleNumberValidator", function() { return __WEBPACK_IMPORTED_MODULE_8__src_directives_locale_number_validator_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "validateLocaleNumber", function() { return __WEBPACK_IMPORTED_MODULE_8__src_directives_locale_number_validator_directive__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_core__ = __webpack_require__(1);
@@ -5482,7 +5482,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var Observable_1 = __webpack_require__(0);
 __webpack_require__(60);
 var moment = __webpack_require__(2);
@@ -5550,6 +5550,12 @@ exports.LoginService = LoginService;
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(3))(194);
+
+/***/ }),
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5606,12 +5612,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(3))(194);
 
 /***/ }),
 /* 12 */
@@ -5848,30 +5848,6 @@ exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
 
 /***/ }),
 /* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NG_VALUE_ACCESSOR; });
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * Used to provide a {@link ControlValueAccessor} for form controls.
- *
- * See {@link DefaultValueAccessor} for how to implement one.
- * @stable
- */
-var /** @type {?} */ NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValueAccessor');
-//# sourceMappingURL=control_value_accessor.js.map
-
-/***/ }),
-/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6336,6 +6312,30 @@ exports.Enumerable = Enumerable;
 
 
 /***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NG_VALUE_ACCESSOR; });
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
+ * Used to provide a {@link ControlValueAccessor} for form controls.
+ *
+ * See {@link DefaultValueAccessor} for how to implement one.
+ * @stable
+ */
+var /** @type {?} */ NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValueAccessor');
+//# sourceMappingURL=control_value_accessor.js.map
+
+/***/ }),
 /* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6343,9 +6343,9 @@ exports.Enumerable = Enumerable;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(123);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_lang__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__private_import_core__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__private_import_core__ = __webpack_require__(125);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return NG_VALIDATORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NG_ASYNC_VALIDATORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Validators; });
@@ -6675,7 +6675,7 @@ function ControlContainer_tsickle_Closure_declarations() {
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var platform_browser_1 = __webpack_require__(696);
+var platform_browser_1 = __webpack_require__(699);
 /**
  * Components helper class to easily work with
  * allows to:
@@ -7126,15 +7126,15 @@ function NgControl_tsickle_Closure_declarations() {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cloudinary_module__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cloudinary_module__ = __webpack_require__(426);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Ng2CloudinaryModule", function() { return __WEBPACK_IMPORTED_MODULE_0__cloudinary_module__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cloudinary_options_class__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cloudinary_options_class__ = __webpack_require__(424);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryOptions", function() { return __WEBPACK_IMPORTED_MODULE_1__cloudinary_options_class__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cloudinary_transforms_class__ = __webpack_require__(268);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryTransforms", function() { return __WEBPACK_IMPORTED_MODULE_2__cloudinary_transforms_class__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__ = __webpack_require__(425);
 /* harmony reexport (binding) */ if(__webpack_require__.o(__WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__, "CloudinaryUploader")) __webpack_require__.d(__webpack_exports__, "CloudinaryUploader", function() { return __WEBPACK_IMPORTED_MODULE_3__cloudinary_uploader_service__["CloudinaryUploader"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(110);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryImageService", function() { return __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__cloudinary_image_component__ = __webpack_require__(267);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CloudinaryImageComponent", function() { return __WEBPACK_IMPORTED_MODULE_5__cloudinary_image_component__["a"]; });
@@ -7626,7 +7626,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var Loginservice = __webpack_require__(9);
@@ -7702,7 +7702,7 @@ exports.EPubService = EPubService;
 
 "use strict";
 
-var browser_1 = __webpack_require__(108);
+var browser_1 = __webpack_require__(109);
 (function (Ng2BootstrapTheme) {
     Ng2BootstrapTheme[Ng2BootstrapTheme["BS3"] = 1] = "BS3";
     Ng2BootstrapTheme[Ng2BootstrapTheme["BS4"] = 2] = "BS4";
@@ -8185,7 +8185,7 @@ function NgForm_tsickle_Closure_declarations() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_control__ = __webpack_require__(28);
 /* unused harmony export RADIO_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return RadioControlRegistry; });
@@ -8456,7 +8456,7 @@ function RadioControlValueAccessor_tsickle_Closure_declarations() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(123);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__reactive_errors__ = __webpack_require__(54);
@@ -9701,7 +9701,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -10042,7 +10042,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var root_1 = __webpack_require__(25);
-var Action_1 = __webpack_require__(661);
+var Action_1 = __webpack_require__(664);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -10189,7 +10189,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Scheduler_1 = __webpack_require__(432);
+var Scheduler_1 = __webpack_require__(435);
 var AsyncScheduler = (function (_super) {
     __extends(AsyncScheduler, _super);
     function AsyncScheduler() {
@@ -10247,7 +10247,7 @@ module.exports = (__webpack_require__(3))(332);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(20);
 /* unused harmony export CHECKBOX_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CheckboxControlValueAccessor; });
 /**
@@ -10348,7 +10348,7 @@ function CheckboxControlValueAccessor_tsickle_Closure_declarations() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(20);
 /* unused harmony export DEFAULT_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DefaultValueAccessor; });
 /**
@@ -10458,7 +10458,7 @@ function DefaultValueAccessor_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_form__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__ = __webpack_require__(121);
 /* unused harmony export modelGroupProvider */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgModelGroup; });
 /**
@@ -10564,7 +10564,7 @@ function NgModelGroup_tsickle_Closure_declarations() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(120);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReactiveErrors; });
 /**
  * @license
@@ -10624,7 +10624,7 @@ var ReactiveErrors = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_lang__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_value_accessor__ = __webpack_require__(20);
 /* unused harmony export SELECT_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SelectControlValueAccessor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgSelectOption; });
@@ -10931,7 +10931,7 @@ function NgSelectOption_tsickle_Closure_declarations() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_lang__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_value_accessor__ = __webpack_require__(20);
 /* unused harmony export SELECT_MULTIPLE_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelectMultipleControlValueAccessor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return NgSelectMultipleOption; });
@@ -11278,7 +11278,7 @@ function NgSelectMultipleOption_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_shared__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_async__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__private_import_core__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__private_import_core__ = __webpack_require__(125);
 /* unused harmony export VALID */
 /* unused harmony export INVALID */
 /* unused harmony export PENDING */
@@ -13011,7 +13011,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -13075,7 +13075,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -13121,10 +13121,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(273);
 // Operators
 __webpack_require__(274);
-__webpack_require__(111);
+__webpack_require__(112);
 __webpack_require__(275);
 __webpack_require__(66);
-__webpack_require__(112);
+__webpack_require__(113);
 __webpack_require__(279);
 
 
@@ -13133,7 +13133,7 @@ __webpack_require__(279);
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var bootstrap_modal_module_1 = __webpack_require__(401);
+var bootstrap_modal_module_1 = __webpack_require__(404);
 exports.BootstrapModalModule = bootstrap_modal_module_1.BootstrapModalModule;
 exports.DialogComponent = bootstrap_modal_module_1.DialogComponent;
 exports.DialogService = bootstrap_modal_module_1.DialogService;
@@ -13324,8 +13324,8 @@ function __export(m) {
 }
 __export(__webpack_require__(271));
 __export(__webpack_require__(269));
-__export(__webpack_require__(427));
-var file_upload_module_1 = __webpack_require__(426);
+__export(__webpack_require__(430));
+var file_upload_module_1 = __webpack_require__(429);
 exports.FileUploadModule = file_upload_module_1.FileUploadModule;
 
 
@@ -13395,7 +13395,7 @@ exports.AsyncSubject = AsyncSubject;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var map_1 = __webpack_require__(116);
+var map_1 = __webpack_require__(117);
 Observable_1.Observable.prototype.map = map_1.map;
 //# sourceMappingURL=map.js.map
 
@@ -13829,12 +13829,12 @@ function NgControlStatusGroup_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_form_group_directive__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_container__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__control_value_accessor__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_control__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_form__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_model_group__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__ = __webpack_require__(121);
 /* unused harmony export formControlBinding */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgModel; });
 /**
@@ -14174,7 +14174,7 @@ function NgModel_tsickle_Closure_declarations() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(20);
 /* unused harmony export NUMBER_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NumberValueAccessor; });
 /**
@@ -14282,7 +14282,7 @@ function NumberValueAccessor_tsickle_Closure_declarations() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__ = __webpack_require__(20);
 /* unused harmony export RANGE_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RangeValueAccessor; });
 /**
@@ -14390,7 +14390,7 @@ function RangeValueAccessor_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_value_accessor__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_control__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__reactive_errors__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared__ = __webpack_require__(26);
@@ -14598,7 +14598,7 @@ function FormControlDirective_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__abstract_form_group_directive__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_value_accessor__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ng_control__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reactive_errors__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared__ = __webpack_require__(26);
@@ -14859,7 +14859,7 @@ function FormControlName_tsickle_Closure_declarations() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(66);
@@ -15461,6 +15461,62 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
+var http_1 = __webpack_require__(10);
+var ontap_models_1 = __webpack_require__(14);
+var appComponent_1 = __webpack_require__(7);
+var login_service_1 = __webpack_require__(9);
+var BeerKegService = (function (_super) {
+    __extends(BeerKegService, _super);
+    function BeerKegService(http, loginService) {
+        var _this = _super.call(this, http, loginService) || this;
+        _this.serverUrl = "api/beerkegs";
+        return _this;
+    }
+    BeerKegService.prototype.default = function () {
+        return new ontap_models_1.BeerKeg({
+            arrivalDate: new Date(),
+            status: ontap_models_1.KegStatus.Waiting
+        });
+    };
+    BeerKegService.prototype.new = function (source) {
+        return new ontap_models_1.BeerKeg(source);
+    };
+    return BeerKegService;
+}(appComponent_1.AppService));
+BeerKegService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http, login_service_1.LoginService])
+], BeerKegService);
+exports.BeerKegService = BeerKegService;
+
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(1);
 var ng2_bootstrap_modal_1 = __webpack_require__(61);
 var SelectorComponent = (function (_super) {
     __extends(SelectorComponent, _super);
@@ -15478,7 +15534,7 @@ var SelectorComponent = (function (_super) {
 SelectorComponent = __decorate([
     core_1.Component({
         selector: 'confirm',
-        template: __webpack_require__(395)
+        template: __webpack_require__(398)
     }),
     __metadata("design:paramtypes", [ng2_bootstrap_modal_1.DialogService])
 ], SelectorComponent);
@@ -15486,7 +15542,7 @@ exports.SelectorComponent = SelectorComponent;
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15562,7 +15618,7 @@ exports.DialogService = DialogService;
 //# sourceMappingURL=dialog.service.js.map
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15613,7 +15669,7 @@ exports.AccordionComponent = AccordionComponent;
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15622,7 +15678,7 @@ var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
 var collapse_module_1 = __webpack_require__(62);
 var accordion_group_component_1 = __webpack_require__(241);
-var accordion_component_1 = __webpack_require__(81);
+var accordion_component_1 = __webpack_require__(82);
 var AccordionModule = (function () {
     function AccordionModule() {
     }
@@ -15641,7 +15697,7 @@ exports.AccordionModule = AccordionModule;
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15667,13 +15723,13 @@ exports.AlertModule = AlertModule;
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var button_checkbox_directive_1 = __webpack_require__(243);
 var button_radio_directive_1 = __webpack_require__(244);
 var ButtonsModule = (function () {
@@ -15694,7 +15750,7 @@ exports.ButtonsModule = ButtonsModule;
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15878,14 +15934,14 @@ exports.CarouselComponent = CarouselComponent;
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
-var carousel_component_1 = __webpack_require__(85);
+var carousel_component_1 = __webpack_require__(86);
 var slide_component_1 = __webpack_require__(245);
 var CarouselModule = (function () {
     function CarouselModule() {
@@ -15905,14 +15961,14 @@ exports.CarouselModule = CarouselModule;
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var datepicker_inner_component_1 = __webpack_require__(47);
 var datepicker_component_1 = __webpack_require__(249);
 var daypicker_component_1 = __webpack_require__(250);
@@ -15940,7 +15996,7 @@ exports.DatepickerModule = DatepickerModule;
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15966,13 +16022,13 @@ exports.DropdownModule = DropdownModule;
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var modal_options_class_1 = __webpack_require__(90);
+var modal_options_class_1 = __webpack_require__(91);
 var ModalBackdropOptions = (function () {
     function ModalBackdropOptions(options) {
         this.animate = true;
@@ -16029,7 +16085,7 @@ exports.ModalBackdropComponent = ModalBackdropComponent;
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16057,13 +16113,13 @@ exports.Selector = {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var modal_backdrop_component_1 = __webpack_require__(89);
+var modal_backdrop_component_1 = __webpack_require__(90);
 var modal_component_1 = __webpack_require__(256);
 var components_helper_service_1 = __webpack_require__(24);
 var ModalModule = (function () {
@@ -16085,13 +16141,13 @@ exports.ModalModule = ModalModule;
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 /* tslint:disable-next-line */
 var MouseEvent = global.MouseEvent;
 var paginationConfig = {
@@ -16331,16 +16387,16 @@ exports.PaginationComponent = PaginationComponent;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)))
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var pager_component_1 = __webpack_require__(257);
-var pagination_component_1 = __webpack_require__(92);
+var pagination_component_1 = __webpack_require__(93);
 var PaginationModule = (function () {
     function PaginationModule() {
     }
@@ -16359,7 +16415,7 @@ exports.PaginationModule = PaginationModule;
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16517,7 +16573,7 @@ exports.positionService = new PositionService();
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16578,7 +16634,7 @@ exports.ProgressDirective = ProgressDirective;
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16586,7 +16642,7 @@ exports.ProgressDirective = ProgressDirective;
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
 var bar_component_1 = __webpack_require__(258);
-var progress_directive_1 = __webpack_require__(95);
+var progress_directive_1 = __webpack_require__(96);
 var progressbar_component_1 = __webpack_require__(259);
 var ProgressbarModule = (function () {
     function ProgressbarModule() {
@@ -16606,14 +16662,14 @@ exports.ProgressbarModule = ProgressbarModule;
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var rating_component_1 = __webpack_require__(260);
 var RatingModule = (function () {
     function RatingModule() {
@@ -16633,13 +16689,13 @@ exports.RatingModule = RatingModule;
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var tabset_component_1 = __webpack_require__(100);
+var tabset_component_1 = __webpack_require__(101);
 /* tslint:disable */
 /* tslint:enable */
 var TabDirective = (function () {
@@ -16706,7 +16762,7 @@ exports.TabDirective = TabDirective;
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16715,8 +16771,8 @@ var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
 var common_2 = __webpack_require__(247);
 var tab_heading_directive_1 = __webpack_require__(261);
-var tab_directive_1 = __webpack_require__(98);
-var tabset_component_1 = __webpack_require__(100);
+var tab_directive_1 = __webpack_require__(99);
+var tabset_component_1 = __webpack_require__(101);
 var TabsModule = (function () {
     function TabsModule() {
     }
@@ -16735,7 +16791,7 @@ exports.TabsModule = TabsModule;
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16867,14 +16923,14 @@ exports.TabsetComponent = TabsetComponent;
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var timepicker_component_1 = __webpack_require__(262);
 var TimepickerModule = (function () {
     function TimepickerModule() {
@@ -16894,13 +16950,13 @@ exports.TimepickerModule = TimepickerModule;
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var position_1 = __webpack_require__(94);
+var position_1 = __webpack_require__(95);
 var tooltip_options_class_1 = __webpack_require__(263);
 var TooltipContainerComponent = (function () {
     function TooltipContainerComponent(element, cdr, options) {
@@ -16954,14 +17010,14 @@ exports.TooltipContainerComponent = TooltipContainerComponent;
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
-var tooltip_container_component_1 = __webpack_require__(102);
+var tooltip_container_component_1 = __webpack_require__(103);
 var tooltip_directive_1 = __webpack_require__(264);
 var components_helper_service_1 = __webpack_require__(24);
 var TooltipModule = (function () {
@@ -16984,16 +17040,16 @@ exports.TooltipModule = TooltipModule;
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
 var ng2_bootstrap_config_1 = __webpack_require__(37);
-var position_1 = __webpack_require__(94);
-var typeahead_options_class_1 = __webpack_require__(105);
-var typeahead_utils_1 = __webpack_require__(106);
+var position_1 = __webpack_require__(95);
+var typeahead_options_class_1 = __webpack_require__(106);
+var typeahead_utils_1 = __webpack_require__(107);
 var bs4 = "\n  <div class=\"dropdown-menu\"\n       [ngStyle]=\"{top: top, left: left, display: 'block'}\"\n       (mouseleave)=\"focusLost()\">\n    <template ngFor let-match let-i=\"index\" [ngForOf]=\"matches\">\n       <h6 *ngIf=\"match.isHeader()\" class=\"dropdown-header\">{{match}}</h6>\n       <div *ngIf=\"!match.isHeader() && !itemTemplate\">\n          <a href=\"#\"\n            class=\"dropdown-item\"\n            (click)=\"selectMatch(match, $event)\"\n            (mouseenter)=\"selectActive(match)\"\n            [class.active]=\"isActive(match)\"\n            [innerHtml]=\"hightlight(match, query)\"></a>\n      </div>\n      <div *ngIf=\"!match.isHeader() && itemTemplate\">\n        <a href=\"#\"\n         class=\"dropdown-item\"\n         (click)=\"selectMatch(match, $event)\"\n         (mouseenter)=\"selectActive(match)\"\n         [class.active]=\"isActive(match)\">\n          <template [ngTemplateOutlet]=\"itemTemplate\"\n                    [ngOutletContext]=\"{item: match.item, index: i}\">\n          </template>\n         </a>\n      </div>\n    </template>\n  </div>\n";
 var bs3 = "\n  <ul class=\"dropdown-menu\"\n      [ngStyle]=\"{top: top, left: left, display: 'block'}\"\n      (mouseleave)=\"focusLost()\">\n    <template ngFor let-match let-i=\"index\" [ngForOf]=\"matches\">\n      <li *ngIf=\"match.isHeader()\" class=\"dropdown-header\">{{match}}</li>\n      <li *ngIf=\"!match.isHeader()\"\n        [class.active]=\"isActive(match)\"\n        (mouseenter)=\"selectActive(match)\">\n        <a href=\"#\"\n           *ngIf=\"!itemTemplate\"\n           (click)=\"selectMatch(match, $event)\"\n           tabindex=\"-1\"\n           [innerHtml]=\"hightlight(match, query)\"></a>\n        <a href=\"#\"\n           *ngIf=\"itemTemplate\"\n           (click)=\"selectMatch(match, $event)\"\n           tabindex=\"-1\">\n            <template [ngTemplateOutlet]=\"itemTemplate\"\n                      [ngOutletContext]=\"{item: match.item, index: i}\">\n            </template>\n        </a>\n      </li>\n    </template>\n  </ul>\n";
 var isBS4 = ng2_bootstrap_config_1.Ng2BootstrapConfig.theme === ng2_bootstrap_config_1.Ng2BootstrapTheme.BS4;
@@ -17127,7 +17183,7 @@ exports.TypeaheadContainerComponent = TypeaheadContainerComponent;
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17142,12 +17198,12 @@ exports.TypeaheadOptions = TypeaheadOptions;
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var latin_map_1 = __webpack_require__(418);
+var latin_map_1 = __webpack_require__(421);
 var TypeaheadUtils = (function () {
     function TypeaheadUtils() {
     }
@@ -17210,15 +17266,15 @@ exports.TypeaheadUtils = TypeaheadUtils;
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var common_1 = __webpack_require__(12);
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
-var typeahead_container_component_1 = __webpack_require__(104);
+var forms_1 = __webpack_require__(11);
+var typeahead_container_component_1 = __webpack_require__(105);
 var typeahead_directive_1 = __webpack_require__(266);
 var components_helper_service_1 = __webpack_require__(24);
 var TypeaheadModule = (function () {
@@ -17241,7 +17297,7 @@ exports.TypeaheadModule = TypeaheadModule;
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17273,7 +17329,7 @@ exports.EventListener = win['EventListener'];
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17302,7 +17358,7 @@ var CloudinaryImageService = (function () {
 //# sourceMappingURL=cloudinary-image.service.js.map
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17317,7 +17373,7 @@ var queue_1 = __webpack_require__(294);
 var Subscription_1 = __webpack_require__(15);
 var observeOn_1 = __webpack_require__(308);
 var ObjectUnsubscribedError_1 = __webpack_require__(304);
-var SubjectSubscription_1 = __webpack_require__(706);
+var SubjectSubscription_1 = __webpack_require__(709);
 /**
  * @class ReplaySubject<T>
  */
@@ -17410,29 +17466,29 @@ var ReplayEvent = (function () {
 //# sourceMappingURL=ReplaySubject.js.map
 
 /***/ }),
-/* 111 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var debounceTime_1 = __webpack_require__(597);
-Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
-//# sourceMappingURL=debounceTime.js.map
-
-/***/ }),
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var switchMap_1 = __webpack_require__(643);
+var debounceTime_1 = __webpack_require__(600);
+Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
+//# sourceMappingURL=debounceTime.js.map
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var switchMap_1 = __webpack_require__(646);
 Observable_1.Observable.prototype.switchMap = switchMap_1.switchMap;
 //# sourceMappingURL=switchMap.js.map
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17590,7 +17646,7 @@ exports.CombineLatestSubscriber = CombineLatestSubscriber;
 //# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17598,7 +17654,7 @@ exports.CombineLatestSubscriber = CombineLatestSubscriber;
 var Observable_1 = __webpack_require__(0);
 var isScheduler_1 = __webpack_require__(27);
 var ArrayObservable_1 = __webpack_require__(31);
-var mergeAll_1 = __webpack_require__(117);
+var mergeAll_1 = __webpack_require__(118);
 /* tslint:enable:max-line-length */
 /**
  * Creates an output Observable which sequentially emits all values from every
@@ -17770,7 +17826,7 @@ exports.concatStatic = concatStatic;
 //# sourceMappingURL=concat.js.map
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18051,25 +18107,25 @@ var ZipBufferIterator = (function (_super) {
 //# sourceMappingURL=zip.js.map
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(121);
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(188);
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(561);
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18091,11 +18147,11 @@ var /** @type {?} */ FormErrorExamples = {
 //# sourceMappingURL=error_examples.js.map
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(120);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TemplateDrivenErrors; });
 /**
  * @license
@@ -18137,7 +18193,7 @@ var TemplateDrivenErrors = (function () {
 //# sourceMappingURL=template_driven_errors.js.map
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18530,7 +18586,7 @@ function PatternValidator_tsickle_Closure_declarations() {
 //# sourceMappingURL=validators.js.map
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18713,7 +18769,7 @@ function iterateListLike(obj, fn) {
 //# sourceMappingURL=collection.js.map
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18854,7 +18910,7 @@ function FormBuilder_tsickle_Closure_declarations() {
 //# sourceMappingURL=form_builder.js.map
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18874,14 +18930,14 @@ var /** @type {?} */ isObservable = __WEBPACK_IMPORTED_MODULE_0__angular_core__[
 //# sourceMappingURL=private_import_core.js.map
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_locale_service__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_locale_parser__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_locale_parser__ = __webpack_require__(130);
 /* harmony export (immutable) */ __webpack_exports__["b"] = validateLocaleNumber;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocaleNumberValidator; });
 /**
@@ -18986,7 +19042,7 @@ var LocaleNumberValidator = (function () {
 //# sourceMappingURL=locale-number-validator.directive.js.map
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19077,7 +19133,7 @@ var LocaleDatePipe = (function () {
 //# sourceMappingURL=locale-date.pipe.js.map
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19320,7 +19376,7 @@ var LocaleCurrencyPipe = (function () {
 //# sourceMappingURL=locale-number.pipe.js.map
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19446,7 +19502,7 @@ var TranslatePipe = (function () {
 //# sourceMappingURL=translate.pipe.js.map
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19704,62 +19760,6 @@ var NumberWrapper = (function () {
 //# sourceMappingURL=locale-parser.js.map
 
 /***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
-var ontap_models_1 = __webpack_require__(14);
-var appComponent_1 = __webpack_require__(7);
-var login_service_1 = __webpack_require__(9);
-var BeerKegService = (function (_super) {
-    __extends(BeerKegService, _super);
-    function BeerKegService(http, loginService) {
-        var _this = _super.call(this, http, loginService) || this;
-        _this.serverUrl = "api/beerkegs";
-        return _this;
-    }
-    BeerKegService.prototype.default = function () {
-        return new ontap_models_1.BeerKeg({
-            arrivalDate: new Date(),
-            status: ontap_models_1.KegStatus.Waiting
-        });
-    };
-    BeerKegService.prototype.new = function (source) {
-        return new ontap_models_1.BeerKeg(source);
-    };
-    return BeerKegService;
-}(appComponent_1.AppService));
-BeerKegService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, login_service_1.LoginService])
-], BeerKegService);
-exports.BeerKegService = BeerKegService;
-
-
-/***/ }),
 /* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19786,7 +19786,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -19846,7 +19846,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -19903,7 +19903,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -30167,7 +30167,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var dialog_service_1 = __webpack_require__(80);
+var dialog_service_1 = __webpack_require__(81);
 var DialogWrapperComponent = (function () {
     function DialogWrapperComponent(resolver, dialogService) {
         this.resolver = resolver;
@@ -30219,7 +30219,7 @@ exports.DialogWrapperComponent = DialogWrapperComponent;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 var core_1 = __webpack_require__(1);
-var accordion_component_1 = __webpack_require__(81);
+var accordion_component_1 = __webpack_require__(82);
 /* tslint:disable-next-line */
 var MouseEvent = global.MouseEvent;
 /* tslint:disable:component-selector-name */
@@ -30335,7 +30335,7 @@ exports.AlertComponent = AlertComponent;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 // TODO: config: activeClass - Class to apply to the checked buttons.
 var ButtonCheckboxDirective = (function () {
     function ButtonCheckboxDirective(cd) {
@@ -30413,7 +30413,7 @@ exports.ButtonCheckboxDirective = ButtonCheckboxDirective;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 /* tslint:disable */
 exports.RADIO_CONTROL_VALUE_ACCESSOR = {
     provide: forms_1.NG_VALUE_ACCESSOR,
@@ -30490,7 +30490,7 @@ exports.ButtonRadioDirective = ButtonRadioDirective;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var carousel_component_1 = __webpack_require__(85);
+var carousel_component_1 = __webpack_require__(86);
 var SlideComponent = (function () {
     function SlideComponent(carousel) {
         this.addClass = true;
@@ -30753,7 +30753,7 @@ exports.DateFormatter = DateFormatter;
 
 var core_1 = __webpack_require__(1);
 var datepicker_inner_component_1 = __webpack_require__(47);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 /* tslint:disable:component-selector-name component-selector-type */
 /* tslint:enable:component-selector-name component-selector-type */
 var DatePickerComponent = (function () {
@@ -31281,10 +31281,10 @@ exports.dropdownService = new DropdownService();
 
 var core_1 = __webpack_require__(1);
 var components_helper_service_1 = __webpack_require__(24);
-var utils_class_1 = __webpack_require__(419);
-var modal_backdrop_component_1 = __webpack_require__(89);
-var modal_options_class_1 = __webpack_require__(90);
-var browser_1 = __webpack_require__(108);
+var utils_class_1 = __webpack_require__(422);
+var modal_backdrop_component_1 = __webpack_require__(90);
+var modal_options_class_1 = __webpack_require__(91);
+var browser_1 = __webpack_require__(109);
 var TRANSITION_DURATION = 300;
 var BACKDROP_TRANSITION_DURATION = 150;
 var ModalDirective = (function () {
@@ -31599,8 +31599,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
-var pagination_component_1 = __webpack_require__(92);
+var forms_1 = __webpack_require__(11);
+var pagination_component_1 = __webpack_require__(93);
 var pagerConfig = {
     itemsPerPage: 10,
     previousText: '« Previous',
@@ -31642,7 +31642,7 @@ exports.PagerComponent = PagerComponent;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var progress_directive_1 = __webpack_require__(95);
+var progress_directive_1 = __webpack_require__(96);
 // todo: number pipe
 // todo: use query from progress?
 var BarComponent = (function () {
@@ -31734,7 +31734,7 @@ exports.ProgressbarComponent = ProgressbarComponent;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 /* tslint:disable-next-line */
 var KeyboardEvent = global.KeyboardEvent;
 var RatingComponent = (function () {
@@ -31852,7 +31852,7 @@ exports.RatingComponent = RatingComponent;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var tab_directive_1 = __webpack_require__(98);
+var tab_directive_1 = __webpack_require__(99);
 var TabHeadingDirective = (function () {
     function TabHeadingDirective(templateRef, tab) {
         tab.headingRef = templateRef;
@@ -31877,7 +31877,7 @@ exports.TabHeadingDirective = TabHeadingDirective;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 // todo: implement global configuration via DI
 // todo: refactor directive has to many functions! (extract to stateless helper)
 // todo: use moment js?
@@ -32229,7 +32229,7 @@ exports.TooltipOptions = TooltipOptions;
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var tooltip_container_component_1 = __webpack_require__(102);
+var tooltip_container_component_1 = __webpack_require__(103);
 var tooltip_options_class_1 = __webpack_require__(263);
 var components_helper_service_1 = __webpack_require__(24);
 /* tslint:disable */
@@ -32368,13 +32368,13 @@ exports.TypeaheadMatch = TypeaheadMatch;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
-var typeahead_container_component_1 = __webpack_require__(104);
-var typeahead_options_class_1 = __webpack_require__(105);
-var typeahead_utils_1 = __webpack_require__(106);
+var forms_1 = __webpack_require__(11);
+var typeahead_container_component_1 = __webpack_require__(105);
+var typeahead_options_class_1 = __webpack_require__(106);
+var typeahead_utils_1 = __webpack_require__(107);
 var Observable_1 = __webpack_require__(0);
 __webpack_require__(272);
-__webpack_require__(111);
+__webpack_require__(112);
 __webpack_require__(276);
 __webpack_require__(66);
 __webpack_require__(277);
@@ -32684,7 +32684,7 @@ exports.TypeaheadDirective = TypeaheadDirective;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cloudinary_transforms_class__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cloudinary_image_service__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cloudinary_image_service__ = __webpack_require__(110);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CloudinaryImageComponent; });
 
 
@@ -33181,7 +33181,7 @@ exports.FileSelectDirective = FileSelectDirective;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var from_1 = __webpack_require__(694);
+var from_1 = __webpack_require__(697);
 Observable_1.Observable.from = from_1.from;
 //# sourceMappingURL=from.js.map
 
@@ -33192,7 +33192,7 @@ Observable_1.Observable.from = from_1.from;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var throw_1 = __webpack_require__(582);
+var throw_1 = __webpack_require__(585);
 Observable_1.Observable.throw = throw_1._throw;
 //# sourceMappingURL=throw.js.map
 
@@ -33203,7 +33203,7 @@ Observable_1.Observable.throw = throw_1._throw;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var catch_1 = __webpack_require__(698);
+var catch_1 = __webpack_require__(701);
 Observable_1.Observable.prototype.catch = catch_1._catch;
 Observable_1.Observable.prototype._catch = catch_1._catch;
 //# sourceMappingURL=catch.js.map
@@ -33237,7 +33237,7 @@ Observable_1.Observable.prototype.filter = filter_1.filter;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var mergeMap_1 = __webpack_require__(710);
+var mergeMap_1 = __webpack_require__(713);
 Observable_1.Observable.prototype.mergeMap = mergeMap_1.mergeMap;
 Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
 //# sourceMappingURL=mergeMap.js.map
@@ -33249,7 +33249,7 @@ Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var toArray_1 = __webpack_require__(653);
+var toArray_1 = __webpack_require__(656);
 Observable_1.Observable.prototype.toArray = toArray_1.toArray;
 //# sourceMappingURL=toArray.js.map
 
@@ -33561,7 +33561,7 @@ var tryCatch_1 = __webpack_require__(17);
 var errorObject_1 = __webpack_require__(16);
 var Observable_1 = __webpack_require__(0);
 var Subscriber_1 = __webpack_require__(4);
-var map_1 = __webpack_require__(116);
+var map_1 = __webpack_require__(117);
 function getCORSRequest() {
     if (root_1.root.XMLHttpRequest) {
         return new root_1.root.XMLHttpRequest();
@@ -34193,7 +34193,7 @@ exports.FindValueSubscriber = FindValueSubscriber;
 
 var Observable_1 = __webpack_require__(0);
 var ArrayObservable_1 = __webpack_require__(31);
-var mergeAll_1 = __webpack_require__(117);
+var mergeAll_1 = __webpack_require__(118);
 var isScheduler_1 = __webpack_require__(27);
 /* tslint:enable:max-line-length */
 /**
@@ -34508,7 +34508,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var FromObservable_1 = __webpack_require__(707);
+var FromObservable_1 = __webpack_require__(710);
 var isArray_1 = __webpack_require__(32);
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
@@ -35013,8 +35013,8 @@ exports.VirtualAction = VirtualAction;
 
 "use strict";
 
-var AsapAction_1 = __webpack_require__(664);
-var AsapScheduler_1 = __webpack_require__(665);
+var AsapAction_1 = __webpack_require__(667);
+var AsapScheduler_1 = __webpack_require__(668);
 /**
  *
  * Asap Scheduler
@@ -35058,8 +35058,8 @@ exports.asap = new AsapScheduler_1.AsapScheduler(AsapAction_1.AsapAction);
 
 "use strict";
 
-var QueueAction_1 = __webpack_require__(666);
-var QueueScheduler_1 = __webpack_require__(667);
+var QueueAction_1 = __webpack_require__(669);
+var QueueScheduler_1 = __webpack_require__(670);
 /**
  *
  * Queue Scheduler
@@ -35300,11 +35300,11 @@ module.exports = (__webpack_require__(3))(577);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(703);
+__webpack_require__(706);
 var core_1 = __webpack_require__(1);
 var angular2_universal_1 = __webpack_require__(306);
 var app_module_1 = __webpack_require__(333);
-__webpack_require__(704);
+__webpack_require__(707);
 var rootElemTagName = 'app'; // Update this if you change your root component selector
 // Enable either Hot Module Reloading or production mode
 if (true) {
@@ -35348,7 +35348,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var querystring = __webpack_require__(430);
+  var querystring = __webpack_require__(433);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -35468,11 +35468,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(680);
+  var strip = __webpack_require__(683);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(691);
+    overlay = __webpack_require__(694);
   }
 
   var styles = {
@@ -35525,7 +35525,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(692);
+var processUpdate = __webpack_require__(695);
 
 var customHandler;
 var subscribeAllHandler;
@@ -35619,7 +35619,7 @@ module.exports = (__webpack_require__(3))(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_name__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__directives_select_control_value_accessor__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__directives_select_multiple_control_value_accessor__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_validators__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_validators__ = __webpack_require__(122);
 /* unused harmony reexport CheckboxControlValueAccessor */
 /* unused harmony reexport DefaultValueAccessor */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__directives_ng_control__ = __webpack_require__(28);
@@ -35780,7 +35780,7 @@ function normalizeAsyncValidator(validator) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(314);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_radio_control_value_accessor__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(124);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormsModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ReactiveFormsModule; });
 /**
@@ -35863,7 +35863,7 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__directives_control_container__ = __webpack_require__(23);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__directives_control_container__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_control_value_accessor__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_control_value_accessor__ = __webpack_require__(20);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__directives_control_value_accessor__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_default_value_accessor__ = __webpack_require__(52);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_5__directives_default_value_accessor__["a"]; });
@@ -35894,13 +35894,13 @@ function ReactiveFormsModule_tsickle_Closure_declarations() {
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_16__directives_select_control_value_accessor__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__directives_select_multiple_control_value_accessor__ = __webpack_require__(56);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_17__directives_select_multiple_control_value_accessor__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__directives_validators__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__directives_validators__ = __webpack_require__(122);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["c"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["d"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["e"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__form_builder__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__form_builder__ = __webpack_require__(124);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return __WEBPACK_IMPORTED_MODULE_19__form_builder__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__model__ = __webpack_require__(57);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["a"]; });
@@ -35989,7 +35989,7 @@ var /** @type {?} */ VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["
 
 var core_1 = __webpack_require__(1);
 var common_1 = __webpack_require__(12);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var select_component_1 = __webpack_require__(328);
 var select_dropdown_component_1 = __webpack_require__(325);
 var SelectModule = (function () {
@@ -37324,7 +37324,7 @@ exports.TEMPLATE = "<div\n    #selection\n    [attr.tabindex]=\"disabled ? null 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var select_component_css_1 = __webpack_require__(326);
 var select_component_html_1 = __webpack_require__(327);
 var option_list_1 = __webpack_require__(321);
@@ -38041,32 +38041,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(10);
+var forms_1 = __webpack_require__(11);
 var router_1 = __webpack_require__(50);
 var angular2_universal_1 = __webpack_require__(306);
 var app_component_1 = __webpack_require__(334);
 var sortbytap_pipe_1 = __webpack_require__(335);
-var navmenu_component_1 = __webpack_require__(350);
-var pubs_component_1 = __webpack_require__(357);
-var pub_component_1 = __webpack_require__(354);
-var cities_component_1 = __webpack_require__(343);
-var beers_component_1 = __webpack_require__(339);
-var epubs_component_1 = __webpack_require__(345);
-var breweries_component_1 = __webpack_require__(340);
-var users_component_1 = __webpack_require__(361);
-var login_component_1 = __webpack_require__(349);
-var locale_component_1 = __webpack_require__(348);
-var pubadmins_component_1 = __webpack_require__(355);
-var breweryadmins_component_1 = __webpack_require__(341);
-var taps_component_1 = __webpack_require__(360);
-var prices_component_1 = __webpack_require__(351);
-var kegs_component_1 = __webpack_require__(347);
+var navmenu_component_1 = __webpack_require__(352);
+var pubs_component_1 = __webpack_require__(359);
+var pub_component_1 = __webpack_require__(356);
+var cities_component_1 = __webpack_require__(345);
+var beers_component_1 = __webpack_require__(341);
+var epubs_component_1 = __webpack_require__(347);
+var breweries_component_1 = __webpack_require__(342);
+var users_component_1 = __webpack_require__(363);
+var login_component_1 = __webpack_require__(351);
+var locale_component_1 = __webpack_require__(350);
+var pubadmins_component_1 = __webpack_require__(357);
+var breweryadmins_component_1 = __webpack_require__(343);
+var taps_component_1 = __webpack_require__(362);
+var prices_component_1 = __webpack_require__(353);
+var kegs_component_1 = __webpack_require__(349);
 var beerkegs_component_1 = __webpack_require__(336);
 var beerkegsontap_component_1 = __webpack_require__(337);
-var home_component_1 = __webpack_require__(346);
-var selector_component_1 = __webpack_require__(79);
-var print_component_1 = __webpack_require__(353);
-var ng2_bootstrap_1 = __webpack_require__(420);
+var beerkegweights_component_1 = __webpack_require__(339);
+var home_component_1 = __webpack_require__(348);
+var selector_component_1 = __webpack_require__(80);
+var print_component_1 = __webpack_require__(355);
+var ng2_bootstrap_1 = __webpack_require__(423);
 var angular2localization_1 = __webpack_require__(8);
 var ng2_cloudinary_1 = __webpack_require__(29);
 var ng2_file_upload_1 = __webpack_require__(64);
@@ -38154,6 +38155,7 @@ AppModule = __decorate([
             kegs_component_1.KegsComponent,
             beerkegs_component_1.BeerKegsComponent,
             beerkegsontap_component_1.BeerKegsOnTapComponent,
+            beerkegweights_component_1.BeerKegWeightsComponent,
             selector_component_1.SelectorComponent,
             locale_component_1.LocaleComponent,
             print_component_1.PrintComponent,
@@ -38183,6 +38185,7 @@ AppModule = __decorate([
                 { path: "kegs", component: kegs_component_1.KegsComponent },
                 { path: "beerkegs", component: beerkegs_component_1.BeerKegsComponent },
                 { path: "beerkegsontap", component: beerkegsontap_component_1.BeerKegsOnTapComponent },
+                { path: "beerkegweights", component: beerkegweights_component_1.BeerKegWeightsComponent },
                 { path: "pub/:id", component: pub_component_1.PubComponent },
                 { path: "users", component: users_component_1.UsersComponent },
                 { path: "pub-admins", component: pubadmins_component_1.PubAdminsComponent },
@@ -38250,8 +38253,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'app',
-        template: __webpack_require__(377),
-        styles: [__webpack_require__(681)],
+        template: __webpack_require__(379),
+        styles: [__webpack_require__(684)],
         providers: [login_service_1.LoginService],
     }),
     __metadata("design:paramtypes", [router_1.Router, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
@@ -38327,13 +38330,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var ontap_models_1 = __webpack_require__(14);
 var epubs_service_1 = __webpack_require__(36);
 var beers_service_1 = __webpack_require__(58);
 var kegs_service_1 = __webpack_require__(132);
 var breweries_service_1 = __webpack_require__(59);
-var beerkegs_service_1 = __webpack_require__(130);
+var beerkegs_service_1 = __webpack_require__(79);
 var appComponent_1 = __webpack_require__(7);
 var angular2localization_1 = __webpack_require__(8);
 var BeerKegsComponent = (function (_super) {
@@ -38424,7 +38427,7 @@ BeerKegsComponent = __decorate([
     ng.Component({
         selector: 'beerkegs',
         providers: [beerkegs_service_1.BeerKegService, epubs_service_1.EPubService, beers_service_1.BeerService, kegs_service_1.KegService, breweries_service_1.BreweryService],
-        template: __webpack_require__(378)
+        template: __webpack_require__(380)
     }),
     __metadata("design:paramtypes", [beerkegs_service_1.BeerKegService,
         epubs_service_1.EPubService,
@@ -38463,9 +38466,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var taps_service_1 = __webpack_require__(133);
-var beerkegs_service_1 = __webpack_require__(130);
+var beerkegs_service_1 = __webpack_require__(79);
 var beerkegsontap_service_1 = __webpack_require__(338);
 var appComponent_1 = __webpack_require__(7);
 var angular2localization_1 = __webpack_require__(8);
@@ -38520,7 +38523,7 @@ BeerKegsOnTapComponent = __decorate([
     ng.Component({
         selector: 'beerkegsontap',
         providers: [beerkegsontap_service_1.BeerKegsOnTapService, taps_service_1.TapService, beerkegs_service_1.BeerKegService],
-        template: __webpack_require__(379)
+        template: __webpack_require__(381)
     }),
     __metadata("design:paramtypes", [beerkegsontap_service_1.BeerKegsOnTapService,
         taps_service_1.TapService,
@@ -38557,7 +38560,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -38613,16 +38616,147 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
+var beerkegs_service_1 = __webpack_require__(79);
+var beerkegweights_service_1 = __webpack_require__(340);
+var appComponent_1 = __webpack_require__(7);
+var angular2localization_1 = __webpack_require__(8);
+var BeerKegWeightsComponent = (function (_super) {
+    __extends(BeerKegWeightsComponent, _super);
+    function BeerKegWeightsComponent(elmService, kegService, locale, localization) {
+        var _this = _super.call(this, elmService, locale, localization) || this;
+        _this.kegService = kegService;
+        _this.locale = locale;
+        _this.localization = localization;
+        _this.getKegs();
+        return _this;
+    }
+    BeerKegWeightsComponent.prototype.startAdd = function () {
+        _super.prototype.startAdd.call(this);
+        this.adding.keg = new linq_1.List(this.kegs).First();
+    };
+    BeerKegWeightsComponent.prototype.getKegs = function () {
+        var _this = this;
+        this.kegService.get()
+            .subscribe(function (kegs) { return _this.kegs = kegs; }, function (error) { return _this.errorMessage = error; });
+    };
+    BeerKegWeightsComponent.prototype.onEditChangeKeg = function (id) {
+        this.onChangeKeg(this.editing, id);
+    };
+    BeerKegWeightsComponent.prototype.onAddChangeKeg = function (id) {
+        this.onChangeKeg(this.adding, id);
+    };
+    BeerKegWeightsComponent.prototype.onChangeKeg = function (obj, id) {
+        obj.keg = new linq_1.List(this.kegs).Where(function (c) { return c.id === id; }).First();
+    };
+    return BeerKegWeightsComponent;
+}(appComponent_1.AppComponent));
+BeerKegWeightsComponent = __decorate([
+    ng.Component({
+        selector: 'beerkegweights',
+        providers: [beerkegweights_service_1.BeerKegWeightsService, beerkegs_service_1.BeerKegService],
+        template: __webpack_require__(382)
+    }),
+    __metadata("design:paramtypes", [beerkegweights_service_1.BeerKegWeightsService,
+        beerkegs_service_1.BeerKegService,
+        angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
+], BeerKegWeightsComponent);
+exports.BeerKegWeightsComponent = BeerKegWeightsComponent;
+
+
+/***/ }),
+/* 340 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(1);
+var http_1 = __webpack_require__(10);
+var ontap_models_1 = __webpack_require__(14);
+var appComponent_1 = __webpack_require__(7);
+var login_service_1 = __webpack_require__(9);
+var BeerKegWeightsService = (function (_super) {
+    __extends(BeerKegWeightsService, _super);
+    function BeerKegWeightsService(http, loginService) {
+        var _this = _super.call(this, http, loginService) || this;
+        _this.serverUrl = "api/beerkegweights";
+        return _this;
+    }
+    BeerKegWeightsService.prototype.default = function () {
+        return new ontap_models_1.BeerKegWeight({
+            date: new Date(),
+            weight: 30
+        });
+    };
+    BeerKegWeightsService.prototype.new = function (source) {
+        return new ontap_models_1.BeerKegWeight(source);
+    };
+    return BeerKegWeightsService;
+}(appComponent_1.AppService));
+BeerKegWeightsService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http, login_service_1.LoginService])
+], BeerKegWeightsService);
+exports.BeerKegWeightsService = BeerKegWeightsService;
+
+
+/***/ }),
+/* 341 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var ng = __webpack_require__(1);
+var linq_1 = __webpack_require__(19);
 var beers_service_1 = __webpack_require__(58);
 var breweries_service_1 = __webpack_require__(59);
-var serves_service_1 = __webpack_require__(359);
-var bjcp_service_1 = __webpack_require__(363);
+var serves_service_1 = __webpack_require__(361);
+var bjcp_service_1 = __webpack_require__(365);
 var appComponent_1 = __webpack_require__(7);
 var angular2localization_1 = __webpack_require__(8);
 var ng2_cloudinary_1 = __webpack_require__(29);
 var ng2_bootstrap_modal_1 = __webpack_require__(61);
-var selector_component_1 = __webpack_require__(79);
+var selector_component_1 = __webpack_require__(80);
 var BeersComponent = (function (_super) {
     __extends(BeersComponent, _super);
     function BeersComponent(elmService, breweryService, bjcpService, dialogService, servesService, locale, localization) {
@@ -38756,8 +38890,8 @@ BeersComponent = __decorate([
     ng.Component({
         selector: 'beers',
         providers: [beers_service_1.BeerService, breweries_service_1.BreweryService, bjcp_service_1.BjcpService, serves_service_1.ServeService],
-        template: __webpack_require__(380),
-        styles: [__webpack_require__(682)]
+        template: __webpack_require__(383),
+        styles: [__webpack_require__(685)]
     }),
     __metadata("design:paramtypes", [beers_service_1.BeerService,
         breweries_service_1.BreweryService,
@@ -38771,7 +38905,7 @@ exports.BeersComponent = BeersComponent;
 
 
 /***/ }),
-/* 340 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38797,11 +38931,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var breweries_service_1 = __webpack_require__(59);
-var countries_service_1 = __webpack_require__(344);
+var countries_service_1 = __webpack_require__(346);
 var beers_service_1 = __webpack_require__(58);
-var selector_component_1 = __webpack_require__(79);
+var selector_component_1 = __webpack_require__(80);
 var appComponent_1 = __webpack_require__(7);
 var angular2localization_1 = __webpack_require__(8);
 var ng2_cloudinary_1 = __webpack_require__(29);
@@ -38896,8 +39030,8 @@ BreweriesComponent = __decorate([
     ng.Component({
         selector: "breweries",
         providers: [breweries_service_1.BreweryService, countries_service_1.CountryService, beers_service_1.BeerService],
-        styles: [__webpack_require__(683)],
-        template: __webpack_require__(381)
+        styles: [__webpack_require__(686)],
+        template: __webpack_require__(384)
     }),
     __metadata("design:paramtypes", [breweries_service_1.BreweryService,
         ng2_bootstrap_modal_1.DialogService,
@@ -38910,7 +39044,7 @@ exports.BreweriesComponent = BreweriesComponent;
 
 
 /***/ }),
-/* 341 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38936,10 +39070,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var breweries_service_1 = __webpack_require__(59);
 var users_service_1 = __webpack_require__(46);
-var breweryadmins_service_1 = __webpack_require__(342);
+var breweryadmins_service_1 = __webpack_require__(344);
 var appComponent_1 = __webpack_require__(7);
 var angular2localization_1 = __webpack_require__(8);
 var BreweryAdminsComponent = (function (_super) {
@@ -38993,7 +39127,7 @@ BreweryAdminsComponent = __decorate([
     ng.Component({
         selector: 'breweryAdmins',
         providers: [breweryadmins_service_1.BreweryAdminService, breweries_service_1.BreweryService, users_service_1.UserService],
-        template: __webpack_require__(382)
+        template: __webpack_require__(385)
     }),
     __metadata("design:paramtypes", [breweryadmins_service_1.BreweryAdminService, breweries_service_1.BreweryService, users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], BreweryAdminsComponent);
@@ -39001,7 +39135,7 @@ exports.BreweryAdminsComponent = BreweryAdminsComponent;
 
 
 /***/ }),
-/* 342 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39027,7 +39161,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -39077,7 +39211,7 @@ exports.BreweryAdminService = BreweryAdminService;
 
 
 /***/ }),
-/* 343 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39120,7 +39254,7 @@ CitiesComponent = __decorate([
     ng.Component({
         selector: 'cities',
         providers: [cities_service_1.CityService],
-        template: __webpack_require__(383)
+        template: __webpack_require__(386)
     }),
     __metadata("design:paramtypes", [cities_service_1.CityService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], CitiesComponent);
@@ -39128,7 +39262,7 @@ exports.CitiesComponent = CitiesComponent;
 
 
 /***/ }),
-/* 344 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39154,7 +39288,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var appComponent_1 = __webpack_require__(7);
 var Loginservice = __webpack_require__(9);
 var CountryService = (function (_super) {
@@ -39188,7 +39322,7 @@ exports.CountryService = CountryService;
 
 
 /***/ }),
-/* 345 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39214,7 +39348,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var epubs_service_1 = __webpack_require__(36);
 var cities_service_1 = __webpack_require__(131);
 var login_service_1 = __webpack_require__(9);
@@ -39305,8 +39439,8 @@ EPubsComponent = __decorate([
     ng.Component({
         selector: "epubs",
         providers: [epubs_service_1.EPubService, cities_service_1.CityService],
-        styles: [__webpack_require__(684)],
-        template: __webpack_require__(384)
+        styles: [__webpack_require__(687)],
+        template: __webpack_require__(387)
     }),
     __metadata("design:paramtypes", [epubs_service_1.EPubService,
         login_service_1.LoginService,
@@ -39318,7 +39452,7 @@ exports.EPubsComponent = EPubsComponent;
 
 
 /***/ }),
-/* 346 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39377,7 +39511,7 @@ var HomeComponent = (function (_super) {
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
-        template: __webpack_require__(385)
+        template: __webpack_require__(388)
     }),
     __metadata("design:paramtypes", [angular2localization_1.LocaleService, angular2localization_1.LocalizationService,
         router_1.ActivatedRoute,
@@ -39387,7 +39521,7 @@ exports.HomeComponent = HomeComponent;
 
 
 /***/ }),
-/* 347 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39430,7 +39564,7 @@ KegsComponent = __decorate([
     ng.Component({
         selector: 'kegs',
         providers: [kegs_service_1.KegService],
-        template: __webpack_require__(386)
+        template: __webpack_require__(389)
     }),
     __metadata("design:paramtypes", [kegs_service_1.KegService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], KegsComponent);
@@ -39438,7 +39572,7 @@ exports.KegsComponent = KegsComponent;
 
 
 /***/ }),
-/* 348 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39473,8 +39607,8 @@ var LocaleComponent = (function () {
 LocaleComponent = __decorate([
     core_1.Component({
         selector: "locale",
-        template: __webpack_require__(387),
-        styles: [__webpack_require__(685)],
+        template: __webpack_require__(390),
+        styles: [__webpack_require__(688)],
     }),
     __metadata("design:paramtypes", [angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], LocaleComponent);
@@ -39482,7 +39616,7 @@ exports.LocaleComponent = LocaleComponent;
 
 
 /***/ }),
-/* 349 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39552,8 +39686,8 @@ var LoginComponent = (function () {
 LoginComponent = __decorate([
     core_1.Component({
         selector: 'log-in',
-        template: __webpack_require__(388),
-        styles: [__webpack_require__(686)],
+        template: __webpack_require__(391),
+        styles: [__webpack_require__(689)],
         providers: [users_service_1.UserService],
     }),
     __metadata("design:paramtypes", [login_service_1.LoginService, users_service_1.UserService])
@@ -39562,7 +39696,7 @@ exports.LoginComponent = LoginComponent;
 
 
 /***/ }),
-/* 350 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39611,8 +39745,8 @@ var NavMenuComponent = (function (_super) {
 NavMenuComponent = __decorate([
     core_1.Component({
         selector: 'nav-menu',
-        template: __webpack_require__(389),
-        styles: [__webpack_require__(687)],
+        template: __webpack_require__(392),
+        styles: [__webpack_require__(690)],
         providers: [users_service_1.UserService],
     }),
     __metadata("design:paramtypes", [login_service_1.LoginService, users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
@@ -39621,7 +39755,7 @@ exports.NavMenuComponent = NavMenuComponent;
 
 
 /***/ }),
-/* 351 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39647,10 +39781,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var epubs_service_1 = __webpack_require__(36);
 var beers_service_1 = __webpack_require__(58);
-var prices_service_1 = __webpack_require__(352);
+var prices_service_1 = __webpack_require__(354);
 var appComponent_1 = __webpack_require__(7);
 var angular2localization_1 = __webpack_require__(8);
 var PricesComponent = (function (_super) {
@@ -39704,7 +39838,7 @@ PricesComponent = __decorate([
     ng.Component({
         selector: "prices",
         providers: [prices_service_1.BeerPriceService, epubs_service_1.EPubService, beers_service_1.BeerService],
-        template: __webpack_require__(390)
+        template: __webpack_require__(393)
     }),
     __metadata("design:paramtypes", [prices_service_1.BeerPriceService, epubs_service_1.EPubService, beers_service_1.BeerService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], PricesComponent);
@@ -39712,7 +39846,7 @@ exports.PricesComponent = PricesComponent;
 
 
 /***/ }),
-/* 352 */
+/* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39738,7 +39872,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -39770,7 +39904,7 @@ exports.BeerPriceService = BeerPriceService;
 
 
 /***/ }),
-/* 353 */
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39854,8 +39988,8 @@ PrintComponent = __decorate([
     core_1.Component({
         selector: 'print-page',
         encapsulation: core_1.ViewEncapsulation.None,
-        template: __webpack_require__(391),
-        styles: [__webpack_require__(688)]
+        template: __webpack_require__(394),
+        styles: [__webpack_require__(691)]
     }),
     __metadata("design:paramtypes", [core_1.ElementRef])
 ], PrintComponent);
@@ -39863,7 +39997,7 @@ exports.PrintComponent = PrintComponent;
 
 
 /***/ }),
-/* 354 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39889,7 +40023,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-__webpack_require__(112);
+__webpack_require__(113);
 var epubs_service_1 = __webpack_require__(36);
 var moment = __webpack_require__(2);
 var angular2localization_1 = __webpack_require__(8);
@@ -39948,8 +40082,8 @@ PubComponent = __decorate([
     core_1.Component({
         selector: 'pub',
         providers: [epubs_service_1.EPubService],
-        template: __webpack_require__(392),
-        styles: [__webpack_require__(689)]
+        template: __webpack_require__(395),
+        styles: [__webpack_require__(692)]
     }),
     __metadata("design:paramtypes", [epubs_service_1.EPubService,
         angular2localization_1.LocaleService,
@@ -39961,7 +40095,7 @@ exports.PubComponent = PubComponent;
 
 
 /***/ }),
-/* 355 */
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39987,10 +40121,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var epubs_service_1 = __webpack_require__(36);
 var users_service_1 = __webpack_require__(46);
-var pubadmins_service_1 = __webpack_require__(356);
+var pubadmins_service_1 = __webpack_require__(358);
 var appComponent_1 = __webpack_require__(7);
 var angular2localization_1 = __webpack_require__(8);
 var PubAdminsComponent = (function (_super) {
@@ -40044,7 +40178,7 @@ PubAdminsComponent = __decorate([
     ng.Component({
         selector: 'pubAdmins',
         providers: [pubadmins_service_1.PubAdminService, epubs_service_1.EPubService, users_service_1.UserService],
-        template: __webpack_require__(393)
+        template: __webpack_require__(396)
     }),
     __metadata("design:paramtypes", [pubadmins_service_1.PubAdminService, epubs_service_1.EPubService, users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], PubAdminsComponent);
@@ -40052,7 +40186,7 @@ exports.PubAdminsComponent = PubAdminsComponent;
 
 
 /***/ }),
-/* 356 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40078,7 +40212,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
@@ -40136,7 +40270,7 @@ exports.PubAdminService = PubAdminService;
 
 
 /***/ }),
-/* 357 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40163,8 +40297,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var TimerObservable_1 = __webpack_require__(281);
-var linq_1 = __webpack_require__(20);
-var pubs_service_1 = __webpack_require__(358);
+var linq_1 = __webpack_require__(19);
+var pubs_service_1 = __webpack_require__(360);
 var appComponent_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
 var angular2localization_1 = __webpack_require__(8);
@@ -40262,8 +40396,8 @@ PubsComponent = __decorate([
     core_1.Component({
         selector: 'pubs',
         providers: [pubs_service_1.PubService],
-        styles: [__webpack_require__(690)],
-        template: __webpack_require__(394)
+        styles: [__webpack_require__(693)],
+        template: __webpack_require__(397)
     }),
     __metadata("design:paramtypes", [pubs_service_1.PubService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService,
         router_1.ActivatedRoute,
@@ -40273,7 +40407,7 @@ exports.PubsComponent = PubsComponent;
 
 
 /***/ }),
-/* 358 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40299,7 +40433,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var ontap_models_1 = __webpack_require__(14);
 var appComponent_1 = __webpack_require__(7);
 var Loginservice = __webpack_require__(9);
@@ -40373,7 +40507,7 @@ exports.PubService = PubService;
 
 
 /***/ }),
-/* 359 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40399,7 +40533,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(11);
+var http_1 = __webpack_require__(10);
 var appComponent_1 = __webpack_require__(7);
 var login_service_1 = __webpack_require__(9);
 var ServeService = (function (_super) {
@@ -40419,7 +40553,7 @@ exports.ServeService = ServeService;
 
 
 /***/ }),
-/* 360 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40445,7 +40579,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ng = __webpack_require__(1);
-var linq_1 = __webpack_require__(20);
+var linq_1 = __webpack_require__(19);
 var ontap_models_1 = __webpack_require__(14);
 var epubs_service_1 = __webpack_require__(36);
 var taps_service_1 = __webpack_require__(133);
@@ -40490,7 +40624,7 @@ TapsComponent = __decorate([
     ng.Component({
         selector: 'taps',
         providers: [taps_service_1.TapService, epubs_service_1.EPubService],
-        template: __webpack_require__(396)
+        template: __webpack_require__(399)
     }),
     __metadata("design:paramtypes", [taps_service_1.TapService, epubs_service_1.EPubService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], TapsComponent);
@@ -40498,7 +40632,7 @@ exports.TapsComponent = TapsComponent;
 
 
 /***/ }),
-/* 361 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40541,7 +40675,7 @@ UsersComponent = __decorate([
     ng.Component({
         selector: 'users',
         providers: [users_service_1.UserService],
-        template: __webpack_require__(397)
+        template: __webpack_require__(400)
     }),
     __metadata("design:paramtypes", [users_service_1.UserService, angular2localization_1.LocaleService, angular2localization_1.LocalizationService])
 ], UsersComponent);
@@ -40549,7 +40683,7 @@ exports.UsersComponent = UsersComponent;
 
 
 /***/ }),
-/* 362 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41162,7 +41296,7 @@ function createSignalList() {
 
 
 /***/ }),
-/* 363 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43145,34 +43279,6 @@ exports.BjcpService = BjcpService;
 
 
 /***/ }),
-/* 364 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(22)();
-// imports
-
-
-// module
-exports.push([module.i, "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 365 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(22)();
-// imports
-
-
-// module
-exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
 /* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43181,7 +43287,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
+exports.push([module.i, "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n", ""]);
 
 // exports
 
@@ -43209,7 +43315,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, ".locale {\r\n    padding: 15px 10px 0 0;\r\n}\r\n", ""]);
+exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -43223,7 +43329,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, ".logged-in {\r\n    color: lightskyblue;\r\n}", ""]);
+exports.push([module.i, ".row-wrapper {\r\n    border-top: 1px solid lightgray;\r\n    padding: 5px 0 5px 0;\r\n}\r\n\r\n.row-wrapper .edit2 {\r\n    padding: 5px 0 0 0;    \r\n}\r\n\r\n.row-wrapper .edit2 img {\r\n    max-height: 20px;\r\n    max-width: 20px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -43237,7 +43343,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highlighting rules for nav menu items */\nli.link-active a,\nli.link-active a:hover,\nli.link-active a:focus {\n    background-color: #4189C7;\n    color: white;\n}\n\n/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n\n.copyright {\n    margin-top: 20px;\n    color: lightgray;\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(15% - 20px);\n    }\n    .navbar {\n        border-radius: 0px;\n        border-width: 0px;\n        height: 100%;\n    }\n    .navbar-header {\n        float: none;\n    }\n    .navbar-collapse {\n        border-top: 1px solid #444;\n        padding: 0px;\n    }\n    .navbar ul {\n        float: none;\n    }\n    .navbar li {\n        float: none;\n        font-size: 15px;\n        margin: 2px;\n    }\n    .navbar li a {\n        padding: 4px 16px;\n        border-radius: 4px;\n    }\n    .navbar a {\n        /* If a menu item's text is too long, truncate it */\n        /*width: 100%;*/\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n}\n", ""]);
+exports.push([module.i, ".locale {\r\n    padding: 15px 10px 0 0;\r\n}\r\n", ""]);
 
 // exports
 
@@ -43251,7 +43357,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "@media screen {\r\n    #printpage, #printpage * {\r\n        display:none;\r\n    }\r\n}\r\n@media print {\r\n    body *{\r\n        visibility:hidden;\r\n        background: transparent;\r\n        -webkit-print-color-adjust: exact !important; \r\n    }\r\n          \r\n    #printpage, #printpage *{\r\n        visibility:visible;\r\n        -webkit-print-color-adjust: exact !important; \r\n    }\r\n\r\n    #printpage{\r\n        position:absolute;\r\n        left:0;\r\n        top:0;             \r\n    }\r\n}", ""]);
+exports.push([module.i, ".logged-in {\r\n    color: lightskyblue;\r\n}", ""]);
 
 // exports
 
@@ -43265,7 +43371,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
+exports.push([module.i, "li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highlighting rules for nav menu items */\nli.link-active a,\nli.link-active a:hover,\nli.link-active a:focus {\n    background-color: #4189C7;\n    color: white;\n}\n\n/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n\n.copyright {\n    margin-top: 20px;\n    color: lightgray;\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(15% - 20px);\n    }\n    .navbar {\n        border-radius: 0px;\n        border-width: 0px;\n        height: 100%;\n    }\n    .navbar-header {\n        float: none;\n    }\n    .navbar-collapse {\n        border-top: 1px solid #444;\n        padding: 0px;\n    }\n    .navbar ul {\n        float: none;\n    }\n    .navbar li {\n        float: none;\n        font-size: 15px;\n        margin: 2px;\n    }\n    .navbar li a {\n        padding: 4px 16px;\n        border-radius: 4px;\n    }\n    .navbar a {\n        /* If a menu item's text is too long, truncate it */\n        /*width: 100%;*/\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n}\n", ""]);
 
 // exports
 
@@ -43279,7 +43385,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
+exports.push([module.i, "@media screen {\r\n    #printpage, #printpage * {\r\n        display:none;\r\n    }\r\n}\r\n@media print {\r\n    body *{\r\n        visibility:hidden;\r\n        background: transparent;\r\n        -webkit-print-color-adjust: exact !important; \r\n    }\r\n          \r\n    #printpage, #printpage *{\r\n        visibility:visible;\r\n        -webkit-print-color-adjust: exact !important; \r\n    }\r\n\r\n    #printpage{\r\n        position:absolute;\r\n        left:0;\r\n        top:0;             \r\n    }\r\n}", ""]);
 
 // exports
 
@@ -43288,16 +43394,44 @@ exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n  
 /* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(22)();
+// imports
+
+
+// module
+exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 375 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(22)();
+// imports
+
+
+// module
+exports.push([module.i, "  .tooltip-inner {\r\n    background-color: grey;\r\n    border: 2px solid white;\r\n      color: black;\r\n  }\r\n\r\n  .tooltip-arrow {\r\n    background-color: grey;\r\n      border-left-color: grey;\r\n      margin-right: 2px;\r\n  }\r\n\r\n.pub-image img {\r\n    max-height: 100px;\r\n    max-width: 100px;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 376 */
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports = {
-  XmlEntities: __webpack_require__(376),
-  Html4Entities: __webpack_require__(375),
+  XmlEntities: __webpack_require__(378),
+  Html4Entities: __webpack_require__(377),
   Html5Entities: __webpack_require__(134),
   AllHtmlEntities: __webpack_require__(134)
 };
 
 
 /***/ }),
-/* 375 */
+/* 377 */
 /***/ (function(module, exports) {
 
 var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'Oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'oelig', 'oelig', 'scaron', 'scaron', 'yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
@@ -43450,7 +43584,7 @@ module.exports = Html4Entities;
 
 
 /***/ }),
-/* 376 */
+/* 378 */
 /***/ (function(module, exports) {
 
 var ALPHA_INDEX = {
@@ -43611,133 +43745,139 @@ module.exports = XmlEntities;
 
 
 /***/ }),
-/* 377 */
+/* 379 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class='container-fluid'>\n    <div class='row'>\n        <div class='col-sm-2'>\t\t\n            <nav-menu></nav-menu>\n        </div>\n        <div class='col-sm-10 body-content'>\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }),
-/* 378 */
+/* 380 */
 /***/ (function(module, exports) {
 
 module.exports = "<h1>Редактировать краны в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать какое пиво в какой кег налито.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\nid: number;\r\nkeg: IKeg;\r\nbeer: IBeer;\r\nowner: IBrewery;\r\nbuyer: IPub;\r\nstatus: KegStatus;\r\nbrewingDate: Date;\r\narrivalDate: Date;\r\ninstallationDate: Date;\r\ndeinstallationDate: Date;\r\nbestBeforeDate: Date;\r\npackageDate: Date;         \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-2\">Кег</th>\r\n            <th class=\"col-md-2\">Пиво</th>\r\n            <th class=\"col-md-2\">Владелец</th>\r\n            <th class=\"col-md-2\">Покупатель</th>\r\n            <th class=\"col-md-1\">Статус</th>\r\n            <th class=\"col-md-1\">Даты</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let keg of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.keg.externalId }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.keg.id\" (change)=\"onEditChangeKeg($event.target.value)\">\r\n                        <option *ngFor=\"let keg of kegs\" [value]=\"keg.id\">{{keg.externalId}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.beer.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.beer.id\" (change)=\"onEditChangeBeer($event.target.value)\">\r\n                        <option *ngFor=\"let beer of beers\" [value]=\"beer.id\">{{beer.brewery.name}}-{{beer.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.owner.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.owner.id\" (change)=\"onEditChangeOwner($event.target.value)\">\r\n                        <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.buyer.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.buyer.id\" (change)=\"onEditChangeBuyer($event.target.value)\">\r\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <!--Waiting = 0,\r\n            OnTap = 1,\r\n            Empty = 2,\r\n            Problematic = 4,\r\n            Inactive = 8-->            \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <i class=\"fa fa-pause\" aria-hidden=\"true\" title=\"Waiting\" *ngIf=\"keg.status == KegStatus.Waiting\"></i>\r\n                    <i class=\"fa fa-check\" aria-hidden=\"true\" title=\"OnTap\" *ngIf=\"keg.status == KegStatus.OnTap\"></i>\r\n                    <i class=\"fa fa-battery-empty\" aria-hidden=\"true\" title=\"Empty\" *ngIf=\"keg.status == KegStatus.Empty\"></i>\r\n                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\" title=\"Problematic\" *ngIf=\"keg.status == KegStatus.Problematic\"></i>\r\n                    <i class=\"fa fa-trash\" aria-hidden=\"true\" title=\"Inactive\" *ngIf=\"keg.status == KegStatus.Inactive\"></i>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.status\" data-show-icon=\"true\">\r\n                        <option [value]=\"KegStatus.Waiting\">&#9208;</option>\r\n                        <option [value]=\"KegStatus.OnTap\" >&#10003;</option>\r\n                        <option [value]=\"KegStatus.Empty\">🔋</option>\r\n                        <option [value]=\"KegStatus.Problematic\">&#9888;</option>\r\n                        <option [value]=\"KegStatus.Inactive\">🗑</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <!--Example of calendar\r\n            Example of calendar-check-o\r\n            Example of calendar-minus-o\r\n            Example of calendar-o\r\n            Example of calendar-plus-o\r\n            Example of calendar-times-o-->\r\n            <!--brewingDate: Date;\r\n            packageDate: Date;\r\n            arrivalDate: Date;\r\n            installationDate: Date;\r\n            deinstallationDate: Date;\r\n            bestBeforeDate: Date;-->\r\n            <td>\r\n                <div *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <div *ngIf=\"keg.brewingDate\">\r\n                        <i class=\"fa fa-calendar\" aria-hidden=\"true\" title=\"Brewing Date\"></i>&nbsp;{{keg.brewingDate | date:'y&#x2011;MM&#x2011;dd'}}\r\n                    </div>\r\n                    <div *ngIf=\"keg.packageDate\">\r\n                        <i class=\"fa fa-calendar-o\" aria-hidden=\"true\" title=\"Package Date\"></i>&nbsp;{{keg.packageDate | date:'y&#x2011;MM&#x2011;dd'}}\r\n                    </div>\r\n                    <div *ngIf=\"keg.arrivalDate\">\r\n                        <i class=\"fa fa-calendar-check-o\" aria-hidden=\"true\" title=\"Arrival Date\"></i>&nbsp;{{keg.arrivalDate | date:'y&#x2011;MM&#x2011;dd'}}\r\n                    </div>\r\n                    <div *ngIf=\"keg.installationDate\">\r\n                        <i class=\"fa fa-calendar-plus-o\" aria-hidden=\"true\" title=\"Installation Date\"></i>&nbsp;{{keg.installationDate | date:'y&#x2011;MM&#x2011;dd'}}\r\n                    </div>\r\n                    <div *ngIf=\"keg.deinstallationDate\">\r\n                        <i class=\"fa fa-calendar-minus-o\" aria-hidden=\"true\" title=\"Deinstallation Date\"></i>&nbsp;{{keg.deinstallationDate | date:'y&#x2011;MM&#x2011;dd'}}\r\n                    </div>\r\n                    <div *ngIf=\"keg.bestBeforeDate\">\r\n                        <i class=\"fa fa-calendar-times-o\" aria-hidden=\"true\" title=\"Best Before Date\"></i>&nbsp;{{keg.bestBeforeDate | date:'y&#x2011;MM&#x2011;dd'}}\r\n                    </div>\r\n                </div>\r\n                <div *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" id=\"editing-brewingDate\"><i class=\"fa fa-calendar\" aria-hidden=\"true\" title=\"Brewing Date\"></i></span>\r\n                        <input type=\"date\" [(ngModel)]=\"editing.brewingDate\" class=\"form-control\" aria-describedby=\"editing-brewingDate\">\r\n                    </div>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" id=\"editing-packageDate\"><i class=\"fa fa-calendar-o\" aria-hidden=\"true\" title=\"Package Date\"></i></span>\r\n                        <input type=\"date\" [(ngModel)]=\"editing.packageDate\" class=\"form-control\" aria-describedby=\"editing-packageDate\">\r\n                    </div>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" id=\"editing-arrivalDate\"><i class=\"fa fa-calendar-check-o\" aria-hidden=\"true\" title=\"Arrival Date\"></i></span>\r\n                        <input type=\"date\" [(ngModel)]=\"editing.arrivalDate\" class=\"form-control\" aria-describedby=\"editing-arrivalDate\">\r\n                    </div>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" id=\"editing-installationDate\"><i class=\"fa fa-calendar-plus-o\" aria-hidden=\"true\" title=\"Installation Date\"></i></span>\r\n                        <input type=\"date\" [(ngModel)]=\"editing.installationDate\" class=\"form-control\" aria-describedby=\"editing-installationDate\">\r\n                    </div>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" id=\"editing-deinstallationDate\"><i class=\"fa fa-calendar-minus-o\" aria-hidden=\"true\" title=\"Deinstallation Date\"></i></span>\r\n                        <input type=\"date\" [(ngModel)]=\"editing.deinstallationDate\" class=\"form-control\" aria-describedby=\"editing-deinstallationDate\">\r\n                    </div>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" id=\"editing-bestBeforeDate\"><i class=\"fa fa-calendar-times-o\" aria-hidden=\"true\" title=\"Best Before Date\"></i></span>\r\n                        <input type=\"date\" [(ngModel)]=\"editing.bestBeforeDate\" class=\"form-control\" aria-describedby=\"editing-bestBeforeDate\">\r\n                    </div>\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <button (click)=\"edit(keg.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <select class=\"form-control\" [(ngModel)]=\"adding.keg.id\" (change)=\"onAddChangeKeg($event.target.value)\">\r\n                <option *ngFor=\"let keg of kegs\" [value]=\"keg.id\">{{keg.externalId}}</option>\r\n            </select>\r\n        </td>\r\n        <td>\r\n            <select class=\"form-control\" [(ngModel)]=\"adding.beer.id\" (change)=\"onAddChangeBeer($event.target.value)\">\r\n                <option *ngFor=\"let beer of beers\" [value]=\"beer.id\">{{beer.brewery.name}}-{{beer.name}}</option>\r\n            </select>\r\n        </td>\r\n        <td>\r\n            <select class=\"form-control\" [(ngModel)]=\"adding.owner.id\" (change)=\"onAddChangeOwner($event.target.value)\">\r\n                <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\r\n            </select>\r\n        </td>\r\n        <td>\r\n            <select class=\"form-control\" [(ngModel)]=\"adding.buyer.id\" (change)=\"onAddChangeBuyer($event.target.value)\">\r\n                <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n            </select>\r\n        </td>\r\n        <td>\r\n            <select class=\"form-control\" [(ngModel)]=\"adding.status\" data-show-icon=\"true\">\r\n                <option [value]=\"KegStatus.Waiting\">&#9208;</option>\r\n                <option [value]=\"KegStatus.OnTap\" >&#10003;</option>\r\n                <option [value]=\"KegStatus.Empty\">🔋</option>\r\n                <option [value]=\"KegStatus.Problematic\">&#9888;</option>\r\n                <option [value]=\"KegStatus.Inactive\">🗑</option>\r\n            </select>\r\n        </td>\r\n        <td>\r\n            <div class=\"input-group\">\r\n                <span class=\"input-group-addon\" id=\"adding-brewingDate\"><i class=\"fa fa-calendar\" aria-hidden=\"true\" title=\"Brewing Date\"></i></span>\r\n                <input type=\"date\" [(ngModel)]=\"adding.brewingDate\" class=\"form-control\" aria-describedby=\"adding-brewingDate\">\r\n            </div>\r\n            <div class=\"input-group\">\r\n                <span class=\"input-group-addon\" id=\"adding-packageDate\"><i class=\"fa fa-calendar-o\" aria-hidden=\"true\" title=\"Package Date\"></i></span>\r\n                <input type=\"date\" [(ngModel)]=\"adding.packageDate\" class=\"form-control\" aria-describedby=\"adding-packageDate\">\r\n            </div>\r\n            <div class=\"input-group\">\r\n                <span class=\"input-group-addon\" id=\"adding-arrivalDate\"><i class=\"fa fa-calendar-check-o\" aria-hidden=\"true\" title=\"Arrival Date\"></i></span>\r\n                <input type=\"date\" [(ngModel)]=\"adding.arrivalDate\" class=\"form-control\" aria-describedby=\"adding-arrivalDate\">\r\n            </div>\r\n            <div class=\"input-group\">\r\n                <span class=\"input-group-addon\" id=\"adding-installationDate\"><i class=\"fa fa-calendar-plus-o\" aria-hidden=\"true\" title=\"Installation Date\"></i></span>\r\n                <input type=\"date\" [(ngModel)]=\"adding.installationDate\" class=\"form-control\" aria-describedby=\"adding-installationDate\">\r\n            </div>\r\n            <div class=\"input-group\">\r\n                <span class=\"input-group-addon\" id=\"adding-deinstallationDate\"><i class=\"fa fa-calendar-minus-o\" aria-hidden=\"true\" title=\"Deinstallation Date\"></i></span>\r\n                <input type=\"date\" [(ngModel)]=\"adding.deinstallationDate\" class=\"form-control\" aria-describedby=\"adding-deinstallationDate\">\r\n            </div>\r\n            <div class=\"input-group\">\r\n                <span class=\"input-group-addon\" id=\"adding-bestBeforeDate\"><i class=\"fa fa-calendar-times-o\" aria-hidden=\"true\" title=\"Best Before Date\"></i></span>\r\n                <input type=\"date\" [(ngModel)]=\"adding.bestBeforeDate\" class=\"form-control\" aria-describedby=\"adding-bestBeforeDate\">\r\n            </div>\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
-/* 379 */
+/* 381 */
 /***/ (function(module, exports) {
 
 module.exports = "<h1>Редактировать краны в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать какое пиво в какой кег налито.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\nkeg: BeerKeg;\r\ntap: ITap;\r\npriority: number;\r\ninstallTime: Date;\r\ndeinstallTime: Date;  \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-2\">Кег</th>\r\n            <th class=\"col-md-2\">Кран</th>\r\n            <th class=\"col-md-2\">Приоритет</th>\r\n            <th class=\"col-md-2\">Дата установки</th>\r\n            <th class=\"col-md-2\">Дата снятия</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let keg of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{keg.keg.keg.externalId}} ({{keg.keg.beer.brewery.name}} - {{keg.keg.beer.name}})\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.keg.id\" (change)=\"onEditChangeKeg($event.target.value)\">\r\n                        <option *ngFor=\"let keg of kegs\" [value]=\"keg.id\">{{keg.keg.externalId}} ({{keg.beer.brewery.name}} - {{keg.beer.name}})</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.tap.pub.name }}&nbsp;#{{ keg.tap.number }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.tap.id\" (change)=\"onEditChangeBeer($event.target.value)\">\r\n                        <option *ngFor=\"let tap of taps\" [value]=\"tap.id\">{{tap.pub.name}} #{{tap.number}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.priority }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control\" id=\"editing.priority\" required [(ngModel)]=\"editing.priority\" name=\"priority\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.installTime | date:'y-MM-dd' }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"date\" class=\"form-control\" id=\"editing.installTime\" required [(ngModel)]=\"editing.installTime\" name=\"installTime\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.installTime | date:'y-MM-dd' }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"date\" class=\"form-control\" id=\"editing.deinstallTime\" required [(ngModel)]=\"editing.deinstallTime\" name=\"deinstallTime\">\r\n                </span>\r\n            </td>     \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <button (click)=\"edit(keg.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.keg.id\" (change)=\"onEditChangeKeg($event.target.value)\">\r\n                    <option *ngFor=\"let keg of kegs\" [value]=\"keg.id\">{{keg.keg.externalId}}-{{keg.beer.name}}-</option>\r\n                </select>\r\n        </td>\r\n        <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.tap.id\" (change)=\"onEditChangeBeer($event.target.value)\">\r\n                    <option *ngFor=\"let tap of taps\" [value]=\"tap.id\">{{tap.pub.name}} #{{tap.number}}</option>\r\n                </select>\r\n        </td>\r\n        <td>\r\n                <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control\" id=\"adding.priority\" required [(ngModel)]=\"adding.priority\" name=\"priority\">\r\n        </td>\r\n        <td>\r\n                <input type=\"date\" class=\"form-control\" id=\"adding.installTime\" required [(ngModel)]=\"adding.installTime\" name=\"installTime\">\r\n        </td>\r\n        <td>\r\n                <input type=\"date\" class=\"form-control\" id=\"adding.deinstallTime\" required [(ngModel)]=\"adding.deinstallTime\" name=\"deinstallTime\">\r\n        </td>   \r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
-/* 380 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Редактировать список пива</h1>\r\n\r\n<p>На этой странице можно редактировать сорта пива, а также добавлять новые сорта.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</alert>\r\n\r\n<div class=\"dropdown\" *ngIf=\"breweries\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"breweryChooser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Пивоварня: <span *ngIf=\"brewery\">{{brewery.name}}</span><span *ngIf=\"!brewery\">все</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"breweryChooser\">\r\n        <li><a (click)=\"setBrewery('')\">*</a></li>\r\n        <li *ngFor=\"let brewery of selectingBreweries\"><a (click)=\"setBrewery(brewery.value)\">{{ brewery.label }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-2\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Производитель</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Стиль</strong></h4></div>\r\n        <div class=\"col-md-3\"><h4><strong>Описание</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>ABV, &deg;</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>OG, %</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>IBU</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let beer of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != beer.id)\" (click)=\"edit(beer.id)\">\r\n            <div class=\"col-md-2\" title=\"{{beer.id}}\">{{ beer.name }}</div>\r\n            <div class=\"col-md-2\">{{ beer.brewery.name }}</div>\r\n            <div class=\"col-md-2\">{{ styles[beer.bjcpStyle] }}</div>\r\n            <div class=\"col-md-3\" style=\"text-overflow: ellipsis; white-space: nowrap; overflow: hidden;\">{{ beer.description }}</div>\r\n            <div class=\"col-md-1\">{{ beer.alcohol }}</div>\r\n            <div class=\"col-md-1\">{{ beer.gravity }}</div>\r\n            <div class=\"col-md-1\">{{ beer.ibu }}\r\n                <span class=\"badge\" *ngIf=\"servesCounts[beer.id]\">{{ servesCounts[beer.id] }}</span>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == beer.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <ng-select [options]=\"selectingBreweries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.brewery.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <ng-select [options]=\"selectingStyles\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.bjcpStyle\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.alcohol\"\r\n                           required\r\n                           [(ngModel)]=\"editing.alcohol\" name=\"alcohol\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.gravity\"\r\n                           [(ngModel)]=\"editing.gravity\" name=\"gravity\">\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.ibu\"\r\n                           [(ngModel)]=\"editing.ibu\" name=\"ibu\">\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-6\">\r\n                    <textarea class=\"form-control\" id=\"editing.description\"\r\n                              required\r\n                              [(ngModel)]=\"editing.description\" name=\"description\"></textarea>\r\n\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>    \r\n                    </button>\r\n                    <button (click)=\"startDelete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>  \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <ng-select [options]=\"selectingBreweries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.brewery.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <ng-select [options]=\"selectingStyles\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.bjcpStyle\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.alcohol\"\r\n                       required\r\n                       [(ngModel)]=\"adding.alcohol\" name=\"alcohol\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.gravity\"\r\n                       [(ngModel)]=\"adding.gravity\" name=\"gravity\">\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.ibu\"\r\n                       [(ngModel)]=\"adding.ibu\" name=\"ibu\">\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-6\">\r\n                <textarea class=\"form-control\" id=\"adding.description\"\r\n                          required\r\n                          [(ngModel)]=\"adding.description\" name=\"description\"></textarea>\r\n\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\" *ngIf=\"adding.image\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isAdding(adding.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isAdding(adding.id)\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
-
-/***/ }),
-/* 381 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Редактировать список пивоварен</h1>\r\n\r\n<p>На этой странице можно редактировать пивоварни, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Страна</strong></h4></div>\r\n        <div class=\"col-md-5\"><h4><strong>Адрес</strong></h4></div>\r\n        <div class=\"col-md-2\"></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let brewery of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != brewery.id)\" (click)=\"edit(brewery.id)\">\r\n            <div class=\"col-md-3\" title=\"{{brewery.id}}\">{{ brewery.name }}</div>\r\n            <div class=\"col-md-2\">{{ brewery.country.name }}</div>\r\n            <div class=\"col-md-5\">{{ brewery.address }}</div>\r\n            <div class=\"col-md-2\">\r\n                <span class=\"badge\" *ngIf=\"breweryCounts[brewery.id]\">{{ breweryCounts[brewery.id] }} <i class=\"fa fa-beer\" aria-hidden=\"true\"></i></span>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == brewery.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingCountries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.country.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-5\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"startDelete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-1\">\r\n                    <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n                </div>\r\n                <div class=\"col-md-7\"></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingCountries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.country.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-5\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                       required\r\n                       [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-1\">\r\n                <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-7\"></div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
-
-/***/ }),
 /* 382 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пивоварням.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Пивоварня</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let breweryAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.brewery.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.brewery.id\" (change)=\"onEditChangeBrewery($event.target.value)\">\n                        <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    <button (click)=\"edit(breweryAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.brewery.id\" (change)=\"onAddChangeBrewery($event.target.value)\">\n                    <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+module.exports = "<h1>Редактировать веса кег</h1>\r\n\r\n<p>На этой странице можно редактировать взвешивания кег.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\nkeg: IBeerKeg;\r\ndate: Date;\r\nweight: number;\r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n    <tr>\r\n        <th class=\"col-md-3\">Кег</th>\r\n        <th class=\"col-md-3\">Дата</th>\r\n        <th class=\"col-md-2\">Вес, кг</th>\r\n        <th class=\"col-md-2\">Действия</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let weight of elements\">\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != weight.id)\">\r\n                {{weight.keg.keg.externalId}} ({{weight.keg.beer.brewery.name}} - {{weight.keg.beer.name}})\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == weight.id)\">\r\n                <select class=\"form-control\" [(ngModel)]=\"editing.keg.id\" (change)=\"onEditChangeKeg($event.target.value)\">\r\n                    <option *ngFor=\"let keg of kegs\" [value]=\"keg.id\">{{keg.keg.externalId}} ({{keg.beer.brewery.name}} - {{keg.beer.name}})</option>\r\n                </select>\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != weight.id)\">\r\n                {{ weight.date | date:'y-MM-dd' }}\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == weight.id)\">\r\n                <input type=\"date\" class=\"form-control\" id=\"editing.date\" required [(ngModel)]=\"editing.date\" name=\"date\">\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != weight.id)\">\r\n                {{ weight.weight }}\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == weight.id)\">\r\n                <input type=\"number\" min=\"0\" max=\"100\" placeholder=\"0.000\" step=\"0.1\" class=\"form-control\" id=\"editing.weight\" required [(ngModel)]=\"editing.weight\" name=\"weight\">\r\n            </span>\r\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != weight.id)\">\r\n                <button (click)=\"edit(weight.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </span>\r\n            <span *ngIf=\"editing && (editing.id == weight.id)\">\r\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </span>\r\n        </td>\r\n    </tr>\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <select class=\"form-control\" [(ngModel)]=\"adding.keg.id\" (change)=\"onEditChangeKeg($event.target.value)\">\r\n                <option *ngFor=\"let keg of kegs\" [value]=\"keg.id\">{{keg.keg.externalId}} ({{keg.beer.brewery.name}} - {{keg.beer.name}})</option>\r\n            </select>\r\n        </td>\r\n        <td>\r\n            <input type=\"date\" class=\"form-control\" id=\"adding.date\" required [(ngModel)]=\"adding.date\" name=\"date\">\r\n        </td>\r\n        <td>\r\n            <input type=\"number\" min=\"0\" max=\"100\" placeholder=\"0.000\" step=\"0.1\" class=\"form-control\" id=\"adding.weight\" required [(ngModel)]=\"adding.weight\" name=\"weight\">\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
 /* 383 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список городов</h1>\n\n<p>На этой странице вы можете редактировать список городов, а также добавлять новые.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n    <tr>\n        <th>Служебный Id</th>\n        <th>Название</th>\n        <th>Действия</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let city of elements\">\n        <td>{{ city.id }}</td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                    {{ city.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                <button (click)=\"edit(city.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\n    </tr>\n\n    <tr *ngIf=\"adding\">\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\n                   required\n                   [(ngModel)]=\"adding.id\" name=\"id\">\n        </td>\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\n                   required\n                   [(ngModel)]=\"adding.name\" name=\"name\">\n        </td>\n        <td>\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\n        </td>\n    </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+module.exports = "<h1>Редактировать список пива</h1>\r\n\r\n<p>На этой странице можно редактировать сорта пива, а также добавлять новые сорта.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</alert>\r\n\r\n<div class=\"dropdown\" *ngIf=\"breweries\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"breweryChooser\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        Пивоварня: <span *ngIf=\"brewery\">{{brewery.name}}</span><span *ngIf=\"!brewery\">все</span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"breweryChooser\">\r\n        <li><a (click)=\"setBrewery('')\">*</a></li>\r\n        <li *ngFor=\"let brewery of selectingBreweries\"><a (click)=\"setBrewery(brewery.value)\">{{ brewery.label }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-2\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Производитель</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Стиль</strong></h4></div>\r\n        <div class=\"col-md-3\"><h4><strong>Описание</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>ABV, &deg;</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>OG, %</strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong>IBU</strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let beer of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != beer.id)\" (click)=\"edit(beer.id)\">\r\n            <div class=\"col-md-2\" title=\"{{beer.id}}\">{{ beer.name }}</div>\r\n            <div class=\"col-md-2\">{{ beer.brewery.name }}</div>\r\n            <div class=\"col-md-2\">{{ styles[beer.bjcpStyle] }}</div>\r\n            <div class=\"col-md-3\" style=\"text-overflow: ellipsis; white-space: nowrap; overflow: hidden;\">{{ beer.description }}</div>\r\n            <div class=\"col-md-1\">{{ beer.alcohol }}</div>\r\n            <div class=\"col-md-1\">{{ beer.gravity }}</div>\r\n            <div class=\"col-md-1\">{{ beer.ibu }}\r\n                <span class=\"badge\" *ngIf=\"servesCounts[beer.id]\">{{ servesCounts[beer.id] }}</span>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == beer.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <ng-select [options]=\"selectingBreweries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.brewery.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <ng-select [options]=\"selectingStyles\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.bjcpStyle\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.alcohol\"\r\n                           required\r\n                           [(ngModel)]=\"editing.alcohol\" name=\"alcohol\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.gravity\"\r\n                           [(ngModel)]=\"editing.gravity\" name=\"gravity\">\r\n\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control col-xs-1\" id=\"editing.ibu\"\r\n                           [(ngModel)]=\"editing.ibu\" name=\"ibu\">\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-6\">\r\n                    <textarea class=\"form-control\" id=\"editing.description\"\r\n                              required\r\n                              [(ngModel)]=\"editing.description\" name=\"description\"></textarea>\r\n\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>    \r\n                    </button>\r\n                    <button (click)=\"startDelete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>  \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <ng-select [options]=\"selectingBreweries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.brewery.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <ng-select [options]=\"selectingStyles\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.bjcpStyle\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.alcohol\"\r\n                       required\r\n                       [(ngModel)]=\"adding.alcohol\" name=\"alcohol\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.gravity\"\r\n                       [(ngModel)]=\"adding.gravity\" name=\"gravity\">\r\n\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control col-xs-1\" id=\"adding.ibu\"\r\n                       [(ngModel)]=\"adding.ibu\" name=\"ibu\">\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-6\">\r\n                <textarea class=\"form-control\" id=\"adding.description\"\r\n                          required\r\n                          [(ngModel)]=\"adding.description\" name=\"description\"></textarea>\r\n\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\" *ngIf=\"adding.image\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isAdding(adding.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isAdding(adding.id)\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
 /* 384 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список пабов</h1>\r\n\r\n<p>На этой странице можно редактировать список пабов, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n        {{errorMessage}}\r\n</alert>\r\n\r\n<alert type=\"success\" dismissible=\"true\" *ngIf=\"successMessage\">\r\n    <p *ngFor=\"let output of outputs\">\r\n        {{output}}\r\n    </p>\r\n</alert>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-map-signs\" title=\"City\"></i></strong></h4></div>\r\n        <div class=\"col-md-4\"><h4><strong><i class=\"fa fa-address-card-o\" title=\"Address\"></i></strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong><span class=\"fa fa-map-pin\" title=\"Taps\"></span></strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-bars\" aria-hidden=\"true\"></i></strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let pub of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != pub.id)\">\r\n            <div class=\"col-md-3\">{{ pub.name }}</div>\r\n            <div class=\"col-md-2\">{{ pub.city.name }}</div>\r\n            <div class=\"col-md-4\">{{ pub.address }}</div>\r\n            <div class=\"col-md-1\">{{ pub.tapNumber }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\" *ngIf=\"canEditPub(pub)\">\r\n                    <span class=\"fa fa-pencil-square-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(pub.id)\"></span>                    \r\n                </button>\r\n                <button (click)=\"import(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"canParsePub(pub)\">\r\n                    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(pub.id)\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == pub.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.city.id\" (change)=\"onEditChangeCity($event.target.value)\">\r\n                        <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                    </select>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.tapNumber\" min=\"0\"\r\n                           required\r\n                           [(ngModel)]=\"editing.tapNumber\" name=\"tapNumber\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span> \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"editing.facebookUrl\" id=\"editing.facebookUrl\" name=\"editing.facebookUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.websiteUrl\"  [(ngModel)]=\"editing.websiteUrl\" name=\"editing.websiteUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.bookingUrl\"  [(ngModel)]=\"editing.bookingUrl\" name=\"editing.bookingUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\"/>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.taplistHeaderImage}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[1]\"/>\r\n                </div>\r\n            </div> \r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-10\">\r\n                    <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"editing.parserOptions\"></textarea>\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    &nbsp;\r\n                </div>\r\n            </div>                       \r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                        required\r\n                        [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.city.id\" (change)=\"onAddChangeCity($event.target.value)\">\r\n                    <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                        required\r\n                        [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.tapNumber\" min=\"0\"\r\n                       required\r\n                       [(ngModel)]=\"adding.tapNumber\" name=\"tapNumber\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"adding.facebookUrl\" id=\"adding.facebookUrl\" name=\"adding.facebookUrl\">\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.websiteUrl\" [(ngModel)]=\"adding.websiteUrl\" name=\"adding.websiteUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.bookingUrl\" [(ngModel)]=\"adding.bookingUrl\" name=\"adding.bookingUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                    <cl-image public-id=\"{{adding.taplistHeaderImage}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[1]\"/>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-12\">\r\n                <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"adding.parserOptions\"></textarea>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\" *ngIf=\"isAdmin()\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>\r\n<button (click)=\"importAll()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"isAdmin()\">\r\n    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(null)\"></span>\r\n    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(null)\"></span>\r\n</button>";
+module.exports = "<h1>Редактировать список пивоварен</h1>\r\n\r\n<p>На этой странице можно редактировать пивоварни, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong>Страна</strong></h4></div>\r\n        <div class=\"col-md-5\"><h4><strong>Адрес</strong></h4></div>\r\n        <div class=\"col-md-2\"></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let brewery of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != brewery.id)\" (click)=\"edit(brewery.id)\">\r\n            <div class=\"col-md-3\" title=\"{{brewery.id}}\">{{ brewery.name }}</div>\r\n            <div class=\"col-md-2\">{{ brewery.country.name }}</div>\r\n            <div class=\"col-md-5\">{{ brewery.address }}</div>\r\n            <div class=\"col-md-2\">\r\n                <span class=\"badge\" *ngIf=\"breweryCounts[brewery.id]\">{{ breweryCounts[brewery.id] }} <i class=\"fa fa-beer\" aria-hidden=\"true\"></i></span>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == brewery.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <ng-select [options]=\"selectingCountries\"\r\n                               [multiple]=\"false\"\r\n                               [(ngModel)]=\"editing.country.id\">\r\n                    </ng-select>\r\n                </div>\r\n                <div class=\"col-md-5\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"startDelete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Delete\">\r\n                        <span class=\"fa fa-trash-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isDeleting(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isDeleting(editing.id)\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-1\">\r\n                    <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n                </div>\r\n                <div class=\"col-md-7\"></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                       required\r\n                       [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <ng-select [options]=\"selectingCountries\"\r\n                           [multiple]=\"false\"\r\n                           [(ngModel)]=\"adding.country.id\">\r\n                </ng-select>\r\n            </div>\r\n            <div class=\"col-md-5\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                       required\r\n                       [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-1\">\r\n                <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-7\"></div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
 /* 385 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\r\n    {{'MENU.ONTAP' | translate:lang}}<!--Що на кранах-->?\r\n</h1>\r\n<p>    \r\n    {{'HOME.DESCRIPTION' | translate:lang}}<!--На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.-->\r\n</p>\r\n<div class=\"panel panel-warning\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">\r\n            {{'HOME.ASSERTION' | translate:lang}}<!--Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років-->:\r\n        </h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n            <a class=\"btn btn-success btn-lg\" (click)=\"goToPubs()\" role=\"button\"><span class=\"glyphicon glyphicon-ok-circle\"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>\r\n            <a class=\"btn btn-danger btn-lg\" href=\"http://prom.ua/Podemnyj-kran-igrushki.html\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> {{'HOME.NO' | translate:lang}}<!--Ні--></a>\r\n    </div>\r\n</div>";
+module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пивоварням.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Пивоварня</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let breweryAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.brewery.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.brewery.id\" (change)=\"onEditChangeBrewery($event.target.value)\">\n                        <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    {{ breweryAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != breweryAdmin.id)\">\n                    <button (click)=\"edit(breweryAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == breweryAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.brewery.id\" (change)=\"onAddChangeBrewery($event.target.value)\">\n                    <option *ngFor=\"let brewery of breweries\" [value]=\"brewery.id\">{{brewery.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
 
 /***/ }),
 /* 386 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать краны в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать краны пабам.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\nexternalId: string;\r\nfitting: string;\r\nvolume: number;\r\nisReturnable: boolean;\r\nmaterial: string;\r\nemptyWeight: number; }          \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-2\">Номер</th>\r\n            <th class=\"col-md-1\">Фиттинг</th>\r\n            <th class=\"col-md-2\">Объём</th>\r\n            <th class=\"col-md-1\">Возвратный?</th>\r\n            <th class=\"col-md-2\">Материал</th>\r\n            <th class=\"col-md-2\">Вес пустого</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let keg of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.externalId }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.externalId\" required [(ngModel)]=\"editing.externalId\" name=\"externalId\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.fitting }}\r\n                </span>\r\n                <div class=\"\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.fitting\" required [(ngModel)]=\"editing.fitting\" name=\"fitting\">\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.volume }}l\r\n                </span>\r\n                <div class=\"input-group\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"editing.volume\" required [(ngModel)]=\"editing.volume\" name=\"volume\">\r\n                    <div class=\"input-group-addon\">l</div>\r\n                </div>                    \r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"keg.isReturnable\"></i>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"editing.isReturnable\" required [(ngModel)]=\"editing.isReturnable\" name=\"isReturnable\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.material }}\r\n                </span>\r\n                <div class=\"\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.material\" required [(ngModel)]=\"editing.material\" name=\"material\">\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.emptyWeight }}kg\r\n                </span>\r\n                <div class=\"input-group\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"editing.emptyWeight\" required [(ngModel)]=\"editing.emptyWeight\" name=\"emptyWeight\">\r\n                    <div class=\"input-group-addon\">kg</div>\r\n                </div>\r\n            </td>       \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <button (click)=\"edit(keg.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.externalId\" required [(ngModel)]=\"adding.externalId\" name=\"externalId\">\r\n            </td>\r\n            <td>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.fitting\" required [(ngModel)]=\"adding.fitting\" name=\"fitting\">\r\n            </td>\r\n            <td>\r\n                <div class=\"input-group\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"adding.volume\" required [(ngModel)]=\"adding.volume\" name=\"volume\">\r\n                    <div class=\"input-group-addon\">l</div>\r\n                </div>\r\n            </td>\r\n            <td>\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"adding.isReturnable\" required [(ngModel)]=\"adding.isReturnable\" name=\"isReturnable\">\r\n            </td>\r\n            <td>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.material\" required [(ngModel)]=\"adding.material\" name=\"material\">\r\n\r\n            </td>\r\n            <td>\r\n                <div class=\"input-group\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"adding.emptyWeight\" required [(ngModel)]=\"adding.emptyWeight\" name=\"emptyWeight\">\r\n                    <div class=\"input-group-addon\">kg</div>\r\n                </div>\r\n            </td>      \r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
+module.exports = "<h1>Редактировать список городов</h1>\n\n<p>На этой странице вы можете редактировать список городов, а также добавлять новые.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n    <tr>\n        <th>Служебный Id</th>\n        <th>Название</th>\n        <th>Действия</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let city of elements\">\n        <td>{{ city.id }}</td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                    {{ city.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\n        <td>\n            <span *ngIf=\"!editing || (editing.id != city.id)\">\n                <button (click)=\"edit(city.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == city.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\n    </tr>\n\n    <tr *ngIf=\"adding\">\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\n                   required\n                   [(ngModel)]=\"adding.id\" name=\"id\">\n        </td>\n        <td>\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\n                   required\n                   [(ngModel)]=\"adding.name\" name=\"name\">\n        </td>\n        <td>\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\n        </td>\n    </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
 
 /***/ }),
 /* 387 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"locale btn-group btn-group-xs pull-right\" role=\"group\" aria-label=\"...\">\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='uk', 'btn-link': currentLocale !='uk'}\"\r\n            (click)=\"selectLocale('uk','UA')\">\r\n        <span class=\"flag-icon flag-icon-ua flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='en', 'btn-link': currentLocale !='en'}\"\r\n            (click)=\"selectLocale('en','US')\">\r\n        <span class=\"flag-icon flag-icon-gb flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='ru', 'btn-link': currentLocale !='ru'}\"\r\n            (click)=\"selectLocale('ru','RU')\">\r\n        <span class=\"flag-icon flag-icon-ru flag-icon-squared\"></span>\r\n    </button>\r\n</div>";
+module.exports = "<h1>Редактировать список пабов</h1>\r\n\r\n<p>На этой странице можно редактировать список пабов, а также добавлять новые.</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\"\r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<alert type=\"danger\" dismissible=\"true\" *ngIf=\"errorMessage\">\r\n        {{errorMessage}}\r\n</alert>\r\n\r\n<alert type=\"success\" dismissible=\"true\" *ngIf=\"successMessage\">\r\n    <p *ngFor=\"let output of outputs\">\r\n        {{output}}\r\n    </p>\r\n</alert>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"elements\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\"><h4><strong>Название</strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-map-signs\" title=\"City\"></i></strong></h4></div>\r\n        <div class=\"col-md-4\"><h4><strong><i class=\"fa fa-address-card-o\" title=\"Address\"></i></strong></h4></div>\r\n        <div class=\"col-md-1\"><h4><strong><span class=\"fa fa-map-pin\" title=\"Taps\"></span></strong></h4></div>\r\n        <div class=\"col-md-2\"><h4><strong><i class=\"fa fa-bars\" aria-hidden=\"true\"></i></strong></h4></div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngFor=\"let pub of elements\">\r\n        <div class=\"row\" *ngIf=\"!editing || (editing.id != pub.id)\">\r\n            <div class=\"col-md-3\">{{ pub.name }}</div>\r\n            <div class=\"col-md-2\">{{ pub.city.name }}</div>\r\n            <div class=\"col-md-4\">{{ pub.address }}</div>\r\n            <div class=\"col-md-1\">{{ pub.tapNumber }}</div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"edit(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\" *ngIf=\"canEditPub(pub)\">\r\n                    <span class=\"fa fa-pencil-square-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(pub.id)\"></span>                    \r\n                </button>\r\n                <button (click)=\"import(pub.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"canParsePub(pub)\">\r\n                    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(pub.id)\"></span>\r\n                    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(pub.id)\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"editing && (editing.id == pub.id)\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-3\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.name\"\r\n                           required\r\n                           [(ngModel)]=\"editing.name\" name=\"name\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.city.id\" (change)=\"onEditChangeCity($event.target.value)\">\r\n                        <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                    </select>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.address\"\r\n                           required\r\n                           [(ngModel)]=\"editing.address\" name=\"address\">\r\n                </div>\r\n                <div class=\"col-md-1\">\r\n                    <input type=\"number\" class=\"form-control\" id=\"editing.tapNumber\" min=\"0\"\r\n                           required\r\n                           [(ngModel)]=\"editing.tapNumber\" name=\"tapNumber\">\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"fa fa-floppy-o fa-lg\" aria-hidden=\"true\" *ngIf=\"!isSaving(editing.id)\"></span>\r\n                        <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isSaving(editing.id)\"></span> \r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"fa fa-times fa-lg\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"editing.facebookUrl\" id=\"editing.facebookUrl\" name=\"editing.facebookUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.websiteUrl\"  [(ngModel)]=\"editing.websiteUrl\" name=\"editing.websiteUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                        <input type=\"text\" class=\"form-control\" id=\"editing.bookingUrl\"  [(ngModel)]=\"editing.bookingUrl\" name=\"editing.bookingUrl\" >\r\n                    </div>                    \r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\"/>\r\n                </div>\r\n                <div class=\"col-md-3\">\r\n                    <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                        <cl-image public-id=\"{{editing.taplistHeaderImage}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                    </div>\r\n                    <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[1]\"/>\r\n                </div>\r\n            </div> \r\n            <div class=\"row edit2\">\r\n                <div class=\"col-md-10\">\r\n                    <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"editing.parserOptions\"></textarea>\r\n                </div>\r\n                <div class=\"col-md-2\">\r\n                    &nbsp;\r\n                </div>\r\n            </div>                       \r\n        </div>\r\n    </div>\r\n    <div class=\"row-wrapper\" *ngIf=\"adding\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                        required\r\n                        [(ngModel)]=\"adding.name\" name=\"name\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.city.id\" (change)=\"onAddChangeCity($event.target.value)\">\r\n                    <option *ngFor=\"let city of cities\" [value]=\"city.id\">{{city.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.address\"\r\n                        required\r\n                        [(ngModel)]=\"adding.address\" name=\"address\">\r\n            </div>\r\n            <div class=\"col-md-1\">\r\n                <input type=\"number\" class=\"form-control\" id=\"adding.tapNumber\" min=\"0\"\r\n                       required\r\n                       [(ngModel)]=\"adding.tapNumber\" name=\"tapNumber\">\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"adding.facebookUrl\" id=\"adding.facebookUrl\" name=\"adding.facebookUrl\">\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.websiteUrl\" [(ngModel)]=\"adding.websiteUrl\" name=\"adding.websiteUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></span>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.bookingUrl\" [(ngModel)]=\"adding.bookingUrl\" name=\"adding.bookingUrl\">\r\n                </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                    <cl-image public-id=\"{{adding.image}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"Sample image\" title=\"Sample image title\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[0]\" />\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <div class=\"pull-left\" style=\"margin-right: 20px;\">\r\n                    <cl-image public-id=\"{{adding.taplistHeaderImage}}\" cloud-name=\"ontap-in-ua\" height=\"20\" dpr=\"auto\" format=\"png\" quality=\"100\" alt=\"\" title=\"\"></cl-image>\r\n                </div>\r\n                <input type=\"file\" ng2FileSelect [uploader]=\"uploaders[1]\"/>\r\n            </div>\r\n        </div>\r\n        <div class=\"row edit2\">\r\n            <div class=\"col-md-12\">\r\n                <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"adding.parserOptions\"></textarea>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\" *ngIf=\"isAdmin()\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>\r\n<button (click)=\"importAll()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Import\" *ngIf=\"isAdmin()\">\r\n    <span class=\"fa fa-cloud-upload fa-lg\" aria-hidden=\"true\" *ngIf=\"!isImporting(null)\"></span>\r\n    <span class=\"fa fa-spinner fa-pulse\" aria-hidden=\"true\" *ngIf=\"isImporting(null)\"></span>\r\n</button>";
 
 /***/ }),
 /* 388 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='login'>\r\n    <span *ngIf=\"!user\">\r\n        <input type=\"text\" class=\"form-control input-sm\" [(ngModel)]=\"userLogin\" id=\"login\" placeholder=\"Login\">\r\n        <div class=\"input-group\">\r\n            <input type=\"password\" class=\"form-control input-sm\" [(ngModel)]=\"userPassword\" id=\"password\" placeholder=\"Password\">\r\n            <span class=\"input-group-btn\">\r\n                <button class=\"btn btn-default btn-sm\" type=\"button\" (click)=\"login()\"><i class=\"glyphicon glyphicon-log-in\"></i></button>\r\n            </span>\r\n        </div><!-- /input-group -->\r\n    </span>\r\n    <span *ngIf=\"user\" class=\"logged-in\">\r\n        <i class=\"glyphicon glyphicon-user\"></i> Привет, {{user.name}}! \r\n        <button class=\"btn btn-primary btn-xs\" type=\"button\" (click)=\"logout()\"><i class=\"glyphicon glyphicon-log-out\"></i></button>\r\n    </span>\r\n</div>\r\n        \r\n";
+module.exports = "<h1>\r\n    {{'MENU.ONTAP' | translate:lang}}<!--Що на кранах-->?\r\n</h1>\r\n<p>    \r\n    {{'HOME.DESCRIPTION' | translate:lang}}<!--На нашому сайті ви маєте змогу знайти що за пиво зараз можна купити в пабах по всієй Україні.-->\r\n</p>\r\n<div class=\"panel panel-warning\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title\">\r\n            {{'HOME.ASSERTION' | translate:lang}}<!--Щоб продовжити, будь ласка підтвердіть що ви маєте 18 років-->:\r\n        </h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n            <a class=\"btn btn-success btn-lg\" (click)=\"goToPubs()\" role=\"button\"><span class=\"glyphicon glyphicon-ok-circle\"></span> {{'HOME.YES' | translate:lang}}<!--Так--></a>\r\n            <a class=\"btn btn-danger btn-lg\" href=\"http://prom.ua/Podemnyj-kran-igrushki.html\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> {{'HOME.NO' | translate:lang}}<!--Ні--></a>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 389 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/pubs']\">{{\"MENU.HOME\" | translate:lang }}<!--На кранах--></a>\r\n            <locale></locale>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/pubs']\">\r\n                        <span class='glyphicon glyphicon-question-sign'></span>\r\n                        {{\"MENU.ONTAP\" | translate:lang }}<!--Що на кранах-->\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/cities']\">\r\n                        <span class='glyphicon glyphicon-flag'></span> Города\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/beers']\">\r\n                        <span class='glyphicon glyphicon-glass'></span> Пиво\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/epubs']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Пабы\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/prices']\">\r\n                        <span class='fa fa-eur fa-fw'></span>&nbsp; Цены\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/taps']\">\r\n                        <span class='fa fa-level-down fa-fw'></span>&nbsp; Краны\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/kegs']\">\r\n                        <span class='fa fa-cubes fa-fw'></span>&nbsp; Кеги\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/beerkegs']\">\r\n                        <span class='fa fa-battery fa-fw'></span>&nbsp; Пиво в кегах\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/beerkegsontap']\">\r\n                        <span class='fa fa-podcast fa-fw'></span>&nbsp; Кеги на кранах\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/breweries']\">\r\n                        <span class='glyphicon glyphicon-star'></span> Пивоварни\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/users']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Пользователи\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/pub-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пабов\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/brewery-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пивоварен\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n        <log-in></log-in>\r\n        <div class=\"center-block text-center copyright\">\r\n            <i class=\"fa fa-copyright\"></i> 2016-2017 ontap.in.ua&nbsp;\r\n            <a href=\"https://fb.me/ontap.in.ua\"><i class=\"fa fa-facebook-square\"></i></a>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<h1>Редактировать краны в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать краны пабам.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\nexternalId: string;\r\nfitting: string;\r\nvolume: number;\r\nisReturnable: boolean;\r\nmaterial: string;\r\nemptyWeight: number; }          \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-2\">Номер</th>\r\n            <th class=\"col-md-1\">Фиттинг</th>\r\n            <th class=\"col-md-2\">Объём</th>\r\n            <th class=\"col-md-1\">Возвратный?</th>\r\n            <th class=\"col-md-2\">Материал</th>\r\n            <th class=\"col-md-2\">Вес пустого</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let keg of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.externalId }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.externalId\" required [(ngModel)]=\"editing.externalId\" name=\"externalId\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.fitting }}\r\n                </span>\r\n                <div class=\"\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.fitting\" required [(ngModel)]=\"editing.fitting\" name=\"fitting\">\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.volume }}l\r\n                </span>\r\n                <div class=\"input-group\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"editing.volume\" required [(ngModel)]=\"editing.volume\" name=\"volume\">\r\n                    <div class=\"input-group-addon\">l</div>\r\n                </div>                    \r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"keg.isReturnable\"></i>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"editing.isReturnable\" required [(ngModel)]=\"editing.isReturnable\" name=\"isReturnable\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.material }}\r\n                </span>\r\n                <div class=\"\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.material\" required [(ngModel)]=\"editing.material\" name=\"material\">\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    {{ keg.emptyWeight }}kg\r\n                </span>\r\n                <div class=\"input-group\" *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"editing.emptyWeight\" required [(ngModel)]=\"editing.emptyWeight\" name=\"emptyWeight\">\r\n                    <div class=\"input-group-addon\">kg</div>\r\n                </div>\r\n            </td>       \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != keg.id)\">\r\n                    <button (click)=\"edit(keg.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == keg.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.externalId\" required [(ngModel)]=\"adding.externalId\" name=\"externalId\">\r\n            </td>\r\n            <td>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.fitting\" required [(ngModel)]=\"adding.fitting\" name=\"fitting\">\r\n            </td>\r\n            <td>\r\n                <div class=\"input-group\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"adding.volume\" required [(ngModel)]=\"adding.volume\" name=\"volume\">\r\n                    <div class=\"input-group-addon\">l</div>\r\n                </div>\r\n            </td>\r\n            <td>\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"adding.isReturnable\" required [(ngModel)]=\"adding.isReturnable\" name=\"isReturnable\">\r\n            </td>\r\n            <td>\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.material\" required [(ngModel)]=\"adding.material\" name=\"material\">\r\n\r\n            </td>\r\n            <td>\r\n                <div class=\"input-group\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"adding.emptyWeight\" required [(ngModel)]=\"adding.emptyWeight\" name=\"emptyWeight\">\r\n                    <div class=\"input-group-addon\">kg</div>\r\n                </div>\r\n            </td>      \r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
 /* 390 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать цены на пиво в пабах.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\n    id: number;\r\n    beer: IBeer;\r\n    pub: IPub;\r\n    price: number;\r\n    volume: number;\r\n    validFrom: Date;\r\n    validTo: Date;\r\n    updated: Date;       \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-3\">Паб</th>\r\n            <th class=\"col-md-3\">Пиво</th>\r\n            <th class=\"col-md-2\">Цена</th>\r\n            <th class=\"col-md-1\">Объём</th>\r\n            <th class=\"col-md-1\">С</th>\r\n            <th class=\"col-md-2\">По</th>\r\n            <th class=\"col-md-1\">Обновлено</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let price of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.pub.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\r\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.beer.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.beer.id\" (change)=\"onEditChangeBeer($event.target.value)\">\r\n                        <option *ngFor=\"let beer of beers\" [value]=\"beer.id\">{{beer.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.price }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.price\" required [(ngModel)]=\"editing.price\" name=\"price\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.volume }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.volume\" required [(ngModel)]=\"editing.volume\" name=\"volume\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.validFrom | date:'y-MM-dd' }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"date\" class=\"form-control\" id=\"editing.validFrom\" required [(ngModel)]=\"editing.validFrom\" name=\"validFrom\">\r\n                </span>\r\n            </td>     \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.validTo }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"date\" class=\"form-control\" id=\"editing.validTo\" [(ngModel)]=\"editing.validTo\" name=\"validTo\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                    {{ price.updated  | date:'y-MM-dd'}}\r\n            </td>\r\n     \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    <button (click)=\"edit(price.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\r\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                </select>\r\n            </td>\r\n            <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.beer.id\" (change)=\"onAddChangeBeer($event.target.value)\">\r\n                    <option *ngFor=\"let beer of beers\" [value]=\"beer.id\">{{beer.brewery.name}}&nbsp;{{beer.name}}</option>\r\n                </select>\r\n            </td>\r\n            <td>\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.price\" required [(ngModel)]=\"adding.price\" name=\"price\">\r\n            </td>\r\n            <td>\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.volume\" required [(ngModel)]=\"adding.volume\" name=\"volume\">\r\n            </td>\r\n            <td>\r\n                <input type=\"date\" class=\"form-control\" id=\"adding.validFrom\" required [(ngModel)]=\"adding.validFrom\" name=\"validFrom\">\r\n            </td>\r\n            <td>\r\n                <input type=\"date\" class=\"form-control\" id=\"adding.validTo\" [(ngModel)]=\"adding.validTo\" name=\"validTo\">\r\n            </td>\r\n            <td>\r\n                &nbsp;\r\n            </td>\r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
+module.exports = "<div class=\"locale btn-group btn-group-xs pull-right\" role=\"group\" aria-label=\"...\">\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='uk', 'btn-link': currentLocale !='uk'}\"\r\n            (click)=\"selectLocale('uk','UA')\">\r\n        <span class=\"flag-icon flag-icon-ua flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='en', 'btn-link': currentLocale !='en'}\"\r\n            (click)=\"selectLocale('en','US')\">\r\n        <span class=\"flag-icon flag-icon-gb flag-icon-squared\"></span>\r\n    </button>\r\n    <button type=\"button\" class=\"btn\"\r\n            [ngClass]=\"{'btn-primary': currentLocale =='ru', 'btn-link': currentLocale !='ru'}\"\r\n            (click)=\"selectLocale('ru','RU')\">\r\n        <span class=\"flag-icon flag-icon-ru flag-icon-squared\"></span>\r\n    </button>\r\n</div>";
 
 /***/ }),
 /* 391 */
 /***/ (function(module, exports) {
 
-module.exports = "<button (click)=\"printDiv()\" class=\"btn btn-default\">\r\n    <span class=\"fa fa-print\" aria-hidden=\"true\"></span>\r\n</button>\r\n<div id=\"printpage\">\r\n</div>";
+module.exports = "<div class='login'>\r\n    <span *ngIf=\"!user\">\r\n        <input type=\"text\" class=\"form-control input-sm\" [(ngModel)]=\"userLogin\" id=\"login\" placeholder=\"Login\">\r\n        <div class=\"input-group\">\r\n            <input type=\"password\" class=\"form-control input-sm\" [(ngModel)]=\"userPassword\" id=\"password\" placeholder=\"Password\">\r\n            <span class=\"input-group-btn\">\r\n                <button class=\"btn btn-default btn-sm\" type=\"button\" (click)=\"login()\"><i class=\"glyphicon glyphicon-log-in\"></i></button>\r\n            </span>\r\n        </div><!-- /input-group -->\r\n    </span>\r\n    <span *ngIf=\"user\" class=\"logged-in\">\r\n        <i class=\"glyphicon glyphicon-user\"></i> Привет, {{user.name}}! \r\n        <button class=\"btn btn-primary btn-xs\" type=\"button\" (click)=\"logout()\"><i class=\"glyphicon glyphicon-log-out\"></i></button>\r\n    </span>\r\n</div>\r\n        \r\n";
 
 /***/ }),
 /* 392 */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!pub\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"pub\" style=\"margin-top: 20px;\">\r\n    <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n            <h3 class=\"panel-title\" [id]=\"pub.id\">\r\n                {{ pub.name }}\r\n                <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                <small>{{ pub.address }}</small>\r\n                <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n            </h3>\r\n        </div>\r\n        <div class=\"panel-body\">\r\n            <div>\r\n                <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                    <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\"\r\n                              format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                </div>\r\n                <div>\r\n                    <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                            [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                            [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                        <span class=\"badge\">{{ serve.tap }}</span>\r\n                        {{ serve.served.name }}\r\n                        <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\">{{ serve.served.brewery.name }}</span>\r\n                        <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/pubs']\">{{\"MENU.HOME\" | translate:lang }}<!--На кранах--></a>\r\n            <locale></locale>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/pubs']\">\r\n                        <span class='glyphicon glyphicon-question-sign'></span>\r\n                        {{\"MENU.ONTAP\" | translate:lang }}<!--Що на кранах-->\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/cities']\">\r\n                        <span class='glyphicon glyphicon-flag'></span> Города\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/beers']\">\r\n                        <span class='glyphicon glyphicon-glass'></span> Пиво\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/epubs']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Пабы\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/prices']\">\r\n                        <span class='fa fa-eur fa-fw'></span>&nbsp; Цены\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/taps']\">\r\n                        <span class='fa fa-level-down fa-fw'></span>&nbsp; Краны\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/kegs']\">\r\n                        <span class='fa fa-cubes fa-fw'></span>&nbsp; Кеги\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/beerkegs']\">\r\n                        <span class='fa fa-battery fa-fw'></span>&nbsp; Пиво в кегах\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/beerkegsontap']\">\r\n                        <span class='fa fa-podcast fa-fw'></span>&nbsp; Кеги на кранах\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminPub)\">\r\n                    <a [routerLink]=\"['/beerkegweights']\">\r\n                        <span class='fa fa-balance-scale fa-fw'></span>&nbsp; Веса кег\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && (loginService.currentUser.isAdmin || loginService.currentUser.canAdminBrewery)\">\r\n                    <a [routerLink]=\"['/breweries']\">\r\n                        <span class='glyphicon glyphicon-star'></span> Пивоварни\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/users']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Пользователи\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/pub-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пабов\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\" *ngIf=\"loginService.currentUser && loginService.currentUser.isAdmin\">\r\n                    <a [routerLink]=\"['/brewery-admins']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Админы пивоварен\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n        <log-in></log-in>\r\n        <div class=\"center-block text-center copyright\">\r\n            <i class=\"fa fa-copyright\"></i> 2016-2017 ontap.in.ua&nbsp;\r\n            <a href=\"https://fb.me/ontap.in.ua\"><i class=\"fa fa-facebook-square\"></i></a>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 393 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пабам.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Паб</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let pubAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.pub.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    <button (click)=\"edit(pubAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+module.exports = "<h1>Редактировать цены в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать цены на пиво в пабах.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\n    id: number;\r\n    beer: IBeer;\r\n    pub: IPub;\r\n    price: number;\r\n    volume: number;\r\n    validFrom: Date;\r\n    validTo: Date;\r\n    updated: Date;       \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-3\">Паб</th>\r\n            <th class=\"col-md-3\">Пиво</th>\r\n            <th class=\"col-md-2\">Цена</th>\r\n            <th class=\"col-md-1\">Объём</th>\r\n            <th class=\"col-md-1\">С</th>\r\n            <th class=\"col-md-2\">По</th>\r\n            <th class=\"col-md-1\">Обновлено</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let price of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.pub.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\r\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.beer.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.beer.id\" (change)=\"onEditChangeBeer($event.target.value)\">\r\n                        <option *ngFor=\"let beer of beers\" [value]=\"beer.id\">{{beer.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.price }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.price\" required [(ngModel)]=\"editing.price\" name=\"price\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.volume }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.volume\" required [(ngModel)]=\"editing.volume\" name=\"volume\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.validFrom | date:'y-MM-dd' }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"date\" class=\"form-control\" id=\"editing.validFrom\" required [(ngModel)]=\"editing.validFrom\" name=\"validFrom\">\r\n                </span>\r\n            </td>     \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    {{ price.validTo }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <input type=\"date\" class=\"form-control\" id=\"editing.validTo\" [(ngModel)]=\"editing.validTo\" name=\"validTo\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                    {{ price.updated  | date:'y-MM-dd'}}\r\n            </td>\r\n     \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != price.id)\">\r\n                    <button (click)=\"edit(price.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == price.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\r\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                </select>\r\n            </td>\r\n            <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.beer.id\" (change)=\"onAddChangeBeer($event.target.value)\">\r\n                    <option *ngFor=\"let beer of beers\" [value]=\"beer.id\">{{beer.brewery.name}}&nbsp;{{beer.name}}</option>\r\n                </select>\r\n            </td>\r\n            <td>\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.price\" required [(ngModel)]=\"adding.price\" name=\"price\">\r\n            </td>\r\n            <td>\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.volume\" required [(ngModel)]=\"adding.volume\" name=\"volume\">\r\n            </td>\r\n            <td>\r\n                <input type=\"date\" class=\"form-control\" id=\"adding.validFrom\" required [(ngModel)]=\"adding.validFrom\" name=\"validFrom\">\r\n            </td>\r\n            <td>\r\n                <input type=\"date\" class=\"form-control\" id=\"adding.validTo\" [(ngModel)]=\"adding.validTo\" name=\"validTo\">\r\n            </td>\r\n            <td>\r\n                &nbsp;\r\n            </td>\r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
 
 /***/ }),
 /* 394 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\r\n    {{'PUBS.TITLE' | translate:lang}}<!--Крафтові паби України-->\r\n</h1>\r\n\r\n<p>\r\n    {{'PUBS.DESCRIPTION' | translate:lang}}<!--На цей сторінці ви можете знайти список усіх крафтових пабів в Україні-->\r\n</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"dropdown\"  *ngIf=\"cities\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        {{'G.CITY' | translate:lang}}<!--Місто-->: <span *ngIf=\"city\">{{city.name}}</span><span *ngIf=\"!city\">{{'G.ALL' | translate:lang}}<!--усі--></span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n        <li><a (click)=\"setCity('')\">*</a></li>\r\n        <li *ngFor=\"let city of cities\"><a (click)=\"setCity(city.name)\">{{ city.name }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"elements\" style=\"margin-top: 20px;\">\r\n    <div *ngFor=\"let pub of elements\">\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-heading\">\r\n                <h3 class=\"panel-title\" [id]=\"pub.id\"><a [routerLink]=\"['/pub', pub.id]\">{{ pub.name }}</a>\r\n                    <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                    <span *ngIf=\"pub.tapNumber > 0\" class=\"badge\">{{ pub.tapNumber }} <span class=\"fa fa-map-pin\" aria-hidden=\"true\"></span></span>\r\n                    <small>{{ pub.address }}</small>\r\n                    <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n                    <span class=\"pull-right\" *ngIf=\"pubUpdates[pub.id]\"><small><i class=\"glyphicon glyphicon-calendar\"></i> {{pubUpdates[pub.id]}}</small></span>\r\n                </h3>\r\n            </div>\r\n            <div class=\"panel-body\">\r\n                <div>\r\n                    <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                        <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\" \r\n                                  format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                    </div>\r\n                    <div>\r\n                        <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                                [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                                [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                            <span class=\"badge\">{{ serve.tap }}</span>\r\n                            {{ serve.served.name }}\r\n                            <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\" >{{ serve.served.brewery.name }}</span>\r\n                            <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<button (click)=\"printDiv()\" class=\"btn btn-default\">\r\n    <span class=\"fa fa-print\" aria-hidden=\"true\"></span>\r\n</button>\r\n<div id=\"printpage\">\r\n</div>";
 
 /***/ }),
 /* 395 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n            <h4 class=\"modal-title\">{{title || 'Confirm'}}</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n            <p>{{message || 'Are you sure?'}}</p>\r\n            <p>\r\n                <ng-select [options]=\"options\"\r\n                                [multiple]=\"false\"\r\n                                [(ngModel)]=\"selected\">\r\n                </ng-select>\r\n            </p>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"confirm()\">OK</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
+module.exports = "<div *ngIf=\"!pub\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"pub\" style=\"margin-top: 20px;\">\r\n    <div class=\"panel panel-default\">\r\n        <div class=\"panel-heading\">\r\n            <h3 class=\"panel-title\" [id]=\"pub.id\">\r\n                {{ pub.name }}\r\n                <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                <small>{{ pub.address }}</small>\r\n                <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n            </h3>\r\n        </div>\r\n        <div class=\"panel-body\">\r\n            <div>\r\n                <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                    <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\"\r\n                              format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                </div>\r\n                <div>\r\n                    <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                            [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                            [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                        <span class=\"badge\">{{ serve.tap }}</span>\r\n                        {{ serve.served.name }}\r\n                        <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\">{{ serve.served.brewery.name }}</span>\r\n                        <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 396 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать краны в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать краны пабам.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\nnumber: \"1\",\r\nfitting: \"A\",\r\nhasHopinator: false,\r\nnitrogenPercentage: 0,\r\nstatus: \"Free\"            \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-3\">Паб</th>\r\n            <th class=\"col-md-2\">Номер крана</th>\r\n            <th class=\"col-md-1\">Фиттинг</th>\r\n            <th class=\"col-md-1\">Хопинатор</th>\r\n            <th class=\"col-md-2\">% азота</th>\r\n            <th class=\"col-md-1\">Статус</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let tap of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.pub.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\r\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.number }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.number\" required [(ngModel)]=\"editing.number\" name=\"number\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.fitting }}\r\n                </span>\r\n                <div class=\"\" *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.fitting\" required [(ngModel)]=\"editing.fitting\" name=\"fitting\">\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"tap.hasHopinator\"></i>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"hasHopinator\" required [(ngModel)]=\"editing.hasHopinator\" name=\"hasHopinator\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.nitrogenPercentage }}%\r\n                </span>\r\n                <div class=\"input-group\" *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"editing.nitrogenPercentage\" required [(ngModel)]=\"editing.nitrogenPercentage\" name=\"nitrogenPercentage\">\r\n                    <div class=\"input-group-addon\">%</div>\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\" *ngIf=\"tap.status == TapStatus_Problem\"></i>\r\n                    <i class=\"fa fa-check\" aria-hidden=\"true\" *ngIf=\"tap.status == TapStatus_Working\"></i>\r\n                    <i class=\"fa fa-pause\" aria-hidden=\"true\" *ngIf=\"tap.status == TapStatus_Free\"></i>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.status\" data-show-icon=\"true\">\r\n                        <option [value]=\"TapStatus_Problem\" >&#9888;</option>\r\n                        <option [value]=\"TapStatus_Working\" >&#10003;</option>\r\n                        <option [value]=\"TapStatus_Free\" >&#9208;</option>\r\n                    </select>\r\n                </span>\r\n            </td>            \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    <button (click)=\"edit(tap.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\r\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                </select>\r\n            </td>\r\n            <td>\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.number\" required [(ngModel)]=\"adding.number\" name=\"number\">\r\n            </td>\r\n            <td>\r\n\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.fitting\" required [(ngModel)]=\"adding.fitting\" name=\"fitting\">\r\n            </td>\r\n            <td>\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"hasHopinator\" required [(ngModel)]=\"adding.hasHopinator\" name=\"hasHopinator\">\r\n            </td>\r\n            <td>\r\n                <div class=\"input-group\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control\" id=\"adding.nitrogenPercentage\" required [(ngModel)]=\"adding.nitrogenPercentage\" name=\"nitrogenPercentage\">\r\n                    <div class=\"input-group-addon\">%</div>\r\n                </div>\r\n            </td>\r\n            <td>\r\n                    <select class=\"form-control\" [(ngModel)]=\"adding.status\" data-show-icon=\"true\">\r\n                        <option [value]=\"TapStatus_Problem\">&#9888;</option>\r\n                        <option [value]=\"TapStatus_Working\">&#10003;</option>\r\n                        <option [value]=\"TapStatus_Free\">&#9208;</option>\r\n                    </select>\r\n            </td>\r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
+module.exports = "<h1>Редактировать цены на пиво в пабах</h1>\n\n<p>На этой странице можно редактировать привязку администраторов к пабам.</p>\n\n<p *ngIf=\"!elements\">\n    <em>Loading...</em>\n</p>\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\n    {{errorMessage}}\n</div>\n\n<table class='table' *ngIf=\"elements\">\n    <thead>\n        <tr>\n            <th>Паб</th>\n            <th>Пользователь</th>\n            <th>Действия</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let pubAdmin of elements\">\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.pub.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    {{ pubAdmin.user.name }}\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <select class=\"form-control\" [(ngModel)]=\"editing.user.id\" (change)=\"onEditChangeUser($event.target.value)\">\n                        <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                    </select>\n                </span>\n            </td>\n            <td>\n                <span *ngIf=\"!editing || (editing.id != pubAdmin.id)\">\n                    <button (click)=\"edit(pubAdmin.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n                <span *ngIf=\"editing && (editing.id == pubAdmin.id)\">\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\n                    </button>\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                    </button>\n                </span>\n            </td>\n        </tr>\n        <tr *ngIf=\"adding\">\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\n                </select>\n            </td>\n            <td>\n                <select class=\"form-control\" [(ngModel)]=\"adding.user.id\" (change)=\"onAddChangeUser($event.target.value)\">\n                    <option *ngFor=\"let user of users\" [value]=\"user.id\">{{user.name}}</option>\n                </select>\n            </td>\n            <td>\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
 
 /***/ }),
 /* 397 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Редактировать список пользователей</h1>\r\n\r\n<p>На этой странице вы можете редактировать список пользователей, а также добавлять новые.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n    <tr>\r\n        <th>Логин</th>\r\n        <th>Имя</th>\r\n        <th>Пароль</th>\r\n        <th>Админ?</th>\r\n        <th>Представляет паб?</th>\r\n        <th>Представляет пивоварню?</th>\r\n        <th>Действия</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let user of elements\">\r\n        <td>{{ user.id }}</td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    {{ user.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    ***\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"password\" class=\"form-control\" id=\"password\"\n                           required\n                           [(ngModel)]=\"editing.password\" name=\"password\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.isAdmin\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"isAdmin\"\n                           required\n                           [(ngModel)]=\"editing.isAdmin\" name=\"isAdmin\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminPub\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminPub\"\n                           required\n                           [(ngModel)]=\"editing.canAdminPub\" name=\"canAdminPub\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminBrewery\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminBrewery\"\n                           required\n                           [(ngModel)]=\"editing.canAdminBrewery\" name=\"canAdminBrewery\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <button (click)=\"edit(user.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\r\n    </tr>\r\n\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\r\n                   required\r\n                   [(ngModel)]=\"adding.id\" name=\"id\">\r\n        </td>\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                   required\r\n                   [(ngModel)]=\"adding.name\" name=\"name\">\r\n        </td>\r\n        <td>\r\n            <input type=\"password\" class=\"form-control\" id=\"adding.password\"\r\n                   required\r\n                   [(ngModel)]=\"adding.password\" name=\"password\">\r\n        </td>\r\n        <td>\r\n\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.isAdmin\"\r\n                   required\r\n                   [(ngModel)]=\"adding.isAdmin\" name=\"isAdmin\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminPub\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminPub\" name=\"canAdminPub\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminBrewery\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminBrewery\" name=\"canAdminBrewery\">\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+module.exports = "<h1>\r\n    {{'PUBS.TITLE' | translate:lang}}<!--Крафтові паби України-->\r\n</h1>\r\n\r\n<p>\r\n    {{'PUBS.DESCRIPTION' | translate:lang}}<!--На цей сторінці ви можете знайти список усіх крафтових пабів в Україні-->\r\n</p>\r\n\r\n<div *ngIf=\"!elements\">\r\n    <div class=\"progress\">\r\n        <div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" \r\n             aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\">            \r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"dropdown\"  *ngIf=\"cities\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n        {{'G.CITY' | translate:lang}}<!--Місто-->: <span *ngIf=\"city\">{{city.name}}</span><span *ngIf=\"!city\">{{'G.ALL' | translate:lang}}<!--усі--></span>\r\n        <span class=\"caret\"></span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n        <li><a (click)=\"setCity('')\">*</a></li>\r\n        <li *ngFor=\"let city of cities\"><a (click)=\"setCity(city.name)\">{{ city.name }}</a></li>\r\n    </ul>\r\n</div>\r\n\r\n<template #toolTipTemplate let-model=\"model\">\r\n    <div class=\"pull-left pub-image\" *ngIf=\"model.served.brewery.image\">\r\n        <cl-image public-id=\"{{model.served.image}}\" *ngIf=\"model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n        <cl-image public-id=\"{{model.served.brewery.image}}\" *ngIf=\"!model.served.image\" cloud-name=\"ontap-in-ua\" crop=\"scale\" height=\"100\" dpr=\"auto\"\r\n                  format=\"png\" quality=\"100\" alt=\"{{model.served.brewery.name}} logo\" title=\"{{model.served.brewery.name}}\"></cl-image>\r\n    </div>    \r\n    <div>\r\n        <p>{{model.served.description}}</p>\r\n        <p>\r\n            <strong>{{model.served.alcohol}}</strong>&deg;\r\n            <span *ngIf=\"model.served.gravity > 0\">\r\n            <strong>{{model.served.gravity}}</strong>%\r\n        </span>\r\n            <strong>{{model.served.ibu}}</strong>&nbsp;IBU\r\n            <strong>{{model.volume}}</strong>&nbsp;л\r\n        </p>\r\n    </div>\r\n</template>\r\n\r\n<div *ngIf=\"elements\" style=\"margin-top: 20px;\">\r\n    <div *ngFor=\"let pub of elements\">\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-heading\">\r\n                <h3 class=\"panel-title\" [id]=\"pub.id\"><a [routerLink]=\"['/pub', pub.id]\">{{ pub.name }}</a>\r\n                    <span class=\"label label-success\">{{ pub.city.name }}</span>\r\n                    <span *ngIf=\"pub.tapNumber > 0\" class=\"badge\">{{ pub.tapNumber }} <span class=\"fa fa-map-pin\" aria-hidden=\"true\"></span></span>\r\n                    <small>{{ pub.address }}</small>\r\n                    <a *ngIf=\"pub.facebookUrl\" [href]=\"pub.facebookUrl\" target=\"_blank\"><i class=\"fa fa-facebook-square\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.vkontakteUrl\" [href]=\"pub.vkontakteUrl\" target=\"_blank\"><i class=\"fa fa-vk\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.websiteUrl\" [href]=\"pub.websiteUrl\" target=\"_blank\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i></a>\r\n                    <a *ngIf=\"pub.bookingUrl\" [href]=\"pub.bookingUrl\" target=\"_blank\"><i class=\"fa fa-shopping-bag\" aria-hidden=\"true\"></i></a>\r\n                    <span class=\"pull-right\" *ngIf=\"pubUpdates[pub.id]\"><small><i class=\"glyphicon glyphicon-calendar\"></i> {{pubUpdates[pub.id]}}</small></span>\r\n                </h3>\r\n            </div>\r\n            <div class=\"panel-body\">\r\n                <div>\r\n                    <div class=\"pull-left pub-image\" *ngIf=\"pub.image\">\r\n                        <cl-image public-id=\"{{pub.image}}\" cloud-name=\"ontap-in-ua\" height=\"100\" dpr=\"auto\" crop=\"scale\" \r\n                                  format=\"png\" quality=\"100\" alt=\"{{pub.name}} logo\" title=\"{{pub.name}}\"></cl-image>\r\n                    </div>\r\n                    <div>\r\n                        <button *ngFor=\"let serve of pub.serves | sortByTap\" class=\"btn btn-s red-tooltip\"\r\n                                [ngClass]=\"serve.served.brewery.country.id=='UA'?'btn-primary':'btn-primary'\" role=\"button\"\r\n                                [tooltipHtml]=\"toolTipTemplate\" tooltipPlacement=\"left\" [tooltipContext]=\"serve\">\r\n                            <span class=\"badge\">{{ serve.tap }}</span>\r\n                            {{ serve.served.name }}\r\n                            <span class=\"label\" [ngClass]=\"serve.served.brewery.country.id=='UA'?'label-info':'label-success'\" >{{ serve.served.brewery.name }}</span>\r\n                            <span class=\"badge\">{{ serve.price | number:'2.2-2' }} ₴</span>\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 398 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"modal-dialog\">\r\n    <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n            <h4 class=\"modal-title\">{{title || 'Confirm'}}</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n            <p>{{message || 'Are you sure?'}}</p>\r\n            <p>\r\n                <ng-select [options]=\"options\"\r\n                                [multiple]=\"false\"\r\n                                [(ngModel)]=\"selected\">\r\n                </ng-select>\r\n            </p>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"confirm()\">OK</button>\r\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
+
+/***/ }),
+/* 399 */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Редактировать краны в пабах</h1>\r\n\r\n<p>На этой странице можно редактировать краны пабам.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n\r\n<!--\r\nnumber: \"1\",\r\nfitting: \"A\",\r\nhasHopinator: false,\r\nnitrogenPercentage: 0,\r\nstatus: \"Free\"            \r\n-->\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"col-md-3\">Паб</th>\r\n            <th class=\"col-md-2\">Номер крана</th>\r\n            <th class=\"col-md-1\">Фиттинг</th>\r\n            <th class=\"col-md-1\">Хопинатор</th>\r\n            <th class=\"col-md-2\">% азота</th>\r\n            <th class=\"col-md-1\">Статус</th>\r\n            <th class=\"col-md-2\">Действия</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let tap of elements\">\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.pub.name }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.pub.id\" (change)=\"onEditChangePub($event.target.value)\">\r\n                        <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                    </select>\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.number }}\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.number\" required [(ngModel)]=\"editing.number\" name=\"number\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.fitting }}\r\n                </span>\r\n                <div class=\"\" *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"text\" class=\"form-control\" id=\"editing.fitting\" required [(ngModel)]=\"editing.fitting\" name=\"fitting\">\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"tap.hasHopinator\"></i>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"hasHopinator\" required [(ngModel)]=\"editing.hasHopinator\" name=\"hasHopinator\">\r\n                </span>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    {{ tap.nitrogenPercentage }}%\r\n                </span>\r\n                <div class=\"input-group\" *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control col-xs-2\" id=\"editing.nitrogenPercentage\" required [(ngModel)]=\"editing.nitrogenPercentage\" name=\"nitrogenPercentage\">\r\n                    <div class=\"input-group-addon\">%</div>\r\n                </div>\r\n            </td>\r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\" *ngIf=\"tap.status == TapStatus_Problem\"></i>\r\n                    <i class=\"fa fa-check\" aria-hidden=\"true\" *ngIf=\"tap.status == TapStatus_Working\"></i>\r\n                    <i class=\"fa fa-pause\" aria-hidden=\"true\" *ngIf=\"tap.status == TapStatus_Free\"></i>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <select class=\"form-control\" [(ngModel)]=\"editing.status\" data-show-icon=\"true\">\r\n                        <option [value]=\"TapStatus_Problem\" >&#9888;</option>\r\n                        <option [value]=\"TapStatus_Working\" >&#10003;</option>\r\n                        <option [value]=\"TapStatus_Free\" >&#9208;</option>\r\n                    </select>\r\n                </span>\r\n            </td>            \r\n            <td>\r\n                <span *ngIf=\"!editing || (editing.id != tap.id)\">\r\n                    <button (click)=\"edit(tap.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\r\n                        <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n                <span *ngIf=\"editing && (editing.id == tap.id)\">\r\n                    <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\r\n                        <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"delete()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                    <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                    </button>\r\n                </span>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"adding\">\r\n            <td>\r\n                <select class=\"form-control\" [(ngModel)]=\"adding.pub.id\" (change)=\"onAddChangePub($event.target.value)\">\r\n                    <option *ngFor=\"let pub of pubs\" [value]=\"pub.id\">{{pub.name}}</option>\r\n                </select>\r\n            </td>\r\n            <td>\r\n                <input type=\"text\" class=\"form-control\" id=\"adding.number\" required [(ngModel)]=\"adding.number\" name=\"number\">\r\n            </td>\r\n            <td>\r\n\r\n                    <input type=\"text\" class=\"form-control\" id=\"adding.fitting\" required [(ngModel)]=\"adding.fitting\" name=\"fitting\">\r\n            </td>\r\n            <td>\r\n                    <input type=\"checkbox\" class=\"form-control\" id=\"hasHopinator\" required [(ngModel)]=\"adding.hasHopinator\" name=\"hasHopinator\">\r\n            </td>\r\n            <td>\r\n                <div class=\"input-group\">\r\n                    <input type=\"number\" min=\"0\" max=\"100\" class=\"form-control\" id=\"adding.nitrogenPercentage\" required [(ngModel)]=\"adding.nitrogenPercentage\" name=\"nitrogenPercentage\">\r\n                    <div class=\"input-group-addon\">%</div>\r\n                </div>\r\n            </td>\r\n            <td>\r\n                    <select class=\"form-control\" [(ngModel)]=\"adding.status\" data-show-icon=\"true\">\r\n                        <option [value]=\"TapStatus_Problem\">&#9888;</option>\r\n                        <option [value]=\"TapStatus_Working\">&#10003;</option>\r\n                        <option [value]=\"TapStatus_Free\">&#9208;</option>\r\n                    </select>\r\n            </td>\r\n            <td>\r\n                <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\r\n                </button>\r\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\r\n</button>";
+
+/***/ }),
+/* 400 */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Редактировать список пользователей</h1>\r\n\r\n<p>На этой странице вы можете редактировать список пользователей, а также добавлять новые.</p>\r\n\r\n<p *ngIf=\"!elements\">\r\n    <em>Loading...</em>\r\n</p>\r\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">\r\n    {{errorMessage}}\r\n</div>\r\n\r\n<table class='table' *ngIf=\"elements\">\r\n    <thead>\r\n    <tr>\r\n        <th>Логин</th>\r\n        <th>Имя</th>\r\n        <th>Пароль</th>\r\n        <th>Админ?</th>\r\n        <th>Представляет паб?</th>\r\n        <th>Представляет пивоварню?</th>\r\n        <th>Действия</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let user of elements\">\r\n        <td>{{ user.id }}</td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    {{ user.name }}\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"text\" class=\"form-control\" id=\"name\"\n                           required\n                           [(ngModel)]=\"editing.name\" name=\"name\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                    ***\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"password\" class=\"form-control\" id=\"password\"\n                           required\n                           [(ngModel)]=\"editing.password\" name=\"password\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\r\n                    <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.isAdmin\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"isAdmin\"\n                           required\n                           [(ngModel)]=\"editing.isAdmin\" name=\"isAdmin\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminPub\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminPub\"\n                           required\n                           [(ngModel)]=\"editing.canAdminPub\" name=\"canAdminPub\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <i class=\"glyphicon glyphicon-check\" *ngIf=\"user.canAdminBrewery\"></i>\r\n                </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                    <input type=\"checkbox\" class=\"form-control\" id=\"canAdminBrewery\"\n                           required\n                           [(ngModel)]=\"editing.canAdminBrewery\" name=\"canAdminBrewery\">\n                </span>\n        </td>\r\n        <td>\r\n            <span *ngIf=\"!editing || (editing.id != user.id)\">\n                <button (click)=\"edit(user.id)\" type=\"button\" class=\"btn btn-default\" aria-label=\"Edit\">\n                    <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n            <span *ngIf=\"editing && (editing.id == user.id)\">\n                <button (click)=\"save()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Save\">\n                    <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n                </button>\n                <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </span>\n        </td>\r\n    </tr>\r\n\r\n    <tr *ngIf=\"adding\">\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.id\"\r\n                   required\r\n                   [(ngModel)]=\"adding.id\" name=\"id\">\r\n        </td>\r\n        <td>\r\n            <input type=\"text\" class=\"form-control\" id=\"adding.name\"\r\n                   required\r\n                   [(ngModel)]=\"adding.name\" name=\"name\">\r\n        </td>\r\n        <td>\r\n            <input type=\"password\" class=\"form-control\" id=\"adding.password\"\r\n                   required\r\n                   [(ngModel)]=\"adding.password\" name=\"password\">\r\n        </td>\r\n        <td>\r\n\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.isAdmin\"\r\n                   required\r\n                   [(ngModel)]=\"adding.isAdmin\" name=\"isAdmin\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminPub\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminPub\" name=\"canAdminPub\">\r\n        </td>\r\n        <td>\r\n            <input type=\"checkbox\" class=\"form-control\" id=\"adding.canAdminBrewery\"\r\n                   required\r\n                   [(ngModel)]=\"adding.canAdminBrewery\" name=\"canAdminBrewery\">\r\n        </td>\r\n        <td>\r\n            <button (click)=\"add()\" type=\"button\" class=\"btn btn-primary\" aria-label=\"Add\">\r\n                <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span>\n            </button>\r\n            <button (click)=\"cancelEdit()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Cancel\">\r\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n            </button>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button (click)=\"startAdd()\" type=\"button\" class=\"btn btn-default\" aria-label=\"Add\">\r\n    <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>\n</button>";
+
+/***/ }),
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -43964,10 +44104,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 398;
+webpackContext.id = 401;
 
 /***/ }),
-/* 399 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43983,7 +44123,7 @@ var core_1 = __webpack_require__(1);
 var common_1 = __webpack_require__(12);
 var dialog_holder_component_1 = __webpack_require__(239);
 var dialog_wrapper_component_1 = __webpack_require__(240);
-var dialog_service_1 = __webpack_require__(80);
+var dialog_service_1 = __webpack_require__(81);
 function dialogServiceFactory(resolver, applicationRef, injector, options) {
     return new dialog_service_1.DialogService(resolver, applicationRef, injector, options);
 }
@@ -44029,13 +44169,13 @@ var BootstrapModalModule_1;
 //# sourceMappingURL=bootstrap-modal.module.js.map
 
 /***/ }),
-/* 400 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var rxjs_1 = __webpack_require__(431);
+var rxjs_1 = __webpack_require__(434);
 var DialogComponent = (function () {
     function DialogComponent(dialogService) {
         this.dialogService = dialogService;
@@ -44069,49 +44209,49 @@ exports.DialogComponent = DialogComponent;
 //# sourceMappingURL=dialog.component.js.map
 
 /***/ }),
-/* 401 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var bootstrap_modal_module_1 = __webpack_require__(399);
+var bootstrap_modal_module_1 = __webpack_require__(402);
 exports.BootstrapModalModule = bootstrap_modal_module_1.BootstrapModalModule;
-var dialog_component_1 = __webpack_require__(400);
+var dialog_component_1 = __webpack_require__(403);
 exports.DialogComponent = dialog_component_1.DialogComponent;
-var dialog_service_1 = __webpack_require__(80);
+var dialog_service_1 = __webpack_require__(81);
 exports.DialogService = dialog_service_1.DialogService;
 exports.DialogServiceConfig = dialog_service_1.DialogServiceConfig;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 402 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var accordion_group_component_1 = __webpack_require__(241);
 exports.AccordionPanelComponent = accordion_group_component_1.AccordionPanelComponent;
-var accordion_component_1 = __webpack_require__(81);
+var accordion_component_1 = __webpack_require__(82);
 exports.AccordionComponent = accordion_component_1.AccordionComponent;
-var accordion_module_1 = __webpack_require__(82);
+var accordion_module_1 = __webpack_require__(83);
 exports.AccordionModule = accordion_module_1.AccordionModule;
 
 
 /***/ }),
-/* 403 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var alert_component_1 = __webpack_require__(242);
 exports.AlertComponent = alert_component_1.AlertComponent;
-var alert_module_1 = __webpack_require__(83);
+var alert_module_1 = __webpack_require__(84);
 exports.AlertModule = alert_module_1.AlertModule;
 
 
 /***/ }),
-/* 404 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44120,26 +44260,26 @@ var button_checkbox_directive_1 = __webpack_require__(243);
 exports.ButtonCheckboxDirective = button_checkbox_directive_1.ButtonCheckboxDirective;
 var button_radio_directive_1 = __webpack_require__(244);
 exports.ButtonRadioDirective = button_radio_directive_1.ButtonRadioDirective;
-var buttons_module_1 = __webpack_require__(84);
+var buttons_module_1 = __webpack_require__(85);
 exports.ButtonsModule = buttons_module_1.ButtonsModule;
 
 
 /***/ }),
-/* 405 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var carousel_component_1 = __webpack_require__(85);
+var carousel_component_1 = __webpack_require__(86);
 exports.CarouselComponent = carousel_component_1.CarouselComponent;
-var carousel_module_1 = __webpack_require__(86);
+var carousel_module_1 = __webpack_require__(87);
 exports.CarouselModule = carousel_module_1.CarouselModule;
 var slide_component_1 = __webpack_require__(245);
 exports.SlideComponent = slide_component_1.SlideComponent;
 
 
 /***/ }),
-/* 406 */
+/* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44151,7 +44291,7 @@ exports.CollapseModule = collapse_module_1.CollapseModule;
 
 
 /***/ }),
-/* 407 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44166,7 +44306,7 @@ exports.CollapseModule = collapse_module_1.CollapseModule;
  */
 var datepicker_component_1 = __webpack_require__(249);
 exports.DatePickerComponent = datepicker_component_1.DatePickerComponent;
-var datepicker_module_1 = __webpack_require__(87);
+var datepicker_module_1 = __webpack_require__(88);
 exports.DatepickerModule = datepicker_module_1.DatepickerModule;
 var daypicker_component_1 = __webpack_require__(250);
 exports.DayPickerComponent = daypicker_component_1.DayPickerComponent;
@@ -44179,7 +44319,7 @@ exports.DateFormatter = date_formatter_1.DateFormatter;
 
 
 /***/ }),
-/* 408 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44192,32 +44332,32 @@ var dropdown_directive_1 = __webpack_require__(63);
 exports.DropdownDirective = dropdown_directive_1.DropdownDirective;
 var dropdown_service_1 = __webpack_require__(255);
 exports.DropdownService = dropdown_service_1.DropdownService;
-var dropdown_module_1 = __webpack_require__(88);
+var dropdown_module_1 = __webpack_require__(89);
 exports.DropdownModule = dropdown_module_1.DropdownModule;
 
 
 /***/ }),
-/* 409 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var core_1 = __webpack_require__(1);
-var accordion_module_1 = __webpack_require__(82);
-var alert_module_1 = __webpack_require__(83);
-var buttons_module_1 = __webpack_require__(84);
-var carousel_module_1 = __webpack_require__(86);
+var accordion_module_1 = __webpack_require__(83);
+var alert_module_1 = __webpack_require__(84);
+var buttons_module_1 = __webpack_require__(85);
+var carousel_module_1 = __webpack_require__(87);
 var collapse_module_1 = __webpack_require__(62);
-var datepicker_module_1 = __webpack_require__(87);
-var dropdown_module_1 = __webpack_require__(88);
-var modal_module_1 = __webpack_require__(91);
-var pagination_module_1 = __webpack_require__(93);
-var progressbar_module_1 = __webpack_require__(96);
-var rating_module_1 = __webpack_require__(97);
-var tabs_module_1 = __webpack_require__(99);
-var timepicker_module_1 = __webpack_require__(101);
-var tooltip_module_1 = __webpack_require__(103);
-var typeahead_module_1 = __webpack_require__(107);
+var datepicker_module_1 = __webpack_require__(88);
+var dropdown_module_1 = __webpack_require__(89);
+var modal_module_1 = __webpack_require__(92);
+var pagination_module_1 = __webpack_require__(94);
+var progressbar_module_1 = __webpack_require__(97);
+var rating_module_1 = __webpack_require__(98);
+var tabs_module_1 = __webpack_require__(100);
+var timepicker_module_1 = __webpack_require__(102);
+var tooltip_module_1 = __webpack_require__(104);
+var typeahead_module_1 = __webpack_require__(108);
 var components_helper_service_1 = __webpack_require__(24);
 var Ng2BootstrapModule = (function () {
     function Ng2BootstrapModule() {
@@ -44242,7 +44382,7 @@ exports.Ng2BootstrapModule = Ng2BootstrapModule;
 
 
 /***/ }),
-/* 410 */
+/* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44250,53 +44390,11 @@ exports.Ng2BootstrapModule = Ng2BootstrapModule;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(89));
 __export(__webpack_require__(90));
+__export(__webpack_require__(91));
 __export(__webpack_require__(256));
-var modal_module_1 = __webpack_require__(91);
+var modal_module_1 = __webpack_require__(92);
 exports.ModalModule = modal_module_1.ModalModule;
-
-
-/***/ }),
-/* 411 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var pager_component_1 = __webpack_require__(257);
-exports.PagerComponent = pager_component_1.PagerComponent;
-var pagination_component_1 = __webpack_require__(92);
-exports.PaginationComponent = pagination_component_1.PaginationComponent;
-var pagination_module_1 = __webpack_require__(93);
-exports.PaginationModule = pagination_module_1.PaginationModule;
-
-
-/***/ }),
-/* 412 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var bar_component_1 = __webpack_require__(258);
-exports.BarComponent = bar_component_1.BarComponent;
-var progress_directive_1 = __webpack_require__(95);
-exports.ProgressDirective = progress_directive_1.ProgressDirective;
-var progressbar_component_1 = __webpack_require__(259);
-exports.ProgressbarComponent = progressbar_component_1.ProgressbarComponent;
-var progressbar_module_1 = __webpack_require__(96);
-exports.ProgressbarModule = progressbar_module_1.ProgressbarModule;
-
-
-/***/ }),
-/* 413 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var rating_component_1 = __webpack_require__(260);
-exports.RatingComponent = rating_component_1.RatingComponent;
-var rating_module_1 = __webpack_require__(97);
-exports.RatingModule = rating_module_1.RatingModule;
 
 
 /***/ }),
@@ -44305,14 +44403,12 @@ exports.RatingModule = rating_module_1.RatingModule;
 
 "use strict";
 
-var tab_heading_directive_1 = __webpack_require__(261);
-exports.TabHeadingDirective = tab_heading_directive_1.TabHeadingDirective;
-var tabset_component_1 = __webpack_require__(100);
-exports.TabsetComponent = tabset_component_1.TabsetComponent;
-var tab_directive_1 = __webpack_require__(98);
-exports.TabDirective = tab_directive_1.TabDirective;
-var tabs_module_1 = __webpack_require__(99);
-exports.TabsModule = tabs_module_1.TabsModule;
+var pager_component_1 = __webpack_require__(257);
+exports.PagerComponent = pager_component_1.PagerComponent;
+var pagination_component_1 = __webpack_require__(93);
+exports.PaginationComponent = pagination_component_1.PaginationComponent;
+var pagination_module_1 = __webpack_require__(94);
+exports.PaginationModule = pagination_module_1.PaginationModule;
 
 
 /***/ }),
@@ -44321,10 +44417,14 @@ exports.TabsModule = tabs_module_1.TabsModule;
 
 "use strict";
 
-var timepicker_component_1 = __webpack_require__(262);
-exports.TimepickerComponent = timepicker_component_1.TimepickerComponent;
-var timepicker_module_1 = __webpack_require__(101);
-exports.TimepickerModule = timepicker_module_1.TimepickerModule;
+var bar_component_1 = __webpack_require__(258);
+exports.BarComponent = bar_component_1.BarComponent;
+var progress_directive_1 = __webpack_require__(96);
+exports.ProgressDirective = progress_directive_1.ProgressDirective;
+var progressbar_component_1 = __webpack_require__(259);
+exports.ProgressbarComponent = progressbar_component_1.ProgressbarComponent;
+var progressbar_module_1 = __webpack_require__(97);
+exports.ProgressbarModule = progressbar_module_1.ProgressbarModule;
 
 
 /***/ }),
@@ -44333,12 +44433,10 @@ exports.TimepickerModule = timepicker_module_1.TimepickerModule;
 
 "use strict";
 
-var tooltip_container_component_1 = __webpack_require__(102);
-exports.TooltipContainerComponent = tooltip_container_component_1.TooltipContainerComponent;
-var tooltip_directive_1 = __webpack_require__(264);
-exports.TooltipDirective = tooltip_directive_1.TooltipDirective;
-var tooltip_module_1 = __webpack_require__(103);
-exports.TooltipModule = tooltip_module_1.TooltipModule;
+var rating_component_1 = __webpack_require__(260);
+exports.RatingComponent = rating_component_1.RatingComponent;
+var rating_module_1 = __webpack_require__(98);
+exports.RatingModule = rating_module_1.RatingModule;
 
 
 /***/ }),
@@ -44347,22 +44445,64 @@ exports.TooltipModule = tooltip_module_1.TooltipModule;
 
 "use strict";
 
-var typeahead_match_class_1 = __webpack_require__(265);
-exports.TypeaheadMatch = typeahead_match_class_1.TypeaheadMatch;
-var typeahead_options_class_1 = __webpack_require__(105);
-exports.TypeaheadOptions = typeahead_options_class_1.TypeaheadOptions;
-var typeahead_utils_1 = __webpack_require__(106);
-exports.TypeaheadUtils = typeahead_utils_1.TypeaheadUtils;
-var typeahead_container_component_1 = __webpack_require__(104);
-exports.TypeaheadContainerComponent = typeahead_container_component_1.TypeaheadContainerComponent;
-var typeahead_directive_1 = __webpack_require__(266);
-exports.TypeaheadDirective = typeahead_directive_1.TypeaheadDirective;
-var typeahead_module_1 = __webpack_require__(107);
-exports.TypeaheadModule = typeahead_module_1.TypeaheadModule;
+var tab_heading_directive_1 = __webpack_require__(261);
+exports.TabHeadingDirective = tab_heading_directive_1.TabHeadingDirective;
+var tabset_component_1 = __webpack_require__(101);
+exports.TabsetComponent = tabset_component_1.TabsetComponent;
+var tab_directive_1 = __webpack_require__(99);
+exports.TabDirective = tab_directive_1.TabDirective;
+var tabs_module_1 = __webpack_require__(100);
+exports.TabsModule = tabs_module_1.TabsModule;
 
 
 /***/ }),
 /* 418 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var timepicker_component_1 = __webpack_require__(262);
+exports.TimepickerComponent = timepicker_component_1.TimepickerComponent;
+var timepicker_module_1 = __webpack_require__(102);
+exports.TimepickerModule = timepicker_module_1.TimepickerModule;
+
+
+/***/ }),
+/* 419 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var tooltip_container_component_1 = __webpack_require__(103);
+exports.TooltipContainerComponent = tooltip_container_component_1.TooltipContainerComponent;
+var tooltip_directive_1 = __webpack_require__(264);
+exports.TooltipDirective = tooltip_directive_1.TooltipDirective;
+var tooltip_module_1 = __webpack_require__(104);
+exports.TooltipModule = tooltip_module_1.TooltipModule;
+
+
+/***/ }),
+/* 420 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var typeahead_match_class_1 = __webpack_require__(265);
+exports.TypeaheadMatch = typeahead_match_class_1.TypeaheadMatch;
+var typeahead_options_class_1 = __webpack_require__(106);
+exports.TypeaheadOptions = typeahead_options_class_1.TypeaheadOptions;
+var typeahead_utils_1 = __webpack_require__(107);
+exports.TypeaheadUtils = typeahead_utils_1.TypeaheadUtils;
+var typeahead_container_component_1 = __webpack_require__(105);
+exports.TypeaheadContainerComponent = typeahead_container_component_1.TypeaheadContainerComponent;
+var typeahead_directive_1 = __webpack_require__(266);
+exports.TypeaheadDirective = typeahead_directive_1.TypeaheadDirective;
+var typeahead_module_1 = __webpack_require__(108);
+exports.TypeaheadModule = typeahead_module_1.TypeaheadModule;
+
+
+/***/ }),
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45196,12 +45336,12 @@ exports.latinMap = {
 
 
 /***/ }),
-/* 419 */
+/* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var browser_1 = __webpack_require__(108);
+var browser_1 = __webpack_require__(109);
 var Utils = (function () {
     function Utils() {
     }
@@ -45225,7 +45365,7 @@ exports.Utils = Utils;
 
 
 /***/ }),
-/* 420 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45233,62 +45373,62 @@ exports.Utils = Utils;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(402));
-__export(__webpack_require__(403));
-__export(__webpack_require__(404));
 __export(__webpack_require__(405));
 __export(__webpack_require__(406));
 __export(__webpack_require__(407));
-__export(__webpack_require__(410));
 __export(__webpack_require__(408));
-__export(__webpack_require__(411));
-__export(__webpack_require__(412));
+__export(__webpack_require__(409));
+__export(__webpack_require__(410));
 __export(__webpack_require__(413));
+__export(__webpack_require__(411));
 __export(__webpack_require__(414));
 __export(__webpack_require__(415));
 __export(__webpack_require__(416));
 __export(__webpack_require__(417));
-__export(__webpack_require__(94));
+__export(__webpack_require__(418));
+__export(__webpack_require__(419));
+__export(__webpack_require__(420));
+__export(__webpack_require__(95));
 __export(__webpack_require__(247));
 __export(__webpack_require__(37));
-var accordion_module_1 = __webpack_require__(82);
+var accordion_module_1 = __webpack_require__(83);
 exports.AccordionModule = accordion_module_1.AccordionModule;
-var alert_module_1 = __webpack_require__(83);
+var alert_module_1 = __webpack_require__(84);
 exports.AlertModule = alert_module_1.AlertModule;
-var buttons_module_1 = __webpack_require__(84);
+var buttons_module_1 = __webpack_require__(85);
 exports.ButtonsModule = buttons_module_1.ButtonsModule;
-var carousel_module_1 = __webpack_require__(86);
+var carousel_module_1 = __webpack_require__(87);
 exports.CarouselModule = carousel_module_1.CarouselModule;
 var collapse_module_1 = __webpack_require__(62);
 exports.CollapseModule = collapse_module_1.CollapseModule;
-var datepicker_module_1 = __webpack_require__(87);
+var datepicker_module_1 = __webpack_require__(88);
 exports.DatepickerModule = datepicker_module_1.DatepickerModule;
-var dropdown_module_1 = __webpack_require__(88);
+var dropdown_module_1 = __webpack_require__(89);
 exports.DropdownModule = dropdown_module_1.DropdownModule;
-var modal_module_1 = __webpack_require__(91);
+var modal_module_1 = __webpack_require__(92);
 exports.ModalModule = modal_module_1.ModalModule;
-var pagination_module_1 = __webpack_require__(93);
+var pagination_module_1 = __webpack_require__(94);
 exports.PaginationModule = pagination_module_1.PaginationModule;
-var progressbar_module_1 = __webpack_require__(96);
+var progressbar_module_1 = __webpack_require__(97);
 exports.ProgressbarModule = progressbar_module_1.ProgressbarModule;
-var rating_module_1 = __webpack_require__(97);
+var rating_module_1 = __webpack_require__(98);
 exports.RatingModule = rating_module_1.RatingModule;
-var tabs_module_1 = __webpack_require__(99);
+var tabs_module_1 = __webpack_require__(100);
 exports.TabsModule = tabs_module_1.TabsModule;
-var timepicker_module_1 = __webpack_require__(101);
+var timepicker_module_1 = __webpack_require__(102);
 exports.TimepickerModule = timepicker_module_1.TimepickerModule;
-var tooltip_module_1 = __webpack_require__(103);
+var tooltip_module_1 = __webpack_require__(104);
 exports.TooltipModule = tooltip_module_1.TooltipModule;
-var typeahead_module_1 = __webpack_require__(107);
+var typeahead_module_1 = __webpack_require__(108);
 exports.TypeaheadModule = typeahead_module_1.TypeaheadModule;
 var components_helper_service_1 = __webpack_require__(24);
 exports.ComponentsHelper = components_helper_service_1.ComponentsHelper;
-var index_1 = __webpack_require__(409);
+var index_1 = __webpack_require__(412);
 exports.Ng2BootstrapModule = index_1.Ng2BootstrapModule;
 
 
 /***/ }),
-/* 421 */
+/* 424 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45306,7 +45446,7 @@ var CloudinaryOptions = (function () {
 //# sourceMappingURL=cloudinary-options.class.js.map
 
 /***/ }),
-/* 422 */
+/* 425 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45380,7 +45520,7 @@ var CloudinaryUploader = (function (_super) {
 //# sourceMappingURL=cloudinary-uploader.service.js.map
 
 /***/ }),
-/* 423 */
+/* 426 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45389,7 +45529,7 @@ var CloudinaryUploader = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_file_upload__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_file_upload__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cloudinary_image_component__ = __webpack_require__(267);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cloudinary_image_service__ = __webpack_require__(110);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Ng2CloudinaryModule; });
 
 
@@ -45423,7 +45563,7 @@ var Ng2CloudinaryModule = (function () {
 //# sourceMappingURL=cloudinary.module.js.map
 
 /***/ }),
-/* 424 */
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45556,7 +45696,7 @@ exports.FileItem = FileItem;
 
 
 /***/ }),
-/* 425 */
+/* 428 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45725,7 +45865,7 @@ exports.FileType = FileType;
 
 
 /***/ }),
-/* 426 */
+/* 429 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45752,14 +45892,14 @@ exports.FileUploadModule = FileUploadModule;
 
 
 /***/ }),
-/* 427 */
+/* 430 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var file_like_object_class_1 = __webpack_require__(270);
-var file_item_class_1 = __webpack_require__(424);
-var file_type_class_1 = __webpack_require__(425);
+var file_item_class_1 = __webpack_require__(427);
+var file_type_class_1 = __webpack_require__(428);
 function isFile(value) {
     return (File && value instanceof File);
 }
@@ -46157,7 +46297,7 @@ exports.FileUploader = FileUploader;
 
 
 /***/ }),
-/* 428 */
+/* 431 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46248,7 +46388,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 429 */
+/* 432 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46340,18 +46480,18 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 430 */
+/* 433 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(428);
-exports.encode = exports.stringify = __webpack_require__(429);
+exports.decode = exports.parse = __webpack_require__(431);
+exports.encode = exports.stringify = __webpack_require__(432);
 
 
 /***/ }),
-/* 431 */
+/* 434 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46368,85 +46508,82 @@ var Observable_1 = __webpack_require__(0);
 exports.Observable = Observable_1.Observable;
 // statics
 /* tslint:disable:no-use-before-declare */
-__webpack_require__(433);
-__webpack_require__(434);
-__webpack_require__(435);
 __webpack_require__(436);
 __webpack_require__(437);
+__webpack_require__(438);
+__webpack_require__(439);
 __webpack_require__(440);
-__webpack_require__(441);
-__webpack_require__(272);
-__webpack_require__(442);
 __webpack_require__(443);
 __webpack_require__(444);
+__webpack_require__(272);
 __webpack_require__(445);
 __webpack_require__(446);
 __webpack_require__(447);
 __webpack_require__(448);
-__webpack_require__(453);
 __webpack_require__(449);
 __webpack_require__(450);
 __webpack_require__(451);
-__webpack_require__(452);
-__webpack_require__(454);
 __webpack_require__(456);
-__webpack_require__(273);
+__webpack_require__(452);
+__webpack_require__(453);
+__webpack_require__(454);
 __webpack_require__(455);
 __webpack_require__(457);
-//dom
-__webpack_require__(438);
-__webpack_require__(439);
-//operators
+__webpack_require__(459);
+__webpack_require__(273);
+__webpack_require__(458);
 __webpack_require__(460);
-__webpack_require__(461);
-__webpack_require__(462);
+//dom
+__webpack_require__(441);
+__webpack_require__(442);
+//operators
 __webpack_require__(463);
 __webpack_require__(464);
-__webpack_require__(274);
 __webpack_require__(465);
 __webpack_require__(466);
 __webpack_require__(467);
+__webpack_require__(274);
 __webpack_require__(468);
 __webpack_require__(469);
 __webpack_require__(470);
 __webpack_require__(471);
-__webpack_require__(476);
 __webpack_require__(472);
-__webpack_require__(111);
 __webpack_require__(473);
 __webpack_require__(474);
-__webpack_require__(475);
-__webpack_require__(477);
-__webpack_require__(275);
-__webpack_require__(478);
 __webpack_require__(479);
-__webpack_require__(482);
-__webpack_require__(483);
-__webpack_require__(484);
+__webpack_require__(475);
+__webpack_require__(112);
+__webpack_require__(476);
+__webpack_require__(477);
+__webpack_require__(478);
 __webpack_require__(480);
-__webpack_require__(276);
+__webpack_require__(275);
+__webpack_require__(481);
+__webpack_require__(482);
 __webpack_require__(485);
 __webpack_require__(486);
 __webpack_require__(487);
+__webpack_require__(483);
+__webpack_require__(276);
 __webpack_require__(488);
 __webpack_require__(489);
 __webpack_require__(490);
 __webpack_require__(491);
-__webpack_require__(458);
-__webpack_require__(459);
 __webpack_require__(492);
 __webpack_require__(493);
-__webpack_require__(481);
-__webpack_require__(66);
 __webpack_require__(494);
+__webpack_require__(461);
+__webpack_require__(462);
 __webpack_require__(495);
 __webpack_require__(496);
+__webpack_require__(484);
+__webpack_require__(66);
 __webpack_require__(497);
 __webpack_require__(498);
-__webpack_require__(277);
 __webpack_require__(499);
 __webpack_require__(500);
 __webpack_require__(501);
+__webpack_require__(277);
 __webpack_require__(502);
 __webpack_require__(503);
 __webpack_require__(504);
@@ -46455,11 +46592,11 @@ __webpack_require__(506);
 __webpack_require__(507);
 __webpack_require__(508);
 __webpack_require__(509);
-__webpack_require__(511);
 __webpack_require__(510);
+__webpack_require__(511);
 __webpack_require__(512);
-__webpack_require__(513);
 __webpack_require__(514);
+__webpack_require__(513);
 __webpack_require__(515);
 __webpack_require__(516);
 __webpack_require__(517);
@@ -46475,10 +46612,10 @@ __webpack_require__(526);
 __webpack_require__(527);
 __webpack_require__(528);
 __webpack_require__(529);
-__webpack_require__(112);
 __webpack_require__(530);
 __webpack_require__(531);
 __webpack_require__(532);
+__webpack_require__(113);
 __webpack_require__(533);
 __webpack_require__(534);
 __webpack_require__(535);
@@ -46487,16 +46624,19 @@ __webpack_require__(537);
 __webpack_require__(538);
 __webpack_require__(539);
 __webpack_require__(540);
-__webpack_require__(278);
-__webpack_require__(279);
 __webpack_require__(541);
 __webpack_require__(542);
 __webpack_require__(543);
+__webpack_require__(278);
+__webpack_require__(279);
 __webpack_require__(544);
 __webpack_require__(545);
 __webpack_require__(546);
 __webpack_require__(547);
 __webpack_require__(548);
+__webpack_require__(549);
+__webpack_require__(550);
+__webpack_require__(551);
 /* tslint:disable:no-unused-variable */
 var Subscription_1 = __webpack_require__(15);
 exports.Subscription = Subscription_1.Subscription;
@@ -46504,7 +46644,7 @@ var Subscriber_1 = __webpack_require__(4);
 exports.Subscriber = Subscriber_1.Subscriber;
 var AsyncSubject_1 = __webpack_require__(65);
 exports.AsyncSubject = AsyncSubject_1.AsyncSubject;
-var ReplaySubject_1 = __webpack_require__(110);
+var ReplaySubject_1 = __webpack_require__(111);
 exports.ReplaySubject = ReplaySubject_1.ReplaySubject;
 var BehaviorSubject_1 = __webpack_require__(300);
 exports.BehaviorSubject = BehaviorSubject_1.BehaviorSubject;
@@ -46520,13 +46660,13 @@ var ObjectUnsubscribedError_1 = __webpack_require__(304);
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
 var TimeoutError_1 = __webpack_require__(297);
 exports.TimeoutError = TimeoutError_1.TimeoutError;
-var UnsubscriptionError_1 = __webpack_require__(709);
+var UnsubscriptionError_1 = __webpack_require__(712);
 exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
 var timeInterval_1 = __webpack_require__(289);
 exports.TimeInterval = timeInterval_1.TimeInterval;
 var timestamp_1 = __webpack_require__(290);
 exports.Timestamp = timestamp_1.Timestamp;
-var TestScheduler_1 = __webpack_require__(671);
+var TestScheduler_1 = __webpack_require__(674);
 exports.TestScheduler = TestScheduler_1.TestScheduler;
 var VirtualTimeScheduler_1 = __webpack_require__(292);
 exports.VirtualTimeScheduler = VirtualTimeScheduler_1.VirtualTimeScheduler;
@@ -46537,10 +46677,10 @@ exports.AjaxTimeoutError = AjaxObservable_1.AjaxTimeoutError;
 var asap_1 = __webpack_require__(293);
 var async_1 = __webpack_require__(18);
 var queue_1 = __webpack_require__(294);
-var animationFrame_1 = __webpack_require__(668);
-var rxSubscriber_1 = __webpack_require__(695);
+var animationFrame_1 = __webpack_require__(671);
+var rxSubscriber_1 = __webpack_require__(698);
 var iterator_1 = __webpack_require__(301);
-var observable_1 = __webpack_require__(693);
+var observable_1 = __webpack_require__(696);
 /* tslint:enable:no-unused-variable */
 /**
  * @typedef {Object} Rx.Scheduler
@@ -46584,7 +46724,7 @@ exports.Symbol = Symbol;
 //# sourceMappingURL=Rx.js.map
 
 /***/ }),
-/* 432 */
+/* 435 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46639,48 +46779,15 @@ exports.Scheduler = Scheduler;
 //# sourceMappingURL=Scheduler.js.map
 
 /***/ }),
-/* 433 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var bindCallback_1 = __webpack_require__(564);
-Observable_1.Observable.bindCallback = bindCallback_1.bindCallback;
-//# sourceMappingURL=bindCallback.js.map
-
-/***/ }),
-/* 434 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var bindNodeCallback_1 = __webpack_require__(565);
-Observable_1.Observable.bindNodeCallback = bindNodeCallback_1.bindNodeCallback;
-//# sourceMappingURL=bindNodeCallback.js.map
-
-/***/ }),
-/* 435 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var combineLatest_1 = __webpack_require__(566);
-Observable_1.Observable.combineLatest = combineLatest_1.combineLatest;
-//# sourceMappingURL=combineLatest.js.map
-
-/***/ }),
 /* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var concat_1 = __webpack_require__(567);
-Observable_1.Observable.concat = concat_1.concat;
-//# sourceMappingURL=concat.js.map
+var bindCallback_1 = __webpack_require__(567);
+Observable_1.Observable.bindCallback = bindCallback_1.bindCallback;
+//# sourceMappingURL=bindCallback.js.map
 
 /***/ }),
 /* 437 */
@@ -46689,9 +46796,9 @@ Observable_1.Observable.concat = concat_1.concat;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var defer_1 = __webpack_require__(568);
-Observable_1.Observable.defer = defer_1.defer;
-//# sourceMappingURL=defer.js.map
+var bindNodeCallback_1 = __webpack_require__(568);
+Observable_1.Observable.bindNodeCallback = bindNodeCallback_1.bindNodeCallback;
+//# sourceMappingURL=bindNodeCallback.js.map
 
 /***/ }),
 /* 438 */
@@ -46700,9 +46807,9 @@ Observable_1.Observable.defer = defer_1.defer;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var ajax_1 = __webpack_require__(570);
-Observable_1.Observable.ajax = ajax_1.ajax;
-//# sourceMappingURL=ajax.js.map
+var combineLatest_1 = __webpack_require__(569);
+Observable_1.Observable.combineLatest = combineLatest_1.combineLatest;
+//# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
 /* 439 */
@@ -46711,9 +46818,9 @@ Observable_1.Observable.ajax = ajax_1.ajax;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var webSocket_1 = __webpack_require__(571);
-Observable_1.Observable.webSocket = webSocket_1.webSocket;
-//# sourceMappingURL=webSocket.js.map
+var concat_1 = __webpack_require__(570);
+Observable_1.Observable.concat = concat_1.concat;
+//# sourceMappingURL=concat.js.map
 
 /***/ }),
 /* 440 */
@@ -46722,9 +46829,9 @@ Observable_1.Observable.webSocket = webSocket_1.webSocket;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var empty_1 = __webpack_require__(572);
-Observable_1.Observable.empty = empty_1.empty;
-//# sourceMappingURL=empty.js.map
+var defer_1 = __webpack_require__(571);
+Observable_1.Observable.defer = defer_1.defer;
+//# sourceMappingURL=defer.js.map
 
 /***/ }),
 /* 441 */
@@ -46733,9 +46840,9 @@ Observable_1.Observable.empty = empty_1.empty;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var forkJoin_1 = __webpack_require__(573);
-Observable_1.Observable.forkJoin = forkJoin_1.forkJoin;
-//# sourceMappingURL=forkJoin.js.map
+var ajax_1 = __webpack_require__(573);
+Observable_1.Observable.ajax = ajax_1.ajax;
+//# sourceMappingURL=ajax.js.map
 
 /***/ }),
 /* 442 */
@@ -46744,9 +46851,9 @@ Observable_1.Observable.forkJoin = forkJoin_1.forkJoin;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var fromEvent_1 = __webpack_require__(574);
-Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
-//# sourceMappingURL=fromEvent.js.map
+var webSocket_1 = __webpack_require__(574);
+Observable_1.Observable.webSocket = webSocket_1.webSocket;
+//# sourceMappingURL=webSocket.js.map
 
 /***/ }),
 /* 443 */
@@ -46755,12 +46862,45 @@ Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var fromEventPattern_1 = __webpack_require__(575);
+var empty_1 = __webpack_require__(575);
+Observable_1.Observable.empty = empty_1.empty;
+//# sourceMappingURL=empty.js.map
+
+/***/ }),
+/* 444 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var forkJoin_1 = __webpack_require__(576);
+Observable_1.Observable.forkJoin = forkJoin_1.forkJoin;
+//# sourceMappingURL=forkJoin.js.map
+
+/***/ }),
+/* 445 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var fromEvent_1 = __webpack_require__(577);
+Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
+//# sourceMappingURL=fromEvent.js.map
+
+/***/ }),
+/* 446 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var fromEventPattern_1 = __webpack_require__(578);
 Observable_1.Observable.fromEventPattern = fromEventPattern_1.fromEventPattern;
 //# sourceMappingURL=fromEventPattern.js.map
 
 /***/ }),
-/* 444 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46771,48 +46911,15 @@ Observable_1.Observable.fromPromise = fromPromise_1.fromPromise;
 //# sourceMappingURL=fromPromise.js.map
 
 /***/ }),
-/* 445 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var GenerateObservable_1 = __webpack_require__(556);
-Observable_1.Observable.generate = GenerateObservable_1.GenerateObservable.create;
-//# sourceMappingURL=generate.js.map
-
-/***/ }),
-/* 446 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var if_1 = __webpack_require__(576);
-Observable_1.Observable.if = if_1._if;
-//# sourceMappingURL=if.js.map
-
-/***/ }),
-/* 447 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var interval_1 = __webpack_require__(577);
-Observable_1.Observable.interval = interval_1.interval;
-//# sourceMappingURL=interval.js.map
-
-/***/ }),
 /* 448 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var merge_1 = __webpack_require__(578);
-Observable_1.Observable.merge = merge_1.merge;
-//# sourceMappingURL=merge.js.map
+var GenerateObservable_1 = __webpack_require__(559);
+Observable_1.Observable.generate = GenerateObservable_1.GenerateObservable.create;
+//# sourceMappingURL=generate.js.map
 
 /***/ }),
 /* 449 */
@@ -46821,9 +46928,9 @@ Observable_1.Observable.merge = merge_1.merge;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var never_1 = __webpack_require__(579);
-Observable_1.Observable.never = never_1.never;
-//# sourceMappingURL=never.js.map
+var if_1 = __webpack_require__(579);
+Observable_1.Observable.if = if_1._if;
+//# sourceMappingURL=if.js.map
 
 /***/ }),
 /* 450 */
@@ -46832,12 +46939,45 @@ Observable_1.Observable.never = never_1.never;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var of_1 = __webpack_require__(705);
+var interval_1 = __webpack_require__(580);
+Observable_1.Observable.interval = interval_1.interval;
+//# sourceMappingURL=interval.js.map
+
+/***/ }),
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var merge_1 = __webpack_require__(581);
+Observable_1.Observable.merge = merge_1.merge;
+//# sourceMappingURL=merge.js.map
+
+/***/ }),
+/* 452 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var never_1 = __webpack_require__(582);
+Observable_1.Observable.never = never_1.never;
+//# sourceMappingURL=never.js.map
+
+/***/ }),
+/* 453 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var of_1 = __webpack_require__(708);
 Observable_1.Observable.of = of_1.of;
 //# sourceMappingURL=of.js.map
 
 /***/ }),
-/* 451 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46848,18 +46988,18 @@ Observable_1.Observable.onErrorResumeNext = onErrorResumeNext_1.onErrorResumeNex
 //# sourceMappingURL=onErrorResumeNext.js.map
 
 /***/ }),
-/* 452 */
+/* 455 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var pairs_1 = __webpack_require__(580);
+var pairs_1 = __webpack_require__(583);
 Observable_1.Observable.pairs = pairs_1.pairs;
 //# sourceMappingURL=pairs.js.map
 
 /***/ }),
-/* 453 */
+/* 456 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46870,48 +47010,15 @@ Observable_1.Observable.race = race_1.raceStatic;
 //# sourceMappingURL=race.js.map
 
 /***/ }),
-/* 454 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var range_1 = __webpack_require__(581);
-Observable_1.Observable.range = range_1.range;
-//# sourceMappingURL=range.js.map
-
-/***/ }),
-/* 455 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var timer_1 = __webpack_require__(583);
-Observable_1.Observable.timer = timer_1.timer;
-//# sourceMappingURL=timer.js.map
-
-/***/ }),
-/* 456 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var using_1 = __webpack_require__(584);
-Observable_1.Observable.using = using_1.using;
-//# sourceMappingURL=using.js.map
-
-/***/ }),
 /* 457 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var zip_1 = __webpack_require__(585);
-Observable_1.Observable.zip = zip_1.zip;
-//# sourceMappingURL=zip.js.map
+var range_1 = __webpack_require__(584);
+Observable_1.Observable.range = range_1.range;
+//# sourceMappingURL=range.js.map
 
 /***/ }),
 /* 458 */
@@ -46920,9 +47027,9 @@ Observable_1.Observable.zip = zip_1.zip;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var audit_1 = __webpack_require__(586);
-Observable_1.Observable.prototype.audit = audit_1.audit;
-//# sourceMappingURL=audit.js.map
+var timer_1 = __webpack_require__(586);
+Observable_1.Observable.timer = timer_1.timer;
+//# sourceMappingURL=timer.js.map
 
 /***/ }),
 /* 459 */
@@ -46931,9 +47038,9 @@ Observable_1.Observable.prototype.audit = audit_1.audit;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var auditTime_1 = __webpack_require__(587);
-Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
-//# sourceMappingURL=auditTime.js.map
+var using_1 = __webpack_require__(587);
+Observable_1.Observable.using = using_1.using;
+//# sourceMappingURL=using.js.map
 
 /***/ }),
 /* 460 */
@@ -46942,9 +47049,9 @@ Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var buffer_1 = __webpack_require__(588);
-Observable_1.Observable.prototype.buffer = buffer_1.buffer;
-//# sourceMappingURL=buffer.js.map
+var zip_1 = __webpack_require__(588);
+Observable_1.Observable.zip = zip_1.zip;
+//# sourceMappingURL=zip.js.map
 
 /***/ }),
 /* 461 */
@@ -46953,9 +47060,9 @@ Observable_1.Observable.prototype.buffer = buffer_1.buffer;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferCount_1 = __webpack_require__(589);
-Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
-//# sourceMappingURL=bufferCount.js.map
+var audit_1 = __webpack_require__(589);
+Observable_1.Observable.prototype.audit = audit_1.audit;
+//# sourceMappingURL=audit.js.map
 
 /***/ }),
 /* 462 */
@@ -46964,9 +47071,9 @@ Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferTime_1 = __webpack_require__(590);
-Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
-//# sourceMappingURL=bufferTime.js.map
+var auditTime_1 = __webpack_require__(590);
+Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
+//# sourceMappingURL=auditTime.js.map
 
 /***/ }),
 /* 463 */
@@ -46975,9 +47082,9 @@ Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferToggle_1 = __webpack_require__(591);
-Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
-//# sourceMappingURL=bufferToggle.js.map
+var buffer_1 = __webpack_require__(591);
+Observable_1.Observable.prototype.buffer = buffer_1.buffer;
+//# sourceMappingURL=buffer.js.map
 
 /***/ }),
 /* 464 */
@@ -46986,9 +47093,9 @@ Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var bufferWhen_1 = __webpack_require__(592);
-Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
-//# sourceMappingURL=bufferWhen.js.map
+var bufferCount_1 = __webpack_require__(592);
+Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
+//# sourceMappingURL=bufferCount.js.map
 
 /***/ }),
 /* 465 */
@@ -46997,9 +47104,9 @@ Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var combineAll_1 = __webpack_require__(593);
-Observable_1.Observable.prototype.combineAll = combineAll_1.combineAll;
-//# sourceMappingURL=combineAll.js.map
+var bufferTime_1 = __webpack_require__(593);
+Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
+//# sourceMappingURL=bufferTime.js.map
 
 /***/ }),
 /* 466 */
@@ -47008,9 +47115,9 @@ Observable_1.Observable.prototype.combineAll = combineAll_1.combineAll;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var combineLatest_1 = __webpack_require__(113);
-Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
-//# sourceMappingURL=combineLatest.js.map
+var bufferToggle_1 = __webpack_require__(594);
+Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
+//# sourceMappingURL=bufferToggle.js.map
 
 /***/ }),
 /* 467 */
@@ -47019,9 +47126,9 @@ Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var concat_1 = __webpack_require__(114);
-Observable_1.Observable.prototype.concat = concat_1.concat;
-//# sourceMappingURL=concat.js.map
+var bufferWhen_1 = __webpack_require__(595);
+Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
+//# sourceMappingURL=bufferWhen.js.map
 
 /***/ }),
 /* 468 */
@@ -47030,9 +47137,9 @@ Observable_1.Observable.prototype.concat = concat_1.concat;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var concatAll_1 = __webpack_require__(699);
-Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
-//# sourceMappingURL=concatAll.js.map
+var combineAll_1 = __webpack_require__(596);
+Observable_1.Observable.prototype.combineAll = combineAll_1.combineAll;
+//# sourceMappingURL=combineAll.js.map
 
 /***/ }),
 /* 469 */
@@ -47041,9 +47148,9 @@ Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var concatMap_1 = __webpack_require__(700);
-Observable_1.Observable.prototype.concatMap = concatMap_1.concatMap;
-//# sourceMappingURL=concatMap.js.map
+var combineLatest_1 = __webpack_require__(114);
+Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
+//# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
 /* 470 */
@@ -47052,9 +47159,9 @@ Observable_1.Observable.prototype.concatMap = concatMap_1.concatMap;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var concatMapTo_1 = __webpack_require__(594);
-Observable_1.Observable.prototype.concatMapTo = concatMapTo_1.concatMapTo;
-//# sourceMappingURL=concatMapTo.js.map
+var concat_1 = __webpack_require__(115);
+Observable_1.Observable.prototype.concat = concat_1.concat;
+//# sourceMappingURL=concat.js.map
 
 /***/ }),
 /* 471 */
@@ -47063,9 +47170,9 @@ Observable_1.Observable.prototype.concatMapTo = concatMapTo_1.concatMapTo;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var count_1 = __webpack_require__(595);
-Observable_1.Observable.prototype.count = count_1.count;
-//# sourceMappingURL=count.js.map
+var concatAll_1 = __webpack_require__(702);
+Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
+//# sourceMappingURL=concatAll.js.map
 
 /***/ }),
 /* 472 */
@@ -47074,9 +47181,9 @@ Observable_1.Observable.prototype.count = count_1.count;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var debounce_1 = __webpack_require__(596);
-Observable_1.Observable.prototype.debounce = debounce_1.debounce;
-//# sourceMappingURL=debounce.js.map
+var concatMap_1 = __webpack_require__(703);
+Observable_1.Observable.prototype.concatMap = concatMap_1.concatMap;
+//# sourceMappingURL=concatMap.js.map
 
 /***/ }),
 /* 473 */
@@ -47085,9 +47192,9 @@ Observable_1.Observable.prototype.debounce = debounce_1.debounce;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var defaultIfEmpty_1 = __webpack_require__(598);
-Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmpty;
-//# sourceMappingURL=defaultIfEmpty.js.map
+var concatMapTo_1 = __webpack_require__(597);
+Observable_1.Observable.prototype.concatMapTo = concatMapTo_1.concatMapTo;
+//# sourceMappingURL=concatMapTo.js.map
 
 /***/ }),
 /* 474 */
@@ -47096,9 +47203,9 @@ Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmp
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var delay_1 = __webpack_require__(599);
-Observable_1.Observable.prototype.delay = delay_1.delay;
-//# sourceMappingURL=delay.js.map
+var count_1 = __webpack_require__(598);
+Observable_1.Observable.prototype.count = count_1.count;
+//# sourceMappingURL=count.js.map
 
 /***/ }),
 /* 475 */
@@ -47107,9 +47214,9 @@ Observable_1.Observable.prototype.delay = delay_1.delay;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var delayWhen_1 = __webpack_require__(600);
-Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
-//# sourceMappingURL=delayWhen.js.map
+var debounce_1 = __webpack_require__(599);
+Observable_1.Observable.prototype.debounce = debounce_1.debounce;
+//# sourceMappingURL=debounce.js.map
 
 /***/ }),
 /* 476 */
@@ -47118,9 +47225,9 @@ Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var dematerialize_1 = __webpack_require__(601);
-Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
-//# sourceMappingURL=dematerialize.js.map
+var defaultIfEmpty_1 = __webpack_require__(601);
+Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmpty;
+//# sourceMappingURL=defaultIfEmpty.js.map
 
 /***/ }),
 /* 477 */
@@ -47129,9 +47236,9 @@ Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var distinct_1 = __webpack_require__(602);
-Observable_1.Observable.prototype.distinct = distinct_1.distinct;
-//# sourceMappingURL=distinct.js.map
+var delay_1 = __webpack_require__(602);
+Observable_1.Observable.prototype.delay = delay_1.delay;
+//# sourceMappingURL=delay.js.map
 
 /***/ }),
 /* 478 */
@@ -47140,9 +47247,9 @@ Observable_1.Observable.prototype.distinct = distinct_1.distinct;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var distinctUntilKeyChanged_1 = __webpack_require__(603);
-Observable_1.Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChanged_1.distinctUntilKeyChanged;
-//# sourceMappingURL=distinctUntilKeyChanged.js.map
+var delayWhen_1 = __webpack_require__(603);
+Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
+//# sourceMappingURL=delayWhen.js.map
 
 /***/ }),
 /* 479 */
@@ -47151,10 +47258,9 @@ Observable_1.Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChan
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var do_1 = __webpack_require__(604);
-Observable_1.Observable.prototype.do = do_1._do;
-Observable_1.Observable.prototype._do = do_1._do;
-//# sourceMappingURL=do.js.map
+var dematerialize_1 = __webpack_require__(604);
+Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
+//# sourceMappingURL=dematerialize.js.map
 
 /***/ }),
 /* 480 */
@@ -47163,9 +47269,9 @@ Observable_1.Observable.prototype._do = do_1._do;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var elementAt_1 = __webpack_require__(605);
-Observable_1.Observable.prototype.elementAt = elementAt_1.elementAt;
-//# sourceMappingURL=elementAt.js.map
+var distinct_1 = __webpack_require__(605);
+Observable_1.Observable.prototype.distinct = distinct_1.distinct;
+//# sourceMappingURL=distinct.js.map
 
 /***/ }),
 /* 481 */
@@ -47174,9 +47280,9 @@ Observable_1.Observable.prototype.elementAt = elementAt_1.elementAt;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var every_1 = __webpack_require__(701);
-Observable_1.Observable.prototype.every = every_1.every;
-//# sourceMappingURL=every.js.map
+var distinctUntilKeyChanged_1 = __webpack_require__(606);
+Observable_1.Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChanged_1.distinctUntilKeyChanged;
+//# sourceMappingURL=distinctUntilKeyChanged.js.map
 
 /***/ }),
 /* 482 */
@@ -47185,9 +47291,10 @@ Observable_1.Observable.prototype.every = every_1.every;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var exhaust_1 = __webpack_require__(606);
-Observable_1.Observable.prototype.exhaust = exhaust_1.exhaust;
-//# sourceMappingURL=exhaust.js.map
+var do_1 = __webpack_require__(607);
+Observable_1.Observable.prototype.do = do_1._do;
+Observable_1.Observable.prototype._do = do_1._do;
+//# sourceMappingURL=do.js.map
 
 /***/ }),
 /* 483 */
@@ -47196,9 +47303,9 @@ Observable_1.Observable.prototype.exhaust = exhaust_1.exhaust;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var exhaustMap_1 = __webpack_require__(607);
-Observable_1.Observable.prototype.exhaustMap = exhaustMap_1.exhaustMap;
-//# sourceMappingURL=exhaustMap.js.map
+var elementAt_1 = __webpack_require__(608);
+Observable_1.Observable.prototype.elementAt = elementAt_1.elementAt;
+//# sourceMappingURL=elementAt.js.map
 
 /***/ }),
 /* 484 */
@@ -47207,9 +47314,9 @@ Observable_1.Observable.prototype.exhaustMap = exhaustMap_1.exhaustMap;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var expand_1 = __webpack_require__(608);
-Observable_1.Observable.prototype.expand = expand_1.expand;
-//# sourceMappingURL=expand.js.map
+var every_1 = __webpack_require__(704);
+Observable_1.Observable.prototype.every = every_1.every;
+//# sourceMappingURL=every.js.map
 
 /***/ }),
 /* 485 */
@@ -47218,13 +47325,46 @@ Observable_1.Observable.prototype.expand = expand_1.expand;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var finally_1 = __webpack_require__(609);
+var exhaust_1 = __webpack_require__(609);
+Observable_1.Observable.prototype.exhaust = exhaust_1.exhaust;
+//# sourceMappingURL=exhaust.js.map
+
+/***/ }),
+/* 486 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var exhaustMap_1 = __webpack_require__(610);
+Observable_1.Observable.prototype.exhaustMap = exhaustMap_1.exhaustMap;
+//# sourceMappingURL=exhaustMap.js.map
+
+/***/ }),
+/* 487 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var expand_1 = __webpack_require__(611);
+Observable_1.Observable.prototype.expand = expand_1.expand;
+//# sourceMappingURL=expand.js.map
+
+/***/ }),
+/* 488 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var finally_1 = __webpack_require__(612);
 Observable_1.Observable.prototype.finally = finally_1._finally;
 Observable_1.Observable.prototype._finally = finally_1._finally;
 //# sourceMappingURL=finally.js.map
 
 /***/ }),
-/* 486 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47235,48 +47375,15 @@ Observable_1.Observable.prototype.find = find_1.find;
 //# sourceMappingURL=find.js.map
 
 /***/ }),
-/* 487 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var findIndex_1 = __webpack_require__(610);
-Observable_1.Observable.prototype.findIndex = findIndex_1.findIndex;
-//# sourceMappingURL=findIndex.js.map
-
-/***/ }),
-/* 488 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var first_1 = __webpack_require__(702);
-Observable_1.Observable.prototype.first = first_1.first;
-//# sourceMappingURL=first.js.map
-
-/***/ }),
-/* 489 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var groupBy_1 = __webpack_require__(611);
-Observable_1.Observable.prototype.groupBy = groupBy_1.groupBy;
-//# sourceMappingURL=groupBy.js.map
-
-/***/ }),
 /* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var ignoreElements_1 = __webpack_require__(612);
-Observable_1.Observable.prototype.ignoreElements = ignoreElements_1.ignoreElements;
-//# sourceMappingURL=ignoreElements.js.map
+var findIndex_1 = __webpack_require__(613);
+Observable_1.Observable.prototype.findIndex = findIndex_1.findIndex;
+//# sourceMappingURL=findIndex.js.map
 
 /***/ }),
 /* 491 */
@@ -47285,9 +47392,9 @@ Observable_1.Observable.prototype.ignoreElements = ignoreElements_1.ignoreElemen
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var isEmpty_1 = __webpack_require__(613);
-Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
-//# sourceMappingURL=isEmpty.js.map
+var first_1 = __webpack_require__(705);
+Observable_1.Observable.prototype.first = first_1.first;
+//# sourceMappingURL=first.js.map
 
 /***/ }),
 /* 492 */
@@ -47296,9 +47403,9 @@ Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var last_1 = __webpack_require__(708);
-Observable_1.Observable.prototype.last = last_1.last;
-//# sourceMappingURL=last.js.map
+var groupBy_1 = __webpack_require__(614);
+Observable_1.Observable.prototype.groupBy = groupBy_1.groupBy;
+//# sourceMappingURL=groupBy.js.map
 
 /***/ }),
 /* 493 */
@@ -47307,10 +47414,9 @@ Observable_1.Observable.prototype.last = last_1.last;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var let_1 = __webpack_require__(614);
-Observable_1.Observable.prototype.let = let_1.letProto;
-Observable_1.Observable.prototype.letBind = let_1.letProto;
-//# sourceMappingURL=let.js.map
+var ignoreElements_1 = __webpack_require__(615);
+Observable_1.Observable.prototype.ignoreElements = ignoreElements_1.ignoreElements;
+//# sourceMappingURL=ignoreElements.js.map
 
 /***/ }),
 /* 494 */
@@ -47319,9 +47425,9 @@ Observable_1.Observable.prototype.letBind = let_1.letProto;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var mapTo_1 = __webpack_require__(615);
-Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
-//# sourceMappingURL=mapTo.js.map
+var isEmpty_1 = __webpack_require__(616);
+Observable_1.Observable.prototype.isEmpty = isEmpty_1.isEmpty;
+//# sourceMappingURL=isEmpty.js.map
 
 /***/ }),
 /* 495 */
@@ -47330,9 +47436,9 @@ Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var materialize_1 = __webpack_require__(616);
-Observable_1.Observable.prototype.materialize = materialize_1.materialize;
-//# sourceMappingURL=materialize.js.map
+var last_1 = __webpack_require__(711);
+Observable_1.Observable.prototype.last = last_1.last;
+//# sourceMappingURL=last.js.map
 
 /***/ }),
 /* 496 */
@@ -47341,12 +47447,46 @@ Observable_1.Observable.prototype.materialize = materialize_1.materialize;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var max_1 = __webpack_require__(617);
+var let_1 = __webpack_require__(617);
+Observable_1.Observable.prototype.let = let_1.letProto;
+Observable_1.Observable.prototype.letBind = let_1.letProto;
+//# sourceMappingURL=let.js.map
+
+/***/ }),
+/* 497 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var mapTo_1 = __webpack_require__(618);
+Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
+//# sourceMappingURL=mapTo.js.map
+
+/***/ }),
+/* 498 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var materialize_1 = __webpack_require__(619);
+Observable_1.Observable.prototype.materialize = materialize_1.materialize;
+//# sourceMappingURL=materialize.js.map
+
+/***/ }),
+/* 499 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var max_1 = __webpack_require__(620);
 Observable_1.Observable.prototype.max = max_1.max;
 //# sourceMappingURL=max.js.map
 
 /***/ }),
-/* 497 */
+/* 500 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47357,18 +47497,18 @@ Observable_1.Observable.prototype.merge = merge_1.merge;
 //# sourceMappingURL=merge.js.map
 
 /***/ }),
-/* 498 */
+/* 501 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var mergeAll_1 = __webpack_require__(117);
+var mergeAll_1 = __webpack_require__(118);
 Observable_1.Observable.prototype.mergeAll = mergeAll_1.mergeAll;
 //# sourceMappingURL=mergeAll.js.map
 
 /***/ }),
-/* 499 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47380,29 +47520,29 @@ Observable_1.Observable.prototype.mergeMapTo = mergeMapTo_1.mergeMapTo;
 //# sourceMappingURL=mergeMapTo.js.map
 
 /***/ }),
-/* 500 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var mergeScan_1 = __webpack_require__(618);
+var mergeScan_1 = __webpack_require__(621);
 Observable_1.Observable.prototype.mergeScan = mergeScan_1.mergeScan;
 //# sourceMappingURL=mergeScan.js.map
 
 /***/ }),
-/* 501 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var min_1 = __webpack_require__(619);
+var min_1 = __webpack_require__(622);
 Observable_1.Observable.prototype.min = min_1.min;
 //# sourceMappingURL=min.js.map
 
 /***/ }),
-/* 502 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47413,7 +47553,7 @@ Observable_1.Observable.prototype.multicast = multicast_1.multicast;
 //# sourceMappingURL=multicast.js.map
 
 /***/ }),
-/* 503 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47424,7 +47564,7 @@ Observable_1.Observable.prototype.observeOn = observeOn_1.observeOn;
 //# sourceMappingURL=observeOn.js.map
 
 /***/ }),
-/* 504 */
+/* 507 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47435,48 +47575,15 @@ Observable_1.Observable.prototype.onErrorResumeNext = onErrorResumeNext_1.onErro
 //# sourceMappingURL=onErrorResumeNext.js.map
 
 /***/ }),
-/* 505 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var pairwise_1 = __webpack_require__(620);
-Observable_1.Observable.prototype.pairwise = pairwise_1.pairwise;
-//# sourceMappingURL=pairwise.js.map
-
-/***/ }),
-/* 506 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var partition_1 = __webpack_require__(621);
-Observable_1.Observable.prototype.partition = partition_1.partition;
-//# sourceMappingURL=partition.js.map
-
-/***/ }),
-/* 507 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var pluck_1 = __webpack_require__(622);
-Observable_1.Observable.prototype.pluck = pluck_1.pluck;
-//# sourceMappingURL=pluck.js.map
-
-/***/ }),
 /* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var publish_1 = __webpack_require__(623);
-Observable_1.Observable.prototype.publish = publish_1.publish;
-//# sourceMappingURL=publish.js.map
+var pairwise_1 = __webpack_require__(623);
+Observable_1.Observable.prototype.pairwise = pairwise_1.pairwise;
+//# sourceMappingURL=pairwise.js.map
 
 /***/ }),
 /* 509 */
@@ -47485,9 +47592,9 @@ Observable_1.Observable.prototype.publish = publish_1.publish;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var publishBehavior_1 = __webpack_require__(624);
-Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBehavior;
-//# sourceMappingURL=publishBehavior.js.map
+var partition_1 = __webpack_require__(624);
+Observable_1.Observable.prototype.partition = partition_1.partition;
+//# sourceMappingURL=partition.js.map
 
 /***/ }),
 /* 510 */
@@ -47496,9 +47603,9 @@ Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBeh
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var publishLast_1 = __webpack_require__(625);
-Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
-//# sourceMappingURL=publishLast.js.map
+var pluck_1 = __webpack_require__(625);
+Observable_1.Observable.prototype.pluck = pluck_1.pluck;
+//# sourceMappingURL=pluck.js.map
 
 /***/ }),
 /* 511 */
@@ -47507,12 +47614,45 @@ Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var publishReplay_1 = __webpack_require__(626);
+var publish_1 = __webpack_require__(626);
+Observable_1.Observable.prototype.publish = publish_1.publish;
+//# sourceMappingURL=publish.js.map
+
+/***/ }),
+/* 512 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var publishBehavior_1 = __webpack_require__(627);
+Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBehavior;
+//# sourceMappingURL=publishBehavior.js.map
+
+/***/ }),
+/* 513 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var publishLast_1 = __webpack_require__(628);
+Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
+//# sourceMappingURL=publishLast.js.map
+
+/***/ }),
+/* 514 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var publishReplay_1 = __webpack_require__(629);
 Observable_1.Observable.prototype.publishReplay = publishReplay_1.publishReplay;
 //# sourceMappingURL=publishReplay.js.map
 
 /***/ }),
-/* 512 */
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47523,48 +47663,15 @@ Observable_1.Observable.prototype.race = race_1.race;
 //# sourceMappingURL=race.js.map
 
 /***/ }),
-/* 513 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var reduce_1 = __webpack_require__(118);
-Observable_1.Observable.prototype.reduce = reduce_1.reduce;
-//# sourceMappingURL=reduce.js.map
-
-/***/ }),
-/* 514 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var repeat_1 = __webpack_require__(627);
-Observable_1.Observable.prototype.repeat = repeat_1.repeat;
-//# sourceMappingURL=repeat.js.map
-
-/***/ }),
-/* 515 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var repeatWhen_1 = __webpack_require__(628);
-Observable_1.Observable.prototype.repeatWhen = repeatWhen_1.repeatWhen;
-//# sourceMappingURL=repeatWhen.js.map
-
-/***/ }),
 /* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var retry_1 = __webpack_require__(629);
-Observable_1.Observable.prototype.retry = retry_1.retry;
-//# sourceMappingURL=retry.js.map
+var reduce_1 = __webpack_require__(119);
+Observable_1.Observable.prototype.reduce = reduce_1.reduce;
+//# sourceMappingURL=reduce.js.map
 
 /***/ }),
 /* 517 */
@@ -47573,9 +47680,9 @@ Observable_1.Observable.prototype.retry = retry_1.retry;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var retryWhen_1 = __webpack_require__(630);
-Observable_1.Observable.prototype.retryWhen = retryWhen_1.retryWhen;
-//# sourceMappingURL=retryWhen.js.map
+var repeat_1 = __webpack_require__(630);
+Observable_1.Observable.prototype.repeat = repeat_1.repeat;
+//# sourceMappingURL=repeat.js.map
 
 /***/ }),
 /* 518 */
@@ -47584,9 +47691,9 @@ Observable_1.Observable.prototype.retryWhen = retryWhen_1.retryWhen;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var sample_1 = __webpack_require__(631);
-Observable_1.Observable.prototype.sample = sample_1.sample;
-//# sourceMappingURL=sample.js.map
+var repeatWhen_1 = __webpack_require__(631);
+Observable_1.Observable.prototype.repeatWhen = repeatWhen_1.repeatWhen;
+//# sourceMappingURL=repeatWhen.js.map
 
 /***/ }),
 /* 519 */
@@ -47595,9 +47702,9 @@ Observable_1.Observable.prototype.sample = sample_1.sample;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var sampleTime_1 = __webpack_require__(632);
-Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
-//# sourceMappingURL=sampleTime.js.map
+var retry_1 = __webpack_require__(632);
+Observable_1.Observable.prototype.retry = retry_1.retry;
+//# sourceMappingURL=retry.js.map
 
 /***/ }),
 /* 520 */
@@ -47606,9 +47713,9 @@ Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var scan_1 = __webpack_require__(633);
-Observable_1.Observable.prototype.scan = scan_1.scan;
-//# sourceMappingURL=scan.js.map
+var retryWhen_1 = __webpack_require__(633);
+Observable_1.Observable.prototype.retryWhen = retryWhen_1.retryWhen;
+//# sourceMappingURL=retryWhen.js.map
 
 /***/ }),
 /* 521 */
@@ -47617,9 +47724,9 @@ Observable_1.Observable.prototype.scan = scan_1.scan;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var sequenceEqual_1 = __webpack_require__(634);
-Observable_1.Observable.prototype.sequenceEqual = sequenceEqual_1.sequenceEqual;
-//# sourceMappingURL=sequenceEqual.js.map
+var sample_1 = __webpack_require__(634);
+Observable_1.Observable.prototype.sample = sample_1.sample;
+//# sourceMappingURL=sample.js.map
 
 /***/ }),
 /* 522 */
@@ -47628,9 +47735,9 @@ Observable_1.Observable.prototype.sequenceEqual = sequenceEqual_1.sequenceEqual;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var share_1 = __webpack_require__(635);
-Observable_1.Observable.prototype.share = share_1.share;
-//# sourceMappingURL=share.js.map
+var sampleTime_1 = __webpack_require__(635);
+Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
+//# sourceMappingURL=sampleTime.js.map
 
 /***/ }),
 /* 523 */
@@ -47639,9 +47746,9 @@ Observable_1.Observable.prototype.share = share_1.share;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var single_1 = __webpack_require__(636);
-Observable_1.Observable.prototype.single = single_1.single;
-//# sourceMappingURL=single.js.map
+var scan_1 = __webpack_require__(636);
+Observable_1.Observable.prototype.scan = scan_1.scan;
+//# sourceMappingURL=scan.js.map
 
 /***/ }),
 /* 524 */
@@ -47650,9 +47757,9 @@ Observable_1.Observable.prototype.single = single_1.single;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var skip_1 = __webpack_require__(637);
-Observable_1.Observable.prototype.skip = skip_1.skip;
-//# sourceMappingURL=skip.js.map
+var sequenceEqual_1 = __webpack_require__(637);
+Observable_1.Observable.prototype.sequenceEqual = sequenceEqual_1.sequenceEqual;
+//# sourceMappingURL=sequenceEqual.js.map
 
 /***/ }),
 /* 525 */
@@ -47661,9 +47768,9 @@ Observable_1.Observable.prototype.skip = skip_1.skip;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var skipUntil_1 = __webpack_require__(638);
-Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
-//# sourceMappingURL=skipUntil.js.map
+var share_1 = __webpack_require__(638);
+Observable_1.Observable.prototype.share = share_1.share;
+//# sourceMappingURL=share.js.map
 
 /***/ }),
 /* 526 */
@@ -47672,9 +47779,9 @@ Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var skipWhile_1 = __webpack_require__(639);
-Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
-//# sourceMappingURL=skipWhile.js.map
+var single_1 = __webpack_require__(639);
+Observable_1.Observable.prototype.single = single_1.single;
+//# sourceMappingURL=single.js.map
 
 /***/ }),
 /* 527 */
@@ -47683,9 +47790,9 @@ Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var startWith_1 = __webpack_require__(640);
-Observable_1.Observable.prototype.startWith = startWith_1.startWith;
-//# sourceMappingURL=startWith.js.map
+var skip_1 = __webpack_require__(640);
+Observable_1.Observable.prototype.skip = skip_1.skip;
+//# sourceMappingURL=skip.js.map
 
 /***/ }),
 /* 528 */
@@ -47694,9 +47801,9 @@ Observable_1.Observable.prototype.startWith = startWith_1.startWith;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var subscribeOn_1 = __webpack_require__(641);
-Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
-//# sourceMappingURL=subscribeOn.js.map
+var skipUntil_1 = __webpack_require__(641);
+Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
+//# sourceMappingURL=skipUntil.js.map
 
 /***/ }),
 /* 529 */
@@ -47705,10 +47812,9 @@ Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var switch_1 = __webpack_require__(642);
-Observable_1.Observable.prototype.switch = switch_1._switch;
-Observable_1.Observable.prototype._switch = switch_1._switch;
-//# sourceMappingURL=switch.js.map
+var skipWhile_1 = __webpack_require__(642);
+Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
+//# sourceMappingURL=skipWhile.js.map
 
 /***/ }),
 /* 530 */
@@ -47717,9 +47823,9 @@ Observable_1.Observable.prototype._switch = switch_1._switch;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var switchMapTo_1 = __webpack_require__(644);
-Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
-//# sourceMappingURL=switchMapTo.js.map
+var startWith_1 = __webpack_require__(643);
+Observable_1.Observable.prototype.startWith = startWith_1.startWith;
+//# sourceMappingURL=startWith.js.map
 
 /***/ }),
 /* 531 */
@@ -47728,9 +47834,9 @@ Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var take_1 = __webpack_require__(645);
-Observable_1.Observable.prototype.take = take_1.take;
-//# sourceMappingURL=take.js.map
+var subscribeOn_1 = __webpack_require__(644);
+Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
+//# sourceMappingURL=subscribeOn.js.map
 
 /***/ }),
 /* 532 */
@@ -47739,9 +47845,10 @@ Observable_1.Observable.prototype.take = take_1.take;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var takeLast_1 = __webpack_require__(646);
-Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
-//# sourceMappingURL=takeLast.js.map
+var switch_1 = __webpack_require__(645);
+Observable_1.Observable.prototype.switch = switch_1._switch;
+Observable_1.Observable.prototype._switch = switch_1._switch;
+//# sourceMappingURL=switch.js.map
 
 /***/ }),
 /* 533 */
@@ -47750,9 +47857,9 @@ Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var takeUntil_1 = __webpack_require__(647);
-Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
-//# sourceMappingURL=takeUntil.js.map
+var switchMapTo_1 = __webpack_require__(647);
+Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
+//# sourceMappingURL=switchMapTo.js.map
 
 /***/ }),
 /* 534 */
@@ -47761,9 +47868,9 @@ Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var takeWhile_1 = __webpack_require__(648);
-Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
-//# sourceMappingURL=takeWhile.js.map
+var take_1 = __webpack_require__(648);
+Observable_1.Observable.prototype.take = take_1.take;
+//# sourceMappingURL=take.js.map
 
 /***/ }),
 /* 535 */
@@ -47772,9 +47879,9 @@ Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var throttle_1 = __webpack_require__(649);
-Observable_1.Observable.prototype.throttle = throttle_1.throttle;
-//# sourceMappingURL=throttle.js.map
+var takeLast_1 = __webpack_require__(649);
+Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
+//# sourceMappingURL=takeLast.js.map
 
 /***/ }),
 /* 536 */
@@ -47783,12 +47890,45 @@ Observable_1.Observable.prototype.throttle = throttle_1.throttle;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var throttleTime_1 = __webpack_require__(650);
+var takeUntil_1 = __webpack_require__(650);
+Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
+//# sourceMappingURL=takeUntil.js.map
+
+/***/ }),
+/* 537 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var takeWhile_1 = __webpack_require__(651);
+Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
+//# sourceMappingURL=takeWhile.js.map
+
+/***/ }),
+/* 538 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var throttle_1 = __webpack_require__(652);
+Observable_1.Observable.prototype.throttle = throttle_1.throttle;
+//# sourceMappingURL=throttle.js.map
+
+/***/ }),
+/* 539 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var throttleTime_1 = __webpack_require__(653);
 Observable_1.Observable.prototype.throttleTime = throttleTime_1.throttleTime;
 //# sourceMappingURL=throttleTime.js.map
 
 /***/ }),
-/* 537 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47799,29 +47939,29 @@ Observable_1.Observable.prototype.timeInterval = timeInterval_1.timeInterval;
 //# sourceMappingURL=timeInterval.js.map
 
 /***/ }),
-/* 538 */
+/* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var timeout_1 = __webpack_require__(651);
+var timeout_1 = __webpack_require__(654);
 Observable_1.Observable.prototype.timeout = timeout_1.timeout;
 //# sourceMappingURL=timeout.js.map
 
 /***/ }),
-/* 539 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var timeoutWith_1 = __webpack_require__(652);
+var timeoutWith_1 = __webpack_require__(655);
 Observable_1.Observable.prototype.timeoutWith = timeoutWith_1.timeoutWith;
 //# sourceMappingURL=timeoutWith.js.map
 
 /***/ }),
-/* 540 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47832,48 +47972,15 @@ Observable_1.Observable.prototype.timestamp = timestamp_1.timestamp;
 //# sourceMappingURL=timestamp.js.map
 
 /***/ }),
-/* 541 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var window_1 = __webpack_require__(654);
-Observable_1.Observable.prototype.window = window_1.window;
-//# sourceMappingURL=window.js.map
-
-/***/ }),
-/* 542 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var windowCount_1 = __webpack_require__(655);
-Observable_1.Observable.prototype.windowCount = windowCount_1.windowCount;
-//# sourceMappingURL=windowCount.js.map
-
-/***/ }),
-/* 543 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Observable_1 = __webpack_require__(0);
-var windowTime_1 = __webpack_require__(656);
-Observable_1.Observable.prototype.windowTime = windowTime_1.windowTime;
-//# sourceMappingURL=windowTime.js.map
-
-/***/ }),
 /* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var windowToggle_1 = __webpack_require__(657);
-Observable_1.Observable.prototype.windowToggle = windowToggle_1.windowToggle;
-//# sourceMappingURL=windowToggle.js.map
+var window_1 = __webpack_require__(657);
+Observable_1.Observable.prototype.window = window_1.window;
+//# sourceMappingURL=window.js.map
 
 /***/ }),
 /* 545 */
@@ -47882,9 +47989,9 @@ Observable_1.Observable.prototype.windowToggle = windowToggle_1.windowToggle;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var windowWhen_1 = __webpack_require__(658);
-Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
-//# sourceMappingURL=windowWhen.js.map
+var windowCount_1 = __webpack_require__(658);
+Observable_1.Observable.prototype.windowCount = windowCount_1.windowCount;
+//# sourceMappingURL=windowCount.js.map
 
 /***/ }),
 /* 546 */
@@ -47893,9 +48000,9 @@ Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var withLatestFrom_1 = __webpack_require__(659);
-Observable_1.Observable.prototype.withLatestFrom = withLatestFrom_1.withLatestFrom;
-//# sourceMappingURL=withLatestFrom.js.map
+var windowTime_1 = __webpack_require__(659);
+Observable_1.Observable.prototype.windowTime = windowTime_1.windowTime;
+//# sourceMappingURL=windowTime.js.map
 
 /***/ }),
 /* 547 */
@@ -47904,9 +48011,9 @@ Observable_1.Observable.prototype.withLatestFrom = withLatestFrom_1.withLatestFr
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var zip_1 = __webpack_require__(115);
-Observable_1.Observable.prototype.zip = zip_1.zipProto;
-//# sourceMappingURL=zip.js.map
+var windowToggle_1 = __webpack_require__(660);
+Observable_1.Observable.prototype.windowToggle = windowToggle_1.windowToggle;
+//# sourceMappingURL=windowToggle.js.map
 
 /***/ }),
 /* 548 */
@@ -47915,12 +48022,45 @@ Observable_1.Observable.prototype.zip = zip_1.zipProto;
 "use strict";
 
 var Observable_1 = __webpack_require__(0);
-var zipAll_1 = __webpack_require__(660);
+var windowWhen_1 = __webpack_require__(661);
+Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
+//# sourceMappingURL=windowWhen.js.map
+
+/***/ }),
+/* 549 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var withLatestFrom_1 = __webpack_require__(662);
+Observable_1.Observable.prototype.withLatestFrom = withLatestFrom_1.withLatestFrom;
+//# sourceMappingURL=withLatestFrom.js.map
+
+/***/ }),
+/* 550 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var zip_1 = __webpack_require__(116);
+Observable_1.Observable.prototype.zip = zip_1.zipProto;
+//# sourceMappingURL=zip.js.map
+
+/***/ }),
+/* 551 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__(0);
+var zipAll_1 = __webpack_require__(663);
 Observable_1.Observable.prototype.zipAll = zipAll_1.zipAll;
 //# sourceMappingURL=zipAll.js.map
 
 /***/ }),
-/* 549 */
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48194,7 +48334,7 @@ function dispatchError(arg) {
 //# sourceMappingURL=BoundCallbackObservable.js.map
 
 /***/ }),
-/* 550 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48463,7 +48603,7 @@ function dispatchError(arg) {
 //# sourceMappingURL=BoundNodeCallbackObservable.js.map
 
 /***/ }),
-/* 551 */
+/* 554 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48568,7 +48708,7 @@ var DeferSubscriber = (function (_super) {
 //# sourceMappingURL=DeferObservable.js.map
 
 /***/ }),
-/* 552 */
+/* 555 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48656,7 +48796,7 @@ exports.ErrorObservable = ErrorObservable;
 //# sourceMappingURL=ErrorObservable.js.map
 
 /***/ }),
-/* 553 */
+/* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48774,7 +48914,7 @@ var ForkJoinSubscriber = (function (_super) {
 //# sourceMappingURL=ForkJoinObservable.js.map
 
 /***/ }),
-/* 554 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48920,7 +49060,7 @@ exports.FromEventObservable = FromEventObservable;
 //# sourceMappingURL=FromEventObservable.js.map
 
 /***/ }),
-/* 555 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49039,7 +49179,7 @@ exports.FromEventPatternObservable = FromEventPatternObservable;
 //# sourceMappingURL=FromEventPatternObservable.js.map
 
 /***/ }),
-/* 556 */
+/* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49180,7 +49320,7 @@ exports.GenerateObservable = GenerateObservable;
 //# sourceMappingURL=GenerateObservable.js.map
 
 /***/ }),
-/* 557 */
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49247,7 +49387,7 @@ var IfSubscriber = (function (_super) {
 //# sourceMappingURL=IfObservable.js.map
 
 /***/ }),
-/* 558 */
+/* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49341,7 +49481,7 @@ exports.IntervalObservable = IntervalObservable;
 //# sourceMappingURL=IntervalObservable.js.map
 
 /***/ }),
-/* 559 */
+/* 562 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49406,7 +49546,7 @@ exports.NeverObservable = NeverObservable;
 //# sourceMappingURL=NeverObservable.js.map
 
 /***/ }),
-/* 560 */
+/* 563 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49497,7 +49637,7 @@ exports.PairsObservable = PairsObservable;
 //# sourceMappingURL=PairsObservable.js.map
 
 /***/ }),
-/* 561 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49599,7 +49739,7 @@ exports.RangeObservable = RangeObservable;
 //# sourceMappingURL=RangeObservable.js.map
 
 /***/ }),
-/* 562 */
+/* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49656,7 +49796,7 @@ exports.SubscribeOnObservable = SubscribeOnObservable;
 //# sourceMappingURL=SubscribeOnObservable.js.map
 
 /***/ }),
-/* 563 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49723,27 +49863,27 @@ var UsingSubscriber = (function (_super) {
 //# sourceMappingURL=UsingObservable.js.map
 
 /***/ }),
-/* 564 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var BoundCallbackObservable_1 = __webpack_require__(549);
+var BoundCallbackObservable_1 = __webpack_require__(552);
 exports.bindCallback = BoundCallbackObservable_1.BoundCallbackObservable.create;
 //# sourceMappingURL=bindCallback.js.map
 
 /***/ }),
-/* 565 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var BoundNodeCallbackObservable_1 = __webpack_require__(550);
+var BoundNodeCallbackObservable_1 = __webpack_require__(553);
 exports.bindNodeCallback = BoundNodeCallbackObservable_1.BoundNodeCallbackObservable.create;
 //# sourceMappingURL=bindNodeCallback.js.map
 
 /***/ }),
-/* 566 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49751,7 +49891,7 @@ exports.bindNodeCallback = BoundNodeCallbackObservable_1.BoundNodeCallbackObserv
 var isScheduler_1 = __webpack_require__(27);
 var isArray_1 = __webpack_require__(32);
 var ArrayObservable_1 = __webpack_require__(31);
-var combineLatest_1 = __webpack_require__(113);
+var combineLatest_1 = __webpack_require__(114);
 /* tslint:enable:max-line-length */
 /**
  * Combines multiple Observables to create an Observable whose values are
@@ -49885,27 +50025,27 @@ exports.combineLatest = combineLatest;
 //# sourceMappingURL=combineLatest.js.map
 
 /***/ }),
-/* 567 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var concat_1 = __webpack_require__(114);
+var concat_1 = __webpack_require__(115);
 exports.concat = concat_1.concatStatic;
 //# sourceMappingURL=concat.js.map
 
 /***/ }),
-/* 568 */
+/* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var DeferObservable_1 = __webpack_require__(551);
+var DeferObservable_1 = __webpack_require__(554);
 exports.defer = DeferObservable_1.DeferObservable.create;
 //# sourceMappingURL=defer.js.map
 
 /***/ }),
-/* 569 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49920,10 +50060,10 @@ var Subscriber_1 = __webpack_require__(4);
 var Observable_1 = __webpack_require__(0);
 var Subscription_1 = __webpack_require__(15);
 var root_1 = __webpack_require__(25);
-var ReplaySubject_1 = __webpack_require__(110);
+var ReplaySubject_1 = __webpack_require__(111);
 var tryCatch_1 = __webpack_require__(17);
 var errorObject_1 = __webpack_require__(16);
-var assign_1 = __webpack_require__(678);
+var assign_1 = __webpack_require__(681);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -50159,7 +50299,7 @@ exports.WebSocketSubject = WebSocketSubject;
 //# sourceMappingURL=WebSocketSubject.js.map
 
 /***/ }),
-/* 570 */
+/* 573 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50169,17 +50309,17 @@ exports.ajax = AjaxObservable_1.AjaxObservable.create;
 //# sourceMappingURL=ajax.js.map
 
 /***/ }),
-/* 571 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var WebSocketSubject_1 = __webpack_require__(569);
+var WebSocketSubject_1 = __webpack_require__(572);
 exports.webSocket = WebSocketSubject_1.WebSocketSubject.create;
 //# sourceMappingURL=webSocket.js.map
 
 /***/ }),
-/* 572 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50189,44 +50329,14 @@ exports.empty = EmptyObservable_1.EmptyObservable.create;
 //# sourceMappingURL=empty.js.map
 
 /***/ }),
-/* 573 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var ForkJoinObservable_1 = __webpack_require__(553);
-exports.forkJoin = ForkJoinObservable_1.ForkJoinObservable.create;
-//# sourceMappingURL=forkJoin.js.map
-
-/***/ }),
-/* 574 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var FromEventObservable_1 = __webpack_require__(554);
-exports.fromEvent = FromEventObservable_1.FromEventObservable.create;
-//# sourceMappingURL=fromEvent.js.map
-
-/***/ }),
-/* 575 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var FromEventPatternObservable_1 = __webpack_require__(555);
-exports.fromEventPattern = FromEventPatternObservable_1.FromEventPatternObservable.create;
-//# sourceMappingURL=fromEventPattern.js.map
-
-/***/ }),
 /* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var IfObservable_1 = __webpack_require__(557);
-exports._if = IfObservable_1.IfObservable.create;
-//# sourceMappingURL=if.js.map
+var ForkJoinObservable_1 = __webpack_require__(556);
+exports.forkJoin = ForkJoinObservable_1.ForkJoinObservable.create;
+//# sourceMappingURL=forkJoin.js.map
 
 /***/ }),
 /* 577 */
@@ -50234,12 +50344,42 @@ exports._if = IfObservable_1.IfObservable.create;
 
 "use strict";
 
-var IntervalObservable_1 = __webpack_require__(558);
+var FromEventObservable_1 = __webpack_require__(557);
+exports.fromEvent = FromEventObservable_1.FromEventObservable.create;
+//# sourceMappingURL=fromEvent.js.map
+
+/***/ }),
+/* 578 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var FromEventPatternObservable_1 = __webpack_require__(558);
+exports.fromEventPattern = FromEventPatternObservable_1.FromEventPatternObservable.create;
+//# sourceMappingURL=fromEventPattern.js.map
+
+/***/ }),
+/* 579 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var IfObservable_1 = __webpack_require__(560);
+exports._if = IfObservable_1.IfObservable.create;
+//# sourceMappingURL=if.js.map
+
+/***/ }),
+/* 580 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var IntervalObservable_1 = __webpack_require__(561);
 exports.interval = IntervalObservable_1.IntervalObservable.create;
 //# sourceMappingURL=interval.js.map
 
 /***/ }),
-/* 578 */
+/* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50249,47 +50389,47 @@ exports.merge = merge_1.mergeStatic;
 //# sourceMappingURL=merge.js.map
 
 /***/ }),
-/* 579 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var NeverObservable_1 = __webpack_require__(559);
-exports.never = NeverObservable_1.NeverObservable.create;
-//# sourceMappingURL=never.js.map
-
-/***/ }),
-/* 580 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var PairsObservable_1 = __webpack_require__(560);
-exports.pairs = PairsObservable_1.PairsObservable.create;
-//# sourceMappingURL=pairs.js.map
-
-/***/ }),
-/* 581 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var RangeObservable_1 = __webpack_require__(561);
-exports.range = RangeObservable_1.RangeObservable.create;
-//# sourceMappingURL=range.js.map
-
-/***/ }),
 /* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ErrorObservable_1 = __webpack_require__(552);
+var NeverObservable_1 = __webpack_require__(562);
+exports.never = NeverObservable_1.NeverObservable.create;
+//# sourceMappingURL=never.js.map
+
+/***/ }),
+/* 583 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var PairsObservable_1 = __webpack_require__(563);
+exports.pairs = PairsObservable_1.PairsObservable.create;
+//# sourceMappingURL=pairs.js.map
+
+/***/ }),
+/* 584 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var RangeObservable_1 = __webpack_require__(564);
+exports.range = RangeObservable_1.RangeObservable.create;
+//# sourceMappingURL=range.js.map
+
+/***/ }),
+/* 585 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ErrorObservable_1 = __webpack_require__(555);
 exports._throw = ErrorObservable_1.ErrorObservable.create;
 //# sourceMappingURL=throw.js.map
 
 /***/ }),
-/* 583 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50299,27 +50439,27 @@ exports.timer = TimerObservable_1.TimerObservable.create;
 //# sourceMappingURL=timer.js.map
 
 /***/ }),
-/* 584 */
+/* 587 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var UsingObservable_1 = __webpack_require__(563);
+var UsingObservable_1 = __webpack_require__(566);
 exports.using = UsingObservable_1.UsingObservable.create;
 //# sourceMappingURL=using.js.map
 
 /***/ }),
-/* 585 */
+/* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var zip_1 = __webpack_require__(115);
+var zip_1 = __webpack_require__(116);
 exports.zip = zip_1.zipStatic;
 //# sourceMappingURL=zip.js.map
 
 /***/ }),
-/* 586 */
+/* 589 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50435,7 +50575,7 @@ var AuditSubscriber = (function (_super) {
 //# sourceMappingURL=audit.js.map
 
 /***/ }),
-/* 587 */
+/* 590 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50545,7 +50685,7 @@ function dispatchNext(subscriber) {
 //# sourceMappingURL=auditTime.js.map
 
 /***/ }),
-/* 588 */
+/* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50627,7 +50767,7 @@ var BufferSubscriber = (function (_super) {
 //# sourceMappingURL=buffer.js.map
 
 /***/ }),
-/* 589 */
+/* 592 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50740,7 +50880,7 @@ var BufferCountSubscriber = (function (_super) {
 //# sourceMappingURL=bufferCount.js.map
 
 /***/ }),
-/* 590 */
+/* 593 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50945,7 +51085,7 @@ function dispatchBufferClose(arg) {
 //# sourceMappingURL=bufferTime.js.map
 
 /***/ }),
-/* 591 */
+/* 594 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51103,7 +51243,7 @@ var BufferToggleSubscriber = (function (_super) {
 //# sourceMappingURL=bufferToggle.js.map
 
 /***/ }),
-/* 592 */
+/* 595 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51231,12 +51371,12 @@ var BufferWhenSubscriber = (function (_super) {
 //# sourceMappingURL=bufferWhen.js.map
 
 /***/ }),
-/* 593 */
+/* 596 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var combineLatest_1 = __webpack_require__(113);
+var combineLatest_1 = __webpack_require__(114);
 /**
  * Converts a higher-order Observable into a first-order Observable by waiting
  * for the outer Observable to complete, then applying {@link combineLatest}.
@@ -51284,7 +51424,7 @@ exports.combineAll = combineAll;
 //# sourceMappingURL=combineAll.js.map
 
 /***/ }),
-/* 594 */
+/* 597 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51354,7 +51494,7 @@ exports.concatMapTo = concatMapTo;
 //# sourceMappingURL=concatMapTo.js.map
 
 /***/ }),
-/* 595 */
+/* 598 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51471,7 +51611,7 @@ var CountSubscriber = (function (_super) {
 //# sourceMappingURL=count.js.map
 
 /***/ }),
-/* 596 */
+/* 599 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51604,7 +51744,7 @@ var DebounceSubscriber = (function (_super) {
 //# sourceMappingURL=debounce.js.map
 
 /***/ }),
-/* 597 */
+/* 600 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51726,7 +51866,7 @@ function dispatchNext(subscriber) {
 //# sourceMappingURL=debounceTime.js.map
 
 /***/ }),
-/* 598 */
+/* 601 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51809,7 +51949,7 @@ var DefaultIfEmptySubscriber = (function (_super) {
 //# sourceMappingURL=defaultIfEmpty.js.map
 
 /***/ }),
-/* 599 */
+/* 602 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51950,7 +52090,7 @@ var DelayMessage = (function () {
 //# sourceMappingURL=delay.js.map
 
 /***/ }),
-/* 600 */
+/* 603 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52146,7 +52286,7 @@ var SubscriptionDelaySubscriber = (function (_super) {
 //# sourceMappingURL=delayWhen.js.map
 
 /***/ }),
-/* 601 */
+/* 604 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52227,7 +52367,7 @@ var DeMaterializeSubscriber = (function (_super) {
 //# sourceMappingURL=dematerialize.js.map
 
 /***/ }),
-/* 602 */
+/* 605 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52239,7 +52379,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__(5);
 var subscribeToResult_1 = __webpack_require__(6);
-var Set_1 = __webpack_require__(677);
+var Set_1 = __webpack_require__(680);
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from previous items.
  *
@@ -52353,7 +52493,7 @@ exports.DistinctSubscriber = DistinctSubscriber;
 //# sourceMappingURL=distinct.js.map
 
 /***/ }),
-/* 603 */
+/* 606 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52429,7 +52569,7 @@ exports.distinctUntilKeyChanged = distinctUntilKeyChanged;
 //# sourceMappingURL=distinctUntilKeyChanged.js.map
 
 /***/ }),
-/* 604 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52548,7 +52688,7 @@ var DoSubscriber = (function (_super) {
 //# sourceMappingURL=do.js.map
 
 /***/ }),
-/* 605 */
+/* 608 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52654,7 +52794,7 @@ var ElementAtSubscriber = (function (_super) {
 //# sourceMappingURL=elementAt.js.map
 
 /***/ }),
-/* 606 */
+/* 609 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52749,7 +52889,7 @@ var SwitchFirstSubscriber = (function (_super) {
 //# sourceMappingURL=exhaust.js.map
 
 /***/ }),
-/* 607 */
+/* 610 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52893,7 +53033,7 @@ var SwitchFirstMapSubscriber = (function (_super) {
 //# sourceMappingURL=exhaustMap.js.map
 
 /***/ }),
-/* 608 */
+/* 611 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53050,7 +53190,7 @@ exports.ExpandSubscriber = ExpandSubscriber;
 //# sourceMappingURL=expand.js.map
 
 /***/ }),
-/* 609 */
+/* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53099,7 +53239,7 @@ var FinallySubscriber = (function (_super) {
 //# sourceMappingURL=finally.js.map
 
 /***/ }),
-/* 610 */
+/* 613 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53146,7 +53286,7 @@ exports.findIndex = findIndex;
 //# sourceMappingURL=findIndex.js.map
 
 /***/ }),
-/* 611 */
+/* 614 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53160,8 +53300,8 @@ var Subscriber_1 = __webpack_require__(4);
 var Subscription_1 = __webpack_require__(15);
 var Observable_1 = __webpack_require__(0);
 var Subject_1 = __webpack_require__(13);
-var Map_1 = __webpack_require__(675);
-var FastMap_1 = __webpack_require__(673);
+var Map_1 = __webpack_require__(678);
+var FastMap_1 = __webpack_require__(676);
 /* tslint:enable:max-line-length */
 /**
  * Groups the items emitted by an Observable according to a specified criterion,
@@ -53387,7 +53527,7 @@ var InnerRefCountSubscription = (function (_super) {
 //# sourceMappingURL=groupBy.js.map
 
 /***/ }),
-/* 612 */
+/* 615 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53440,7 +53580,7 @@ var IgnoreElementsSubscriber = (function (_super) {
 //# sourceMappingURL=ignoreElements.js.map
 
 /***/ }),
-/* 613 */
+/* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53498,7 +53638,7 @@ var IsEmptySubscriber = (function (_super) {
 //# sourceMappingURL=isEmpty.js.map
 
 /***/ }),
-/* 614 */
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53516,7 +53656,7 @@ exports.letProto = letProto;
 //# sourceMappingURL=let.js.map
 
 /***/ }),
-/* 615 */
+/* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53585,7 +53725,7 @@ var MapToSubscriber = (function (_super) {
 //# sourceMappingURL=mapTo.js.map
 
 /***/ }),
-/* 616 */
+/* 619 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53681,12 +53821,12 @@ var MaterializeSubscriber = (function (_super) {
 //# sourceMappingURL=materialize.js.map
 
 /***/ }),
-/* 617 */
+/* 620 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var reduce_1 = __webpack_require__(118);
+var reduce_1 = __webpack_require__(119);
 /**
  * The Max operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
  * and when source Observable completes it emits a single item: the item with the largest value.
@@ -53728,7 +53868,7 @@ exports.max = max;
 //# sourceMappingURL=max.js.map
 
 /***/ }),
-/* 618 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53863,12 +54003,12 @@ exports.MergeScanSubscriber = MergeScanSubscriber;
 //# sourceMappingURL=mergeScan.js.map
 
 /***/ }),
-/* 619 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var reduce_1 = __webpack_require__(118);
+var reduce_1 = __webpack_require__(119);
 /**
  * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
  * and when source Observable completes it emits a single item: the item with the smallest value.
@@ -53910,7 +54050,7 @@ exports.min = min;
 //# sourceMappingURL=min.js.map
 
 /***/ }),
-/* 620 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53993,12 +54133,12 @@ var PairwiseSubscriber = (function (_super) {
 //# sourceMappingURL=pairwise.js.map
 
 /***/ }),
-/* 621 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var not_1 = __webpack_require__(679);
+var not_1 = __webpack_require__(682);
 var filter_1 = __webpack_require__(307);
 /**
  * Splits the source Observable into two, one with values that satisfy a
@@ -54051,12 +54191,12 @@ exports.partition = partition;
 //# sourceMappingURL=partition.js.map
 
 /***/ }),
-/* 622 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var map_1 = __webpack_require__(116);
+var map_1 = __webpack_require__(117);
 /**
  * Maps each source value (an object) to its specified nested property.
  *
@@ -54114,7 +54254,7 @@ function plucker(props, length) {
 //# sourceMappingURL=pluck.js.map
 
 /***/ }),
-/* 623 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54143,7 +54283,7 @@ exports.publish = publish;
 //# sourceMappingURL=publish.js.map
 
 /***/ }),
-/* 624 */
+/* 627 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54163,7 +54303,7 @@ exports.publishBehavior = publishBehavior;
 //# sourceMappingURL=publishBehavior.js.map
 
 /***/ }),
-/* 625 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54182,12 +54322,12 @@ exports.publishLast = publishLast;
 //# sourceMappingURL=publishLast.js.map
 
 /***/ }),
-/* 626 */
+/* 629 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ReplaySubject_1 = __webpack_require__(110);
+var ReplaySubject_1 = __webpack_require__(111);
 var multicast_1 = __webpack_require__(38);
 /**
  * @param bufferSize
@@ -54206,7 +54346,7 @@ exports.publishReplay = publishReplay;
 //# sourceMappingURL=publishReplay.js.map
 
 /***/ }),
-/* 627 */
+/* 630 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54282,7 +54422,7 @@ var RepeatSubscriber = (function (_super) {
 //# sourceMappingURL=repeat.js.map
 
 /***/ }),
-/* 628 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54396,7 +54536,7 @@ var RepeatWhenSubscriber = (function (_super) {
 //# sourceMappingURL=repeatWhen.js.map
 
 /***/ }),
-/* 629 */
+/* 632 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54467,7 +54607,7 @@ var RetrySubscriber = (function (_super) {
 //# sourceMappingURL=retry.js.map
 
 /***/ }),
-/* 630 */
+/* 633 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54574,7 +54714,7 @@ var RetryWhenSubscriber = (function (_super) {
 //# sourceMappingURL=retryWhen.js.map
 
 /***/ }),
-/* 631 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54668,7 +54808,7 @@ var SampleSubscriber = (function (_super) {
 //# sourceMappingURL=sample.js.map
 
 /***/ }),
-/* 632 */
+/* 635 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54765,7 +54905,7 @@ function dispatchNotification(state) {
 //# sourceMappingURL=sampleTime.js.map
 
 /***/ }),
-/* 633 */
+/* 636 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54890,7 +55030,7 @@ var ScanSubscriber = (function (_super) {
 //# sourceMappingURL=scan.js.map
 
 /***/ }),
-/* 634 */
+/* 637 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55060,7 +55200,7 @@ var SequenceEqualCompareToSubscriber = (function (_super) {
 //# sourceMappingURL=sequenceEqual.js.map
 
 /***/ }),
-/* 635 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55090,7 +55230,7 @@ exports.share = share;
 //# sourceMappingURL=share.js.map
 
 /***/ }),
-/* 636 */
+/* 639 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55189,7 +55329,7 @@ var SingleSubscriber = (function (_super) {
 //# sourceMappingURL=single.js.map
 
 /***/ }),
-/* 637 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55246,7 +55386,7 @@ var SkipSubscriber = (function (_super) {
 //# sourceMappingURL=skip.js.map
 
 /***/ }),
-/* 638 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55323,7 +55463,7 @@ var SkipUntilSubscriber = (function (_super) {
 //# sourceMappingURL=skipUntil.js.map
 
 /***/ }),
-/* 639 */
+/* 642 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55395,15 +55535,15 @@ var SkipWhileSubscriber = (function (_super) {
 //# sourceMappingURL=skipWhile.js.map
 
 /***/ }),
-/* 640 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var ArrayObservable_1 = __webpack_require__(31);
-var ScalarObservable_1 = __webpack_require__(697);
+var ScalarObservable_1 = __webpack_require__(700);
 var EmptyObservable_1 = __webpack_require__(39);
-var concat_1 = __webpack_require__(114);
+var concat_1 = __webpack_require__(115);
 var isScheduler_1 = __webpack_require__(27);
 /* tslint:enable:max-line-length */
 /**
@@ -55447,12 +55587,12 @@ exports.startWith = startWith;
 //# sourceMappingURL=startWith.js.map
 
 /***/ }),
-/* 641 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var SubscribeOnObservable_1 = __webpack_require__(562);
+var SubscribeOnObservable_1 = __webpack_require__(565);
 /**
  * Asynchronously subscribes Observers to this Observable on the specified IScheduler.
  *
@@ -55482,7 +55622,7 @@ var SubscribeOnOperator = (function () {
 //# sourceMappingURL=subscribeOn.js.map
 
 /***/ }),
-/* 642 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55596,7 +55736,7 @@ var SwitchSubscriber = (function (_super) {
 //# sourceMappingURL=switch.js.map
 
 /***/ }),
-/* 643 */
+/* 646 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55742,7 +55882,7 @@ var SwitchMapSubscriber = (function (_super) {
 //# sourceMappingURL=switchMap.js.map
 
 /***/ }),
-/* 644 */
+/* 647 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55873,7 +56013,7 @@ var SwitchMapToSubscriber = (function (_super) {
 //# sourceMappingURL=switchMapTo.js.map
 
 /***/ }),
-/* 645 */
+/* 648 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55968,7 +56108,7 @@ var TakeSubscriber = (function (_super) {
 //# sourceMappingURL=take.js.map
 
 /***/ }),
-/* 646 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56081,7 +56221,7 @@ var TakeLastSubscriber = (function (_super) {
 //# sourceMappingURL=takeLast.js.map
 
 /***/ }),
-/* 647 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56162,7 +56302,7 @@ var TakeUntilSubscriber = (function (_super) {
 //# sourceMappingURL=takeUntil.js.map
 
 /***/ }),
-/* 648 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56260,7 +56400,7 @@ var TakeWhileSubscriber = (function (_super) {
 //# sourceMappingURL=takeWhile.js.map
 
 /***/ }),
-/* 649 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56374,7 +56514,7 @@ var ThrottleSubscriber = (function (_super) {
 //# sourceMappingURL=throttle.js.map
 
 /***/ }),
-/* 650 */
+/* 653 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56475,7 +56615,7 @@ function dispatchNext(arg) {
 //# sourceMappingURL=throttleTime.js.map
 
 /***/ }),
-/* 651 */
+/* 654 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56582,7 +56722,7 @@ var TimeoutSubscriber = (function (_super) {
 //# sourceMappingURL=timeout.js.map
 
 /***/ }),
-/* 652 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56699,7 +56839,7 @@ var TimeoutWithSubscriber = (function (_super) {
 //# sourceMappingURL=timeoutWith.js.map
 
 /***/ }),
-/* 653 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56750,7 +56890,7 @@ var ToArraySubscriber = (function (_super) {
 //# sourceMappingURL=toArray.js.map
 
 /***/ }),
-/* 654 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56866,7 +57006,7 @@ var WindowSubscriber = (function (_super) {
 //# sourceMappingURL=window.js.map
 
 /***/ }),
-/* 655 */
+/* 658 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57003,7 +57143,7 @@ var WindowCountSubscriber = (function (_super) {
 //# sourceMappingURL=windowCount.js.map
 
 /***/ }),
-/* 656 */
+/* 659 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57170,7 +57310,7 @@ function dispatchWindowClose(state) {
 //# sourceMappingURL=windowTime.js.map
 
 /***/ }),
-/* 657 */
+/* 660 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57356,7 +57496,7 @@ var WindowToggleSubscriber = (function (_super) {
 //# sourceMappingURL=windowToggle.js.map
 
 /***/ }),
-/* 658 */
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57489,7 +57629,7 @@ var WindowSubscriber = (function (_super) {
 //# sourceMappingURL=windowWhen.js.map
 
 /***/ }),
-/* 659 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57625,12 +57765,12 @@ var WithLatestFromSubscriber = (function (_super) {
 //# sourceMappingURL=withLatestFrom.js.map
 
 /***/ }),
-/* 660 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var zip_1 = __webpack_require__(115);
+var zip_1 = __webpack_require__(116);
 /**
  * @param project
  * @return {Observable<R>|WebSocketSubject<T>|Observable<T>}
@@ -57644,7 +57784,7 @@ exports.zipAll = zipAll;
 //# sourceMappingURL=zipAll.js.map
 
 /***/ }),
-/* 661 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57694,7 +57834,7 @@ exports.Action = Action;
 //# sourceMappingURL=Action.js.map
 
 /***/ }),
-/* 662 */
+/* 665 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57705,7 +57845,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var AsyncAction_1 = __webpack_require__(48);
-var AnimationFrame_1 = __webpack_require__(672);
+var AnimationFrame_1 = __webpack_require__(675);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -57755,7 +57895,7 @@ exports.AnimationFrameAction = AnimationFrameAction;
 //# sourceMappingURL=AnimationFrameAction.js.map
 
 /***/ }),
-/* 663 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57798,7 +57938,7 @@ exports.AnimationFrameScheduler = AnimationFrameScheduler;
 //# sourceMappingURL=AnimationFrameScheduler.js.map
 
 /***/ }),
-/* 664 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57808,7 +57948,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Immediate_1 = __webpack_require__(674);
+var Immediate_1 = __webpack_require__(677);
 var AsyncAction_1 = __webpack_require__(48);
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -57859,7 +57999,7 @@ exports.AsapAction = AsapAction;
 //# sourceMappingURL=AsapAction.js.map
 
 /***/ }),
-/* 665 */
+/* 668 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57902,7 +58042,7 @@ exports.AsapScheduler = AsapScheduler;
 //# sourceMappingURL=AsapScheduler.js.map
 
 /***/ }),
-/* 666 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57957,7 +58097,7 @@ exports.QueueAction = QueueAction;
 //# sourceMappingURL=QueueAction.js.map
 
 /***/ }),
-/* 667 */
+/* 670 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57979,13 +58119,13 @@ exports.QueueScheduler = QueueScheduler;
 //# sourceMappingURL=QueueScheduler.js.map
 
 /***/ }),
-/* 668 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var AnimationFrameAction_1 = __webpack_require__(662);
-var AnimationFrameScheduler_1 = __webpack_require__(663);
+var AnimationFrameAction_1 = __webpack_require__(665);
+var AnimationFrameScheduler_1 = __webpack_require__(666);
 /**
  *
  * Animation Frame Scheduler
@@ -58020,7 +58160,7 @@ exports.animationFrame = new AnimationFrameScheduler_1.AnimationFrameScheduler(A
 //# sourceMappingURL=animationFrame.js.map
 
 /***/ }),
-/* 669 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58072,7 +58212,7 @@ applyMixins_1.applyMixins(ColdObservable, [SubscriptionLoggable_1.SubscriptionLo
 //# sourceMappingURL=ColdObservable.js.map
 
 /***/ }),
-/* 670 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58126,7 +58266,7 @@ applyMixins_1.applyMixins(HotObservable, [SubscriptionLoggable_1.SubscriptionLog
 //# sourceMappingURL=HotObservable.js.map
 
 /***/ }),
-/* 671 */
+/* 674 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58138,8 +58278,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Observable_1 = __webpack_require__(0);
 var Notification_1 = __webpack_require__(70);
-var ColdObservable_1 = __webpack_require__(669);
-var HotObservable_1 = __webpack_require__(670);
+var ColdObservable_1 = __webpack_require__(672);
+var HotObservable_1 = __webpack_require__(673);
 var SubscriptionLog_1 = __webpack_require__(295);
 var VirtualTimeScheduler_1 = __webpack_require__(292);
 var defaultMaxFrame = 750;
@@ -58355,7 +58495,7 @@ exports.TestScheduler = TestScheduler;
 //# sourceMappingURL=TestScheduler.js.map
 
 /***/ }),
-/* 672 */
+/* 675 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58395,7 +58535,7 @@ exports.AnimationFrame = new RequestAnimationFrameDefinition(root_1.root);
 //# sourceMappingURL=AnimationFrame.js.map
 
 /***/ }),
-/* 673 */
+/* 676 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58432,7 +58572,7 @@ exports.FastMap = FastMap;
 //# sourceMappingURL=FastMap.js.map
 
 /***/ }),
-/* 674 */
+/* 677 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58648,18 +58788,18 @@ exports.Immediate = new ImmediateDefinition(root_1.root);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(309).clearImmediate, __webpack_require__(309).setImmediate))
 
 /***/ }),
-/* 675 */
+/* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var root_1 = __webpack_require__(25);
-var MapPolyfill_1 = __webpack_require__(676);
+var MapPolyfill_1 = __webpack_require__(679);
 exports.Map = root_1.root.Map || (function () { return MapPolyfill_1.MapPolyfill; })();
 //# sourceMappingURL=Map.js.map
 
 /***/ }),
-/* 676 */
+/* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58712,7 +58852,7 @@ exports.MapPolyfill = MapPolyfill;
 //# sourceMappingURL=MapPolyfill.js.map
 
 /***/ }),
-/* 677 */
+/* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58751,7 +58891,7 @@ exports.Set = root_1.root.Set || minimalSetImpl();
 //# sourceMappingURL=Set.js.map
 
 /***/ }),
-/* 678 */
+/* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58783,7 +58923,7 @@ exports.assign = getAssign(root_1.root);
 //# sourceMappingURL=assign.js.map
 
 /***/ }),
-/* 679 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58800,7 +58940,7 @@ exports.not = not;
 //# sourceMappingURL=not.js.map
 
 /***/ }),
-/* 680 */
+/* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58813,35 +58953,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 681 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__(364);
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-/* 682 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__(365);
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-/* 683 */
+/* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58855,7 +58967,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 684 */
+/* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58869,7 +58981,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 685 */
+/* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58883,7 +58995,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 686 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58897,7 +59009,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 687 */
+/* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58911,7 +59023,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 688 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58925,7 +59037,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 689 */
+/* 690 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58939,7 +59051,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 690 */
+/* 691 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -58953,7 +59065,35 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 691 */
+/* 692 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__(374);
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+/* 693 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__(375);
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+/* 694 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*eslint-env browser*/
@@ -58997,7 +59137,7 @@ var colors = {
 };
 ansiHTML.setColors(colors);
 
-var Entities = __webpack_require__(374).AllHtmlEntities;
+var Entities = __webpack_require__(376).AllHtmlEntities;
 var entities = new Entities();
 
 exports.showProblems =
@@ -59038,7 +59178,7 @@ function problemType (type) {
 
 
 /***/ }),
-/* 692 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -59176,115 +59316,115 @@ module.exports = function(hash, moduleMap, options) {
 
 
 /***/ }),
-/* 693 */
+/* 696 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(122);
 
 /***/ }),
-/* 694 */
+/* 697 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(187);
 
 /***/ }),
-/* 695 */
+/* 698 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(190);
 
 /***/ }),
-/* 696 */
+/* 699 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(29);
 
 /***/ }),
-/* 697 */
+/* 700 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(315);
 
 /***/ }),
-/* 698 */
+/* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(317);
 
 /***/ }),
-/* 699 */
+/* 702 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(318);
 
 /***/ }),
-/* 700 */
+/* 703 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(319);
 
 /***/ }),
-/* 701 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(320);
 
 /***/ }),
-/* 702 */
+/* 705 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(321);
 
 /***/ }),
-/* 703 */
+/* 706 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(333);
 
 /***/ }),
-/* 704 */
+/* 707 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(335);
 
 /***/ }),
-/* 705 */
+/* 708 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(47);
 
 /***/ }),
-/* 706 */
+/* 709 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(554);
 
 /***/ }),
-/* 707 */
+/* 710 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(556);
 
 /***/ }),
-/* 708 */
+/* 711 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(559);
 
 /***/ }),
-/* 709 */
+/* 712 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(562);
 
 /***/ }),
-/* 710 */
+/* 713 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(3))(84);
 
 /***/ }),
-/* 711 */
+/* 714 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(313);

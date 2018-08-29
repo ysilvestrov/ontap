@@ -21,6 +21,7 @@ import { PricesComponent } from "./components/prices/prices.component";
 import { KegsComponent } from "./components/kegs/kegs.component";
 import { BeerKegsComponent } from "./components/beerkegs/beerkegs.component";
 import { BeerKegsOnTapComponent } from "./components/beerkegsontap/beerkegsontap.component";
+import { BeerKegWeightsComponent } from "./components/beerkegweights/beerkegweights.component";
 import { HomeComponent } from "./components/home/home.component";
 import { SelectorComponent } from "./components/selector/selector.component";
 import { PrintComponent } from "./components/print/print.component";
@@ -108,6 +109,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
         KegsComponent,
         BeerKegsComponent,
         BeerKegsOnTapComponent,
+        BeerKegWeightsComponent,
         SelectorComponent,
         LocaleComponent,
         PrintComponent,
@@ -137,6 +139,7 @@ export function initLocalization(localizationConfig: LocalizationConfig): Functi
             { path: "kegs", component: KegsComponent },
             { path: "beerkegs", component: BeerKegsComponent },
             { path: "beerkegsontap", component: BeerKegsOnTapComponent },
+            { path: "beerkegweights", component: BeerKegWeightsComponent },
             { path: "pub/:id", component: PubComponent },
             { path: "users", component: UsersComponent },
             { path: "pub-admins", component: PubAdminsComponent },
