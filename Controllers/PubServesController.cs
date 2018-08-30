@@ -97,6 +97,12 @@ namespace Ontap.Controllers
 
         private IEnumerable<PubServe> Pubs => _context.Pubs
             .Include(p => p.City)
+            .Include(p => p.Taps)
+            .ThenInclude(t => t.BeerKegsOnTap)
+            .ThenInclude(bkt => bkt.Keg)
+            .ThenInclude(k => k.Beer)
+            .ThenInclude(b => b.Brewery)
+            .ThenInclude(b => b.Country)
             .Include(p => p.BeerPrices)
             .ThenInclude(s => s.Beer)
             .ThenInclude(b => b.Brewery)

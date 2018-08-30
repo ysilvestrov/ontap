@@ -5,7 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import { Http } from '@angular/http';
 import { List } from "../../modules/linq";
 import {IPub, ICity, Pub} from "../../models/ontap.models";
-import {EPubService} from "../epubs/epubs.service";
+import { PubService} from "../pubs/pubs.service";
 import {CityService} from "../cities/cities.service";
 import {AppComponent, AppService} from "../../modules/appComponent";
 import {SortByTap} from "../app/sortbytap.pipe";
@@ -18,7 +18,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'pub',
-    providers: [EPubService],
+    providers: [PubService],
     templateUrl: './pub.component.html',
     styleUrls: ['./pub.component.css']
 })
@@ -36,7 +36,7 @@ export class PubComponent extends Locale implements OnInit {
     });
 
     constructor(
-        private elmService: EPubService,
+        private elmService: PubService,
         public locale: LocaleService,
         public localization: LocalizationService,
         private route: ActivatedRoute,
