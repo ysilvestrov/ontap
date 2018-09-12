@@ -13,11 +13,11 @@ RUN ["dotnet", "restore"]
 RUN ["dotnet", "build"]
 
 
-RUN ["node", "-v"]
-RUN ["npm", "-v"]
-RUN ["npm", "install"]
-RUN ["npm", "run", "webpack-cfg"]
-RUN ["npm", "run", "webpack"]
+#RUN ["node", "-v"]
+#RUN ["npm", "-v"]
+#RUN ["npm", "install"]
+#RUN ["npm", "run", "webpack-cfg"]
+#RUN ["npm", "run", "webpack"]
 
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 EXPOSE 5000
