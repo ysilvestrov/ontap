@@ -379,7 +379,11 @@ namespace Ontap.Migrations
 
                     b.Property<bool>("CanAdminPub");
 
+                    b.Property<string>("Email");
+
                     b.Property<bool>("IsAdmin");
+
+                    b.Property<string>("LoginOnceCode");
 
                     b.Property<string>("Name");
 

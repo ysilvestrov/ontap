@@ -44,5 +44,9 @@ namespace Ontap.Models
         [NotMapped]
         public IEnumerable<Brewery> Breweries
             => BreweryAdmins != null && BreweryAdmins.Any() ? BreweryAdmins.Select(ba => ba.Brewery).Distinct() : new Brewery[0];
+
+        public string Email { get; set; }
+        [JsonIgnore]
+        public string LoginOnceCode { get; set; }
     }
 }

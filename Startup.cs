@@ -66,6 +66,7 @@ namespace Ontap
                 //                     ?? Configuration.GetConnectionString("DefaultConnection"));
             });
             // Add framework services.
+            services.AddCors();
             services.AddMvc(config =>
             {
                 // Make authentication compulsory across the board (i.e. shut
@@ -98,6 +99,7 @@ namespace Ontap
                 options.AddPolicy("BreweryOrPubAdminUser",
                     policy => policy.RequireUserType("Admin", "PubAdmin", "BrewerAdmin"));
             });
+
         }
 
         private SymmetricSecurityKey SigningKey
@@ -137,6 +139,13 @@ namespace Ontap
 
             app.UseStaticFiles();
 
+            app.UseCors(builder =>
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+            );
+
             app.UseMiddleware(typeof(JsonErrorHandlingMiddleware));
 
             app.UseMvc(routes =>
@@ -149,6 +158,7 @@ namespace Ontap
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
         }
 
         private void ConfigureDb(IApplicationBuilder app)

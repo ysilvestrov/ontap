@@ -78,6 +78,7 @@ namespace Ontap.Controllers
             current.Password = string.IsNullOrWhiteSpace(user.Password)
                 ? current.Password
                 : UserBase.GetHash(user.Password);
+            current.Email = user.Email;
             current.IsAdmin = user.IsAdmin;
             current.CanAdminPub = user.CanAdminPub;
             current.CanAdminBrewery = user.CanAdminBrewery;          

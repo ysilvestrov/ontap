@@ -16,6 +16,7 @@ export class UserService extends AppService<IUser> {
             id: 'id',
             name: 'name',
             password: '',
+            email: 'email@server.com',
             isAdmin: false,
             canAdminBrewery: false,
             canAdminPub: false,
@@ -28,12 +29,6 @@ export class UserService extends AppService<IUser> {
         return new User(source);
     }
 
-    copy(source: IUser, dest: IUser) {
-        dest.name = source.name;
-        dest.password = source.password;
-        dest.isAdmin = source.isAdmin;
-        dest.canAdminPub = source.canAdminPub;
-        dest.canAdminBrewery = source.canAdminBrewery;
-    }
+
 
 }

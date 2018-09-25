@@ -59,6 +59,8 @@ namespace Ontap.Controllers
                     ClaimValueTypes.Integer64)
             });
             claims.AddRange(identity.FindAll("UserType"));
+            claims.AddRange(identity.FindAll("PubAdmin"));
+            claims.AddRange(identity.FindAll("BreweryAdmin"));
             
 
             // Create the JWT security token and encode it.
@@ -122,7 +124,7 @@ namespace Ontap.Controllers
         {
             var hash = UserBase.GetHash(user.Password);
             var found =
-                _context.Users.FirstOrDefault(u => u.Id == user.Name && u.Password == hash);
+                _context.Users.FirstOrDefault(u => (u.Id == user.Name || u.Email == user.Name) && u.Password == hash);
 
             if (found == null)
                 return Task.FromResult<ClaimsIdentity>(null);
@@ -136,6 +138,9 @@ namespace Ontap.Controllers
             if (found.CanAdminPub)
             {
                 claims.Add(new Claim("UserType", "PubAdmin"));
+                claims.AddRange(
+                    _context.PubAdmins.Where(pu => pu.User.Id == found.Id)
+                        .Select(pu => new Claim("PubAdmin", pu.Pub.Id)));
             }
             if (found.CanAdminBrewery)
             {

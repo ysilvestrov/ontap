@@ -65,6 +65,7 @@ export interface IUser {
     id: string;
     name: string;
     password: string;
+    email: string;
     isAdmin: boolean;
     canAdminPub: boolean;
     canAdminBrewery: boolean;
@@ -169,6 +170,7 @@ export class User implements IUser {
     id: string;
     name: string;
     password: string;
+    email: string;
     isAdmin: boolean;
     canAdminPub: boolean;
     canAdminBrewery: boolean;

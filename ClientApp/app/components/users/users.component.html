@@ -15,6 +15,7 @@
         <th>Логин</th>
         <th>Имя</th>
         <th>Пароль</th>
+        <th>Емейл</th>
         <th>Админ?</th>
         <th>Представляет паб?</th>
         <th>Представляет пивоварню?</th>
@@ -29,10 +30,8 @@
                     {{ user.name }}
                 </span>
             <span *ngIf="editing && (editing.id == user.id)">
-                    <input type="text" class="form-control" id="name"
-                           required
-                           [(ngModel)]="editing.name" name="name">
-                </span>
+                <input type="text" class="form-control" id="editing.name" required [(ngModel)]="editing.name" name="editing.name">
+            </span>
         </td>
         <td>
             <span *ngIf="!editing || (editing.id != user.id)">
@@ -43,6 +42,14 @@
                            required
                            [(ngModel)]="editing.password" name="password">
                 </span>
+        </td>
+        <td>
+            <span *ngIf="!editing || (editing.id != user.id)">
+                {{ user.email }}
+            </span>
+            <span *ngIf="editing && (editing.id == user.id)">
+                <input type="text" class="form-control" id="editing.email" required [(ngModel)]="editing.email" email="editing.email">
+            </span>
         </td>
         <td>
             <span *ngIf="!editing || (editing.id != user.id)">
@@ -108,7 +115,9 @@
                    [(ngModel)]="adding.password" name="password">
         </td>
         <td>
-
+            <input type="text" class="form-control" id="adding.email" required [(ngModel)]="adding.email" email="adding.email">
+        </td>
+        <td>
             <input type="checkbox" class="form-control" id="adding.isAdmin"
                    required
                    [(ngModel)]="adding.isAdmin" name="isAdmin">
