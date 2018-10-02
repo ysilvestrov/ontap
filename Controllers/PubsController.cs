@@ -226,5 +226,21 @@ namespace Ontap.Controllers
             await _context.SaveChangesAsync();
             return current;
         }
+
+        // GET: api/pubs/{yourpub}/taps
+        [HttpGet("{id}/taps")]
+        public IEnumerable<Tap> GetTaps(string id, [FromQuery]bool pure = true)
+        {
+            var taps = _context.Taps.Include(t => t.Pub).Where(tap => tap.Pub.Id == id).ToArray();
+            if (pure)
+            {
+                taps = taps.Select(t =>
+                {
+                    t.Pub = null;
+                    return t;
+                }).ToArray();
+            }
+            return taps;
+        }
     }
 }

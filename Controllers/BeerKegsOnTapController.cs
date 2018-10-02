@@ -46,6 +46,14 @@ namespace Ontap.Controllers
         [HttpGet]
         public IEnumerable<BeerKegOnTap> Get() => BeerKegsOnTap.ToArray();
 
+        // GET: api/beerkegsontap/yourpub/true
+        [HttpGet("{pubId},{pure}")]
+        public IEnumerable<BeerKegOnTap> Get(string pubId, bool pure)
+        {
+            var beerKegOnTaps = (pure ? _context.BeerKegsOnTap : BeerKegsOnTap).Where(bk => bk.Tap.Pub.Id == pubId);
+            return beerKegOnTaps.ToArray();
+        }
+
         // POST api/beerkegsontap
         [HttpPost]
         public async Task<BeerKegOnTap> Post([FromBody] BeerKegOnTap keg)
