@@ -231,15 +231,51 @@ namespace Ontap.Controllers
         [HttpGet("{id}/taps")]
         public IEnumerable<Tap> GetTaps(string id, [FromQuery]bool pure = true)
         {
-            var taps = _context.Taps.Include(t => t.Pub).Where(tap => tap.Pub.Id == id).ToArray();
-            if (pure)
-            {
-                taps = taps.Select(t =>
+            var taps = _context.Taps
+                .Include(t => t.Pub)
+                .Include(t => t.BeerKegsOnTap)
+                    .ThenInclude(bk => bk.Keg)
+                        .ThenInclude(k => k.Beer)
+                            .ThenInclude(b => b.Brewery)
+                .Include(t => t.BeerKegsOnTap)
+                    .ThenInclude(bk => bk.Keg)
+                        .ThenInclude(k => k.Weights)
+                .Where(tap => tap.Pub.Id == id)
+                .ToArray()
+                .Select(t => new Tap
                 {
-                    t.Pub = null;
-                    return t;
-                }).ToArray();
-            }
+                    Id = t.Id,
+                    Fitting = t.Fitting,
+                    HasHopinator = t.HasHopinator,
+                    Number = t.Number,
+                    NitrogenPercentage = t.NitrogenPercentage,
+                    Status = t.Status,
+                    BeerKegsOnTap =
+                        t.BeerKegsOnTap
+                        .Where(bk => bk.DeinstallTime == null || bk.DeinstallTime < DateTime.UtcNow)
+                        .Select(bk => new BeerKegOnTap
+                            {
+                                Id = bk.Id,
+                                DeinstallTime = bk.DeinstallTime,
+                                InstallTime = bk.InstallTime,
+                                Priority = bk.Priority,
+                                Keg = new BeerKeg
+                                {
+                                    Id = bk.Keg.Id,
+                                    ArrivalDate = bk.Keg.ArrivalDate,
+                                    Beer = bk.Keg.Beer,
+                                    BestBeforeDate = bk.Keg.BestBeforeDate,
+                                    BrewingDate = bk.Keg.BrewingDate,
+                                    DeinstallationDate = bk.Keg.DeinstallationDate,
+                                    InstallationDate = bk.Keg.InstallationDate,
+                                    PackageDate = bk.Keg.PackageDate,
+                                    Keg = bk.Keg.Keg,
+                                    Status = bk.Keg.Status,
+                                    Weights = bk.Keg.Weights
+                                }
+                            })
+                            .ToArray()
+                });
             return taps;
         }
     }
