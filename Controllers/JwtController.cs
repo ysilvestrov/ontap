@@ -131,10 +131,6 @@ namespace Ontap.Controllers
 
             var claims = new List<Claim>();
 
-            if (found.IsAdmin)
-            {
-                claims.Add(new Claim("UserType", "Admin"));
-            }
             if (found.CanAdminPub)
             {
                 claims.Add(new Claim("UserType", "PubAdmin"));
@@ -145,6 +141,14 @@ namespace Ontap.Controllers
             if (found.CanAdminBrewery)
             {
                 claims.Add(new Claim("UserType", "BreweryAdmin"));
+            }
+            if (found.IsAdmin)
+            {
+                claims.Add(new Claim("UserType", "Admin"));
+                if (!found.CanAdminPub)
+                {
+                    claims.AddRange(_context.Pubs.Select(p => new Claim("PubAdmin", p.Id)));
+                }
             }
             return Task.FromResult(new ClaimsIdentity(new GenericIdentity(user.Name, "Token"), claims));
         }
