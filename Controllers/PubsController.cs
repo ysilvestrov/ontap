@@ -120,9 +120,9 @@ namespace Ontap.Controllers
                 }
                 var discontinuedBeerKegs = _context.BeerKegsOnTap.Where(bk => bk.Tap.Pub.Id == pub.Id && bk.DeinstallTime == null)
                     .Where(bk => serves.All(s => s.Beer.Id != bk.Keg.Beer.Id));
-                foreach (var beer in discontinuedBeerKegs)
+                foreach (var keg in discontinuedBeerKegs)
                 {
-                    _context.BeerKegsOnTap.First(bp => bp.Id == beer.Id).DeinstallTime = DateTime.UtcNow;
+                    _context.BeerKegsOnTap.First(bp => bp.Id == keg.Id).DeinstallTime = DateTime.UtcNow;
                 }
                 //update beers
                 foreach (var serve in serves)
@@ -240,6 +240,8 @@ namespace Ontap.Controllers
                 .Include(t => t.BeerKegsOnTap)
                     .ThenInclude(bk => bk.Keg)
                         .ThenInclude(k => k.Weights)
+                .Include(t => t.BeerKegsOnTap)
+                    .ThenInclude(bk => bk.Keg.Keg)
                 .Where(tap => tap.Pub.Id == id)
                 .ToArray()
                 .Select(t => new Tap
@@ -269,7 +271,15 @@ namespace Ontap.Controllers
                                     DeinstallationDate = bk.Keg.DeinstallationDate,
                                     InstallationDate = bk.Keg.InstallationDate,
                                     PackageDate = bk.Keg.PackageDate,
-                                    Keg = bk.Keg.Keg,
+                                    Keg = new Keg {
+                                        Id = bk.Keg.Keg.Id,                                        
+                                        EmptyWeight = bk.Keg.Keg.EmptyWeight,                                        
+                                        ExternalId = bk.Keg.Keg.ExternalId,                                        
+                                        Fitting = bk.Keg.Keg.Fitting,                                        
+                                        IsReturnable = bk.Keg.Keg.IsReturnable,                                        
+                                        Material = bk.Keg.Keg.Material,                                        
+                                        Volume = bk.Keg.Keg.Volume,                                        
+                                    },
                                     Status = bk.Keg.Status,
                                     Weights = bk.Keg.Weights
                                 }

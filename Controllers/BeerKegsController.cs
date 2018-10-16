@@ -35,7 +35,12 @@ namespace Ontap.Controllers
             return _context.Users.Include(u => u.PubAdmins).FirstAsync(u => u.Id == userId);
         }
 
-        private IEnumerable<BeerKeg> BeerKegs => _context.BeerKegs.Include(bk => bk.Beer).Include(bk => bk.Keg).Include(bk => bk.Owner).Include(bk => bk.Buyer);
+        private IEnumerable<BeerKeg> BeerKegs => _context.BeerKegs
+            .Include(bk => bk.Beer)
+                .ThenInclude(b => b.Brewery)
+            .Include(bk => bk.Keg)
+            .Include(bk => bk.Owner)
+            .Include(bk => bk.Buyer);
 
 
         // GET: api/kegs
