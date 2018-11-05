@@ -45,7 +45,37 @@ namespace Ontap.Controllers
 
         // GET: api/kegs
         [HttpGet]
-        public IEnumerable<BeerKeg> Get() => BeerKegs.ToArray();
+        public IEnumerable<BeerKeg> Get()
+        {
+            var beerKegs = BeerKegs.ToArray();
+            foreach (var bk in beerKegs)
+            {
+                bk.Keg.BeerKegs = null;
+                bk.BeerKegsOnTap = null;
+                bk.Beer.BeerKegs = null;
+                bk.Beer.BeerPrices = null;
+                bk.Beer.Substitutions = null;
+                bk.Beer.Brewery.Admins = null;
+                bk.Beer.Brewery.BeerKegsOwned = null;
+                bk.Beer.Brewery.Beers = null;
+                bk.Beer.Brewery.Substitutions = null;
+                if (bk.Buyer != null)
+                {
+                    bk.Buyer.BeerKegsBought = null;
+                    bk.Buyer.BeerPrices = null;
+                    bk.Buyer.Taps = null;
+                }
+                if (bk.Owner != null)
+                {
+                    bk.Owner.Admins = null;
+                    bk.Owner.BeerKegsOwned = null;
+                    bk.Owner.Beers = null;
+                    bk.Owner.Substitutions = null;
+                }
+            }
+
+            return beerKegs;
+        }
 
         // POST api/kegs
         [HttpPost]

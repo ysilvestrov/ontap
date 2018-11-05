@@ -110,8 +110,7 @@ namespace Ontap.Migrations
 
                     b.Property<int>("Priority");
 
-                    b.Property<int?>("TapId")
-                        .IsRequired();
+                    b.Property<int?>("TapId");
 
                     b.HasKey("Id");
 
@@ -433,8 +432,7 @@ namespace Ontap.Migrations
 
                     b.HasOne("Ontap.Models.Tap", "Tap")
                         .WithMany("BeerKegsOnTap")
-                        .HasForeignKey("TapId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TapId");
                 });
 
             modelBuilder.Entity("Ontap.Models.BeerKegWeight", b =>

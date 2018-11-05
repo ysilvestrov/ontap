@@ -20,9 +20,9 @@ deinstallTime: Date;
 <table class='table' *ngIf="elements">
     <thead>
         <tr>
-            <th class="col-md-2">Кег</th>
-            <th class="col-md-2">Кран</th>
-            <th class="col-md-2">Приоритет</th>
+            <th class="col-md-3">Кег</th>
+            <th class="col-md-3">Кран</th>
+            <th class="col-md-1">Приоритет</th>
             <th class="col-md-2">Дата установки</th>
             <th class="col-md-2">Дата снятия</th>
             <th class="col-md-2">Действия</th>
@@ -42,13 +42,29 @@ deinstallTime: Date;
             </td>
             <td>
                 <span *ngIf="!editing || (editing.id != keg.id)">
-                    {{ keg.tap.pub.name }}&nbsp;#{{ keg.tap.number }}
+                    <ng-container *ngIf="keg.tap">
+                        {{ keg.tap.pub.name }}&nbsp;#{{ keg.tap.number }}
+                    </ng-container>
                 </span>
-                <span *ngIf="editing && (editing.id == keg.id)">
-                    <select class="form-control" [(ngModel)]="editing.tap.id" (change)="onEditChangeBeer($event.target.value)">
-                        <option *ngFor="let tap of taps" [value]="tap.id">{{tap.pub.name}} #{{tap.number}}</option>
-                    </select>
-                </span>
+                <ng-container *ngIf="editing && (editing.id == keg.id)">
+                    <div class="input-group" style="min-width: 100px;">
+                        <ng-container *ngIf="editing.tap">
+                            <select class="form-control" [(ngModel)]="editing.tap.id" (change)="onEditChangeTap($event.target.value)">
+                                <option value="">---</option>
+                                <option *ngFor="let tap of taps" [value]="tap.id">{{tap.pub.name}} #{{tap.number}}</option>
+                            </select>                            
+                        </ng-container>
+                        <ng-container *ngIf="!editing.tap">
+                            <select class="form-control" (change)="onEditChangeTap($event.target.value)">
+                                <option value="">---</option>
+                                <option *ngFor="let tap of taps" [value]="tap.id">{{tap.pub.name}} #{{tap.number}}</option>
+                            </select>
+                        </ng-container>
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="clearTap()"><span aria-hidden="true">&times;</span></button>
+                        </span>
+                    </div>
+                </ng-container>
             </td>
             <td>
                 <span *ngIf="!editing || (editing.id != keg.id)">
@@ -62,17 +78,27 @@ deinstallTime: Date;
                 <span *ngIf="!editing || (editing.id != keg.id)">
                     {{ keg.installTime | date:'y-MM-dd' }}
                 </span>
-                <span *ngIf="editing && (editing.id == keg.id)">
-                    <input type="date" class="form-control" id="editing.installTime" required [(ngModel)]="editing.installTime" name="installTime">
-                </span>
+                <div *ngIf="editing && (editing.id == keg.id)">
+                    <div class="input-group">
+                        <input type="date" class="form-control" id="editing.installTime" required [ngModel]="formatDate(editing.installTime)" (ngModelChange)="editing.installTime=$event" name="installTime">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="clearInstallTime()"><span aria-hidden="true">&times;</span></button>
+                        </span>
+                    </div>
+                </div>
             </td>
             <td>
                 <span *ngIf="!editing || (editing.id != keg.id)">
-                    {{ keg.installTime | date:'y-MM-dd' }}
+                    {{ keg.deinstallTime | date:'y-MM-dd' }}
                 </span>
-                <span *ngIf="editing && (editing.id == keg.id)">
-                    <input type="date" class="form-control" id="editing.deinstallTime" required [(ngModel)]="editing.deinstallTime" name="deinstallTime">
-                </span>
+                <div *ngIf="editing && (editing.id == keg.id)">
+                    <div class="input-group">
+                        <input type="date" class="form-control" id="editing.deinstallTime" required [ngModel]="formatDate(editing.deinstallTime)" (ngModelChange)="editing.deinstallTime=$event" name="deinstallTime">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="clearDeinstallTime()"><span aria-hidden="true">&times;</span></button>
+                        </span>
+                    </div>
+                </div>
             </td>     
             <td>
                 <span *ngIf="!editing || (editing.id != keg.id)">

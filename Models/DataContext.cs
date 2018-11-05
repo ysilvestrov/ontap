@@ -21,6 +21,7 @@ namespace Ontap.Models
         DbSet<BeerSubstitution> BeerSubstitutions { get; set; }
         DbSet<BeerKeg> BeerKegs { get; set; }
         DbSet<BeerKegOnTap> BeerKegsOnTap { get; set; }
+        //DbSet<BeerKegOnQueue> BeerKegsOnQueue { get; set; }
         DbSet<BeerKegWeight> BeerKegWeights { get; set; }
         DbSet<Tap> Taps { get; set; }
         DbSet<Keg> Kegs { get; set; }
@@ -89,9 +90,14 @@ namespace Ontap.Models
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<BeerKegOnTap>()
                 .HasOne(bk => bk.Tap)
-                .WithMany(b => b.BeerKegsOnTap)
+                .WithMany(b => b.BeerKegsOnTap)/*
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade)*/;
+            //modelBuilder.Entity<BeerKegOnQueue>()
+            //    .HasOne(bk => bk.Keg)
+            //    .WithMany(b => b.BeerKegsOnQueue)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<BeerKegWeight>()
                 .HasOne(bk => bk.Keg)
                 .WithMany(b => b.Weights)
@@ -501,6 +507,7 @@ namespace Ontap.Models
         public DbSet<BeerSubstitution> BeerSubstitutions { get; set; }
         public DbSet<BeerKeg> BeerKegs { get; set; }
         public DbSet<BeerKegOnTap> BeerKegsOnTap { get; set; }
+        //public DbSet<BeerKegOnQueue> BeerKegsOnQueue { get; set; }
         public DbSet<BeerKegWeight> BeerKegWeights { get; set; }
         public DbSet<Tap> Taps { get; set; }
         public DbSet<Keg> Kegs { get; set; }

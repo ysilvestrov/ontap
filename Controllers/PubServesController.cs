@@ -121,6 +121,9 @@ namespace Ontap.Controllers
             foreach (var pub in enumerable)
             {
                 pub.BeersServedInPub.ToArray();
+                //pub.BeerPrices = null;
+                //pub.Admins = null;
+                //pub.BeerKegsBought = null;
             }
             return enumerable;
         }

@@ -17,7 +17,6 @@ using Ontap.Models;
 namespace Ontap.Controllers
 {
     [Route("api/beerkegsontap")]
-    [Authorize(Policy = "BreweryOrPubAdminUser")]
     public class BeerKegsOnTapController : Controller
     {
         private readonly DataContext _context;
@@ -44,7 +43,42 @@ namespace Ontap.Controllers
 
         // GET: api/beerkegsontap
         [HttpGet]
-        public IEnumerable<BeerKegOnTap> Get() => BeerKegsOnTap.ToArray();
+        public IEnumerable<BeerKegOnTap> Get()
+        {
+            var beerKegOnTaps = BeerKegsOnTap.ToArray();
+            foreach (var bk in beerKegOnTaps)
+            {
+                if (bk.Tap != null)
+                {
+                    bk.Tap.Pub.BeerKegsBought = null;
+                    bk.Tap.Pub.Taps = null;
+                    bk.Tap.Pub.BeerPrices = null;
+                }
+                if (bk.Keg != null)
+                {
+                    bk.Keg.BeerKegsOnTap = null;
+                    bk.Keg.Beer.BeerKegs = null;
+                    bk.Keg.Beer.BeerPrices = null;
+                    bk.Keg.Beer.Substitutions = null;
+                    bk.Keg.Beer.Brewery.Admins = null;
+                    bk.Keg.Beer.Brewery.BeerKegsOwned = null;
+                    bk.Keg.Beer.Brewery.Beers = null;
+                    bk.Keg.Beer.Brewery.Substitutions = null;
+                    bk.Keg.Buyer.BeerKegsBought = null;
+                    bk.Keg.Buyer.BeerPrices = null;
+                    bk.Keg.Buyer.Taps = null;
+                    if (bk.Keg.Owner != null)
+                    {
+                        bk.Keg.Owner.Admins = null;
+                        bk.Keg.Owner.BeerKegsOwned = null;
+                        bk.Keg.Owner.Beers = null;
+                        bk.Keg.Owner.Substitutions = null;
+                    }
+                }
+            }
+
+            return beerKegOnTaps;
+        }
 
         // GET: api/beerkegsontap/yourpub/true
         [HttpGet("{pubId},{pure}")]
@@ -56,6 +90,7 @@ namespace Ontap.Controllers
 
         // POST api/beerkegsontap
         [HttpPost]
+        [Authorize(Policy = "BreweryOrPubAdminUser")]
         public async Task<BeerKegOnTap> Post([FromBody] BeerKegOnTap keg)
         {
             await CheckUserRights(keg);
@@ -83,12 +118,13 @@ namespace Ontap.Controllers
 
         // PUT api/beerkegsontap/12
         [HttpPut("{id}")]
+        [Authorize(Policy = "BreweryOrPubAdminUser")]
         public async Task<BeerKegOnTap> Put(int id, [FromBody]BeerKegOnTap keg)
         {
             if (BeerKegsOnTap.All(c => c.Id != id))
                 throw new KeyNotFoundException($"No beer keg with id {id}");
-            if (keg.Tap == null || keg.Keg == null)
-                throw new ArgumentNullException(nameof(keg), "Cannot update beerkeg on tap entry without beerkeg and tap.");
+            if (keg.Keg == null)
+                throw new ArgumentNullException(nameof(keg), "Cannot update beerkeg on tap entry without beerkeg.");
 
             var current = BeerKegsOnTap.First(c => c.Id == id);
             await CheckUserRights(current);
@@ -96,7 +132,7 @@ namespace Ontap.Controllers
             current.DeinstallTime = keg.DeinstallTime;
             current.InstallTime = keg.InstallTime;
             current.Priority = keg.Priority;
-            current.Tap = _context.Taps.FirstOrDefault(b => b.Id == keg.Tap.Id);
+            current.Tap = keg.Tap != null ? _context.Taps.FirstOrDefault(b => b.Id == keg.Tap.Id) : null;
             current.Keg = _context.BeerKegs.FirstOrDefault(k => k.Id == keg.Keg.Id);
 
             await _context.SaveChangesAsync();
@@ -105,6 +141,7 @@ namespace Ontap.Controllers
 
         // DELETE api/beerkegsontap/5
         [HttpDelete("{id}")]
+        [Authorize(Policy = "BreweryOrPubAdminUser")]
         public async Task<BeerKegOnTap> Delete(int id)
         {
             if (BeerKegsOnTap.All(c => c.Id != id))

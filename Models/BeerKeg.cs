@@ -21,5 +21,6 @@ namespace Ontap.Models
         public DateTime? BestBeforeDate { get; set; }
         public IList<BeerKegWeight> Weights { get; set; }
         public IList<BeerKegOnTap> BeerKegsOnTap { get; set; }
+        //public IList<BeerKegOnQueue> BeerKegsOnQueue { get; set; }
     }
 }

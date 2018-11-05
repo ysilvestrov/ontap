@@ -35,12 +35,38 @@ namespace Ontap.Controllers
             return _context.Users.Include(u => u.PubAdmins).FirstAsync(u => u.Id == userId);
         }
 
-        private IEnumerable<Keg> BeerKegs => _context.Kegs.Include(k => k.BeerKegs).ThenInclude(bk => bk.Buyer).Include(k => k.BeerKegs).ThenInclude(bk => bk.Owner);
+        private IEnumerable<Keg> BeerKegs => _context.Kegs
+            .Include(k => k.BeerKegs).ThenInclude(bk => bk.Buyer)
+            .Include(k => k.BeerKegs).ThenInclude(bk => bk.Owner);
 
 
         // GET: api/kegs
         [HttpGet]
-        public IEnumerable<Keg> Get() => BeerKegs.ToArray();
+        public IEnumerable<Keg> Get()
+        {
+            var kegs = BeerKegs.ToArray();
+            foreach (var keg in kegs)
+            {
+                foreach (var bk in keg.BeerKegs)
+                {
+                    bk.BeerKegsOnTap = null;
+                    if (bk.Buyer != null)
+                    {
+                        bk.Buyer.BeerKegsBought = null;
+                        bk.Buyer.BeerPrices = null;
+                        bk.Buyer.Taps = null;
+                        bk.Buyer.Admins = null;
+                    }
+                    if (bk.Owner != null)
+                    {
+                        bk.Owner.Admins = null;
+                        bk.Owner.BeerKegsOwned = null;
+                        bk.Owner.Substitutions = null;
+                    }
+                }
+            }
+            return kegs;
+        }
 
         // POST api/kegs
         [HttpPost]

@@ -59,7 +59,7 @@ packageDate: Date;
                 </span>
             </td>
             <td>
-                <span *ngIf="!editing || (editing.id != keg.id)">
+                <span *ngIf="(!editing || (editing.id != keg.id)) && keg.owner">
                     {{ keg.owner.name }}
                 </span>
                 <span *ngIf="editing && (editing.id == keg.id)">
