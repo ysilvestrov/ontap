@@ -301,7 +301,7 @@ namespace Ontap.Controllers
                     .ThenInclude(k => k.Weights)
                 .First(p => p.Id == id)
                 .BeerKegsBought
-                .Where(bk => bk.InstallationDate == null || bk.InstallationDate < DateTime.UtcNow)
+                .Where(bk => bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow)
                 .ToArray();
 
             var kegsOnTapInQueue = _context.BeerKegsOnTap
@@ -344,6 +344,52 @@ namespace Ontap.Controllers
                     }
                 })
                 .ToArray();    
+            return kegs;
+        }
+    
+        // GET: api/pubs/{yourpub}/taps
+        [HttpGet("{id}/storage")]
+        public IEnumerable<BeerKeg> GetStorage(string id, [FromQuery]bool pure = true)
+        {
+            var kegsBoughtAndNotInstalled = _context.Pubs
+                .Include(p => p.BeerKegsBought)
+                    .ThenInclude(k => k.Beer)
+                        .ThenInclude(b => b.Brewery)
+                .Include(p => p.BeerKegsBought)
+                    .ThenInclude(k => k.Weights)
+                .Include(p => p.BeerKegsBought)
+                    .ThenInclude(k => k.Keg)
+                .First(p => p.Id == id)
+                .BeerKegsBought
+                .Where(bk => bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow)
+                .ToArray();
+
+            var kegs = kegsBoughtAndNotInstalled
+                .Select(bk => new BeerKeg
+                    {
+                        Id = bk.Id,
+                        ArrivalDate = bk.ArrivalDate,
+                        Beer = bk.Beer,
+                        BestBeforeDate = bk.BestBeforeDate,
+                        BrewingDate = bk.BrewingDate,
+                        DeinstallationDate = bk.DeinstallationDate,
+                        InstallationDate = bk.InstallationDate,
+                        PackageDate = bk.PackageDate,
+                        Keg = new Keg
+                        {
+                            Id = bk.Keg.Id,
+                            EmptyWeight = bk.Keg.EmptyWeight,
+                            ExternalId = bk.Keg.ExternalId,
+                            Fitting = bk.Keg.Fitting,
+                            IsReturnable = bk.Keg.IsReturnable,
+                            Material = bk.Keg.Material,
+                            Volume = bk.Keg.Volume,
+                        },
+                        Status = bk.Status,
+                        Weights = bk.Weights
+
+                    })
+                .ToArray();
             return kegs;
         }
     }
