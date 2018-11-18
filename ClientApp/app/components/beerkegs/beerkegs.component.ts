@@ -121,4 +121,22 @@ export class BeerKegsComponent extends  AppComponent<IBeerKeg, BeerKegService> {
     onChangeKeg(obj: IBeerKeg, id:number) {
         obj.keg = new List(this.kegs).Where(c => c.id === id).First();
     }
+
+    formatDate(date) {
+        const d = new Date(date);
+        let month = `${d.getMonth() + 1}`;
+        let day = `${d.getDate()}`;
+        const year = d.getFullYear();
+
+        if (month.length < 2) month = `0${month}`;
+        if (day.length < 2) day = `0${day}`;
+
+        return [year, month, day].join("-");
+    }
+
+    setValue(object, property:string, value) {
+        if (object) {
+            object[property] = value;
+        }
+    }
 }

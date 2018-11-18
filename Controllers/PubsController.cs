@@ -24,11 +24,27 @@ namespace Ontap.Controllers
         private readonly DataContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+        #region Helpers
+      
         private Task<User> GetUser()
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _context.Users.Include(u=>u.PubAdmins).FirstAsync(u => u.Id == userId);
         }
+
+        private async Task CheckUserRights(BeerKeg keg)
+        {
+            var user = await GetUser();
+            if (
+                //if any buyer exists, it should be pub user have access to
+                keg?.Buyer == null || !user.HasRights(keg.Buyer)
+            )
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
+        }
+
+        #endregion
 
         public PubsController(DataContext context, IHttpContextAccessor httpContextAccessor)
         {
@@ -46,6 +62,8 @@ namespace Ontap.Controllers
             .ToArray();
 
 
+        #region CRUD
+       
         // GET: api/pubs
         [HttpGet]
         public IEnumerable<Pub> Get() => Pubs;
@@ -226,9 +244,12 @@ namespace Ontap.Controllers
             await _context.SaveChangesAsync();
             return current;
         }
+        #endregion
 
+        #region taps        
         // GET: api/pubs/{yourpub}/taps
         [HttpGet("{id}/taps")]
+        [Authorize(Policy = "PubAdminUser")]
         public IEnumerable<Tap> GetTaps(string id, [FromQuery]bool pure = true)
         {
             var taps = _context.Taps
@@ -241,7 +262,8 @@ namespace Ontap.Controllers
                     .ThenInclude(bk => bk.Keg)
                         .ThenInclude(k => k.Weights)
                 .Include(t => t.BeerKegsOnTap)
-                    .ThenInclude(bk => bk.Keg.Keg)
+                    .ThenInclude(bk => bk.Keg)
+                    .ThenInclude(k => k.Keg)
                 .Where(tap => tap.Pub.Id == id)
                 .ToArray()
                 .Select(t => new Tap
@@ -288,9 +310,12 @@ namespace Ontap.Controllers
                 });
             return taps;
         }
+        #endregion
 
-        // GET: api/pubs/{yourpub}/taps
+        #region queue
+        // GET: api/pubs/{yourpub}/queue
         [HttpGet("{id}/queue")]
+        [Authorize(Policy = "PubAdminUser")]
         public IEnumerable<BeerKegOnTap> GetQueue(string id, [FromQuery]bool pure = true)
         {
             var kegsBoughtAndNotInstalled = _context.Pubs
@@ -346,9 +371,51 @@ namespace Ontap.Controllers
                 .ToArray();    
             return kegs;
         }
-    
-        // GET: api/pubs/{yourpub}/taps
+
+        // POST: api/pubs/{yourpub}/queue
+        [HttpPost("{id}/queue")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<BeerKeg> AddToQueue(string id, [FromBody] BeerKeg keg)
+        {
+            keg = await _context.BeerKegs.Include(k=>k.Buyer).FirstAsync(k => k.Id == keg.Id);
+
+            await CheckUserRights(keg);
+
+            var beerKegOnTap = new BeerKegOnTap
+            {
+                Priority = 1,
+                Keg = _context.BeerKegs.FirstOrDefault(k => k.Id == keg.Id)
+            };
+            _context.BeerKegsOnTap.Add(beerKegOnTap);
+
+            await _context.SaveChangesAsync();
+
+            Task<BeerKeg> result =
+                 _context.BeerKegs.Include(k => k.BeerKegsOnTap).FirstAsync(k => k.Id == keg.Id);
+
+            await result.ContinueWith(t =>
+            {
+                var bk = t.Result;
+                bk.BeerKegsOnTap = bk.BeerKegsOnTap
+                    .Where(bko => bko.InstallTime == null || bko.InstallTime > DateTime.UtcNow)
+                    .Select(bko => new BeerKegOnTap
+                    {
+                        Id = bko.Id,
+                        InstallTime = bko.InstallTime,
+                        DeinstallTime = bko.DeinstallTime,
+                        Priority = bko.Priority
+                    }).ToArray();
+                return bk;
+            });
+
+            return await result;
+        }
+        #endregion
+
+        #region storage
+        // GET: api/pubs/{yourpub}/storage
         [HttpGet("{id}/storage")]
+        [Authorize(Policy = "PubAdminUser")]
         public IEnumerable<BeerKeg> GetStorage(string id, [FromQuery]bool pure = true)
         {
             var kegsBoughtAndNotInstalled = _context.Pubs
@@ -359,6 +426,8 @@ namespace Ontap.Controllers
                     .ThenInclude(k => k.Weights)
                 .Include(p => p.BeerKegsBought)
                     .ThenInclude(k => k.Keg)
+                .Include(p => p.BeerKegsBought)
+                    .ThenInclude(k => k.BeerKegsOnTap)
                 .First(p => p.Id == id)
                 .BeerKegsBought
                 .Where(bk => bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow)
@@ -386,11 +455,70 @@ namespace Ontap.Controllers
                             Volume = bk.Keg.Volume,
                         },
                         Status = bk.Status,
-                        Weights = bk.Weights
+                        Weights = bk.Weights,
+                        BeerKegsOnTap = bk.BeerKegsOnTap
+                            .Where(bko => bko.InstallTime == null || bko.InstallTime > DateTime.UtcNow )
+                            .Select(bko => new BeerKegOnTap
+                                {
+                                    Id = bko.Id,
+                                    InstallTime = bko.InstallTime,
+                                    DeinstallTime = bko.DeinstallTime,
+                                    Priority = bko.Priority
+                                }).ToArray()
 
                     })
                 .ToArray();
             return kegs;
         }
+
+        // DELETE: api/pubs/{yourpub}/storage
+        [HttpDelete("{id}/storage/{kegId}")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<BeerKeg> RemoveFromStorage(string id, int kegId)
+        {
+            var pub = _context.Pubs
+                .Include(p => p.BeerKegsBought)
+                .ThenInclude(k => k.Beer)
+                .ThenInclude(b => b.Brewery)
+                .Include(p => p.BeerKegsBought)
+                .ThenInclude(k => k.Weights)
+                .Include(p => p.BeerKegsBought)
+                .ThenInclude(k => k.Keg)
+                .Include(p => p.BeerKegsBought)
+                .ThenInclude(k => k.BeerKegsOnTap)
+                .First(p => p.Id == id);
+
+            var kegsBoughtAndNotInstalled = pub
+                .BeerKegsBought
+                .Where(bk => bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow);
+
+            var keg = kegsBoughtAndNotInstalled.FirstOrDefault(k => k.Id == kegId);
+
+            if (keg == null)
+                throw new KeyNotFoundException($"No keg with id {kegId} at pub {id} storage");
+
+            if (!(await GetUser()).HasRights(pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
+
+            keg.InstallationDate = DateTime.UtcNow.AddDays(-1);
+            if (keg.DeinstallationDate == null)
+            {
+                keg.DeinstallationDate = DateTime.UtcNow;
+            }
+            foreach (var bko in keg.BeerKegsOnTap)
+            {
+                if (bko.InstallTime == null)
+                    bko.InstallTime = DateTime.UtcNow.AddDays(-1);
+                if (bko.DeinstallTime == null)
+                    bko.DeinstallTime = DateTime.UtcNow;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return keg;
+        }
+        #endregion
     }
 }

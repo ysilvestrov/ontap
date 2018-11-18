@@ -90,13 +90,14 @@ namespace Ontap.Controllers
 
         // POST api/beerkegsontap
         [HttpPost]
-        [Authorize(Policy = "BreweryOrPubAdminUser")]
+        [Authorize(Policy = "PubAdminUser")]
         public async Task<BeerKegOnTap> Post([FromBody] BeerKegOnTap keg)
         {
             await CheckUserRights(keg);
-            if (keg.Tap == null || keg.Keg == null)
-                throw new ArgumentNullException(nameof(keg), "Cannot create beerkeg on tap entry without beerkeg and tap.");
-            keg.Tap = _context.Taps.FirstOrDefault(t => t.Id == keg.Tap.Id);
+            if (keg.Keg == null)
+                throw new ArgumentNullException(nameof(keg), "Cannot create beerkeg on tap entry without beerkeg.");
+            if (keg.Tap != null)
+                keg.Tap = _context.Taps.FirstOrDefault(t => t.Id == keg.Tap.Id);
             keg.Keg = _context.BeerKegs.FirstOrDefault(k => k.Id == keg.Keg.Id);
             _context.BeerKegsOnTap.Add(keg);      
             await _context.SaveChangesAsync();

@@ -63,7 +63,10 @@ packageDate: Date;
                     {{ keg.owner.name }}
                 </span>
                 <span *ngIf="editing && (editing.id == keg.id)">
-                    <select class="form-control" [(ngModel)]="editing.owner.id" (change)="onEditChangeOwner($event.target.value)">
+                    <select class="form-control" *ngIf="editing.owner" [(ngModel)]="editing.owner.id" (change)="onEditChangeOwner($event.target.value)">
+                        <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
+                    </select>
+                    <select class="form-control" *ngIf="!editing.owner" (change)="onEditChangeOwner($event.target.value)">
                         <option *ngFor="let brewery of breweries" [value]="brewery.id">{{brewery.name}}</option>
                     </select>
                 </span>
@@ -137,27 +140,45 @@ packageDate: Date;
                 <div *ngIf="editing && (editing.id == keg.id)">
                     <div class="input-group">
                         <span class="input-group-addon" id="editing-brewingDate"><i class="fa fa-calendar" aria-hidden="true" title="Brewing Date"></i></span>
-                        <input type="date" [(ngModel)]="editing.brewingDate" class="form-control" aria-describedby="editing-brewingDate">
+                        <input type="date" [ngModel]="formatDate(editing.brewingDate)" (ngModelChange)="editing.brewingDate=$event" class="form-control" aria-describedby="editing-brewingDate">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="editing.brewingDate=null"><span aria-hidden="true">&times;</span></button>
+                        </span>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="editing-packageDate"><i class="fa fa-calendar-o" aria-hidden="true" title="Package Date"></i></span>
-                        <input type="date" [(ngModel)]="editing.packageDate" class="form-control" aria-describedby="editing-packageDate">
+                        <input type="date" [ngModel]="formatDate(editing.packageDate)" (ngModelChange)="editing.packageDate=$event" class="form-control" aria-describedby="editing-packageDate">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="editing.packageDate=null"><span aria-hidden="true">&times;</span></button>
+                        </span>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="editing-arrivalDate"><i class="fa fa-calendar-check-o" aria-hidden="true" title="Arrival Date"></i></span>
-                        <input type="date" [(ngModel)]="editing.arrivalDate" class="form-control" aria-describedby="editing-arrivalDate">
+                        <input type="date" [ngModel]="formatDate(editing.arrivalDate)" (ngModelChange)="editing.arrivalDate=$event" class="form-control" aria-describedby="editing-arrivalDate">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="editing.arrivalDate=null"><span aria-hidden="true">&times;</span></button>
+                        </span>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="editing-installationDate"><i class="fa fa-calendar-plus-o" aria-hidden="true" title="Installation Date"></i></span>
-                        <input type="date" [(ngModel)]="editing.installationDate" class="form-control" aria-describedby="editing-installationDate">
+                        <input type="date" [ngModel]="formatDate(editing.installationDate)" (ngModelChange)="editing.installationDate=$event" class="form-control" aria-describedby="editing-installationDate">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="editing.installationDate=null"><span aria-hidden="true">&times;</span></button>
+                        </span>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="editing-deinstallationDate"><i class="fa fa-calendar-minus-o" aria-hidden="true" title="Deinstallation Date"></i></span>
-                        <input type="date" [(ngModel)]="editing.deinstallationDate" class="form-control" aria-describedby="editing-deinstallationDate">
+                        <input type="date" [ngModel]="formatDate(editing.deinstallationDate)" (ngModelChange)="setValue(editing, 'deinstallationDate', $event)" class="form-control" aria-describedby="editing-deinstallationDate">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="setValue(editing, 'deinstallationDate', null)"><span aria-hidden="true">&times;</span></button>
+                        </span>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="editing-bestBeforeDate"><i class="fa fa-calendar-times-o" aria-hidden="true" title="Best Before Date"></i></span>
-                        <input type="date" [(ngModel)]="editing.bestBeforeDate" class="form-control" aria-describedby="editing-bestBeforeDate">
+                        <input type="date" [ngModel]="formatDate(editing.bestBeforeDate)" (ngModelChange)="editing.bestBeforeDate=$event" class="form-control" aria-describedby="editing-bestBeforeDate">
+                        <span class="input-group-btn">
+                            <button type="button" class="close" aria-label="Clear" (click)="editing.bestBeforeDate=null"><span aria-hidden="true">&times;</span></button>
+                        </span>
                     </div>
                 </div>
             </td>
