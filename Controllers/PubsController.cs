@@ -303,7 +303,12 @@ namespace Ontap.Controllers
                                         Volume = bk.Keg.Keg.Volume,                                        
                                     },
                                     Status = bk.Keg.Status,
-                                    Weights = bk.Keg.Weights
+                                    Weights = bk.Keg.Weights.Select(w => new BeerKegWeight
+                                    {
+                                      Id  = w.Id,
+                                      Date = w.Date,
+                                      Weight = w.Weight
+                                    }).ToArray()
                                 }
                             })
                             .ToArray()

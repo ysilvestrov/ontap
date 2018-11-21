@@ -149,5 +149,29 @@ namespace Ontap.Controllers
             await _context.SaveChangesAsync();
             return current;
         }
+
+        // PUT api/beerkegs/12/weight
+        [HttpPut("{id}/weight")]
+        public async Task<BeerKeg> Weight(int id, [FromBody]BeerKegWeight weight)
+        {
+            if (BeerKegs.All(c => c.Id != id))
+                throw new KeyNotFoundException($"No beer keg with id {id}");
+
+            var current = await _context.BeerKegs
+                .Include(bk => bk.Beer)
+                    .ThenInclude(b => b.Brewery)
+                .Include(bk => bk.Keg)
+                .Include(bk => bk.Owner)
+                .Include(bk => bk.Buyer)
+                .Include(bk => bk.Weights)
+                .FirstAsync(c => c.Id == id);
+
+            await CheckUserRights(current);
+
+            await _context.BeerKegWeights.AddAsync(new BeerKegWeight {Date = DateTime.UtcNow, Keg = current, Weight = weight.Weight});
+
+            await _context.SaveChangesAsync();
+            return current;
+        }
     }
 }
