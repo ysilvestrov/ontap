@@ -524,6 +524,38 @@ namespace Ontap.Controllers
 
             return keg;
         }
+
+        // POST: api/pubs/{yourpub}/storage
+        [HttpPost("{id}/storage")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<BeerKeg> AddToStorage(string id, [FromBody] BeerKeg keg)
+        {
+            if (Pubs.All(c => c.Id != id))
+                throw new KeyNotFoundException($"No pub with id {id}");
+            var pub = Pubs.First(c => c.Id == id);
+            if (!(await GetUser()).HasRights(pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
+            keg.Buyer = pub;
+            keg.Beer = await _context.Beers.FirstOrDefaultAsync(b => b.Id == keg.Beer.Id);
+            keg.InstallationDate = null;
+            keg.DeinstallationDate = null;
+            keg.ArrivalDate = keg.ArrivalDate ?? DateTime.UtcNow;
+            keg.Status = KegStatus.Waiting;
+            foreach (var beerKegWeight in keg.Weights)
+            {
+                if (beerKegWeight.Id < 1)
+                {
+                    beerKegWeight.Date = DateTime.UtcNow;
+                    beerKegWeight.Keg = keg;
+                }
+            }
+
+            await _context.BeerKegs.AddAsync(keg);
+            await _context.SaveChangesAsync();
+            return keg;
+        }
         #endregion
     }
 }
