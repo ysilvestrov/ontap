@@ -538,7 +538,18 @@ namespace Ontap.Controllers
                 throw new InvalidCredentialException("Current user has no right to change this record");
             }
             keg.Buyer = pub;
-            keg.Beer = await _context.Beers.FirstOrDefaultAsync(b => b.Id == keg.Beer.Id);
+            if (!String.IsNullOrWhiteSpace(keg.Beer?.Id))
+            {
+                keg.Beer = await _context.Beers.FirstOrDefaultAsync(b => b.Id == keg.Beer.Id);
+            }
+            else
+            {
+                if (!String.IsNullOrWhiteSpace(keg.Beer?.Brewery?.Id))
+                {
+                    keg.Beer.Brewery = await _context.Breweries
+                        .FirstOrDefaultAsync(b => b.Id == keg.Beer.Brewery.Id);
+                }
+            }
             keg.InstallationDate = null;
             keg.DeinstallationDate = null;
             keg.ArrivalDate = keg.ArrivalDate ?? DateTime.UtcNow;
