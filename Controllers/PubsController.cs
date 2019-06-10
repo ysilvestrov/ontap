@@ -323,25 +323,14 @@ namespace Ontap.Controllers
         [Authorize(Policy = "PubAdminUser")]
         public IEnumerable<BeerKegOnTap> GetQueue(string id, [FromQuery]bool pure = true)
         {
-            var kegsBoughtAndNotInstalled = _context.Pubs
-                .Include(p => p.BeerKegsBought)
-                    .ThenInclude(k => k.Beer)
-                        .ThenInclude(b => b.Brewery)
-                .Include(p => p.BeerKegsBought)
-                    .ThenInclude(k => k.Weights)
-                .First(p => p.Id == id)
-                .BeerKegsBought
-                .Where(bk => bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow)
-                .ToArray();
+            var kegsOnTapInQueue = GetKegsOnTapInQueue(id);
 
-            var kegsOnTapInQueue = _context.BeerKegsOnTap
-                //.Include(bk => bk.Tap)
-                .Include(bk => bk.Keg)
-                    .ThenInclude(bk => bk.Keg)
-                .Where(bk => bk.Tap == null).ToArray();
+            var kegs = ClearBeerKegOnTaps(kegsOnTapInQueue);    
+            return kegs;
+        }
 
-            kegsOnTapInQueue = kegsOnTapInQueue.Where(kot => kegsBoughtAndNotInstalled.Any(k => kot.Keg.Id == k.Id)).ToArray();
-
+        private static BeerKegOnTap[] ClearBeerKegOnTaps(BeerKegOnTap[] kegsOnTapInQueue)
+        {
             var kegs = kegsOnTapInQueue
                 .Select(bk => new BeerKegOnTap
                 {
@@ -373,8 +362,31 @@ namespace Ontap.Controllers
                         Weights = bk.Keg.Weights
                     }
                 })
-                .ToArray();    
+                .ToArray();
             return kegs;
+        }
+
+        private BeerKegOnTap[] GetKegsOnTapInQueue(string id)
+        {
+            var kegsBoughtAndNotInstalled = _context.Pubs
+                .Include(p => p.BeerKegsBought)
+                .ThenInclude(k => k.Beer)
+                .ThenInclude(b => b.Brewery)
+                .Include(p => p.BeerKegsBought)
+                .ThenInclude(k => k.Weights)
+                .First(p => p.Id == id)
+                .BeerKegsBought
+                .Where(bk => bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow)
+                .ToArray();
+
+            var kegsOnTapInQueue = _context.BeerKegsOnTap
+                //.Include(bk => bk.Tap)
+                .Include(bk => bk.Keg)
+                .ThenInclude(bk => bk.Keg)
+                .Where(bk => bk.Tap == null).ToArray();
+
+            kegsOnTapInQueue = kegsOnTapInQueue.Where(kot => kegsBoughtAndNotInstalled.Any(k => kot.Keg.Id == k.Id)).ToArray();
+            return kegsOnTapInQueue;
         }
 
         // POST: api/pubs/{yourpub}/queue
@@ -382,21 +394,22 @@ namespace Ontap.Controllers
         [Authorize(Policy = "PubAdminUser")]
         public async Task<BeerKeg> AddToQueue(string id, [FromBody] BeerKeg keg)
         {
-            keg = await _context.BeerKegs.Include(k=>k.Buyer).FirstAsync(k => k.Id == keg.Id);
+            var kegId = keg.Id;
+            keg = await _context.BeerKegs.Include(k=>k.Buyer).FirstAsync(k => k.Id == kegId);
 
             await CheckUserRights(keg);
 
             var beerKegOnTap = new BeerKegOnTap
             {
                 Priority = 1,
-                Keg = _context.BeerKegs.FirstOrDefault(k => k.Id == keg.Id)
+                Keg = _context.BeerKegs.FirstOrDefault(k => k.Id == kegId)
             };
             _context.BeerKegsOnTap.Add(beerKegOnTap);
 
             await _context.SaveChangesAsync();
 
             Task<BeerKeg> result =
-                 _context.BeerKegs.Include(k => k.BeerKegsOnTap).FirstAsync(k => k.Id == keg.Id);
+                 _context.BeerKegs.Include(k => k.BeerKegsOnTap).FirstAsync(k => k.Id == kegId);
 
             await result.ContinueWith(t =>
             {
@@ -414,6 +427,52 @@ namespace Ontap.Controllers
             });
 
             return await result;
+        }
+
+        // POST: api/pubs/{yourpub}/reorder-queue
+        [HttpPost("{id}/reorder-queue/{priority}")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<IEnumerable<BeerKegOnTap>> ReorderQueue(string id, int priority, [FromBody] BeerKegOnTap keg)
+        {
+            var beerKeg = await _context.BeerKegs.Include(k=>k.Buyer).FirstAsync(k => k.Id == keg.Keg.Id);
+
+            await CheckUserRights(beerKeg);
+
+            var kegsOnTapInQueue = GetKegsOnTapInQueue(id).OrderBy(k => k.Priority).ToArray();
+            var temp = new List<BeerKegOnTap>(kegsOnTapInQueue.Length);
+            if (keg.Priority < priority)
+            {
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority < keg.Priority));
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority > keg.Priority && k.Priority < priority));
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority == keg.Priority));
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority >= priority));
+            }
+            else
+            {
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority < priority));
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority == keg.Priority));
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority >= priority && k.Priority < keg.Priority));
+                temp.AddRange(kegsOnTapInQueue.Where(k => k.Priority > keg.Priority));
+            }
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                var kegOnTap = temp[i];
+                if (kegOnTap.Priority != i)
+                {
+                    var tkeg = await _context.BeerKegsOnTap.FirstOrDefaultAsync(k => k.Id == kegOnTap.Id);
+                    if (tkeg != null)
+                    {
+                        tkeg.Priority = i;
+                    }
+                }
+                kegOnTap.Priority = i;
+            }
+
+            await _context.SaveChangesAsync();
+
+            var kegs = ClearBeerKegOnTaps(temp.ToArray());
+            return kegs;
         }
         #endregion
 
