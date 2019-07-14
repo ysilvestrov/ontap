@@ -144,7 +144,7 @@ namespace Ontap.Models
         {
             if (!Breweries.Any())
             {
-                var ukraine = new Country {Id = "UA", Name = "Ukraine"};
+                var ukraine = new Country { Id = "UA", Name = "Ukraine" };
                 var syndicateBrewery = new Brewery {Id = "Syndicate", Name = "Syndicate", Country = ukraine};
                 var whiteRabbitBrewery = new Brewery {Id = "White Rabbit", Name = "White Rabbit", Country = ukraine};
                 var abbeyDubbelBeer = new Beer
@@ -492,7 +492,27 @@ namespace Ontap.Models
                 }
                 SaveChanges();
             }
+            if (!Beers.Any(b => b.Id == UnknownBeerId))
+            {
+                var ukraine = Countries.FirstOrDefault();
+                var naBrewery = new Brewery { Id = UnknownBeerId, Name = "__UNKNOWN__", Country = ukraine };
+                var naBeer = new Beer
+                {
+                    Name = "__UNKNOWN__",
+                    Id = UnknownBeerId,
+                    Kind = Beer.Classification.Ale,
+                    Alcohol = 0,
+                    Brewery = naBrewery,
+                    Description = "",
+                    Ibu = 0,
+                    Type = "NA"
+                };
+                Beers.Add(naBeer);
+                SaveChanges();
+            }
         }
+
+        public const string UnknownBeerId = "NA";
 
         public DbSet<Pub> Pubs { get; set; }
         public DbSet<Beer> Beers { get; set; }

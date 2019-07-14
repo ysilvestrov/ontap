@@ -584,10 +584,16 @@ namespace Ontap.Controllers
             return keg;
         }
 
+        public struct NBeerKeg
+        {
+            public BeerKeg keg;
+            public int count;
+        }
+
         // POST: api/pubs/{yourpub}/storage
         [HttpPost("{id}/storage")]
         [Authorize(Policy = "PubAdminUser")]
-        public async Task<BeerKeg> AddToStorage(string id, [FromBody] BeerKeg keg)
+        public async Task<BeerKeg[]> AddToStorage(string id, [FromBody] NBeerKeg nBeerKeg)
         {
             if (Pubs.All(c => c.Id != id))
                 throw new KeyNotFoundException($"No pub with id {id}");
@@ -596,19 +602,25 @@ namespace Ontap.Controllers
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
             }
+            var keg = nBeerKeg.keg;
+            var count = nBeerKeg.count;
+
             keg.Buyer = pub;
             if (!String.IsNullOrWhiteSpace(keg.Beer?.Id))
             {
-                keg.Beer = await _context.Beers.FirstOrDefaultAsync(b => b.Id == keg.Beer.Id);
+                keg.Beer = await _context.Beers.Include(b => b.Brewery).FirstOrDefaultAsync(b => b.Id == keg.Beer.Id);
             }
-            else
+            else if (!String.IsNullOrWhiteSpace(keg.Beer?.Brewery?.Id))
             {
-                if (!String.IsNullOrWhiteSpace(keg.Beer?.Brewery?.Id))
-                {
-                    keg.Beer.Brewery = await _context.Breweries
-                        .FirstOrDefaultAsync(b => b.Id == keg.Beer.Brewery.Id);
-                }
+                keg.Beer.Brewery = await _context.Breweries
+                    .FirstOrDefaultAsync(b => b.Id == keg.Beer.Brewery.Id);
             }
+            else if (keg.Beer == null)
+            {
+                //beer is unknown
+                keg.Beer = await _context.Beers.Include(b => b.Brewery).FirstOrDefaultAsync(b => b.Id == DataContext.UnknownBeerId);
+            }
+            
             keg.InstallationDate = null;
             keg.DeinstallationDate = null;
             keg.ArrivalDate = keg.ArrivalDate ?? DateTime.UtcNow;
@@ -621,8 +633,83 @@ namespace Ontap.Controllers
                     beerKegWeight.Keg = keg;
                 }
             }
+            var kegs = new BeerKeg[count];
+            for (var i = 0; i < count; i++)
+            {
+                kegs[i] = new BeerKeg
+                {
+                    ArrivalDate = keg.ArrivalDate,
+                    Beer = keg.Beer,
+                    BestBeforeDate = keg.BestBeforeDate,
+                    BrewingDate = keg.BrewingDate,
+                    Buyer = keg.Buyer,
+                    DeinstallationDate = keg.DeinstallationDate,
+                    InstallationDate = keg.InstallationDate,
+                    PackageDate = keg.PackageDate,
+                    Status = keg.Status,
+                    Keg = new Keg
+                    {
+                        EmptyWeight = keg.Keg.EmptyWeight,
+                        ExternalId = keg.Keg.ExternalId,
+                        Fitting = keg.Keg.Fitting,
+                        IsReturnable = keg.Keg.IsReturnable,
+                        Material = keg.Keg.Material,
+                        Volume = keg.Keg.Volume,
+                    }
+                };
+                kegs[i].Weights = keg.Weights.Select(w =>
+                    new BeerKegWeight {Keg = kegs[i], Date = w.Date, Weight = w.Weight}).ToList();
 
-            await _context.BeerKegs.AddAsync(keg);
+                await _context.BeerKegs.AddAsync(kegs[i]);
+            }
+            await _context.SaveChangesAsync();
+            return kegs;
+        }
+
+        // PUT: api/pubs/{yourpub}/storage/{kegid}
+        [HttpPut("{id}/storage/{kegid}")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<BeerKeg> AddToStorage(string id, int kegid, [FromBody] BeerKeg beerKeg)
+        {
+            if (Pubs.All(c => c.Id != id))
+                throw new KeyNotFoundException($"No pub with id {id}");
+            var pub = Pubs.First(c => c.Id == id);
+            if (!(await GetUser()).HasRights(pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
+            if (beerKeg.Id != kegid || pub.BeerKegsBought.All(k => k.Id != kegid))
+                throw new InvalidCredentialException("Current user has no right to change this record");
+
+            var keg = pub.BeerKegsBought.First(k => k.Id == kegid);
+
+            keg.Beer = beerKeg.Beer;
+
+            if (!String.IsNullOrWhiteSpace(keg.Beer?.Id))
+            {
+                keg.Beer = await _context.Beers.Include(b => b.Brewery).FirstOrDefaultAsync(b => b.Id == keg.Beer.Id);
+            }
+            else if (!String.IsNullOrWhiteSpace(keg.Beer?.Brewery?.Id))
+            {
+                keg.Beer.Brewery = await _context.Breweries
+                    .FirstOrDefaultAsync(b => b.Id == keg.Beer.Brewery.Id);
+            }
+            
+            keg.InstallationDate = beerKeg.InstallationDate;
+            keg.DeinstallationDate = beerKeg.DeinstallationDate;
+            keg.ArrivalDate = beerKeg.ArrivalDate;
+            keg.Status = beerKeg.Status;
+            keg.PackageDate = beerKeg.PackageDate;
+            keg.BrewingDate = beerKeg.BrewingDate;
+
+            foreach (var beerKegWeight in beerKeg.Weights)
+            {
+                if (beerKegWeight.Id >= 1) continue;
+                beerKegWeight.Date = DateTime.UtcNow;
+                beerKegWeight.Keg = keg;
+                keg.Weights.Add(beerKegWeight);
+            }
+
             await _context.SaveChangesAsync();
             return keg;
         }
