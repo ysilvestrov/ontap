@@ -44,6 +44,13 @@ namespace Ontap.Controllers
             }
         }
 
+        private async Task CheckUserRights(Pub pub)
+        {
+            if (!(await GetUser()).HasRights(pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
+        }
         #endregion
 
         public PubsController(DataContext context, IHttpContextAccessor httpContextAccessor)
@@ -101,10 +108,7 @@ namespace Ontap.Controllers
         public async Task<string> Run(string id)
         {
             var pub = Pubs.First(c => c.Id == id);
-            if (!(await GetUser()).HasRights(pub))
-            {
-                throw new InvalidCredentialException("Current user has no right to change this record");
-            }
+            await CheckUserRights(pub);
             var result = new StringBuilder();
             ParsePubData(pub, result);
             await _context.SaveChangesAsync();
@@ -243,6 +247,67 @@ namespace Ontap.Controllers
             current.TapNumber = pub.TapNumber;
             await _context.SaveChangesAsync();
             return current;
+        }
+        #endregion
+
+        #region prices
+        // GET: api/pubs/{yourpub}/prices
+        [HttpGet("{id}/prices")]
+        [Authorize(Policy = "PubAdminUser")]
+        public IEnumerable<BeerPrice> GetPrices(string id)
+        {
+            var prices = _context.BeerPrices
+                .Include(p => p.Beer)
+                .Include(p => p.Pub)
+                .Where(p => p.Pub.Id == id)
+                .Where(p => (p.ValidFrom == null || p.ValidFrom < DateTime.UtcNow) && (p.ValidTo == null || p.ValidTo > DateTime.UtcNow))
+                .Select(p => new BeerPrice
+                {
+                    Beer = new Beer {Id = p.Beer.Id},
+                    Price = p.Price,
+                    Volume = p.Volume
+                });
+
+            return prices.ToArray();
+        }
+        
+        // PUT: api/pubs/{yourpub}/prices/{beer}
+        [HttpPut("{id}/prices/{beerid}")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<BeerPrice> SetPrice(string id, string beerid, [FromBody] BeerPrice price)
+        {
+            var pub = Pubs.First(c => c.Id == id);
+            await CheckUserRights(pub);
+
+            if (price?.Beer?.Id == null)
+            {
+                throw new ArgumentException("Unknown beer in price", nameof(price));
+            }
+
+            var ePrice = await _context.BeerPrices
+                .Include(p => p.Beer)
+                .Include(p => p.Pub)
+                .Where(p => (p.ValidFrom == null || p.ValidFrom < DateTime.UtcNow) && (p.ValidTo == null || p.ValidTo > DateTime.UtcNow))
+                .Where(p => p.Beer.Id == price.Beer.Id && p.Pub.Id == id && p.Volume == price.Volume)
+                .OrderByDescending(p => p.ValidFrom)
+                .FirstOrDefaultAsync() ?? new BeerPrice();
+
+            ePrice.Updated = DateTime.UtcNow;
+            ePrice.Pub = ePrice.Pub ?? pub;
+            ePrice.Beer = ePrice.Beer ?? await _context.Beers.FindAsync(beerid);
+            ePrice.Price = price.Price;
+            ePrice.Volume = price.Volume;
+            ePrice.ValidFrom = ePrice.ValidFrom > DateTime.MinValue ? ePrice.ValidFrom : DateTime.UtcNow;
+            ePrice.ValidTo = null;
+
+            if (ePrice.Id < 1)
+            {
+                await _context.BeerPrices.AddAsync(ePrice);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return ePrice;
         }
         #endregion
 
@@ -561,10 +626,7 @@ namespace Ontap.Controllers
             if (keg == null)
                 throw new KeyNotFoundException($"No keg with id {kegId} at pub {id} storage");
 
-            if (!(await GetUser()).HasRights(pub))
-            {
-                throw new InvalidCredentialException("Current user has no right to change this record");
-            }
+            await CheckUserRights(pub);
 
             keg.InstallationDate = DateTime.UtcNow.AddDays(-1);
             if (keg.DeinstallationDate == null)
