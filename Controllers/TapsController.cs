@@ -61,8 +61,7 @@ namespace Ontap.Controllers
         {
             if (Taps.All(c => c.Id != id))
                 throw new KeyNotFoundException($"No tap with id {id}");
-            var current = Taps.First(c => c.Id == id);
-            current.Pub = _context.Pubs.First(b => b.Id == tap.Pub.Id);
+            var current = _context.Taps.Include(t=>t.Pub).First(c => c.Id == id);
             if (!(await GetUser()).HasRights(current.Pub))
             {
                 throw new InvalidCredentialException("Current user has no right to change this record");
@@ -104,7 +103,14 @@ namespace Ontap.Controllers
                 .ThenInclude(bk => bk.Keg)
                 .ThenInclude(k => k.Keg)
                 .FirstAsync(t => t.Id == current.Id);
-            return tap.BeerKegsOnTap.Where(bk => bk.DeinstallTime == null || bk.DeinstallTime > DateTime.UtcNow).ToArray();
+            var beerKegsOnTap = tap.BeerKegsOnTap.Where(bk => bk.DeinstallTime == null || bk.DeinstallTime > DateTime.UtcNow).ToArray();
+            foreach (var kegOnTap in beerKegsOnTap)
+            {
+                kegOnTap.Tap.Pub = null;
+                kegOnTap.Tap.BeerKegsOnTap = null;
+                kegOnTap.Keg.Buyer = null;
+            }
+            return beerKegsOnTap;
         }
         #endregion
 
@@ -183,6 +189,42 @@ namespace Ontap.Controllers
             }
 
             keg.Tap = null;
+
+            await _context.SaveChangesAsync();
+            return await GetBeerKegsOnTap(current);
+        }
+
+        // DELETE api/taps/{tap}/queue
+        [HttpDelete("{id}/queue")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<BeerKegOnTap[]> RemoveAllBeerFromTapDirectQueue(int id)
+        {
+            var current = await _context.Taps
+                .Include(t => t.Pub)
+                .Include(t => t.BeerKegsOnTap)
+                    .ThenInclude(bk => bk.Keg)
+                    .ThenInclude(k=>k.Weights)
+                .Include(t => t.BeerKegsOnTap)
+                    .ThenInclude(bk => bk.Keg)
+                    .ThenInclude(k=>k.Keg)
+                .FirstOrDefaultAsync(c => c.Id == id);
+            if (current == null)
+                throw new KeyNotFoundException($"No tap with id {id}");
+            if (!(await GetUser()).HasRights(current.Pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
+
+            var kegs = current.BeerKegsOnTap
+                .Where(bk =>  bk.InstallTime == null || bk.InstallTime > DateTime.UtcNow);
+
+            foreach (var keg in kegs)
+            {
+                keg.Tap = null;
+            }
+
+            current.Status |= TapStatus.LeaveEmpty;
+            current.Status &= ~TapStatus.Repeat;
 
             await _context.SaveChangesAsync();
             return await GetBeerKegsOnTap(current);
@@ -280,6 +322,79 @@ namespace Ontap.Controllers
 
             await _context.SaveChangesAsync();
             return await GetBeerKegsOnTap(current);
+        }
+
+        //POST api/taps/{tap}/repeat
+        [HttpPost("{id}/repeat")]
+        [Authorize(Policy = "PubAdminUser")]
+        public async Task<BeerKegOnTap[]> RepeatBeerOnTap(int id)
+        {
+            var tap = await _context.Taps
+                .Include(t => t.Pub)
+                .Include(t => t.BeerKegsOnTap)
+                .ThenInclude(bk => bk.Keg)
+                .ThenInclude(k => k.Beer)
+                .FirstOrDefaultAsync(c => c.Id == id);
+            if (tap == null)
+                throw new KeyNotFoundException($"No tap with id {id}");
+            if (!(await GetUser()).HasRights(tap.Pub))
+            {
+                throw new InvalidCredentialException("Current user has no right to change this record");
+            }
+            var currentBeerKeg = tap.BeerKegsOnTap.FirstOrDefault(
+                bk => bk.InstallTime != null && bk.InstallTime < DateTime.UtcNow &&
+                      (bk.DeinstallTime == null || bk.DeinstallTime > DateTime.UtcNow));
+            if (currentBeerKeg == null)
+            {
+                throw new KeyNotFoundException("There is no beer on tap to repeat");
+            }
+
+            tap.Status |= TapStatus.Repeat;
+            tap.Status &= ~TapStatus.LeaveEmpty;
+
+            //remove any non-repeatable from direct queue
+            foreach (var beerKegOnTap in tap.BeerKegsOnTap
+                .Where(bk =>
+                    !(bk.InstallTime != null && bk.InstallTime < DateTime.UtcNow &&
+                      (bk.DeinstallTime == null || bk.DeinstallTime > DateTime.UtcNow)) &&
+                      bk.Keg.Beer.Id != currentBeerKeg.Keg.Beer.Id
+                      ))
+            {
+                beerKegOnTap.Tap = null;
+            }
+
+            var priority = tap.BeerKegsOnTap.Where(
+                bk => bk.InstallTime != null && bk.InstallTime < DateTime.UtcNow &&
+                      (bk.DeinstallTime == null || bk.DeinstallTime > DateTime.UtcNow))
+                      .Max(bk => bk.Priority);
+
+            var kegsBoughtAndNotInstalled = _context.Pubs
+                .Include(p => p.BeerKegsBought)
+                .ThenInclude(k => k.Beer)
+                .First(p => p.Id == tap.Pub.Id)
+                .BeerKegsBought
+                .Where(bk =>
+                    bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow &&
+                    bk.Beer.Id == currentBeerKeg.Keg.Beer.Id).ToArray();
+
+            var kegsOnTapInQueue = _context.BeerKegsOnTap
+                //.Include(bk => bk.Tap)
+                .Include(bk => bk.Keg)
+                .ThenInclude(bk => bk.Beer)
+                .Where(bk => bk.Tap == null && bk.Keg.Beer.Id == currentBeerKeg.Keg.Beer.Id);
+
+            //kegsOnTapInQueue = kegsOnTapInQueue.Where(kot => kegsBoughtAndNotInstalled.Any(k => kot.Keg.Id == k.Id)).ToArray();
+
+            foreach (var kegOnTap in kegsOnTapInQueue)
+            {
+                if (kegsBoughtAndNotInstalled.All(k => k.Id != kegOnTap.Keg.Id)) continue;
+                kegOnTap.Tap = tap;
+                kegOnTap.Priority = ++priority;
+            }
+
+
+            await _context.SaveChangesAsync();
+            return await GetBeerKegsOnTap(tap);
         }
 
         #endregion

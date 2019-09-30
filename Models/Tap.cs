@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ontap.Models
 {
+    [Flags]
     public enum TapStatus
     {
-        Working = 2,
+        Free = 0,
         Problem = 1,
-        Free = 0
+        Working = 2, //Reserved
+        Repeat = 4,
+        LeaveEmpty = 8
     }
 
     public class Tap
