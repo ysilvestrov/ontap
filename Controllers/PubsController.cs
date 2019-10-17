@@ -557,6 +557,7 @@ namespace Ontap.Controllers
                     .ThenInclude(k => k.Keg)
                 .Include(p => p.BeerKegsBought)
                     .ThenInclude(k => k.BeerKegsOnTap)
+                    .ThenInclude(bko => bko.Tap)
                 .First(p => p.Id == id)
                 .BeerKegsBought
                 .Where(bk => bk.InstallationDate == null || bk.InstallationDate > DateTime.UtcNow)
@@ -592,7 +593,8 @@ namespace Ontap.Controllers
                                     Id = bko.Id,
                                     InstallTime = bko.InstallTime,
                                     DeinstallTime = bko.DeinstallTime,
-                                    Priority = bko.Priority
+                                    Priority = bko.Priority,
+                                    Tap = bko.Tap == null ? null : new Tap()
                                 }).ToArray()
 
                     })
