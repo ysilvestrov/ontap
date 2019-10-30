@@ -281,7 +281,7 @@ namespace Ontap.Controllers
         //POST api/taps/{tap}/beer
         [HttpPost("{id}/beer")]
         [Authorize(Policy = "PubAdminUser")]
-        public async Task<BeerKegOnTap[]> PutOnTapFromDirectQueue(int id)
+        public async Task<BeerKegOnTap[]> PutOnTapFromQueue(int id, [FromBody] BeerKegOnTap keg)
         {
             var current = await _context.Taps
                 .Include(t => t.Pub)
@@ -299,24 +299,39 @@ namespace Ontap.Controllers
                 throw new AlreadyExistsException("There is a beer already on tap. Please remove it first.");
             }
 
-            var keg = current.BeerKegsOnTap.OrderBy(bk => bk.Priority)
-                .First(bk => bk.InstallTime == null || bk.InstallTime > DateTime.UtcNow);
+            if (keg != null)
+            {
+                var kegid = keg.Id;
+                keg = await _context.BeerKegsOnTap
+                    .Include(bk => bk.Keg)
+                    .FirstAsync(bk => bk.Id == kegid); //let's throw exception if not found 
+            }
+            else
+                keg = current.BeerKegsOnTap.OrderBy(bk => bk.Priority)
+                    .First(bk => bk.InstallTime == null || bk.InstallTime > DateTime.UtcNow);
 
+            var priority = 0;
+            if (keg.Tap == current)
+                priority = keg.Priority;
+            else
+                keg.Tap = current;
             keg.InstallTime = DateTime.UtcNow;
             keg.Keg.InstallationDate = DateTime.UtcNow;
             keg.DeinstallTime = null;
-            keg.Keg.DeinstallationDate = null;
-            var priority = keg.Priority;
+            keg.Keg.DeinstallationDate = null;           
             keg.Priority = 0;
 
             if (priority > 0)
             {
+                var number = 0;
                 foreach (var beerKegOnTap in current.BeerKegsOnTap
                     .Where(bk =>
                         !(bk.InstallTime != null && bk.InstallTime < DateTime.UtcNow &&
-                          (bk.DeinstallTime == null || bk.DeinstallTime > DateTime.UtcNow))))
+                          (bk.DeinstallTime == null || bk.DeinstallTime > DateTime.UtcNow)))
+                    .OrderBy(bk => bk.Priority)
+                          )
                 {
-                    beerKegOnTap.Priority--;
+                    beerKegOnTap.Priority = number++;
                 }
             }
 
